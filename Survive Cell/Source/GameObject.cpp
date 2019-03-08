@@ -16,3 +16,30 @@ void GameObject::SetTag(string tag)
 {
 	this->tag = tag;
 }
+
+void GameObject::SetWidth(int width) 
+{
+	this-> width = width;
+}
+
+
+int GameObject::SetWidth()
+{
+	return width;
+}
+
+
+void GameObject::SetLength(int length)
+{
+	this->length = length;
+}
+
+int GameObject::GetLength()
+{
+	return length;
+}
+
+void GameObject::LoadBitMap(string pictrueAddress)
+{
+	objectPic.LoadBitMap(pictureAddress); 
+}
