@@ -23,7 +23,7 @@ void GameObject::SetWidth(int width)
 }
 
 
-int GameObject::SetWidth()
+int GameObject::GetWidth()
 {
 	return width;
 }
@@ -39,7 +39,7 @@ int GameObject::GetLength()
 	return length;
 }
 
-void GameObject::LoadBitMap(string pictrueAddress)
+void GameObject::LoadBitMap(string pictureAddress)
 {
-	objectPic.LoadBitMap(pictureAddress); 
+	NULL;
 }
