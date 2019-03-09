@@ -11,6 +11,17 @@ GameObject::GameObject()
 	height = 10;
 }
 
+GameObject::GameObject(string tag, int x, int y, int width, int height, int pictureID)
+{
+	this->tag = tag;
+	this->x = x;
+	this->y = y;
+	this->width = width;
+	this->height = height;
+	this->pictureID = pictureID;
+	this->LoadBitMap(pictureID);//¸ü¤J¹Ï¤ù
+}
+
 string GameObject::GetTag()
 {
 	return tag;
@@ -41,9 +52,9 @@ void GameObject::SetY(int y)
 	this->y = y;
 }
 
-void GameObject::SetWidth(int width) 
+void GameObject::SetWidth(int width)
 {
-	this-> width = width;
+	this->width = width;
 }
 
 void GameObject::SetHeight(int height)
@@ -64,4 +75,19 @@ int GameObject::GetHeight()
 void GameObject::LoadBitMap(char* pictureAddress)
 {
 	objectPic.LoadBitmap(pictureAddress);
+}
+
+void GameObject::LoadBitMap(int pictureID)
+{
+	objectPic.LoadBitmap(pictureID);
+}
+
+void GameObject::SetBitMapPosition()
+{
+	objectPic.SetTopLeft(x, y);
+}
+
+void GameObject::ShowBitMap()
+{
+	objectPic.ShowBitmap();
 }

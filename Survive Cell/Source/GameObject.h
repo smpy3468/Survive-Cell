@@ -11,25 +11,30 @@ using namespace std;
 #include <ddraw.h>
 #include "gamelib.h"
 using namespace game_framework;
+#include "resource.h"
 
 class GameObject
 {
 public:
 	GameObject();
-	
+	GameObject(string tag, int x, int y, int width, int height, int pictureID);
+
 	void SetTag(string tag);
 	void SetX(int x);
 	void SetY(int y);
 	void SetWidth(int width);
 	void SetHeight(int height);
-	
+
 	string GetTag();
 	int GetX();
 	int GetY();
 	int GetWidth();
 	int GetHeight();
-	
-	virtual void LoadBitMap(char* pictureAddress);
+
+	void LoadBitMap(char* pictureAddress);//用路徑載入圖片
+	void LoadBitMap(int pictureID);//用編號載入圖片
+	void SetBitMapPosition();//設定圖片位置
+	void ShowBitMap();//顯示圖片
 
 protected:
 	string tag;//物件標籤
@@ -38,5 +43,5 @@ protected:
 	int height;//高度
 
 	CMovingBitmap objectPic;//物件圖片
-	
+	int pictureID;//圖片編號
 };

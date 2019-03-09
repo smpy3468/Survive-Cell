@@ -52,3 +52,19 @@ void GameSystem::MoveAllObject(int dx, int dy)//²¾°Ê©Ò¦³ª«¥ó(¥Î©ó§ïÅÜ¿Ã¹õ¬Ý¨ìªºµ
 		i.SetY(i.GetY() + dy);//²¾°Ê¨ì­ì¥»ªºy®y¼Ð+dyªº¦ì¸m
 	}
 }
+
+void GameSystem::SetAllObjectBitMapPosition()//³]©w©Ò¦³ª«¥ó¹Ï¤ù¦ì¸m
+{
+	for (auto i : gameObjectList)
+	{
+		i.SetBitMapPosition();
+	}
+}
+
+void GameSystem::ShowAllObject()//Åã¥Ü©Ò¦³ª«¥ó
+{
+	for (auto i : gameObjectList)
+	{
+		i.ShowBitMap();
+	}
+}

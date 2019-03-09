@@ -58,6 +58,9 @@
 #include "audio.h"
 #include "gamelib.h"
 #include "mygame.h"
+#include "GameSystem.h"
+#include "GameObject.h"
+#include "Character.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -71,7 +74,7 @@ namespace game_framework {
 
 	void CGameStateInit::OnInit()
 	{
-		
+		GameSystem::AddGameObject(*(new GameObject("Character", 0, 10, 10, 10, IDB_0)));
 	}
 
 	void CGameStateInit::OnBeginState()
@@ -80,17 +83,17 @@ namespace game_framework {
 
 	void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	{
-		
+		GotoGameState(GAME_STATE_RUN);
 	}
 
 	void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point)
 	{
-		
+
 	}
 
 	void CGameStateInit::OnShow()
 	{
-					// 放掉 Back Plain 的 CDC
+		// 放掉 Back Plain 的 CDC
 	}
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -104,90 +107,88 @@ namespace game_framework {
 
 	void CGameStateOver::OnMove()
 	{
-		
+
 	}
 
 	void CGameStateOver::OnBeginState()
 	{
-		
+
 	}
 
 	void CGameStateOver::OnInit()
 	{
-		
+
 	}
 
 	void CGameStateOver::OnShow()
 	{
-		
+
 	}
 
-	
+
 	CGameStateRun::CGameStateRun(CGame *g)
-	: CGameState(g)
+		: CGameState(g)
 	{
-		
+
 	}
 
 	CGameStateRun::~CGameStateRun()
 	{
-		
+
 	}
 
 	void CGameStateRun::OnBeginState()
 	{
-	
+
 	}
 
 	void CGameStateRun::OnMove()							// 移動遊戲元素
 	{
-		
+		GameSystem::SetAllObjectBitMapPosition();//設定所有物件圖片位置
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	{
-		
+
 	}
-
-
 
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	{
-		
+
 	}
 
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	{
-		
+		GameSystem::MoveAllObject(0, 10);//向上移動1單位
 	}
 
 	void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
 	{
-		
+
 	}
 
 	void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 	{
-		
+
 	}
 
 	void CGameStateRun::OnMouseMove(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 	{
-		
+
 	}
 
 	void CGameStateRun::OnRButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
 	{
-		
+
 	}
 
 	void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 	{
-		
+
 	}
 
 	void CGameStateRun::OnShow()
 	{
-		
+		GameSystem::ShowAllObject();
 	}
 }
