@@ -44,7 +44,7 @@ vector<GameObject*> GameSystem::GetGameObjectsWithTag(string tag)//¨ú±o¯S©w¼ÐÅÒª
 	return targetObjects;
 }
 
-void GameSystem::MoveAllObject(int dx, int dy)//²¾°Ê©Ò¦³ª«¥ó
+void GameSystem::MoveAllObject(int dx, int dy)//²¾°Ê©Ò¦³ª«¥ó(¥Î©ó§ïÅÜ¿Ã¹õ¬Ý¨ìªºµe­±)
 {
 	for (auto i : gameObjectList)
 	{

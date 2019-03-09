@@ -104,16 +104,6 @@ IDB_HELP                BITMAP                  "..\\res\\help.bmp"
 
 IDB_LOADING             BITMAP                  "..\\res\\loading.bmp"
 
-IDB_unname              BITMAP                  "..\\res\\bitmap3.bmp"
-
-IDB_PRACTICE            BITMAP                  "..\\RES\\duckduck.bmp"
-
-IDB_WHITE               BITMAP                  "..\\Bitmaps\\White.bmp"
-												 
-IDB_BLUE                BITMAP                  "..\\Bitmaps\\Blue.bmp"
-												 
-IDB_GREEN               BITMAP                  "..\\Bitmaps\\Green.bmp"
-
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -148,7 +138,6 @@ IDR_MAINFRAME           BITMAP                  "..\\res\\Toolbar.bmp"
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDR_MAINFRAME           ICON                    "..\\res\\game.ico"
 
 IDR_GAMETYPE            ICON                    "..\\res\\gameDoc.ico"
 

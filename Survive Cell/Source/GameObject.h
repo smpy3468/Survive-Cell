@@ -29,7 +29,7 @@ public:
 	int GetWidth();
 	int GetHeight();
 	
-	virtual void LoadBitMap(string pictureAddress);
+	virtual void LoadBitMap(char* pictureAddress);
 
 protected:
 	string tag;//ª«¥ó¼ÐÅÒ

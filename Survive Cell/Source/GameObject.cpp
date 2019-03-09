@@ -61,7 +61,7 @@ int GameObject::GetHeight()
 	return height;
 }
 
-void GameObject::LoadBitMap(string pictureAddress)
+void GameObject::LoadBitMap(char* pictureAddress)
 {
-	NULL;
+	objectPic.LoadBitmap(pictureAddress);
 }
