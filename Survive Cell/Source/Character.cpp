@@ -1,7 +1,7 @@
 #include "StdAfx.h"
 #include "Character.h"
 
-Character::Character()
+Character::Character():GameObject()
 {
 	tag = "Character";
 }
