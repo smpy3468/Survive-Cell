@@ -27,7 +27,7 @@ public:
 	static void MoveAllObject(int dx, int dy);//移動所有物件(用於改變螢幕看到的畫面)
 	static void SetAllObjectBitMapPosition();//設定所有物件的圖片位置
 	static void ShowAllObject();//顯示所有物件
-
+	
 private:
 	static vector<GameObject> gameObjectList;//存放所有遊戲物件的列表
 	static CMovingBitmap backgroundPic;//背景圖片
