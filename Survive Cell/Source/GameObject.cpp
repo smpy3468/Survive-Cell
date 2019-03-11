@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "GameObject.h"
+#include "Map.h"
 
 
 GameObject::GameObject()
@@ -84,7 +85,7 @@ void GameObject::LoadBitMap(int pictureID)
 
 void GameObject::SetBitMapPosition()
 {
-	objectPic.SetTopLeft(x, y);
+	objectPic.SetTopLeft(x - Map::GetSX(), y - Map::GetSY());
 }
 
 void GameObject::ShowBitMap()

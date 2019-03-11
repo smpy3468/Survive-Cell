@@ -75,7 +75,7 @@ namespace game_framework {
 
 	void CGameStateInit::OnInit()
 	{
-		GameSystem::AddGameObject(*(new GameObject("Character", 0, 10, 10, 10, IDB_0)));
+		GameSystem::AddGameObject(*(new GameObject("Character", 0, 0, 10, 10, IDB_0)));
 		Map::SetStaticObject();
 	}
 
