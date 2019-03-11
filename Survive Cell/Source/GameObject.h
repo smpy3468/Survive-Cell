@@ -7,8 +7,6 @@
 #include "StdAfx.h"
 #include <string>
 using namespace std;
-#include <mmsystem.h>
-#include <ddraw.h>
 #include "gamelib.h"
 using namespace game_framework;
 #include "resource.h"

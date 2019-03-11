@@ -58,6 +58,7 @@
 #include "audio.h"
 #include "gamelib.h"
 #include "mygame.h"
+#include "Map.h"
 #include "GameSystem.h"
 #include "GameObject.h"
 #include "Character.h"
@@ -75,6 +76,7 @@ namespace game_framework {
 	void CGameStateInit::OnInit()
 	{
 		GameSystem::AddGameObject(*(new GameObject("Character", 0, 10, 10, 10, IDB_0)));
+		Map::SetStaticObject();
 	}
 
 	void CGameStateInit::OnBeginState()
