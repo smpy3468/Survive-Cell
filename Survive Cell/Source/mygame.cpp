@@ -75,7 +75,8 @@ namespace game_framework {
 
 	void CGameStateInit::OnInit()
 	{
-		GameSystem::AddGameObject(*(new GameObject("Character", 0, 0, 10, 10, IDB_0)));
+		GameSystem::AddGameObject(*(new GameObject("Player", SIZE_X / 2, SIZE_Y / 2, 10, 10, IDB_BALL)));
+		GameSystem::AddGameObject(*(new GameObject("Monster", SIZE_X / 2 - 30, SIZE_Y / 2, 10, 10, IDB_0)));
 		Map::SetStaticObject();
 	}
 
@@ -146,7 +147,6 @@ namespace game_framework {
 
 	void CGameStateRun::OnMove()							// 移動遊戲元素
 	{
-		GameSystem::GetAllGameObject()[0].GetY();
 		GameSystem::SetAllObjectBitMapPosition();//設定所有物件圖片位置
 	}
 
@@ -164,19 +164,23 @@ namespace game_framework {
 
 		if (nChar == KEY_LEFT)
 		{
-			GameSystem::MoveAllObject(-10,0);
+			GameSystem::MoveScreenTopLeft(-10, 0);
+			GameSystem::GetGameObjectWithTag("Player")->SetX(GameSystem::GetGameObjectWithTag("Player")->GetX() - 10);
 		}
 		else if (nChar == KEY_RIGHT)
 		{
-			GameSystem::MoveAllObject(10,0);
+			GameSystem::MoveScreenTopLeft(10, 0);
+			GameSystem::GetGameObjectWithTag("Player")->SetX(GameSystem::GetGameObjectWithTag("Player")->GetX() + 10);
 		}
 		else if (nChar == KEY_UP)
 		{
-			GameSystem::MoveAllObject(0, -10);
+			GameSystem::MoveScreenTopLeft(0, -10);
+			GameSystem::GetGameObjectWithTag("Player")->SetY(GameSystem::GetGameObjectWithTag("Player")->GetY() - 10);
 		}
 		else if (nChar == KEY_DOWN)
 		{
-			GameSystem::MoveAllObject(0, 10);
+			GameSystem::MoveScreenTopLeft(0, 10);
+			GameSystem::GetGameObjectWithTag("Player")->SetY(GameSystem::GetGameObjectWithTag("Player")->GetY() + 10);
 		}
 	}
 

@@ -85,7 +85,7 @@ void GameObject::LoadBitMap(int pictureID)
 
 void GameObject::SetBitMapPosition()
 {
-	objectPic.SetTopLeft(x - Map::GetSX(), y - Map::GetSY());
+	objectPic.SetTopLeft(x - this->width / 2 - Map::GetSX(), y - this->height / 2 - Map::GetSY());
 }
 
 void GameObject::ShowBitMap()

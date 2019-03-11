@@ -10,6 +10,7 @@ using namespace std;
 #include "gamelib.h"
 using namespace game_framework;
 
+#include "Map.h"
 #include "GameObject.h"
 
 class GameSystem
@@ -22,7 +23,7 @@ public:
 	static GameObject* GetGameObjectWithTag(string tag);//取得特定標籤的遊戲物件(單一個)
 	static vector<GameObject*> GetGameObjectsWithTag(string tag);//取得特定標籤的遊戲物件(多個)
 
-	static void MoveAllObject(int dx, int dy);//移動所有物件(用於改變螢幕看到的畫面)
+	static void MoveScreenTopLeft(int dx, int dy);//移動螢幕左上角位置
 	static void SetAllObjectBitMapPosition();//設定所有物件的圖片位置
 	static void ShowAllObject();//顯示所有物件
 	

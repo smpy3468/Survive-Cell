@@ -44,13 +44,10 @@ vector<GameObject*> GameSystem::GetGameObjectsWithTag(string tag)//¨ú±o¯S©w¼ÐÅÒª
 	return targetObjects;
 }
 
-void GameSystem::MoveAllObject(int dx, int dy)//²¾°Ê©Ò¦³ª«¥ó(¥Î©ó§ïÅÜ¿Ã¹õ¬Ý¨ìªºµe­±)
+void GameSystem::MoveScreenTopLeft(int dx, int dy)
 {
-	for (auto i = gameObjectList.begin(); i != gameObjectList.end(); i++)
-	{
-		i->SetX(i->GetX() + dx);//²¾°Ê¨ì­ì¥»ªºx®y¼Ð+dxªº¦ì¸m
-		i->SetY(i->GetY() + dy);//²¾°Ê¨ì­ì¥»ªºy®y¼Ð+dyªº¦ì¸m
-	}
+	Map::SetSX(Map::GetSX() + dx);
+	Map::SetSY(Map::GetSY() + dy);
 }
 
 void GameSystem::SetAllObjectBitMapPosition()//³]©w©Ò¦³ª«¥ó¹Ï¤ù¦ì¸m
