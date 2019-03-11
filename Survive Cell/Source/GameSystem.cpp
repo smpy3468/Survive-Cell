@@ -20,11 +20,11 @@ void GameSystem::AddGameObject(GameObject& obj)//增加遊戲物件
 
 GameObject* GameSystem::GetGameObjectWithTag(string tag)//取得特定標籤的遊戲物件(單一個)
 {
-	for (auto i = gameObjectList.begin(); i != gameObjectList.end(); i++)
+	for (auto& i : gameObjectList)
 	{
-		if (i->GetTag() == tag)
+		if (i.GetTag() == tag)
 		{
-			return &*i;
+			return &i;
 		}
 	}
 	return NULL;
@@ -33,11 +33,11 @@ GameObject* GameSystem::GetGameObjectWithTag(string tag)//取得特定標籤的遊戲物件
 vector<GameObject*> GameSystem::GetGameObjectsWithTag(string tag)//取得特定標籤的遊戲物件(多個)
 {
 	vector<GameObject*> targetObjects;
-	for (auto i = gameObjectList.begin(); i != gameObjectList.end(); i++)
+	for (auto& i : gameObjectList)
 	{
-		if (i->GetTag() == tag)
+		if (i.GetTag() == tag)
 		{
-			targetObjects.push_back(&*i);
+			targetObjects.push_back(&i);
 		}
 	}
 
@@ -52,9 +52,9 @@ void GameSystem::MoveScreenTopLeft(int dx, int dy)
 
 void GameSystem::SetAllObjectBitMapPosition()//設定所有物件圖片位置
 {
-	for (auto i = gameObjectList.begin(); i != gameObjectList.end(); i++)
+	for (auto& i : gameObjectList)
 	{
-		i->SetBitMapPosition();
+		i.SetBitMapPosition();
 	}
 }
 
