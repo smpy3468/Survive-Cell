@@ -13,6 +13,7 @@ using namespace game_framework;
 #include "Map.h"
 #include "GameObject.h"
 
+
 class GameSystem
 {
 public:
@@ -22,7 +23,7 @@ public:
 	static void AddGameObject(GameObject& obj);//加入遊戲物件
 	static GameObject* GetGameObjectWithTag(string tag);//取得特定標籤的遊戲物件(單一個)
 	static vector<GameObject*> GetGameObjectsWithTag(string tag);//取得特定標籤的遊戲物件(多個)
-
+ 
 	static void MoveScreenTopLeft(int dx, int dy);//移動螢幕左上角位置
 	static void SetAllObjectBitMapPosition();//設定所有物件的圖片位置
 	static void ShowAllObject();//顯示所有物件

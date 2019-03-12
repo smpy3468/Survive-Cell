@@ -62,6 +62,7 @@
 #include "GameSystem.h"
 #include "GameObject.h"
 #include "Character.h"
+#include "Monster.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -76,7 +77,7 @@ namespace game_framework {
 	void CGameStateInit::OnInit()
 	{
 		GameSystem::AddGameObject(*(new GameObject("Player", SIZE_X / 2, SIZE_Y / 2, 10, 10, IDB_BALL)));
-		GameSystem::AddGameObject(*(new GameObject("Monster", SIZE_X / 2 - 30, SIZE_Y / 2, 10, 10, IDB_0)));
+		GameSystem::AddGameObject(*(new Monster("Monster", SIZE_X / 2 - 30, SIZE_Y / 2, 10, 10, IDB_0)));
 		
 		Map::SetStaticObject();
 	}

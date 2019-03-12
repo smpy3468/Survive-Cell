@@ -10,18 +10,19 @@ class Monster :public Character
 {
 public:
 	Monster();
+	Monster::Monster(string tag, int x, int y, int width, int height, int pictureID);
 	void SetDefenseRange(int Rnage);
-	void SetLR(int lr);
+	void SetRL(int rl);
 
 	int GetDefenseRange();
-	int GetLR();
-	int* GetdX();
+	int GetRL();
+	int GetdX(int point);
 
-
-private:	
 	void SetdX();
 	void SetdY();
-	int defenseRange = 20;
-	int lr=0;
-	int dX[2], dY[2]; //左右、上下
+	
+private:	
+	int defenseRange; 
+	int dX[2] ,dY[2]; //左右、上下
+	int rl;
 };

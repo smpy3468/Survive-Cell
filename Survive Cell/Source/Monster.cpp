@@ -7,8 +7,17 @@ Monster::Monster()
 }
 
 
-void Monster::SetDefenseRange(int range) {
-	this->defenseRange;
+Monster::Monster(string tag, int x, int y, int width, int height, int pictureID) :Character(tag, x, y, width, height, pictureID)
+{
+	tag = "Monster";
+	defenseRange = 5;
+	dX[0] = x - defenseRange; //左邊
+	dX[1] = x + defenseRange;	//右邊
+	rl = 1;
+}
+
+void Monster::SetDefenseRange(int defenseRange) {
+	this -> defenseRange = defenseRange;
 }
 
 int Monster::GetDefenseRange() {
@@ -16,20 +25,23 @@ int Monster::GetDefenseRange() {
 }
 
 void Monster::SetdX() {
-	this->dX[0] = x - defenseRange; //左邊
-	this->dX[1] = x + defenseRange;	//右邊
+	dX[0] = x - 1; //左邊
+	dX[1] = x + 1 ;	//右邊
 }
 
-void Monster::SetLR(int lr) {
-	this->lr = lr;
+void Monster::SetRL(int rl) {
+	this ->rl = rl;
 }
 
-int Monster::GetLR() {
-	return lr;
+int Monster::GetRL() {
+	return rl;
 }
 
-int* Monster::GetdX() {
-	return dX;
+int Monster::GetdX(int point) {
+	if (point == 0)
+		return dX[0];
+	else
+		return dX[1];
 }
 
 void Monster::SetdY() {

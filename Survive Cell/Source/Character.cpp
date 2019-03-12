@@ -6,6 +6,11 @@ Character::Character():GameObject()
 	tag = "Character";
 }
 
+Character::Character(string tag, int x, int y, int width, int height, int pictureID):GameObject(tag, x, y, width, height, pictureID)
+{
+	tag = "Character";
+}
+
 void Character::SetMaxHP(int maxHp)
 {
 	this->maxHP = maxHp;
@@ -105,3 +110,4 @@ bool Character::IsDead()
 {
 	return this->isDead;
 }
+

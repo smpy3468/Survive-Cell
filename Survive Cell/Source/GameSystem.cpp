@@ -70,18 +70,21 @@ void GameSystem::ShowAllObject()//顯示所有物件
 void GameSystem::AutoMove() {
 	vector<GameObject*> allMonster = GetGameObjectsWithTag("Monster");
 	int monsterAmount = allMonster.size();
+
 	for (int i = 0; i < monsterAmount; i++) {
 
-		if (allMonster[i]->GetLR() == 0)							//如果GetLR == 0 , X 往左移動
-			allMonster[i]->SetX(allMonster[i]->GetX() - (1 / 33)); 
+		if (allMonster[i]->GetRL() == 0)							//如果GetLR == 0 , X 往左移動
+			allMonster[i]->SetX(allMonster[i]->GetX() - (1)); 
 
-		if (allMonster[i]->GetLR() == 1)
-			allMonster[i]->SetX(allMonster[i]->GetX() + (1 / 33)); //如果GetLR == ! , X 往右移動
+		else if (allMonster[i]->GetRL() == 1)
+			allMonster[i]->SetX(allMonster[i]->GetX() + 1); //如果GetLR == 1 , X 往右移動
+		
 
-		if (allMonster[i]->GetX() < allMonster[i]->GetdX[0])       //GetdX[0]左邊警戒範圍，如果超過左邊 改右邊移動
-			allMonster[i]->SetdX(1);
-		else if (allMonster[i]->GetX() > allMonster[i]->GetdX[1]) //GetdX[1]右邊警戒範圍，如果超過右邊 改左邊移動
-			allMonster[i]->SetdX(0);
+		if (allMonster[i]->GetX() <= allMonster[i]->GetdX(0))       //GetdX[0]左邊警戒範圍，如果超過左邊 改右邊移動
+			allMonster[i]->SetRL(1);
+
+		else if (allMonster[i]->GetX() >= allMonster[i]->GetdX(1)) //GetdX[1]右邊警戒範圍，如果超過右邊 改左邊移動
+			allMonster[i]->SetRL(0);
 
 		//GameSystem::GetGameObjectWithTag("Player")->SetX(GameSystem::GetGameObjectWithTag("Player")->GetX() - 10);
 	}

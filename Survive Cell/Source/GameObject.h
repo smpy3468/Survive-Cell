@@ -34,7 +34,9 @@ public:
 	void SetBitMapPosition();//設定圖片位置
 	void ShowBitMap();//顯示圖片
 
-
+	virtual int GetRL();
+	virtual void SetRL(int rl);
+	virtual int GetdX(int point);
 protected:
 	string tag;//物件標籤
 	int x, y;//x,y座標

@@ -92,3 +92,7 @@ void GameObject::ShowBitMap()
 {
 	objectPic.ShowBitmap();
 }
+
+int GameObject::GetRL() { return 0; }
+void GameObject::SetRL(int rl) {  }
+int GameObject::GetdX(int point) { return 0; }

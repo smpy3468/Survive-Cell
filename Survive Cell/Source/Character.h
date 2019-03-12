@@ -12,6 +12,7 @@ class Character :public GameObject
 {
 public:
 	Character();
+	Character::Character(string tag, int x, int y, int width, int height, int pictureID);
 	void SetMaxHP(int maxHp);//設定最大血量
 	void SetHP(int hp);//設定目前血量
 	void SetOriginMoveSpeed(int originMoveSpeed);//設定原始移動速度
@@ -34,6 +35,9 @@ public:
 	int GetAttackRange();//取得攻擊範圍
 	bool IsDead();//確認是否死亡
 
+	virtual int Character::GetRL() { return 1; }
+	virtual void Character::SetRL(int rl) {  }
+	virtual int Character::GetdX(int point) { return 0; }
 private:
 	int maxHP, HP;//最大血量、目前血量
 	int originMoveSpeed, moveSpeed;//原始移動速度、目前移動速度
