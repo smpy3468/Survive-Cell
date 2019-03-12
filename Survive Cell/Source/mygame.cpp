@@ -77,6 +77,7 @@ namespace game_framework {
 	{
 		GameSystem::AddGameObject(*(new GameObject("Player", SIZE_X / 2, SIZE_Y / 2, 10, 10, IDB_BALL)));
 		GameSystem::AddGameObject(*(new GameObject("Monster", SIZE_X / 2 - 30, SIZE_Y / 2, 10, 10, IDB_0)));
+		
 		Map::SetStaticObject();
 	}
 
@@ -148,6 +149,7 @@ namespace game_framework {
 	void CGameStateRun::OnMove()							// 移動遊戲元素
 	{
 		GameSystem::SetAllObjectBitMapPosition();//設定所有物件圖片位置
+		GameSystem::AutoMove();//怪物來回移動
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -161,6 +163,8 @@ namespace game_framework {
 		const char KEY_UP = 0x26; // keyboard上箭頭
 		const char KEY_RIGHT = 0x27; // keyboard右箭頭
 		const char KEY_DOWN = 0x28; // keyboard下箭頭
+
+
 
 		if (nChar == KEY_LEFT)
 		{

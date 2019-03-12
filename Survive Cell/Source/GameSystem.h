@@ -26,7 +26,9 @@ public:
 	static void MoveScreenTopLeft(int dx, int dy);//移動螢幕左上角位置
 	static void SetAllObjectBitMapPosition();//設定所有物件的圖片位置
 	static void ShowAllObject();//顯示所有物件
-	
+
+	static void AutoMove(); //怪物自動在警戒範圍內來回移動
+
 private:
 	static vector<GameObject> gameObjectList;//存放所有遊戲物件的列表
 	static CMovingBitmap backgroundPic;//背景圖片

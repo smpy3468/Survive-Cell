@@ -5,17 +5,17 @@
 #include "Map.h"
 
 bool Map::coordinate[SIZE_X][SIZE_Y] = { false };//紀錄哪個座標有物件
-int Map::sx = 0;//預設螢幕左上角在地圖座標的0,0
-int Map::sy = 0;//預設螢幕左上角在地圖座標的0,0
+int Map::sx = 0;//預設螢幕左上角在地圖座標的0,0 
+int Map::sy = 0;//預設螢幕左上角在地圖座標的0,0 
 
 void Map::SetSX(int x)
 {
-	sx = x;
+	sx = x; 
 }
 
 void Map::SetSY(int y)
 {
-	sy = y;
+	sy = y; 
 }
 
 int Map::GetSX()
