@@ -171,22 +171,22 @@ namespace game_framework {
 		if (nChar == KEY_LEFT)
 		{
 			GameSystem::MoveScreenTopLeft(-10, 0);
-			GameSystem::GetGameObjectWithTag("Player")->SetX(GameSystem::GetGameObjectWithTag("Player")->GetX() - 10);
+			GameSystem::GetGameObjectWithTag<Player>("Player")->SetX(GameSystem::GetGameObjectWithTag<Player>("Player")->GetX() - 10);
 		}
 		else if (nChar == KEY_RIGHT)
 		{
 			GameSystem::MoveScreenTopLeft(10, 0);
-			GameSystem::GetGameObjectWithTag("Player")->SetX(GameSystem::GetGameObjectWithTag("Player")->GetX() + 10);
+			GameSystem::GetGameObjectWithTag<Player>("Player")->SetX(GameSystem::GetGameObjectWithTag<Player>("Player")->GetX() + 10);
 		}
 		else if (nChar == KEY_UP)
 		{
 			GameSystem::MoveScreenTopLeft(0, -10);
-			GameSystem::GetGameObjectWithTag("Player")->SetY(GameSystem::GetGameObjectWithTag("Player")->GetY() - 10);
+			GameSystem::GetGameObjectWithTag<Player>("Player")->SetY(GameSystem::GetGameObjectWithTag<Player>("Player")->GetY() - 10);
 		}
 		else if (nChar == KEY_DOWN)
 		{
 			GameSystem::MoveScreenTopLeft(0, 10);
-			GameSystem::GetGameObjectWithTag("Player")->SetY(GameSystem::GetGameObjectWithTag("Player")->GetY() + 10);
+			GameSystem::GetGameObjectWithTag<Player>("Player")->SetY(GameSystem::GetGameObjectWithTag<Player>("Player")->GetY() + 10);
 		}
 	}
 

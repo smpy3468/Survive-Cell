@@ -18,7 +18,7 @@ void GameSystem::AddGameObject(GameObject& obj)//增加遊戲物件
 	gameObjectList.push_back(obj);
 }
 
-GameObject* GameSystem::GetGameObjectWithTag(string tag)//取得特定標籤的遊戲物件(單一個)
+/*GameObject* GameSystem::GetGameObjectWithTag(string tag)//取得特定標籤的遊戲物件(單一個)
 {
 	for (auto& i : gameObjectList)
 	{
@@ -28,7 +28,7 @@ GameObject* GameSystem::GetGameObjectWithTag(string tag)//取得特定標籤的遊戲物件
 		}
 	}
 	return NULL;
-}
+}*/
 
 /*template <class T>
 vector<T*> GameSystem::GetGameObjectsWithTag(string tag)//取得特定標籤的遊戲物件(多個)
