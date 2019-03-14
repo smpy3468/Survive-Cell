@@ -50,7 +50,7 @@ void Monster::SetdY() {
 }
 
 void Monster::AutoMove() {
-	vector<Monster*> allMonster = GameSystem::GetGameObjectsWithTag("Monster");
+	vector<Monster*> allMonster = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
 	int monsterAmount = allMonster.size();
 	
 	for (int i = 0; i < monsterAmount; i++) {

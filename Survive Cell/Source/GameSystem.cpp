@@ -30,9 +30,10 @@ GameObject* GameSystem::GetGameObjectWithTag(string tag)//¨ú±o¯S©w¼ÐÅÒªº¹CÀ¸ª«¥ó
 	return NULL;
 }
 
-vector<GameObject*> GameSystem::GetGameObjectsWithTag(string tag)//¨ú±o¯S©w¼ÐÅÒªº¹CÀ¸ª«¥ó(¦h­Ó)
+/*template <class T>
+vector<T*> GameSystem::GetGameObjectsWithTag(string tag)//¨ú±o¯S©w¼ÐÅÒªº¹CÀ¸ª«¥ó(¦h­Ó)
 {
-	vector<GameObject*> targetObjects;
+	vector<T*> targetObjects;
 	for (auto& i : gameObjectList)
 	{
 		if (i.GetTag() == tag)
@@ -42,7 +43,7 @@ vector<GameObject*> GameSystem::GetGameObjectsWithTag(string tag)//¨ú±o¯S©w¼ÐÅÒª
 	}
 
 	return targetObjects;
-}
+}*/
 
 void GameSystem::MoveScreenTopLeft(int dx, int dy)
 {
