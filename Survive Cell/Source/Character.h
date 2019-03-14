@@ -35,9 +35,7 @@ public:
 	int GetAttackRange();//取得攻擊範圍
 	bool IsDead();//確認是否死亡
 
-	virtual int Character::GetRL() { return 1; }
-	virtual void Character::SetRL(int rl) {  }
-	virtual int Character::GetdX(int point) { return 0; }
+
 private:
 	int maxHP, HP;//最大血量、目前血量
 	int originMoveSpeed, moveSpeed;//原始移動速度、目前移動速度

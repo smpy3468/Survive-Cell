@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "GameObject.h"
 #include "Map.h"
+#include "Monster.h"
 
 
 GameObject::GameObject()
@@ -93,6 +94,7 @@ void GameObject::ShowBitMap()
 	objectPic.ShowBitmap();
 }
 
-int GameObject::GetRL() { return 0; }
+/*int GameObject::GetRL() { return 2; }
 void GameObject::SetRL(int rl) {  }
-int GameObject::GetdX(int point) { return 0; }
+int GameObject::GetdX(int point) { return 2; }*/
+

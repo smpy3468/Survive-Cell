@@ -150,7 +150,7 @@ namespace game_framework {
 	void CGameStateRun::OnMove()							// 移動遊戲元素
 	{
 		GameSystem::SetAllObjectBitMapPosition();//設定所有物件圖片位置
-		GameSystem::AutoMove();//怪物來回移動
+		Monster::AutoMove();//怪物來回移動
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定

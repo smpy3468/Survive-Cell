@@ -5,7 +5,7 @@
 //Ä~©ÓCharacter
 
 #include "Character.h"
-
+#include "GameSystem.h"
 class Monster :public Character
 {
 public:
@@ -15,12 +15,14 @@ public:
 	void SetRL(int rl);
 
 	int GetDefenseRange();
-	int GetRL();
+    int GetRL();
 	int GetdX(int point);
 
 	void SetdX();
 	void SetdY();
-	
+
+	static void AutoMove();
+
 private:	
 	int defenseRange; 
 	int dX[2] ,dY[2]; //¥ª¥k¡B¤W¤U
