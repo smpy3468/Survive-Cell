@@ -54,10 +54,10 @@ void Monster::AutoMove() {
 	int monsterAmount = allMonster.size();
 	
 	for (int i = 0; i < monsterAmount; i++) {
-		if (allMonster[i]-> GetRL() == 1)							//如果GetLR == 0 , X 往左移動
-			allMonster[i]->SetX(allMonster[i]->GetX() - (1));
+		if (allMonster[i]-> GetRL() == 0)							//如果GetLR == 0 , X 往左移動
+			allMonster[i]->SetX(allMonster[i]->GetX() - 1);
 
-		else if (allMonster[i]->GetRL() == 2)
+		else if (allMonster[i]->GetRL() == 1)
 			allMonster[i]->SetX(allMonster[i]->GetX() + 1); //如果GetLR == 1 , X 往右移動
 
 

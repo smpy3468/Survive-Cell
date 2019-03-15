@@ -110,4 +110,3 @@ bool Character::IsDead()
 {
 	return this->isDead;
 }
-

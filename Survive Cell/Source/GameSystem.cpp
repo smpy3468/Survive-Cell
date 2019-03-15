@@ -2,18 +2,18 @@
 #include <iostream>
 #include "GameSystem.h"
 
-vector<GameObject> GameSystem::gameObjectList;//初始化物件列表
+vector<GameObject*> GameSystem::gameObjectList;//初始化物件列表
 
 GameSystem::GameSystem()
 {
 }
 
-vector<GameObject>& GameSystem::GetAllGameObject()//取得所有物件
+vector<GameObject*>& GameSystem::GetAllGameObject()//取得所有物件
 {
 	return gameObjectList;
 }
 
-void GameSystem::AddGameObject(GameObject& obj)//增加遊戲物件
+void GameSystem::AddGameObject(GameObject* obj)//增加遊戲物件
 {
 	gameObjectList.push_back(obj);
 }
@@ -55,13 +55,13 @@ void GameSystem::SetAllObjectBitMapPosition()//設定所有物件圖片位置
 {
 	for (auto& i : gameObjectList)
 	{
-		i.SetBitMapPosition();
+		i->SetBitMapPosition();
 	}
 }
 
 void GameSystem::ShowAllObject()//顯示所有物件
 {
-	for (auto i = gameObjectList.begin(); i != gameObjectList.end(); i++)
+	for (auto& i : gameObjectList)
 	{
 		i->ShowBitMap();
 	}

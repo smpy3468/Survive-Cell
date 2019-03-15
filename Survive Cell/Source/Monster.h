@@ -21,6 +21,8 @@ public:
 	void SetdX();
 	void SetdY();
 
+	void Move(int dx, int dy) {}
+
 	static void AutoMove();
 
 private:	

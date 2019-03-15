@@ -18,16 +18,16 @@ class GameSystem
 public:
 	GameSystem();
 
-	static vector<GameObject>& GetAllGameObject();//取得所有遊戲物件
-	static void AddGameObject(GameObject& obj);//加入遊戲物件
+	static vector<GameObject*>& GetAllGameObject();//取得所有遊戲物件
+	static void AddGameObject(GameObject* obj);//加入遊戲物件
 	
 	template <class T> static T* GetGameObjectWithTag(string tag)//取得特定標籤的遊戲物件(單一個)
 	{
 		for (auto& i : gameObjectList)
 		{
-			if (i.GetTag() == tag)
+			if (i->GetTag() == tag)
 			{
-				return static_cast<T*>(&i);
+				return static_cast<T*>(i);
 			}
 		}
 		return NULL;
@@ -38,9 +38,9 @@ public:
 		vector<T*> targetObjects;
 		for (auto& i : gameObjectList)
 		{
-			if (i.GetTag() == tag)
+			if (i->GetTag() == tag)
 			{
-				targetObjects.push_back(static_cast<T*>(&i));
+				targetObjects.push_back(static_cast<T*>(i));
 			}
 		}
 
@@ -52,6 +52,5 @@ public:
 	static void ShowAllObject();//顯示所有物件
 	
 private:
-	static vector<GameObject> gameObjectList;//存放所有遊戲物件的列表
-	static CMovingBitmap backgroundPic;//背景圖片
+	static vector<GameObject*> gameObjectList;//存放所有遊戲物件的列表
 };

@@ -64,6 +64,7 @@
 #include "Character.h"
 #include "Player.h"
 #include "Monster.h"
+#include "Floor.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -77,8 +78,10 @@ namespace game_framework {
 
 	void CGameStateInit::OnInit()
 	{
-		GameSystem::AddGameObject(*(new Player("Player", SIZE_X / 2, SIZE_Y / 2, 10, 10, IDB_BALL)));
-		GameSystem::AddGameObject(*(new Monster("Monster", SIZE_X / 2 - 30, SIZE_Y / 2, 10, 10, IDB_0)));
+		GameSystem::AddGameObject((new Player("Player", SIZE_X / 2, SIZE_Y / 2, 10, 10, IDB_BALL)));
+		GameSystem::AddGameObject((new Monster("Monster", SIZE_X / 2 - 30, SIZE_Y / 2, 10, 10, IDB_0)));
+		GameSystem::AddGameObject((new Monster("Monster", SIZE_X / 2 + 30, SIZE_Y / 2, 10, 10, IDB_1)));
+		GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2, SIZE_Y, 10, 10, IDB_ERASER1));
 		
 		Map::SetStaticObject();
 	}
@@ -150,8 +153,12 @@ namespace game_framework {
 
 	void CGameStateRun::OnMove()							// 移動遊戲元素
 	{
+
+
 		GameSystem::SetAllObjectBitMapPosition();//設定所有物件圖片位置
 		Monster::AutoMove();//怪物來回移動
+
+
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -166,27 +173,23 @@ namespace game_framework {
 		const char KEY_RIGHT = 0x27; // keyboard右箭頭
 		const char KEY_DOWN = 0x28; // keyboard下箭頭
 
-
+		Player& player = *(GameSystem::GetGameObjectWithTag<Player>("Player"));//宣告一個玩家，避免每次都要打一長串GetGameObject...
 
 		if (nChar == KEY_LEFT)
 		{
-			GameSystem::MoveScreenTopLeft(-10, 0);
-			GameSystem::GetGameObjectWithTag<Player>("Player")->SetX(GameSystem::GetGameObjectWithTag<Player>("Player")->GetX() - 10);
+			player.Move(-10,0);
 		}
 		else if (nChar == KEY_RIGHT)
 		{
-			GameSystem::MoveScreenTopLeft(10, 0);
-			GameSystem::GetGameObjectWithTag<Player>("Player")->SetX(GameSystem::GetGameObjectWithTag<Player>("Player")->GetX() + 10);
+			player.Move(10, 0);
 		}
 		else if (nChar == KEY_UP)
 		{
-			GameSystem::MoveScreenTopLeft(0, -10);
-			GameSystem::GetGameObjectWithTag<Player>("Player")->SetY(GameSystem::GetGameObjectWithTag<Player>("Player")->GetY() - 10);
+			player.Move(0, -10);
 		}
 		else if (nChar == KEY_DOWN)
 		{
-			GameSystem::MoveScreenTopLeft(0, 10);
-			GameSystem::GetGameObjectWithTag<Player>("Player")->SetY(GameSystem::GetGameObjectWithTag<Player>("Player")->GetY() + 10);
+			player.Move(0, 10);
 		}
 	}
 
