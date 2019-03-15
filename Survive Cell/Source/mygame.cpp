@@ -81,8 +81,8 @@ namespace game_framework {
 		GameSystem::AddGameObject((new Player("Player", SIZE_X / 2, SIZE_Y / 2, 10, 10, IDB_BALL)));
 		GameSystem::AddGameObject((new Monster("Monster", SIZE_X / 2 - 30, SIZE_Y / 2, 10, 10, IDB_0)));
 		GameSystem::AddGameObject((new Monster("Monster", SIZE_X / 2 + 30, SIZE_Y / 2, 10, 10, IDB_1)));
-		GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2, SIZE_Y, 10, 10, IDB_ERASER1));
-		
+		GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2, SIZE_Y / 2 + 100, 30, 30, IDB_ERASER1));
+
 		Map::SetStaticObject();
 	}
 
@@ -153,12 +153,10 @@ namespace game_framework {
 
 	void CGameStateRun::OnMove()							// 移動遊戲元素
 	{
-
-
-		GameSystem::SetAllObjectBitMapPosition();//設定所有物件圖片位置
+		Player& player = *(GameSystem::GetGameObjectWithTag<Player>("Player"));//宣告一個玩家，避免每次都要打一長串GetGameObject...
+		player.Move();
 		Monster::AutoMove();//怪物來回移動
-
-
+		GameSystem::SetAllObjectBitMapPosition();//設定所有物件圖片位置
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -177,25 +175,47 @@ namespace game_framework {
 
 		if (nChar == KEY_LEFT)
 		{
-			player.Move(-10,0);
+			player.SetIsMoveLeft(true);
 		}
-		else if (nChar == KEY_RIGHT)
+		if (nChar == KEY_RIGHT)
 		{
-			player.Move(10, 0);
+			player.SetIsMoveRight(true);
 		}
-		else if (nChar == KEY_UP)
+		if (nChar == KEY_UP)
 		{
-			player.Move(0, -10);
+			player.SetIsMoveUp(true);
 		}
-		else if (nChar == KEY_DOWN)
+		if (nChar == KEY_DOWN)
 		{
-			player.Move(0, 10);
+			player.SetIsMoveDown(true);
 		}
 	}
 
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	{
+		const char KEY_LEFT = 0x25; // keyboard左箭頭
+		const char KEY_UP = 0x26; // keyboard上箭頭
+		const char KEY_RIGHT = 0x27; // keyboard右箭頭
+		const char KEY_DOWN = 0x28; // keyboard下箭頭
 
+		Player& player = *(GameSystem::GetGameObjectWithTag<Player>("Player"));//宣告一個玩家，避免每次都要打一長串GetGameObject...
+
+		if (nChar == KEY_LEFT)
+		{
+			player.SetIsMoveLeft(false);
+		}
+		if (nChar == KEY_RIGHT)
+		{
+			player.SetIsMoveRight(false);
+		}
+		if (nChar == KEY_UP)
+		{
+			player.SetIsMoveUp(false);
+		}
+		if (nChar == KEY_DOWN)
+		{
+			player.SetIsMoveDown(false);
+		}
 	}
 
 	void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
