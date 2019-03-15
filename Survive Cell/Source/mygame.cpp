@@ -155,7 +155,7 @@ namespace game_framework {
 	{
 		Player& player = *(GameSystem::GetGameObjectWithTag<Player>("Player"));//宣告一個玩家，避免每次都要打一長串GetGameObject...
 		player.Move();
-		Monster::AutoMove();//怪物來回移動
+		GameSystem::MonsterAutoMove();//怪物來回移動
 		GameSystem::SetAllObjectBitMapPosition();//設定所有物件圖片位置
 	}
 

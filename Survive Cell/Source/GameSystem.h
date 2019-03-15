@@ -51,6 +51,8 @@ public:
 	static void SetAllObjectBitMapPosition();//設定所有物件的圖片位置
 	static void ShowAllObject();//顯示所有物件
 	
+	static void MonsterAutoMove();
+	
 private:
 	static vector<GameObject*> gameObjectList;//存放所有遊戲物件的列表
 };

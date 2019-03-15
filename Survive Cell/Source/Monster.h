@@ -23,10 +23,11 @@ public:
 
 	void Move(int dx, int dy) {}
 
-	static void AutoMove();
+	void AutoMove();
 
 private:	
 	int defenseRange; 
 	int dX[2] ,dY[2]; //¥ª¥k¡B¤W¤U
 	int rl;
+	static const int LEFT = 1, RIGHT = 2;
 };
