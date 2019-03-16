@@ -1,7 +1,7 @@
 #include"Stdafx.h"
 #include <iostream>
 #include "GameSystem.h"
-
+#include "Monster.h"
 vector<GameObject*> GameSystem::gameObjectList;//初始化物件列表
 
 GameSystem::GameSystem()
@@ -58,6 +58,13 @@ void GameSystem::ShowAllObject()//顯示所有物件
 	for (auto& i : gameObjectList)
 	{
 		i->ShowBitMap();
+	}
+}
+
+void GameSystem::MonsterAutoMove() {
+	vector<Monster*> allMonster = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
+	for (auto& i : allMonster) {
+		i -> AutoMove();
 	}
 }
 
