@@ -24,7 +24,7 @@ public:
 	void Move(int dx, int dy) {}
 
 	void AutoMove(); //在防守區域內來回走動
-	bool InAttackField(int playerX, int playerY);   //是的話，衝向主角
+	bool IsInAttackField(int playerX, int playerY);   //是的話，衝向主角
 	void AttackPlayer();//當Player進入防守區，攻擊他
 
 private:	

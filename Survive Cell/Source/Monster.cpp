@@ -67,7 +67,7 @@ void Monster::AutoMove() {
 		this->rl = LEFT;
 }
 
-bool Monster::InAttackField	(int playerX, int playerY) {
+bool Monster::IsInAttackField	(int playerX, int playerY) {
 	int attackXField_Left = x - attackField, attackXField_Right = x + attackField;
 	int attackYField_down = y + attackField, attackYField_up = y - attackField;
 
@@ -82,7 +82,7 @@ void Monster::AttackPlayer() {
 	Player* player = GameSystem::GetGameObjectWithTag<Player>("Player");
 	const int ATTACK_SPEED = 4;
 
-	if (InAttackField(player->GetX(), player->GetY())) {  //怪物衝過去攻擊主角
+	if (IsInAttackField(player->GetX(), player->GetY())) {  //怪物衝過去攻擊主角
 		status = ATTACK;
 
 		moveSpeed = ATTACK_SPEED;
