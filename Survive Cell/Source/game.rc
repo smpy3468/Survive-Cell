@@ -66,8 +66,6 @@ IDB_BALL                BITMAP                  "..\\res\\ball.bmp"
 
 IDB_ERASER1             BITMAP                  "..\\res\\eraser1.bmp"
 
-IDB_BACKGROUND          BITMAP                  "..\\res\\ntutcsie.bmp"
-
 IDB_CORNER              BITMAP                  "..\\res\\corner.bmp"
 
 IDB_0                   BITMAP                  "..\\res\\bmp0.bmp"
@@ -104,6 +102,8 @@ IDB_HELP                BITMAP                  "..\\res\\help.bmp"
 
 IDB_LOADING             BITMAP                  "..\\res\\loading.bmp"
 
+IDB_BACKGROUND          BITMAP                  "C:\Users\user\Documents\Survive-Cell\Survive Cell\RES\\background.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -138,7 +138,6 @@ IDR_MAINFRAME           BITMAP                  "..\\res\\Toolbar.bmp"
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-
 IDR_GAMETYPE            ICON                    "..\\res\\gameDoc.ico"
 
 

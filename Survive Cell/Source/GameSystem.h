@@ -47,7 +47,6 @@ public:
 		return targetObjects;
 	}
 
-	static void MoveScreenTopLeft(int dx, int dy);//移動螢幕左上角位置
 	static void SetAllObjectBitMapPosition();//設定所有物件的圖片位置
 	static void ShowAllObject();//顯示所有物件
 	

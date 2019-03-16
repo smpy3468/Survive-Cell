@@ -349,6 +349,7 @@
     <Image Include="Bitmaps\Blue.bmp" />
     <Image Include="Bitmaps\Green.bmp" />
     <Image Include="Bitmaps\White.bmp" />
+    <Image Include="RES\background.bmp" />
     <Image Include="res\bitmap3.bmp" />
     <Image Include="res\bitmap4.bmp" />
     <Image Include="RES\duckduck.bmp" />

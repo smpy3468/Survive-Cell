@@ -45,12 +45,6 @@ vector<T*> GameSystem::GetGameObjectsWithTag(string tag)//取得特定標籤的遊戲物件
 	return targetObjects;
 }*/
 
-void GameSystem::MoveScreenTopLeft(int dx, int dy)
-{
-	Map::SetSX(Map::GetSX() + dx);
-	Map::SetSY(Map::GetSY() + dy);
-}
-
 void GameSystem::SetAllObjectBitMapPosition()//設定所有物件圖片位置
 {
 	for (auto& i : gameObjectList)

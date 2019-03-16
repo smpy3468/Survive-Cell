@@ -1,9 +1,11 @@
 #include "StdAfx.h"
 
 #include "gamelib.h"
+using namespace game_framework;
 #include "GameSystem.h"
 #include "Map.h"
 
+CMovingBitmap Map::backgroundPic;//背景圖片
 bool Map::coordinate[SIZE_X][SIZE_Y] = { false };//紀錄哪個座標有物件
 int Map::sx = 0;//預設螢幕左上角在地圖座標的0,0 
 int Map::sy = 0;//預設螢幕左上角在地圖座標的0,0 
@@ -18,6 +20,17 @@ void Map::SetSY(int y)
 	sy = y;
 }
 
+void Map::LoadBackgroundPic()
+{
+	backgroundPic.LoadBitmap(IDB_BACKGROUND);
+}
+
+void Map::ShowBackgroundPic()
+{
+	backgroundPic.SetTopLeft(-sx, -sy);
+	backgroundPic.ShowBitmap();
+}
+
 int Map::GetSX()
 {
 	return sx;
@@ -26,6 +39,12 @@ int Map::GetSX()
 int Map::GetSY()
 {
 	return sy;
+}
+
+void Map::MoveScreenTopLeft(int dx, int dy)
+{
+	Map::SetSX(Map::GetSX() + dx);
+	Map::SetSY(Map::GetSY() + dy);
 }
 
 void Map::SetStaticObject()//設定不會移動的物件座標，只會在遊戲一開始呼叫
