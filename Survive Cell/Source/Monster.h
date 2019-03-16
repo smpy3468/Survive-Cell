@@ -23,11 +23,13 @@ public:
 
 	void Move(int dx, int dy) {}
 
-	void AutoMove();
+	void AutoMove(); //在防守區域內來回走動
+	bool IsInAttackField(int playerX, int playerY);   //是的話，衝向主角
+	void AttackPlayer();//當Player進入防守區，攻擊他
 
 private:	
-	int defenseRange; 
+	int defenseRange, attackField; //defenseRange 來回走動的範圍, attackfield衝過去攻擊主角的範圍
 	int dX[2] ,dY[2]; //左右、上下
-	int rl;
-	static const int LEFT = 1, RIGHT = 2;
+	int rl,status;
+	static const int LEFT = 1, RIGHT = 2, STANDBY = 0, ALERTNESS = 1, ATTACK = 2;
 };

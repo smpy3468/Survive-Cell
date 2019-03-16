@@ -61,10 +61,17 @@ void GameSystem::ShowAllObject()//顯示所有物件
 	}
 }
 
-void GameSystem::MonsterAutoMove() {
+void GameSystem::MonstersAutoMove() {
 	vector<Monster*> allMonster = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
 	for (auto& i : allMonster) {
 		i -> AutoMove();
+	}
+}
+
+void GameSystem::MonstersAttackPlayer() {
+	vector<Monster*> allMonster = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
+	for (auto& i : allMonster) {
+		i->AttackPlayer();
 	}
 }
 
