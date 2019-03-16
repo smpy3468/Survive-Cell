@@ -78,10 +78,13 @@ namespace game_framework {
 
 	void CGameStateInit::OnInit()
 	{
+		Map::LoadBackgroundPic();
+
 		GameSystem::AddGameObject((new Player("Player", SIZE_X / 2, SIZE_Y / 2, 10, 10, IDB_BALL)));
 		GameSystem::AddGameObject((new Monster("Monster", SIZE_X / 2 - 30, SIZE_Y / 2, 10, 10, IDB_0)));
 		GameSystem::AddGameObject((new Monster("Monster", SIZE_X / 2 + 30, SIZE_Y / 2, 10, 10, IDB_1)));
-		GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2, SIZE_Y / 2 + 100, 30, 30, IDB_ERASER1));
+		GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2, SIZE_Y, 80, 50, IDB_ERASER1));
+		GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 - 80, SIZE_Y + 100, 80, 50, IDB_ERASER1));
 
 		Map::SetStaticObject();
 	}
@@ -183,11 +186,11 @@ namespace game_framework {
 		}
 		if (nChar == KEY_UP)
 		{
-			player.SetIsMoveUp(true);
+			player.SetIsJump(true);
 		}
 		if (nChar == KEY_DOWN)
 		{
-			player.SetIsMoveDown(true);
+			//player.SetIsMoveDown(true);
 		}
 	}
 
@@ -210,11 +213,11 @@ namespace game_framework {
 		}
 		if (nChar == KEY_UP)
 		{
-			player.SetIsMoveUp(false);
+			player.SetIsJump(false);
 		}
 		if (nChar == KEY_DOWN)
 		{
-			player.SetIsMoveDown(false);
+			//player.SetIsMoveDown(false);
 		}
 	}
 
@@ -245,6 +248,7 @@ namespace game_framework {
 
 	void CGameStateRun::OnShow()
 	{
+		Map::ShowBackgroundPic();
 		GameSystem::ShowAllObject();
 	}
 }
