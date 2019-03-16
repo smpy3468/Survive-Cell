@@ -33,9 +33,18 @@ void Player::Move(int dx, int dy)
 {
 	if (!Map::HasObject(x + dx, y + dy))//如果該座標沒有物件
 	{
-		Map::MoveScreenTopLeft(dx, dy);//螢幕移動
 		this->x += dx;//玩家x移動
 		this->y += dy;//玩家y移動
+		
+		if (dx > 0 && this->x >= Map::GetSX() + SIZE_X / 2)
+			Map::MoveScreenTopLeft(dx, 0);//螢幕移動
+		else if(dx < 0 && this->x < Map::GetSX() + SIZE_X / 2)
+			Map::MoveScreenTopLeft(dx, 0);//螢幕移動
+
+		if (dy > 0 && this->y >= Map::GetSY() + SIZE_Y * 3 / 4)
+			Map::MoveScreenTopLeft(0, dy);//螢幕移動
+		else if (dy < 0 && this->y < Map::GetSY() + SIZE_Y / 4)
+			Map::MoveScreenTopLeft(0, dy);//螢幕移動
 	}
 }
 
@@ -84,12 +93,14 @@ void Player::Move()//移動方向
 
 	if (this->isMoveLeft)
 	{
-		Move(-moveSpeed, 0);
+		if(this->x > 0)
+			Move(-moveSpeed, 0);
 	}
 
 	if (this->isMoveRight)
 	{
-		Move(moveSpeed, 0);
+		if(this->x + this->width < Map::GetWorldSizeX())
+			Move(moveSpeed, 0);
 	}
 
 	if (this->isJump)//如果按下跳躍
@@ -106,13 +117,12 @@ void Player::Move()//移動方向
 
 void Player::Fall()
 {
-	if (!Map::HasObject(this->x, this->y + this->height))//如果腳下沒東西
+	if (!Map::HasObject(this->x, this->y + this->height + fallDisplacement))//如果腳下沒東西
 	{
 		if (isGrounded == true)//原本在地上
 		{
 			fallDisplacement++;
-			this->y += fallDisplacement;
-			Map::MoveScreenTopLeft(0, fallDisplacement);
+			Move(0, fallDisplacement);
 		}
 	}
 	else
@@ -130,15 +140,13 @@ void Player::Jump()
 
 		if (jumpDisplacement >= 0)//往上升
 		{
-			this->y -= jumpDisplacement;//改變y軸座標
-			Map::MoveScreenTopLeft(0, -jumpDisplacement);//螢幕左上角跟著角色移動
+			Move(0, -jumpDisplacement);
 		}
-		if (jumpDisplacement < 0)//往下降
+		else if (jumpDisplacement < 0)//往下降
 		{
 			if (!Map::HasObject(this->x, this->y + this->height))//下方沒有地板
 			{
-				this->y -= jumpDisplacement;//改變y軸座標
-				Map::MoveScreenTopLeft(0, -jumpDisplacement);//螢幕左上角跟著角色移動
+				Move(0, -jumpDisplacement);
 			}
 			else
 			{

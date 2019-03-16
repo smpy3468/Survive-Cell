@@ -6,19 +6,9 @@ using namespace game_framework;
 #include "Map.h"
 
 CMovingBitmap Map::backgroundPic;//背景圖片
-bool Map::coordinate[SIZE_X][SIZE_Y] = { false };//紀錄哪個座標有物件
+bool Map::coordinate[WORLD_SIZE_X][WORLD_SIZE_Y] = { false };//紀錄哪個座標有物件
 int Map::sx = 0;//預設螢幕左上角在地圖座標的0,0 
 int Map::sy = 0;//預設螢幕左上角在地圖座標的0,0 
-
-void Map::SetSX(int x)
-{
-	sx = x;
-}
-
-void Map::SetSY(int y)
-{
-	sy = y;
-}
 
 void Map::LoadBackgroundPic()
 {
@@ -29,6 +19,32 @@ void Map::ShowBackgroundPic()
 {
 	backgroundPic.SetTopLeft(-sx, -sy);
 	backgroundPic.ShowBitmap();
+}
+
+int Map::GetWorldSizeX()
+{
+	return WORLD_SIZE_X;
+}
+
+int Map::GetWorldSizeY()
+{
+	return WORLD_SIZE_Y;
+}
+
+void Map::SetSX(int x)
+{
+	if(x >= 0 && x + SIZE_X < WORLD_SIZE_X)//確保螢幕在遊戲畫面中
+		sx = x;
+	else
+	{
+
+	}
+}
+
+void Map::SetSY(int y)
+{
+	if (y >= 0 && y + SIZE_Y < WORLD_SIZE_Y)//確保螢幕在遊戲畫面中
+		sy = y;
 }
 
 int Map::GetSX()
