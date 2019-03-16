@@ -79,8 +79,8 @@ namespace game_framework {
 	void CGameStateInit::OnInit()
 	{
 		GameSystem::AddGameObject((new Player("Player", SIZE_X / 2, SIZE_Y / 2, 10, 10, IDB_BALL)));
-		GameSystem::AddGameObject((new Monster("Monster", SIZE_X / 2 - 30, SIZE_Y / 2, 10, 10, IDB_0)));
-		GameSystem::AddGameObject((new Monster("Monster", SIZE_X / 2 + 30, SIZE_Y / 2, 10, 10, IDB_1)));
+		GameSystem::AddGameObject((new Monster("Monster", SIZE_X / 2 - 30, SIZE_Y / 2 + 10, 10, 10, IDB_0)));
+		//GameSystem::AddGameObject((new Monster("Monster", SIZE_X / 2 + 30, SIZE_Y / 2, 10, 10, IDB_1)));
 		GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2, SIZE_Y / 2 + 100, 30, 30, IDB_ERASER1));
 
 		Map::SetStaticObject();
@@ -155,7 +155,8 @@ namespace game_framework {
 	{
 		Player& player = *(GameSystem::GetGameObjectWithTag<Player>("Player"));//宣告一個玩家，避免每次都要打一長串GetGameObject...
 		player.Move();
-		GameSystem::MonsterAutoMove();//怪物來回移動
+		GameSystem::MonstersAttackPlayer(); //攻擊Player
+		GameSystem::MonstersAutoMove();//怪物來回移動
 		GameSystem::SetAllObjectBitMapPosition();//設定所有物件圖片位置
 	}
 

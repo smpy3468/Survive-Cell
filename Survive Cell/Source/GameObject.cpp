@@ -94,3 +94,21 @@ void GameObject::ShowBitMap()
 	objectPic.ShowBitmap();
 }
 
+bool GameObject::IsAnthorObjectInRange(GameObject* object) {
+	const int RIGHT_EDGE = x + width, LEFT_EDGE = x - width,
+		UP_EDGE = y - height, DOWN_EDGE = y - height;
+
+	const int OB_X = object->GetX(), OB_Y = object->GetY(), OB_WIDTH = object->GetWidth(), OB_HEIGHT = object->GetHeight();
+	const int OB_RIGHT_EDGE = OB_X - OB_WIDTH, OB_LEFT_EDGE = OB_X + OB_WIDTH,
+		OB_UP_EDGE = OB_Y - OB_HEIGHT, OB_DOWN_EDGE = OB_Y + OB_HEIGHT;
+
+	if (OB_LEFT_EDGE < RIGHT_EDGE && OB_LEFT_EDGE > LEFT_EDGE)
+		return true;
+	else if (OB_RIGHT_EDGE < RIGHT_EDGE && OB_RIGHT_EDGE > LEFT_EDGE)
+		return true;
+	else if (OB_DOWN_EDGE > UP_EDGE && OB_DOWN_EDGE < DOWN_EDGE)
+		return true;
+	else if (OB_UP_EDGE < DOWN_EDGE && OB_UP_EDGE > UP_EDGE)
+		return true;
+	return false;
+}

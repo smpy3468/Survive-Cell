@@ -51,7 +51,8 @@ public:
 	static void SetAllObjectBitMapPosition();//設定所有物件的圖片位置
 	static void ShowAllObject();//顯示所有物件
 	
-	static void MonsterAutoMove();
+	static void MonstersAutoMove();    //全部怪物在defenseRange內移動
+	static void MonstersAttackPlayer();//全部怪物在Player進入attackField時會追Player
 	
 private:
 	static vector<GameObject*> gameObjectList;//存放所有遊戲物件的列表
