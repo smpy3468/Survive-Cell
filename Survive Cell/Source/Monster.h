@@ -25,7 +25,7 @@ public:
 
 	void AutoMove(); //在防守區域內來回走動
 	bool IsInAttackField(int playerX, int playerY);   //是的話，衝向主角
-	void AttackPlayer();//當Player進入防守區，攻擊他
+	void Attack()override;//當Player進入防守區，攻擊他
 
 private:	
 	int defenseRange, attackField; //defenseRange 來回走動的範圍, attackfield衝過去攻擊主角的範圍

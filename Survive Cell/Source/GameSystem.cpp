@@ -71,7 +71,7 @@ void GameSystem::MonstersAutoMove() {
 void GameSystem::MonstersAttackPlayer() {
 	vector<Monster*> allMonster = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
 	for (auto& i : allMonster) {
-		i->AttackPlayer();
+		i->Attack();
 	}
 }
 

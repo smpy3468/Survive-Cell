@@ -80,16 +80,15 @@ namespace game_framework {
 	{
 		Map::LoadBackgroundPic();
 
-		GameSystem::AddGameObject((new Player("Player", SIZE_X / 2, SIZE_Y / 2 - 50, 10, 10, IDB_BALL)));
+		GameSystem::AddGameObject((new Player("Player", SIZE_X / 2, SIZE_Y / 2 - 100, 10, 10, IDB_BALL)));
 		GameSystem::AddGameObject((new Monster("Monster", SIZE_X / 2 - 30, SIZE_Y / 2, 10, 10, IDB_0)));
 		GameSystem::AddGameObject((new Monster("Monster", SIZE_X / 2 + 30, SIZE_Y / 2, 10, 10, IDB_1)));
 
-
 		GameSystem::AddGameObject(new Floor("Floor", 0, Map::GetWorldSizeY() / 2 + 10, Map::GetWorldSizeX(), 100, IDB_ERASER1));
 
-		GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2, SIZE_Y / 2 + 100, 30, 30, IDB_ERASER1));
-		GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 - 30, SIZE_Y + 20, 80, 50, IDB_ERASER1));
-		GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 - 120, SIZE_Y + 150, 80, 50, IDB_ERASER1));
+		//GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2, SIZE_Y / 2 + 100, 30, 30, IDB_ERASER1));
+		//GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 - 30, SIZE_Y + 20, 80, 50, IDB_ERASER1));
+		//GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 - 120, SIZE_Y + 150, 80, 50, IDB_ERASER1));
 
 
 		Map::SetStaticObject();
@@ -180,6 +179,7 @@ namespace game_framework {
 		const char KEY_UP = 0x26; // keyboard上箭頭
 		const char KEY_RIGHT = 0x27; // keyboard右箭頭
 		const char KEY_DOWN = 0x28; // keyboard下箭頭
+		const char KEY_SPACE = 0x20;//空白鍵
 
 		Player& player = *(GameSystem::GetGameObjectWithTag<Player>("Player"));//宣告一個玩家，避免每次都要打一長串GetGameObject...
 
@@ -198,6 +198,10 @@ namespace game_framework {
 		if (nChar == KEY_DOWN)
 		{
 			//player.SetIsMoveDown(true);
+		}
+		if (nChar == KEY_SPACE)
+		{
+			player.Attack();
 		}
 	}
 

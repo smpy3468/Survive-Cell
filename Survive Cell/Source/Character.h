@@ -35,6 +35,8 @@ public:
 	int GetAttackRange();//取得攻擊範圍
 	bool IsDead();//確認是否死亡
 
+	void DecreaseHP(int dhp);//扣血
+	virtual void Attack() = 0;//攻擊
 	virtual void Move(int dx, int dy) = 0;
 
 protected:

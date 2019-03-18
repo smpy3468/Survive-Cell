@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "GameSystem.h"
 #include "Player.h"
+#include "Monster.h"
 #include "Map.h"
 
 Player::Player()
@@ -17,15 +18,20 @@ Player::Player(string tag, int x, int y, int width, int height, int pictureID) :
 
 	fallDisplacement = 0;
 
-	originJumpDisplacement = 10;
+	originJumpDisplacement = 15;
 	jumpDisplacement = originJumpDisplacement;
+
+	attackRange = 10;
+	attack = 5;
 
 	//isMoveUp = false;
 	//isMoveDown = false;
 	isMoveLeft = false;
 	isMoveRight = false;
 
+	isJumpKeyDown = false;
 	isJump = false;
+	isFall = false;
 	isGrounded = true;
 }
 
@@ -35,10 +41,10 @@ void Player::Move(int dx, int dy)
 	{
 		this->x += dx;//玩家x移動
 		this->y += dy;//玩家y移動
-		
+
 		if (dx > 0 && this->x >= Map::GetSX() + SIZE_X / 2)
 			Map::MoveScreenTopLeft(dx, 0);//螢幕移動
-		else if(dx < 0 && this->x < Map::GetSX() + SIZE_X / 2)
+		else if (dx < 0 && this->x < Map::GetSX() + SIZE_X / 2)
 			Map::MoveScreenTopLeft(dx, 0);//螢幕移動
 
 		if (dy > 0 && this->y >= Map::GetSY() + SIZE_Y * 3 / 4)
@@ -70,7 +76,7 @@ void Player::SetIsMoveRight(bool isMoveRight)
 
 void Player::SetIsJump(bool isJump)
 {
-	this->isJump = isJump;
+	this->isJumpKeyDown = isJump;
 }
 
 void Player::SetIsGrounded(bool isGrounded)
@@ -93,21 +99,22 @@ void Player::Move()//移動方向
 
 	if (this->isMoveLeft)
 	{
-		if(this->x > 0)
+		if (this->x > 0)
 			Move(-moveSpeed, 0);
 	}
 
 	if (this->isMoveRight)
 	{
-		if(this->x + this->width < Map::GetWorldSizeX())
+		if (this->x + this->width < Map::GetWorldSizeX())
 			Move(moveSpeed, 0);
 	}
 
-	if (this->isJump)//如果按下跳躍
+	if (this->isJumpKeyDown)//如果按下跳躍
 	{
 		if (isGrounded)//如果在地上
 		{
-			isGrounded = false;
+			isJump = true;//正在跳躍
+			isGrounded = false;//沒在地上
 		}
 	}
 
@@ -119,8 +126,10 @@ void Player::Fall()
 {
 	if (!Map::HasObject(this->x, this->y + this->height + fallDisplacement))//如果腳下沒東西
 	{
-		if (isGrounded == true)//原本在地上
+		if (isJump == false)//沒在跳躍
 		{
+			isFall = true;//正在下降
+			isGrounded = false;//不在地上
 			fallDisplacement++;
 			Move(0, fallDisplacement);
 		}
@@ -128,31 +137,39 @@ void Player::Fall()
 	else
 	{
 		fallDisplacement = 0;
+		isGrounded = true;//在地上
+		isFall = false;//沒在下降
 	}
 }
 
 void Player::Jump()
 {
-	if (isGrounded == false)//如果沒在地上(跳躍中)
+	if (isGrounded == false && isFall == false)//如果沒在地上且沒在下降
 	{
-		if (jumpDisplacement > -5 * originJumpDisplacement)//跳躍係數未小於最小值
-			jumpDisplacement--;//位移量隨著時間改變
+		jumpDisplacement--;//位移量隨著時間改變
 
 		if (jumpDisplacement >= 0)//往上升
 		{
 			Move(0, -jumpDisplacement);
 		}
-		else if (jumpDisplacement < 0)//往下降
+		else//往下降
 		{
-			if (!Map::HasObject(this->x, this->y + this->height))//下方沒有地板
-			{
-				Move(0, -jumpDisplacement);
-			}
-			else
-			{
-				isGrounded = true;//碰到地板
-				jumpDisplacement = originJumpDisplacement;//跳躍位移量還原
-			}
+			isJump = false;
+			jumpDisplacement = originJumpDisplacement;//跳躍位移量還原
+		}
+	}
+}
+
+void Player::Attack()
+{
+	vector<Monster*> monsters = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
+
+	for (auto& i : monsters)
+	{
+		if (i->GetX() > this->x - attackRange && i->GetX() < this->x + attackRange 
+			&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height)//在攻擊範圍內
+		{
+			i->DecreaseHP(attack);
 		}
 	}
 }

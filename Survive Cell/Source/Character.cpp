@@ -112,3 +112,14 @@ bool Character::IsDead()
 {
 	return this->isDead;
 }
+
+void Character::DecreaseHP(int dhp)
+{
+	this->HP -= dhp;
+	if (this->HP <= 0)//¦º¤`
+	{
+		HP = 0;
+		isDead = true;
+
+	}
+}

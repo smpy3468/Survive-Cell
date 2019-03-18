@@ -22,12 +22,16 @@ public:
 	void Move();//按下按鍵移動
 	void Fall();//下降
 	void Jump();//跳躍
+
+	void Attack()override;//攻擊
 private:
 	//bool isMoveUp;//是否向上移動
 	//bool isMoveDown;//是否向下移動
 	bool isMoveLeft;//是否向左移動
 	bool isMoveRight;//是否向右移動
-	bool isJump;//是否按下跳躍
+	bool isJumpKeyDown;//是否按下跳躍
+	bool isJump;//是否正在跳躍
+	bool isFall;//是否正在下降
 
 	int fallDisplacement;//下降位移量(移動到沒有地板的位置會用到)
 	int originJumpDisplacement, jumpDisplacement;//跳躍位移量

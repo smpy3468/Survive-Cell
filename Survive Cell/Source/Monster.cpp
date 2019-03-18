@@ -16,6 +16,7 @@ Monster::Monster(string tag, int x, int y, int width, int height, int pictureID)
 	dX[1] = x + defenseRange;	//•k√‰
 	rl = 1;
 	SetOriginAttackRange(10);
+	HP = 10;
 	SetAttackRange(GetOriginAttackRange());
 }
 
@@ -78,7 +79,7 @@ bool Monster::IsInAttackField	(int playerX, int playerY) {
 	return false;
 }
 
-void Monster::AttackPlayer() {
+void Monster::Attack() {
 	Player* player = GameSystem::GetGameObjectWithTag<Player>("Player");
 	const int ATTACK_SPEED = 4;
 
