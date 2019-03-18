@@ -22,7 +22,7 @@ Player::Player(string tag, int x, int y, int width, int height, int pictureID) :
 	jumpDisplacement = originJumpDisplacement;
 
 	attackRange = 10;
-	attack = 5;
+	attackDamage = 5;
 
 	//isMoveUp = false;
 	//isMoveDown = false;
@@ -164,12 +164,12 @@ void Player::Attack()
 {
 	vector<Monster*> monsters = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
 
-	for (auto& i : monsters)
+	for (auto& i : monsters)//對怪物攻擊
 	{
 		if (i->GetX() > this->x - attackRange && i->GetX() < this->x + attackRange 
-			&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height)//在攻擊範圍內
+			&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height)//怪物在攻擊範圍內
 		{
-			i->DecreaseHP(attack);
+			i->DecreaseHP(attackDamage);
 		}
 	}
 }

@@ -34,14 +34,14 @@ void Character::SetMoveSpeed(int moveSpeed)
 	this->moveSpeed = moveSpeed;
 }
 
-void Character::SetOriginAttack(int originAttack)
+void Character::SetOriginAttackDamage(int originAttack)
 {
-	this->originAttack = originAttack;
+	this->originAttackDamage = originAttack;
 }
 
-void Character::SetAttack(int attack)
+void Character::SetAttackDamage(int attack)
 {
-	this->attack = attack;
+	this->attackDamage = attack;
 }
 
 void Character::SetOriginAttackSpeed(int originAttackSpeed)
@@ -89,14 +89,14 @@ int Character::GetMoveSpeed()
 	return this->moveSpeed;
 }
 
-int Character::GetOriginAttack()
+int Character::GetOriginAttackDamage()
 {
-	return this->originAttack;
+	return this->originAttackDamage;
 }
 
-int Character::GetAttack()
+int Character::GetAttackDamage()
 {
-	return this->attack;
+	return this->attackDamage;
 }
 
 int Character::GetOriginAttackRange()
