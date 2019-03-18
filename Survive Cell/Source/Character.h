@@ -13,6 +13,7 @@ class Character :public GameObject
 public:
 	Character();
 	Character::Character(string tag, int x, int y, int width, int height, int pictureID);
+
 	void SetMaxHP(int maxHp);//設定最大血量
 	void SetHP(int hp);//設定目前血量
 	void SetOriginMoveSpeed(int originMoveSpeed);//設定原始移動速度

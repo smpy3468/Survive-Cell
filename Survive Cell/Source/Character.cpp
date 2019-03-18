@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "Character.h"
+#include "GameSystem.h"
 
 Character::Character():GameObject()
 {
@@ -120,6 +121,6 @@ void Character::DecreaseHP(int dhp)
 	{
 		HP = 0;
 		isDead = true;
-
+ 		GameSystem::DeleteGameObject(this);//刪除此物件
 	}
 }

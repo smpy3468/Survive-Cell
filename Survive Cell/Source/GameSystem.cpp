@@ -18,6 +18,18 @@ void GameSystem::AddGameObject(GameObject* obj)//增加遊戲物件
 	gameObjectList.push_back(obj);
 }
 
+void GameSystem::DeleteGameObject(GameObject * obj)
+{
+	for (auto i = gameObjectList.begin(); i != gameObjectList.end(); i++)
+	{
+		if (*i == obj)
+		{
+			gameObjectList.erase(i);
+			break;
+		}
+	}
+}
+
 /*GameObject* GameSystem::GetGameObjectWithTag(string tag)//取得特定標籤的遊戲物件(單一個)
 {
 	for (auto& i : gameObjectList)
@@ -64,7 +76,7 @@ void GameSystem::ShowAllObject()//顯示所有物件
 void GameSystem::MonstersAutoMove() {
 	vector<Monster*> allMonster = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
 	for (auto& i : allMonster) {
-		i -> AutoMove();
+		i->AutoMove();
 	}
 }
 
