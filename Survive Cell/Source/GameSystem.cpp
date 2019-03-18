@@ -25,7 +25,7 @@ void GameSystem::DeleteGameObject(GameObject * obj)
 		if (*i == obj)
 		{
 			gameObjectList.erase(i);
-			break;
+			return;
 		}
 	}
 }

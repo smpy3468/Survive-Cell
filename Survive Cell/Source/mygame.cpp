@@ -80,11 +80,11 @@ namespace game_framework {
 	{
 		Map::LoadBackgroundPic();
 
-		GameSystem::AddGameObject((new Player("Player", SIZE_X / 2, SIZE_Y / 2 - 100, 10, 10, IDB_BALL)));
+		GameSystem::AddGameObject((new Player("Player", SIZE_X / 2, SIZE_Y / 2 - 100, 40, 90, IDB_PLAYER)));
 		GameSystem::AddGameObject((new Monster("Monster", SIZE_X / 2 - 30, SIZE_Y / 2, 10, 10, IDB_0)));
 		GameSystem::AddGameObject((new Monster("Monster", SIZE_X / 2 + 30, SIZE_Y / 2, 10, 10, IDB_1)));
 
-		GameSystem::AddGameObject(new Floor("Floor", 0, Map::GetWorldSizeY() / 2 + 20, Map::GetWorldSizeX(), 100, IDB_BALL));
+		GameSystem::AddGameObject(new Floor("Floor", 0, Map::GetWorldSizeY() / 2 + 20, Map::GetWorldSizeX(), 100, IDB_GROUND));
 
 		//GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2, SIZE_Y / 2 + 100, 30, 30, IDB_ERASER1));
 		//GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 - 30, SIZE_Y + 20, 80, 50, IDB_ERASER1));
