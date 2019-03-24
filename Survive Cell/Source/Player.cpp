@@ -33,6 +33,8 @@ Player::Player(string tag, int x, int y, int width, int height, int pictureID) :
 	isJump = false;
 	isFall = false;
 	isGrounded = true;
+
+	LoadAni();
 }
 
 void Player::Move(int dx, int dy)
@@ -160,16 +162,46 @@ void Player::Jump()
 	}
 }
 
+void Player::ShowBitMap()
+{
+	if (isMoveLeft)
+	{
+		ani[ANI_LEFT]->OnMove();
+		ani[ANI_LEFT]->OnShow();
+	}
+	else if (isMoveRight)
+	{
+		ani[ANI_RIGHT]->OnMove();
+		ani[ANI_RIGHT]->OnShow();
+	}
+	else
+	{
+		ani[ANI_IDLE]->OnShow();
+	}
+}
+
 void Player::Attack()
 {
 	vector<Monster*> monsters = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
 
 	for (auto& i : monsters)//對怪物攻擊
 	{
-		if (i->GetX() > this->x - attackRange && i->GetX() < this->x + attackRange 
+		if (i->GetX() > this->x - attackRange && i->GetX() < this->x + attackRange
 			&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height)//怪物在攻擊範圍內
 		{
 			i->DecreaseHP(attackDamage);
 		}
 	}
+}
+
+void Player::LoadAni()
+{
+	char* aniIdle[1] = {".\\res\\player_idle.bmp"};
+	AddAniBitMaps(aniIdle, ANI_IDLE, 1);
+
+	char* aniLeft[4] = { ".\\res\\player_left_0.bmp", ".\\res\\player_left_1.bmp", ".\\res\\player_left_2.bmp", ".\\res\\player_left_3.bmp" };
+	AddAniBitMaps(aniLeft, ANI_LEFT, 4);
+
+	char* aniRight[4] = { ".\\res\\player_right_0.bmp", ".\\res\\player_right_1.bmp", ".\\res\\player_right_2.bmp", ".\\res\\player_right_3.bmp" };
+	AddAniBitMaps(aniRight, ANI_RIGHT, 4);
 }

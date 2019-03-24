@@ -23,6 +23,8 @@ public:
 	void Fall();//下降
 	void Jump();//跳躍
 
+	void ShowBitMap()override;//顯示動畫
+
 	void Attack()override;//攻擊
 private:
 	//bool isMoveUp;//是否向上移動
@@ -36,4 +38,9 @@ private:
 	int fallDisplacement;//下降位移量(移動到沒有地板的位置會用到)
 	int originJumpDisplacement, jumpDisplacement;//跳躍位移量
 	bool isGrounded;//是否在地上
+
+	void LoadAni()override;//載入動畫
+	const unsigned int ANI_IDLE = 0;
+	const unsigned int ANI_LEFT = 1;//左動畫
+	const unsigned int ANI_RIGHT = 2;//右動畫
 };

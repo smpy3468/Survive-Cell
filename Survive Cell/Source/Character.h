@@ -36,6 +36,8 @@ public:
 	int GetAttackRange();//取得攻擊範圍
 	bool IsDead();//確認是否死亡
 
+	void SetBitMapPosition()override;//設定動畫位置
+
 	void DecreaseHP(int dhp);//扣血
 	virtual void Attack() = 0;//攻擊
 	virtual void Move(int dx, int dy) = 0;
@@ -49,4 +51,9 @@ protected:
 
 	vector<Buff> buff;//套用中的BUFF
 	bool isDead;//是否死亡
+
+	vector<CAnimation*> ani;//動畫
+	virtual void LoadAni(); //載入動畫
+	void AddAniBitMaps(char* pic[], int aniType, int picCount);//增加多張動畫圖片
+	void AddAniBitMap(char* pic, int aniType);//增加動畫圖片
 };

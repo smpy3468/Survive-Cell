@@ -2,12 +2,12 @@
 #include "Character.h"
 #include "GameSystem.h"
 
-Character::Character():GameObject()
+Character::Character() :GameObject()
 {
 	tag = "Character";
 }
 
-Character::Character(string tag, int x, int y, int width, int height, int pictureID):GameObject(tag, x, y, width, height, pictureID)
+Character::Character(string tag, int x, int y, int width, int height, int pictureID) : GameObject(tag, x, y, width, height, pictureID)
 {
 	tag = "Character";
 	originMoveSpeed = 3;
@@ -114,6 +114,14 @@ bool Character::IsDead()
 	return this->isDead;
 }
 
+void Character::SetBitMapPosition()
+{
+	for (auto& i : ani)
+	{
+		i->SetTopLeft(x, y);
+	}
+}
+
 void Character::DecreaseHP(int dhp)
 {
 	this->HP -= dhp;
@@ -121,6 +129,26 @@ void Character::DecreaseHP(int dhp)
 	{
 		HP = 0;
 		isDead = true;
- 		GameSystem::DeleteGameObject(this);//刪除此物件
+		GameSystem::DeleteGameObject(this);//刪除此物件
 	}
+}
+
+void Character::LoadAni()
+{
+}
+
+void Character::AddAniBitMaps(char * pic[], int aniType, int picCount)
+{
+	for (int i = 0; i < picCount; i++)
+	{
+		AddAniBitMap(pic[i], aniType);
+	}
+}
+
+void Character::AddAniBitMap(char* pic, int aniType)
+{
+	while ((int)ani.size() <= aniType)
+		ani.push_back(new CAnimation);
+
+	ani[aniType]->AddBitmap(pic);
 }

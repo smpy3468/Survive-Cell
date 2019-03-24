@@ -30,7 +30,7 @@ public:
 	static bool HasObject(int x, int y);//該座標是否有物件
 
 private:
-	static const int WORLD_SIZE_X = 5*640, WORLD_SIZE_Y = 480;//整個遊戲地圖的長寬
+	static const int WORLD_SIZE_X = 3*640, WORLD_SIZE_Y = 480;//整個遊戲地圖的長寬
 	static bool coordinate[WORLD_SIZE_X][WORLD_SIZE_Y];//紀錄哪個座標有物件
 	static int sx, sy;//螢幕左上角的座標在地圖座標的哪裡
 	static CMovingBitmap backgroundPic;//背景圖片

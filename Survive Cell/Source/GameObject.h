@@ -31,8 +31,8 @@ public:
 
 	void LoadBitMap(char* pictureAddress);//用路徑載入圖片
 	void LoadBitMap(int pictureID);//用編號載入圖片
-	void SetBitMapPosition();//設定圖片位置
-	void ShowBitMap();//顯示圖片
+	virtual void SetBitMapPosition();//設定圖片位置
+	virtual void ShowBitMap();//顯示圖片
 
 	bool IsAnthorObjectInRange(GameObject* object); //object是否與此物件有重疊
 
