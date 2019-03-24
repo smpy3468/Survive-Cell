@@ -166,18 +166,24 @@ void Player::ShowBitMap()
 {
 	if (isMoveLeft)
 	{
+		currentAni = ANI_LEFT;
 		ani[ANI_LEFT]->OnMove();
-		ani[ANI_LEFT]->OnShow();
+		
 	}
 	else if (isMoveRight)
 	{
-		//ani[ANI_RIGHT]->OnMove();
-		ani[ANI_RIGHT]->OnShow();
+		currentAni = ANI_RIGHT;
+		ani[ANI_RIGHT]->OnMove();
 	}
 	else
 	{
-		ani[ANI_IDLE]->OnShow();
+		for (auto& i : ani)
+		{
+			i->Reset();//重置所有動畫
+		}
 	}
+
+	ani[currentAni]->OnShow();
 }
 
 void Player::Attack()
