@@ -171,7 +171,7 @@ void Player::ShowBitMap()
 	}
 	else if (isMoveRight)
 	{
-		ani[ANI_RIGHT]->OnMove();
+		//ani[ANI_RIGHT]->OnMove();
 		ani[ANI_RIGHT]->OnShow();
 	}
 	else

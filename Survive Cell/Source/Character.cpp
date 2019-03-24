@@ -118,7 +118,7 @@ void Character::SetBitMapPosition()
 {
 	for (auto& i : ani)
 	{
-		i->SetTopLeft(x, y);
+		i->SetTopLeft(this->x - Map::GetSX(), this->y - Map::GetSY());
 	}
 }
 
