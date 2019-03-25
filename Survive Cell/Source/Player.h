@@ -40,7 +40,7 @@ private:
 	void LoadAni()override;//載入動畫
 	int currentAni = 0;//目前動畫
 
-	const unsigned int ANI_IDLE = 0;
+	const unsigned int ANI_IDLE = 0;//靜止動畫，預設的動畫
 	const unsigned int ANI_LEFT = 1;//左動畫
 	const unsigned int ANI_RIGHT = 2;//右動畫
 	const unsigned int ANI_JUMP_LEFT = 3;//左跳動畫
