@@ -159,6 +159,29 @@ void Player::Jump()
 			isJump = false;
 			jumpDisplacement = originJumpDisplacement;//跳躍位移量還原
 		}
+
+		if (currentAni == ANI_LEFT)//跳躍動畫
+		{
+			currentAni = ANI_JUMP_LEFT;
+		}
+		else if (currentAni == ANI_RIGHT)
+		{
+			currentAni = ANI_JUMP_RIGHT;
+		}
+	}
+}
+
+void Player::Attack()
+{
+	vector<Monster*> monsters = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
+
+	for (auto& i : monsters)//對怪物攻擊
+	{
+		if (i->GetX() + i->GetWidth() > this->x - attackRange && i->GetX() < this->x + this->width + attackRange
+			&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height)//怪物在攻擊範圍內
+		{
+			i->DecreaseHP(attackDamage);
+		}
 	}
 }
 
@@ -186,20 +209,6 @@ void Player::ShowBitMap()
 	ani[currentAni]->OnShow();
 }
 
-void Player::Attack()
-{
-	vector<Monster*> monsters = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
-
-	for (auto& i : monsters)//對怪物攻擊
-	{
-		if (i->GetX() > this->x - attackRange && i->GetX() < this->x + attackRange
-			&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height)//怪物在攻擊範圍內
-		{
-			i->DecreaseHP(attackDamage);
-		}
-	}
-}
-
 void Player::LoadAni()
 {
 	char* aniIdle[1] = {".\\res\\player_idle.bmp"};
@@ -210,4 +219,10 @@ void Player::LoadAni()
 
 	char* aniRight[4] = { ".\\res\\player_right_0.bmp", ".\\res\\player_right_1.bmp", ".\\res\\player_right_2.bmp", ".\\res\\player_right_3.bmp" };
 	AddAniBitMaps(aniRight, ANI_RIGHT, 4);
+
+	char* aniJumpLeft = ".\\res\\player_jump_left.bmp";
+	AddAniBitMap(aniJumpLeft, ANI_JUMP_LEFT);
+
+	char* aniJumpRight = ".\\res\\player_jump_right.bmp";
+	AddAniBitMap(aniJumpRight, ANI_JUMP_RIGHT);
 }

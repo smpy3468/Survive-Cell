@@ -27,9 +27,16 @@ public:
 	bool IsInAttackField(int playerX, int playerY);   //是的話，衝向主角
 	void Attack()override;//當Player進入防守區，攻擊他
 
+	void ShowBitMap()override;
+
 private:	
 	int defenseRange, attackField; //defenseRange 來回走動的範圍, attackfield衝過去攻擊主角的範圍
 	int dX[2] ,dY[2]; //左右、上下
 	int rl,status;
 	static const int LEFT = 1, RIGHT = 2, STANDBY = 0, ALERTNESS = 1, ATTACK = 2;
+
+	void LoadAni()override;
+
+	int currentAni = 0;
+	const int ANI_LEFT = 0;
 };

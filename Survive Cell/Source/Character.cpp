@@ -150,5 +150,5 @@ void Character::AddAniBitMap(char* pic, int aniType)
 	while ((int)ani.size() <= aniType)
 		ani.push_back(new CAnimation);
 
-	ani[aniType]->AddBitmap(pic);
+	ani[aniType]->AddBitmap(pic, RGB(255,255,255));
 }

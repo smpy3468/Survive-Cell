@@ -44,4 +44,6 @@ private:
 	const unsigned int ANI_IDLE = 0;
 	const unsigned int ANI_LEFT = 1;//左動畫
 	const unsigned int ANI_RIGHT = 2;//右動畫
+	const unsigned int ANI_JUMP_LEFT = 3;//左跳動畫
+	const unsigned int ANI_JUMP_RIGHT = 4;//右跳動畫
 };

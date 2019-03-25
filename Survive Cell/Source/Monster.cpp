@@ -18,6 +18,8 @@ Monster::Monster(string tag, int x, int y, int width, int height, int pictureID)
 	SetOriginAttackRange(10);
 	HP = 10;
 	SetAttackRange(GetOriginAttackRange());
+
+	LoadAni();
 }
 
 void Monster::SetDefenseRange(int defenseRange) {
@@ -109,4 +111,15 @@ void Monster::Attack() {
 		status = STANDBY;
 		moveSpeed = originMoveSpeed;
 	}
+}
+
+void Monster::ShowBitMap()
+{
+	ani[currentAni]->OnShow();
+}
+
+void Monster::LoadAni()
+{
+	char* aniLeft[4] = {".\\res\\monster_left_0.bmp", ".\\res\\monster_left_1.bmp", ".\\res\\monster_left_2.bmp", ".\\res\\monster_left_3.bmp", };
+	AddAniBitMaps(aniLeft, ANI_LEFT, 4);
 }
