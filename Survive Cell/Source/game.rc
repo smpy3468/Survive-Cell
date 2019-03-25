@@ -110,6 +110,8 @@ IDB_GROUND              BITMAP                  "..\\res\\ground.bmp"
 
 IDB_CELL_GREEN          BITMAP                  "C:\\Users\\smpy3\\Documents\\Survive Cell\\Survive Cell\\RES\\cell_green.bmp"
 
+IDB_MENU                BITMAP                  "C:\\Users\\smpy3\\Documents\\Survive Cell\\Survive Cell\\RES\\menu.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

@@ -13,8 +13,6 @@ public:
 	Player(string tag, int x, int y, int width, int height, int pictureID);
 	void Move(int dx, int dy)override;//移動特定距離
 
-	//void SetIsMoveUp(bool isMoveUp);//設定是否向上移動
-	//void SetIsMoveDown(bool isMoveDown);//設定是否向下移動
 	void SetIsMoveLeft(bool isMoveLeft);//設定是否向左移動
 	void SetIsMoveRight(bool isMoveRight);//設定是否向右移動
 	void SetIsGrounded(bool isGrounded);//設定是否在地上
@@ -27,8 +25,6 @@ public:
 
 	void Attack()override;//攻擊
 private:
-	//bool isMoveUp;//是否向上移動
-	//bool isMoveDown;//是否向下移動
 	bool isMoveLeft;//是否向左移動
 	bool isMoveRight;//是否向右移動
 	bool isJumpKeyDown;//是否按下跳躍
@@ -42,7 +38,7 @@ private:
 	void Dead()override;//死亡時呼叫
 
 	void LoadAni()override;//載入動畫
-	int currentAni = 1;//目前動畫
+	int currentAni = 0;//目前動畫
 	const unsigned int ANI_IDLE = 0;
 	const unsigned int ANI_LEFT = 1;//左動畫
 	const unsigned int ANI_RIGHT = 2;//右動畫

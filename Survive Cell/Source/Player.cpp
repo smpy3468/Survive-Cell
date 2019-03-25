@@ -24,8 +24,6 @@ Player::Player(string tag, int x, int y, int width, int height, int pictureID) :
 	attackRange = 10;
 	attackDamage = 5;
 
-	//isMoveUp = false;
-	//isMoveDown = false;
 	isMoveLeft = false;
 	isMoveRight = false;
 
@@ -58,16 +56,6 @@ void Player::Move(int dx, int dy)
 	}
 }
 
-/*void Player::SetIsMoveUp(bool isMoveUp)
-{
-	this->isMoveUp = isMoveUp;
-}*/
-
-/*void Player::SetIsMoveDown(bool isMoveDown)
-{
-	this->isMoveDown = isMoveDown;
-}*/
-
 void Player::SetIsMoveLeft(bool isMoveLeft)
 {
 	this->isMoveLeft = isMoveLeft;
@@ -90,17 +78,6 @@ void Player::SetIsGrounded(bool isGrounded)
 
 void Player::Move()//²¾°Ê¤è¦V
 {
-	/*if (this->isMoveUp)
-	{
-		Move(0, -moveSpeed);
-	}*/
-
-	/*if (this->isMoveDown)
-	{
-		Move(0, moveSpeed);
-	}*/
-
-
 	if (this->isMoveLeft)
 	{
 		if (this->x > 0)

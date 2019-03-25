@@ -79,6 +79,8 @@ namespace game_framework {
 
 	void CGameStateInit::OnInit()
 	{
+		menu.LoadBitmap(".\\res\\menu.bmp");
+
 		Map::LoadBackgroundPic();
 
 		GameSystem::AddGameObject((new Player("Player", SIZE_X / 2, SIZE_Y / 2 - 100, 50, 80, IDB_PLAYER)));
@@ -91,12 +93,12 @@ namespace game_framework {
 		//GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 - 30, SIZE_Y + 20, 80, 50, IDB_ERASER1));
 		//GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 - 120, SIZE_Y + 150, 80, 50, IDB_ERASER1));
 
-
 		Map::SetStaticObject();
 	}
 
 	void CGameStateInit::OnBeginState()
 	{
+
 	}
 
 	void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -112,6 +114,8 @@ namespace game_framework {
 	void CGameStateInit::OnShow()
 	{
 		// ©ñ±¼ Back Plain ªº CDC
+		menu.ShowBitmap();
+		
 	}
 
 	/////////////////////////////////////////////////////////////////////////////
