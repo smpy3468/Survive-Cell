@@ -58,12 +58,16 @@ void Monster::SetdY() {
 }
 
 void Monster::AutoMove() {
-	if (rl == LEFT && status == STANDBY)							//如果GetLR == 0 , X 往左移動
+	if (rl == LEFT && status == STANDBY) {			//如果GetLR == 0 , X 往左移動
 		this->x = x - moveSpeed;
-
-	else if (rl == RIGHT && status == STANDBY)
+		currentAni = ANI_LEFT;					    //設定現在動畫為LEFT
+	}
+	else if (rl == RIGHT && status == STANDBY) {
 		this->x = x + moveSpeed;					//如果GetLR == 1 , X 往右移動
+		currentAni = ANI_RIGHT;						//設定現在動畫為RIGHT
+	}
 
+	ani[currentAni]->OnMove();						//顯示動畫
 
 	if (x <= dX[0] && rl != 0)       //GetdX[0]左邊警戒範圍，如果超過左邊 改右邊移動
 		this->rl = RIGHT;
@@ -98,16 +102,6 @@ void Monster::Attack() {
 				x += moveSpeed;
 		}
 
-		/*moveSpeed = ATTACK_SPEED;
-		if (x > player->GetX())
-			x -= moveSpeed;
-		else
-			x += moveSpeed;
-		if (y > player->GetX())
-			y -= moveSpeed;
-		else
-			y += moveSpeed;*/
-
 	}
 	else{
 		status = STANDBY;
@@ -129,6 +123,14 @@ void Monster::Dead()
 
 void Monster::LoadAni()
 {
-	char* aniLeft[4] = {".\\res\\monster_left_0.bmp", ".\\res\\monster_left_1.bmp", ".\\res\\monster_left_2.bmp", ".\\res\\monster_left_3.bmp", };
-	AddAniBitMaps(aniLeft, ANI_LEFT, 4);
+	char* aniIdle[1] = { ".\\res\\demon_idle.bmp" };
+	AddAniBitMaps(aniIdle, ANI_IDLE, 1);
+
+ 	char* aniLeft[6] = {".\\res\\demon_left_0.bmp",".\\res\\demon_left_1.bmp" ,".\\res\\demon_left_2.bmp" 
+						,".\\res\\demon_left_3.bmp" ,".\\res\\demon_left_4.bmp" ,".\\res\\demon_left_5.bmp" };
+	AddAniBitMaps(aniLeft, ANI_LEFT, 6);
+
+	char* aniRight[6] = { ".\\res\\demon_right_0.bmp", ".\\res\\demon_right_1.bmp" ,".\\res\\demon_right_2.bmp" ,
+						".\\res\\demon_right_3.bmp" ,".\\res\\demon_right_4.bmp" ,".\\res\\demon_right_5.bmp" };
+	AddAniBitMaps(aniRight, ANI_RIGHT, 6);
 }
