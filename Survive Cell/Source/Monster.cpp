@@ -12,8 +12,8 @@ Monster::Monster()
 Monster::Monster(string tag, int x, int y, int width, int height, int pictureID) :Character(tag, x, y, width, height, pictureID)
 {
 	tag = "Monster";
-	defenseRange = 150;
-	attackField = 30;
+	defenseRange = 300;
+	attackField = 50;
 	dX[0] = x - defenseRange; //左邊
 	dX[1] = x + defenseRange;	//右邊
 	rl = 1;
@@ -21,6 +21,8 @@ Monster::Monster(string tag, int x, int y, int width, int height, int pictureID)
 	HP = 10;
 	SetAttackRange(GetOriginAttackRange());
 
+	//SetWidth(100);
+	//SetHeight(100);
 	LoadAni();
 }
 
@@ -95,17 +97,24 @@ void Monster::Attack() {
 		status = ATTACK;
 
 		moveSpeed = ATTACK_SPEED;
-		if(IsAnthorObjectInRange(player) == false ) {
-			if (x > player->GetX() )
-				x -= moveSpeed;
-			else if (x < player->GetX())
+		if(IsAnthorObjectInRange(player) == false ) {	//如果怪物還沒撞到腳色
+			if (x > player->GetX()) {		//如果怪物在人的右邊
+				x -= moveSpeed;				
+				currentAni = ANI_LEFT;      //設定往左的動畫
+			}
+			else if (x < player->GetX()) {  //如果怪物在人的左邊
 				x += moveSpeed;
+				currentAni = ANI_RIGHT;     //設定往右的動畫
+			}
 		}
-
+		else {
+			currentAni = ANI_IDLE;  //待在原地
+		}
 	}
 	else{
 		status = STANDBY;
 		moveSpeed = originMoveSpeed;
+		currentAni = ANI_IDLE;  //待在原地
 	}
 }
 
