@@ -125,7 +125,7 @@ void Monster::ShowBitMap()
 
 void Monster::Dead()
 {
-	GameSystem::AddGameObject(new Item("Item", x + width / 2, y + height, 20, 10, IDB_CELL_GREEN));//產生一個細胞道具
+	GameSystem::AddGameObject(new Item("Item", x, y, 20, 10, IDB_CELL_GREEN));//產生一個細胞道具
 
 	GameSystem::DeleteGameObject(this);
 }
@@ -136,10 +136,10 @@ void Monster::LoadAni()
 	AddAniBitMaps(aniIdle, ANI_IDLE, 1);
 
 	char* aniLeft[6] = { ".\\res\\demon_left_0.bmp",".\\res\\demon_left_1.bmp" ,".\\res\\demon_left_2.bmp"
-						,".\\res\\demon_left_3.bmp" ,".\\res\\demon_left_4.bmp" ,".\\res\\demon_left_5.bmp" };
+		,".\\res\\demon_left_3.bmp" ,".\\res\\demon_left_4.bmp" ,".\\res\\demon_left_5.bmp" };
 	AddAniBitMaps(aniLeft, ANI_LEFT, 6);
 
 	char* aniRight[6] = { ".\\res\\demon_right_0.bmp", ".\\res\\demon_right_1.bmp" ,".\\res\\demon_right_2.bmp" ,
-						".\\res\\demon_right_3.bmp" ,".\\res\\demon_right_4.bmp" ,".\\res\\demon_right_5.bmp" };
+		".\\res\\demon_right_3.bmp" ,".\\res\\demon_right_4.bmp" ,".\\res\\demon_right_5.bmp" };
 	AddAniBitMaps(aniRight, ANI_RIGHT, 6);
 }
