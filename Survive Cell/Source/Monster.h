@@ -39,5 +39,5 @@ private:
 
 	void LoadAni()override;
 	int currentAni = 0;
-	const int ANI_LEFT = 0;
+	const unsigned int ANI_LEFT = 0;
 };
