@@ -43,5 +43,4 @@ private:
 	const int ANI_IDLE = 0; //原地
 	const int ANI_LEFT = 1; //左動畫
 	const int ANI_RIGHT = 2; //右動畫
-
 };

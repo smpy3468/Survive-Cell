@@ -97,6 +97,7 @@ void Monster::Attack() {
 		status = ATTACK;
 
 		moveSpeed = ATTACK_SPEED;
+
 		if (IsAnthorObjectInRange(player) == false) {	//如果怪物還沒撞到腳色
 			if (x > player->GetX()) {		//如果怪物在人的右邊
 				x -= moveSpeed;
@@ -135,11 +136,11 @@ void Monster::LoadAni()
 	char* aniIdle[1] = { ".\\res\\demon_idle.bmp" };
 	AddAniBitMaps(aniIdle, ANI_IDLE, 1);
 
-	char* aniLeft[6] = { ".\\res\\demon_left_0.bmp",".\\res\\demon_left_1.bmp" ,".\\res\\demon_left_2.bmp"
-		,".\\res\\demon_left_3.bmp" ,".\\res\\demon_left_4.bmp" ,".\\res\\demon_left_5.bmp" };
+ 	char* aniLeft[6] = {".\\res\\demon_left_0.bmp",".\\res\\demon_left_1.bmp" ,".\\res\\demon_left_2.bmp" 
+						,".\\res\\demon_left_3.bmp" ,".\\res\\demon_left_4.bmp" ,".\\res\\demon_left_5.bmp" };
 	AddAniBitMaps(aniLeft, ANI_LEFT, 6);
 
 	char* aniRight[6] = { ".\\res\\demon_right_0.bmp", ".\\res\\demon_right_1.bmp" ,".\\res\\demon_right_2.bmp" ,
-		".\\res\\demon_right_3.bmp" ,".\\res\\demon_right_4.bmp" ,".\\res\\demon_right_5.bmp" };
+						".\\res\\demon_right_3.bmp" ,".\\res\\demon_right_4.bmp" ,".\\res\\demon_right_5.bmp" };
 	AddAniBitMaps(aniRight, ANI_RIGHT, 6);
 }

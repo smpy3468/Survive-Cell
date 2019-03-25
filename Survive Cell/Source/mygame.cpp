@@ -84,6 +84,7 @@ namespace game_framework {
 		Map::LoadBackgroundPic();
 
 		GameSystem::AddGameObject((new Player("Player", SIZE_X / 2, SIZE_Y / 2 - 100, 50, 80, IDB_PLAYER)));
+
 		GameSystem::AddGameObject((new Monster("Monster", SIZE_X / 2 - 30, SIZE_Y / 2 - 133, 149, 133, IDB_0)));
 		GameSystem::AddGameObject((new Monster("Monster", SIZE_X / 2 + 30, SIZE_Y / 2 - 133, 149, 133, IDB_1)));
 
