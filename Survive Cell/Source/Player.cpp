@@ -44,14 +44,14 @@ void Player::Move(int dx, int dy)
 		this->x += dx;//ª±®ax²¾°Ê
 		this->y += dy;//ª±®ay²¾°Ê
 
-		if (dx > 0 && this->x >= Map::GetSX() + SIZE_X / 2)
+		if (dx > 0 && this->x + this->width / 2 >= Map::GetSX() + SIZE_X / 2)
 			Map::MoveScreenTopLeft(dx, 0);//¿Ã¹õ²¾°Ê
-		else if (dx < 0 && this->x < Map::GetSX() + SIZE_X / 2)
+		else if (dx < 0 && this->x + this->width /2 < Map::GetSX() + SIZE_X / 2)
 			Map::MoveScreenTopLeft(dx, 0);//¿Ã¹õ²¾°Ê
 
-		if (dy > 0 && this->y >= Map::GetSY() + SIZE_Y * 3 / 4)
+		if (dy > 0 && this->y + this->height / 2 >= Map::GetSY() + SIZE_Y * 3 / 4)
 			Map::MoveScreenTopLeft(0, dy);//¿Ã¹õ²¾°Ê
-		else if (dy < 0 && this->y < Map::GetSY() + SIZE_Y / 4)
+		else if (dy < 0 && this->y + this->height / 2 < Map::GetSY() + SIZE_Y / 4)
 			Map::MoveScreenTopLeft(0, dy);//¿Ã¹õ²¾°Ê
 	}
 }
