@@ -33,11 +33,15 @@ private:
 	int defenseRange, attackField; //defenseRange 來回走動的範圍, attackfield衝過去攻擊主角的範圍
 	int dX[2] ,dY[2]; //左右、上下
 	int rl,status;
-	static const int LEFT = 1, RIGHT = 2, STANDBY = 0, ALERTNESS = 1, ATTACK = 2;
+	static const int LEFT = 1, RIGHT = 2, STANDBY = 0, ALERTNESS = 1, ATTACK = 2; //目前怪物的狀態
 
 	void Dead()override;
 
-	void LoadAni()override;
-	int currentAni = 0;
-	const unsigned int ANI_LEFT = 0;
+	void LoadAni()override; //載入動畫
+	int currentAni = 0; //現在執行得動畫
+
+	const int ANI_IDLE = 0; //原地
+	const int ANI_LEFT = 1; //左動畫
+	const int ANI_RIGHT = 2; //右動畫
+
 };

@@ -346,7 +346,6 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\Desktop\未命名.bmp" />
     <Image Include="Bitmaps\Blue.bmp" />
     <Image Include="Bitmaps\Green.bmp" />
     <Image Include="Bitmaps\White.bmp" />
