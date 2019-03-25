@@ -34,6 +34,8 @@ Player::Player(string tag, int x, int y, int width, int height, int pictureID) :
 	isFall = false;
 	isGrounded = true;
 
+	currentAni = ANI_IDLE;
+
 	LoadAni();
 }
 
@@ -141,6 +143,11 @@ void Player::Fall()
 		fallDisplacement = 0;
 		isGrounded = true;//在地上
 		isFall = false;//沒在下降
+
+		if (currentAni == ANI_JUMP_LEFT)//將跳躍動畫還原
+			currentAni = ANI_LEFT;
+		else if (currentAni == ANI_JUMP_RIGHT)
+			currentAni = ANI_RIGHT;
 	}
 }
 
@@ -158,15 +165,6 @@ void Player::Jump()
 		{
 			isJump = false;
 			jumpDisplacement = originJumpDisplacement;//跳躍位移量還原
-		}
-
-		if (currentAni == ANI_LEFT)//跳躍動畫
-		{
-			currentAni = ANI_JUMP_LEFT;
-		}
-		else if (currentAni == ANI_RIGHT)
-		{
-			currentAni = ANI_JUMP_RIGHT;
 		}
 	}
 }
@@ -187,13 +185,32 @@ void Player::Attack()
 
 void Player::ShowBitMap()
 {
-	if (isMoveLeft)
+	if (isJump || isFall)//跳躍動畫
+	{
+		if (currentAni == ANI_LEFT)
+		{
+			currentAni = ANI_JUMP_LEFT;
+		}
+		else if (currentAni == ANI_RIGHT)
+		{
+			currentAni = ANI_JUMP_RIGHT;
+		}
+		else if (currentAni == ANI_JUMP_LEFT && isMoveRight)//面向左邊跳躍時按下右鍵要面向右邊
+		{
+			currentAni = ANI_JUMP_RIGHT;
+		}
+		else if (currentAni == ANI_JUMP_RIGHT && isMoveLeft)//面向右邊跳躍時按下左鍵要面向左邊
+		{
+			currentAni = ANI_JUMP_LEFT;
+		}
+	}
+	else if (isMoveLeft)//左移動畫
 	{
 		currentAni = ANI_LEFT;
 		ani[ANI_LEFT]->OnMove();
 		
 	}
-	else if (isMoveRight)
+	else if (isMoveRight)//右移動畫
 	{
 		currentAni = ANI_RIGHT;
 		ani[ANI_RIGHT]->OnMove();
@@ -207,6 +224,13 @@ void Player::ShowBitMap()
 	}
 
 	ani[currentAni]->OnShow();
+}
+
+void Player::Dead()
+{
+	
+
+	GameSystem::DeleteGameObject(this);
 }
 
 void Player::LoadAni()

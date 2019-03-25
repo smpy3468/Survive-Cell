@@ -35,8 +35,9 @@ private:
 	int rl,status;
 	static const int LEFT = 1, RIGHT = 2, STANDBY = 0, ALERTNESS = 1, ATTACK = 2;
 
-	void LoadAni()override;
+	void Dead()override;
 
+	void LoadAni()override;
 	int currentAni = 0;
 	const int ANI_LEFT = 0;
 };

@@ -1,6 +1,8 @@
 #include "StdAfx.h"
 #include "Monster.h"
 #include "Player.h"
+#include "Item.h"
+
 Monster::Monster()
 {
 	tag = "Monster";
@@ -116,6 +118,13 @@ void Monster::Attack() {
 void Monster::ShowBitMap()
 {
 	ani[currentAni]->OnShow();
+}
+
+void Monster::Dead()
+{
+	GameSystem::AddGameObject(new Item("Item",x,y,20,10,IDB_CELL_GREEN));//產生一個細胞道具
+
+	GameSystem::DeleteGameObject(this);
 }
 
 void Monster::LoadAni()

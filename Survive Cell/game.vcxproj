@@ -353,6 +353,7 @@
     <Image Include="RES\background.bmp" />
     <Image Include="res\bitmap3.bmp" />
     <Image Include="res\bitmap4.bmp" />
+    <Image Include="RES\cell_green.bmp" />
     <Image Include="RES\duckduck.bmp" />
     <Image Include="RES\ground.bmp" />
     <Image Include="res\player.bmp" />

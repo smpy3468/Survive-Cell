@@ -39,8 +39,10 @@ private:
 	int originJumpDisplacement, jumpDisplacement;//跳躍位移量
 	bool isGrounded;//是否在地上
 
+	void Dead()override;//死亡時呼叫
+
 	void LoadAni()override;//載入動畫
-	int currentAni = 0;//目前動畫
+	int currentAni = 1;//目前動畫
 	const unsigned int ANI_IDLE = 0;
 	const unsigned int ANI_LEFT = 1;//左動畫
 	const unsigned int ANI_RIGHT = 2;//右動畫

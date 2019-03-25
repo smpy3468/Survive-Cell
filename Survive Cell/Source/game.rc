@@ -108,6 +108,8 @@ IDB_PLAYER              BITMAP                  "..\\res\\player.bmp"
 
 IDB_GROUND              BITMAP                  "..\\res\\ground.bmp"
 
+IDB_CELL_GREEN          BITMAP                  "C:\\Users\\smpy3\\Documents\\Survive Cell\\Survive Cell\\RES\\cell_green.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

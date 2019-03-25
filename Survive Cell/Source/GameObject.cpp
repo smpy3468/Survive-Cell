@@ -76,12 +76,12 @@ int GameObject::GetHeight()
 
 void GameObject::LoadBitMap(char* pictureAddress)
 {
-	objectPic.LoadBitmap(pictureAddress);
+	objectPic.LoadBitmap(pictureAddress, RGB(255, 255, 255));
 }
 
 void GameObject::LoadBitMap(int pictureID)
 {
-	objectPic.LoadBitmap(pictureID);
+	objectPic.LoadBitmap(pictureID, RGB(255, 255, 255));
 }
 
 void GameObject::SetBitMapPosition()

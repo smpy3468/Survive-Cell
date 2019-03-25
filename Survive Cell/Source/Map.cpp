@@ -67,7 +67,7 @@ void Map::SetStaticObject()//設定不會移動的物件座標，只會在遊戲一開始呼叫
 {
 	for (auto& i : GameSystem::GetAllGameObject())
 	{
-		if (!(i->GetTag() == "Player" || i->GetTag() == "Monster"))//不記錄會動的物件
+		if (i->GetTag() == "Floor")//不記錄會動的物件
 		{
 			for (int x = i->GetX(); x < i->GetX() + i->GetWidth(); x++)
 			{

@@ -270,5 +270,8 @@
     <Image Include="RES\ground.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="RES\cell_green.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

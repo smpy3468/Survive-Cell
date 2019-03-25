@@ -65,6 +65,7 @@
 #include "Player.h"
 #include "Monster.h"
 #include "Floor.h"
+#include "Item.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////

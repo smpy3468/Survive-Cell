@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "Character.h"
 #include "GameSystem.h"
+#include "Item.h"
 
 Character::Character() :GameObject()
 {
@@ -129,8 +130,14 @@ void Character::DecreaseHP(int dhp)
 	{
 		HP = 0;
 		isDead = true;
-		GameSystem::DeleteGameObject(this);//刪除此物件
+
+		Dead();
 	}
+}
+
+void Character::Dead()
+{
+	GameSystem::DeleteGameObject(this);//刪除此物件
 }
 
 void Character::LoadAni()
@@ -147,8 +154,8 @@ void Character::AddAniBitMaps(char * pic[], int aniType, int picCount)
 
 void Character::AddAniBitMap(char* pic, int aniType)
 {
-	while ((int)ani.size() <= aniType)
-		ani.push_back(new CAnimation);
+	while ((int)ani.size() <= aniType)//vector的大小不夠大
+		ani.push_back(new CAnimation);//增加大小
 
-	ani[aniType]->AddBitmap(pic, RGB(255,255,255));
+	ani[aniType]->AddBitmap(pic, RGB(255, 255, 255));
 }

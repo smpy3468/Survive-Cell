@@ -51,6 +51,7 @@ protected:
 
 	vector<Buff> buff;//套用中的BUFF
 	bool isDead;//是否死亡
+	virtual void Dead();//死亡時呼叫
 
 	vector<CAnimation*> ani;//動畫
 	virtual void LoadAni(); //載入動畫
