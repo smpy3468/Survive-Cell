@@ -13,7 +13,7 @@ Monster::Monster(string tag, int x, int y, int width, int height, int pictureID)
 {
 	tag = "Monster";
 	defenseRange = 300;
-	attackField = 50;
+	attackField = 125;
 	dX[0] = x - defenseRange; //左邊
 	dX[1] = x + defenseRange;	//右邊
 	rl = 1;
@@ -78,9 +78,9 @@ void Monster::AutoMove() {
 		this->rl = LEFT;
 }
 
-bool Monster::IsInAttackField	(int playerX, int playerY) {
-	int attackXField_Left = x - attackField, attackXField_Right = x + attackField;
-	int attackYField_down = y + attackField, attackYField_up = y - attackField;
+bool Monster::IsInAttackField	(int playerX, int playerY, int right_fix, int left_fix, int up_fix, int down_fix) {
+	int attackXField_Left = x - attackField - left_fix, attackXField_Right = x + attackField + right_fix;
+	int attackYField_down = y + attackField + down_fix, attackYField_up = y - attackField - up_fix;
 
 	if (playerX >= attackXField_Left && playerX <= attackXField_Right &&
 		playerY >= attackYField_up && playerY <= attackYField_down)
@@ -89,32 +89,67 @@ bool Monster::IsInAttackField	(int playerX, int playerY) {
 	return false;
 }
 
+bool Monster::IsPlayerInRange(Player* player, int right_fix, int left_fix, int up_fix, int down_fix) {
+	 int RIGHT_EDGE = x + width / 2 +right_fix, LEFT_EDGE = x - width / 2 - left_fix,
+		UP_EDGE = y - height / 2 - up_fix, DOWN_EDGE = y + height / 2 + down_fix;
+
+	int OB_X = player->GetX(), OB_Y = player->GetY(), OB_WIDTH = player->GetWidth(), OB_HEIGHT = player->GetHeight();
+	
+	int OB_RIGHT_EDGE = OB_X + OB_WIDTH/2, OB_LEFT_EDGE = OB_X - OB_WIDTH/2,
+		OB_UP_EDGE = OB_Y - OB_HEIGHT/2, OB_DOWN_EDGE = OB_Y + OB_HEIGHT/2;
+
+	if (OB_RIGHT_EDGE>=LEFT_EDGE && PlaceRelativePlayer(player) == RIGHT)        //人在左, 怪物在右
+		return true;
+	else if (OB_LEFT_EDGE <= RIGHT_EDGE && PlaceRelativePlayer(player) == LEFT)  //人在右, 怪物在左
+		return true;
+	/*else if (OB_DOWN_EDGE > UP_EDGE)       //人在下, 怪物在上
+		return true;
+	else if (OB_UP_EDGE < DOWN_EDGE)	   //人在上, 怪物在下
+		return true;*/
+	return false;
+}
+
+int  Monster::PlaceRelativePlayer(Player* player) {
+	if (x >= player->GetX())
+		return RIGHT;
+	else
+		return LEFT;
+}
+
 void Monster::Attack() {
 	Player* player = GameSystem::GetGameObjectWithTag<Player>("Player");
 	const int ATTACK_SPEED = 4;
 
-	if (IsInAttackField(player->GetX(), player->GetY())) {  //怪物衝過去攻擊主角
+	if (IsInAttackField(player->GetX(), player->GetY(), 100, -20, 0, 0)) {  //Player在怪物攻擊領域內 跟隨  #要增加跟隨感應距離改AttackField
 		status = ATTACK;
 
 		moveSpeed = ATTACK_SPEED;
-		if(IsAnthorObjectInRange(player) == false ) {	//如果怪物還沒撞到腳色
-			if (x > player->GetX()) {		//如果怪物在人的右邊
+		if(IsPlayerInRange(player, 50, -20, 0, 0) == false ) {	//如果怪物還沒撞到腳色
+			if (PlaceRelativePlayer(player) == RIGHT) {		//如果怪物在人的右邊 
 				x -= moveSpeed;				
 				currentAni = ANI_LEFT;      //設定往左的動畫
 			}
-			else if (x < player->GetX()) {  //如果怪物在人的左邊
+			else if(PlaceRelativePlayer(player) == LEFT) {  //如果怪物在人的左邊
 				x += moveSpeed;
 				currentAni = ANI_RIGHT;     //設定往右的動畫
 			}
 		}
 		else {
-			currentAni = ANI_IDLE;  //待在原地
+			if (PlaceRelativePlayer(player) == RIGHT)	//如果怪物在人的右邊
+				currentAni = ANI_LEFT;      //設定往左的動畫
+
+			else if (PlaceRelativePlayer(player) == LEFT)  //如果怪物在人的左邊
+				currentAni = ANI_RIGHT;     //設定往右的動畫
 		}
+
 	}
-	else{
+	else{												 //脫離警戒領域 回復來回走動
+		if(PlaceRelativePlayer(player) == RIGHT)
+			currentAni = ANI_RIGHT;
+		else if (PlaceRelativePlayer(player) == LEFT)
+			currentAni = ANI_LEFT;
 		status = STANDBY;
-		moveSpeed = originMoveSpeed;
-		currentAni = ANI_IDLE;  //待在原地
+		moveSpeed = originMoveSpeed;  
 	}
 }
 

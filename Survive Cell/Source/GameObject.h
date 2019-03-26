@@ -34,7 +34,7 @@ public:
 	virtual void SetBitMapPosition();//設定圖片位置
 	virtual void ShowBitMap();//顯示圖片
 
-	bool IsAnthorObjectInRange(GameObject* object); //object是否與此物件有重疊
+	//bool IsAnthorObjectInRange(GameObject* object); //object是否與此物件有重疊
 
 protected:
 	string tag;//物件標籤
