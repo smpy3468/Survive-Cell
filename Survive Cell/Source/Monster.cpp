@@ -78,7 +78,7 @@ void Monster::AutoMove() {
 		this->rl = LEFT;
 }
 
-bool Monster::IsInAttackField	(int playerX, int playerY, int right_fix, int left_fix, int up_fix, int down_fix) {
+bool Monster::IsInAttackField(int playerX, int playerY, int right_fix, int left_fix, int up_fix, int down_fix) {
 	int attackXField_Left = x - attackField - left_fix, attackXField_Right = x + attackField + right_fix;
 	int attackYField_down = y + attackField + down_fix, attackYField_up = y - attackField - up_fix;
 
@@ -90,22 +90,22 @@ bool Monster::IsInAttackField	(int playerX, int playerY, int right_fix, int left
 }
 
 bool Monster::IsPlayerInRange(Player* player, int right_fix, int left_fix, int up_fix, int down_fix) {
-	 int RIGHT_EDGE = x + width / 2 +right_fix, LEFT_EDGE = x - width / 2 - left_fix,
+	int RIGHT_EDGE = x + width / 2 + right_fix, LEFT_EDGE = x - width / 2 - left_fix,
 		UP_EDGE = y - height / 2 - up_fix, DOWN_EDGE = y + height / 2 + down_fix;
 
 	int OB_X = player->GetX(), OB_Y = player->GetY(), OB_WIDTH = player->GetWidth(), OB_HEIGHT = player->GetHeight();
-	
-	int OB_RIGHT_EDGE = OB_X + OB_WIDTH/2, OB_LEFT_EDGE = OB_X - OB_WIDTH/2,
-		OB_UP_EDGE = OB_Y - OB_HEIGHT/2, OB_DOWN_EDGE = OB_Y + OB_HEIGHT/2;
 
-	if (OB_RIGHT_EDGE>=LEFT_EDGE && PlaceRelativePlayer(player) == RIGHT)        //人在左, 怪物在右
+	int OB_RIGHT_EDGE = OB_X + OB_WIDTH / 2, OB_LEFT_EDGE = OB_X - OB_WIDTH / 2,
+		OB_UP_EDGE = OB_Y - OB_HEIGHT / 2, OB_DOWN_EDGE = OB_Y + OB_HEIGHT / 2;
+
+	if (OB_RIGHT_EDGE >= LEFT_EDGE && PlaceRelativePlayer(player) == RIGHT)        //人在左, 怪物在右
 		return true;
 	else if (OB_LEFT_EDGE <= RIGHT_EDGE && PlaceRelativePlayer(player) == LEFT)  //人在右, 怪物在左
 		return true;
 	/*else if (OB_DOWN_EDGE > UP_EDGE)       //人在下, 怪物在上
-		return true;
+			return true;
 	else if (OB_UP_EDGE < DOWN_EDGE)	   //人在上, 怪物在下
-		return true;*/
+			return true;*/
 	return false;
 }
 
@@ -124,12 +124,13 @@ void Monster::Attack() {
 		status = ATTACK;
 
 		moveSpeed = ATTACK_SPEED;
-		if(IsPlayerInRange(player, 50, -20, 0, 0) == false ) {	//如果怪物還沒撞到腳色
+		if (IsPlayerInRange(player, 50, -20, 0, 0) == false) {	//如果怪物還沒撞到腳色
+
 			if (PlaceRelativePlayer(player) == RIGHT) {		//如果怪物在人的右邊 
-				x -= moveSpeed;				
-				currentAni = ANI_LEFT;      //設定往左的動畫
+				x -= moveSpeed;
+				currentAni = ANI_LEFT;
 			}
-			else if(PlaceRelativePlayer(player) == LEFT) {  //如果怪物在人的左邊
+			else if (PlaceRelativePlayer(player) == LEFT) {  //如果怪物在人的左邊
 				x += moveSpeed;
 				currentAni = ANI_RIGHT;     //設定往右的動畫
 			}
@@ -141,16 +142,16 @@ void Monster::Attack() {
 			else if (PlaceRelativePlayer(player) == LEFT)  //如果怪物在人的左邊
 				currentAni = ANI_RIGHT;     //設定往右的動畫
 		}
-
 	}
-	else{												 //脫離警戒領域 回復來回走動
-		if(PlaceRelativePlayer(player) == RIGHT)
+	else {												 //脫離警戒領域 回復來回走動
+		if (PlaceRelativePlayer(player) == RIGHT)
 			currentAni = ANI_RIGHT;
 		else if (PlaceRelativePlayer(player) == LEFT)
 			currentAni = ANI_LEFT;
+
 		status = STANDBY;
-		moveSpeed = originMoveSpeed;  
-	}
+		moveSpeed = originMoveSpeed;
+	}	
 }
 
 void Monster::ShowBitMap()
@@ -160,7 +161,7 @@ void Monster::ShowBitMap()
 
 void Monster::Dead()
 {
-	GameSystem::AddGameObject(new Item("Item",x,y,20,10,IDB_CELL_GREEN));//產生一個細胞道具
+	GameSystem::AddGameObject(new Item("Item", x, y, 20, 10, IDB_CELL_GREEN));//產生一個細胞道具
 
 	GameSystem::DeleteGameObject(this);
 }
@@ -170,11 +171,11 @@ void Monster::LoadAni()
 	char* aniIdle[1] = { ".\\res\\demon_idle.bmp" };
 	AddAniBitMaps(aniIdle, ANI_IDLE, 1);
 
- 	char* aniLeft[6] = {".\\res\\demon_left_0.bmp",".\\res\\demon_left_1.bmp" ,".\\res\\demon_left_2.bmp" 
-						,".\\res\\demon_left_3.bmp" ,".\\res\\demon_left_4.bmp" ,".\\res\\demon_left_5.bmp" };
+	char* aniLeft[6] = { ".\\res\\demon_left_0.bmp",".\\res\\demon_left_1.bmp" ,".\\res\\demon_left_2.bmp"
+									,".\\res\\demon_left_3.bmp" ,".\\res\\demon_left_4.bmp" ,".\\res\\demon_left_5.bmp" };
 	AddAniBitMaps(aniLeft, ANI_LEFT, 6);
 
 	char* aniRight[6] = { ".\\res\\demon_right_0.bmp", ".\\res\\demon_right_1.bmp" ,".\\res\\demon_right_2.bmp" ,
-						".\\res\\demon_right_3.bmp" ,".\\res\\demon_right_4.bmp" ,".\\res\\demon_right_5.bmp" };
+									".\\res\\demon_right_3.bmp" ,".\\res\\demon_right_4.bmp" ,".\\res\\demon_right_5.bmp" };
 	AddAniBitMaps(aniRight, ANI_RIGHT, 6);
 }

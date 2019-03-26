@@ -30,7 +30,7 @@ Player::Player(string tag, int x, int y, int width, int height, int pictureID) :
 	isJumpKeyDown = false;
 	isJump = false;
 	isFall = false;
-	isGrounded = true;
+	isGrounded = false;
 
 	currentAni = ANI_IDLE;
 
@@ -44,14 +44,14 @@ void Player::Move(int dx, int dy)
 		this->x += dx;//玩家x移動
 		this->y += dy;//玩家y移動
 
-		if (dx > 0 && this->x >= Map::GetSX() + SIZE_X / 2)
+		if (dx > 0 && this->x + this->width / 2 >= Map::GetSX() + SIZE_X / 2)
 			Map::MoveScreenTopLeft(dx, 0);//螢幕移動
-		else if (dx < 0 && this->x < Map::GetSX() + SIZE_X / 2)
+		else if (dx < 0 && this->x + this->width / 2 < Map::GetSX() + SIZE_X / 2)
 			Map::MoveScreenTopLeft(dx, 0);//螢幕移動
 
-		if (dy > 0 && this->y >= Map::GetSY() + SIZE_Y * 3 / 4)
+		if (dy > 0 && this->y + this->height / 2 >= Map::GetSY() + SIZE_Y * 3 / 4)
 			Map::MoveScreenTopLeft(0, dy);//螢幕移動
-		else if (dy < 0 && this->y < Map::GetSY() + SIZE_Y / 4)
+		else if (dy < 0 && this->y + this->height / 2 < Map::GetSY() + SIZE_Y / 4)
 			Map::MoveScreenTopLeft(0, dy);//螢幕移動
 	}
 }
@@ -99,21 +99,23 @@ void Player::Move()//移動方向
 		}
 	}
 
-	Jump();//跳躍
-	Fall();//下降
+	if (isJump)
+		Jump();//跳躍
+	else
+		Fall();//下降
 }
 
 void Player::Fall()
 {
-	if (!Map::HasObject(this->x, this->y + this->height + fallDisplacement))//如果腳下沒東西
+	//如果腳下沒東西
+	if (!Map::HasObject(this->x + this->width / 10, this->y + this->height + fallDisplacement)//人物左邊的下方
+		&& !Map::HasObject(this->x + this->width - this->width / 10, this->y + this->height + fallDisplacement)//人物右邊的下方
+		&& !Map::HasObject(this->x + this->width / 2, this->y + this->height + fallDisplacement))//人物中間的下方													 
 	{
-		if (isJump == false)//沒在跳躍
-		{
-			isFall = true;//正在下降
-			isGrounded = false;//不在地上
-			fallDisplacement++;
-			Move(0, fallDisplacement);
-		}
+		isFall = true;//正在下降
+		isGrounded = false;//不在地上
+		fallDisplacement++;
+		Move(0, fallDisplacement);
 	}
 	else
 	{
@@ -141,6 +143,7 @@ void Player::Jump()
 		else//往下降
 		{
 			isJump = false;
+			isFall = true;
 			jumpDisplacement = originJumpDisplacement;//跳躍位移量還原
 		}
 	}
@@ -185,7 +188,7 @@ void Player::ShowBitMap()
 	{
 		currentAni = ANI_LEFT;
 		ani[ANI_LEFT]->OnMove();
-		
+
 	}
 	else if (isMoveRight)//右移動畫
 	{
@@ -205,14 +208,14 @@ void Player::ShowBitMap()
 
 void Player::Dead()
 {
-	
+
 
 	GameSystem::DeleteGameObject(this);
 }
 
 void Player::LoadAni()
 {
-	char* aniIdle[1] = {".\\res\\player_idle.bmp"};
+	char* aniIdle[1] = { ".\\res\\player_idle.bmp" };
 	AddAniBitMaps(aniIdle, ANI_IDLE, 1);
 
 	char* aniLeft[4] = { ".\\res\\player_left_0.bmp", ".\\res\\player_left_1.bmp", ".\\res\\player_left_2.bmp", ".\\res\\player_left_3.bmp" };
