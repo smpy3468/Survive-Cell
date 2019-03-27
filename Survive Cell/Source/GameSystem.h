@@ -39,6 +39,10 @@ public:
 		vector<T*> targetObjects;
 		for (auto& i : gameObjectList)
 		{
+			if (typeid(T) == typeid(GameObject))
+			{
+
+			}
 			if (i->GetTag() == tag)
 			{
 				targetObjects.push_back(static_cast<T*>(i));

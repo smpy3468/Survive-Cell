@@ -2,6 +2,7 @@
 #include "Monster.h"
 #include "Player.h"
 #include "Item.h"
+#include "Potion.h"
 
 Monster::Monster()
 {
@@ -20,6 +21,9 @@ Monster::Monster(string tag, int x, int y, int width, int height, int pictureID)
 	SetOriginAttackRange(10);
 	HP = 10;
 	SetAttackRange(GetOriginAttackRange());
+
+	originMoveSpeed = 3;
+	SetMoveSpeed(GetOriginMoveSpeed());
 
 	//SetWidth(100);
 	//SetHeight(100);
@@ -161,7 +165,7 @@ void Monster::ShowBitMap()
 
 void Monster::Dead()
 {
-	GameSystem::AddGameObject(new Item("Item", x, y + height, 20, 10, IDB_CELL_GREEN));//產生一個細胞道具
+	GameSystem::AddGameObject(new Potion("Potion", x, y + height, 20, 10, IDB_CELL_GREEN));//產生一個細胞道具
 
 	GameSystem::DeleteGameObject(this);
 }

@@ -11,8 +11,7 @@ Character::Character() :GameObject()
 Character::Character(string tag, int x, int y, int width, int height, int pictureID) : GameObject(tag, x, y, width, height, pictureID)
 {
 	tag = "Character";
-	originMoveSpeed = 3;
-	SetMoveSpeed(GetOriginMoveSpeed());
+	
 }
 
 void Character::SetMaxHP(int maxHp)
@@ -133,6 +132,13 @@ void Character::DecreaseHP(int dhp)
 
 		Dead();
 	}
+}
+
+void Character::IncreaseHP(int ihp)
+{
+	this->HP += ihp;
+	if (this->HP > this->maxHP)//超過最大血量
+		this->HP = this->maxHP;		
 }
 
 void Character::Dead()

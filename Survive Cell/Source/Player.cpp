@@ -14,6 +14,9 @@ Player::Player(string tag, int x, int y, int width, int height, int pictureID) :
 {
 	tag = "Player";
 
+	maxHP = 10;
+	HP = maxHP;
+
 	originMoveSpeed = 5;
 	moveSpeed = originMoveSpeed;
 
@@ -152,13 +155,13 @@ void Player::Jump()
 
 void Player::Interact()
 {
-	for (auto& i : GameSystem::GetGameObjectsWithTag<Item>("Item"))//對物品互動
+	for (auto& i : GameSystem::GetAllGameObject())//對物件互動
 	{
-		if (i->GetTag() == "Item")//是物品
+		if (i->GetTag() == "Item" || i->GetTag() == "Potion")//是物品
 		{
 			if(i->GetX() > this->x && i->GetX() < this->x + this->width
 				&& i->GetY() > this->y && i->GetY() < this->y + this->height)
-				i->Picked();
+				static_cast<Item*>(i)->Picked();
 		}
 	}
 }

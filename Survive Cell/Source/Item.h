@@ -14,6 +14,6 @@ public:
 	Item(string tag, int x, int y, int width, int height, int pictureID);
 
 	virtual void Picked();//³Q¾ß°_
-private:
-	void Dead()override;
+protected:
+	virtual void Dead()override;
 };
