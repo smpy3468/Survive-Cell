@@ -43,35 +43,22 @@ Player::Player(string tag, int x, int y, int width, int height, int pictureID) :
 
 void Player::Move(int dx, int dy)
 {
-	if (!Map::HasObject(x + dx, y + dy))//如果該座標沒有物件
+	if ((dx > 0 && CanMoveRight(moveSpeed)) || (dx < 0 && CanMoveLeft(moveSpeed)))//x位移量往右而且右邊沒東西 或者 x位移量往左而且左邊沒東西
 	{
-		if (dx > 0)
-		{
-			if (!Map::HasObject(x + width + dx, y) && !Map::HasObject(x + width + dx, y + height / 2) && !Map::HasObject(x + width + dx, y + height - 1))//右邊沒東西
-			{
-				this->x += dx;//玩家x移動
-			}
-		}
-		else if (dx < 0)
-		{
-			if (!Map::HasObject(x + dx, y) && !Map::HasObject(x + dx, y + height / 2) && !Map::HasObject(x + dx, y + height - 1))//左邊沒東西
-			{
-				this->x += dx;//玩家x移動
-			}
-		}
-	
-		this->y += dy;//玩家y移動
-
-		if (dx > 0 && this->x + this->width / 2 >= Map::GetSX() + SIZE_X / 2)
-			Map::MoveScreenTopLeft(dx, 0);//螢幕移動
-		else if (dx < 0 && this->x + this->width / 2 < Map::GetSX() + SIZE_X / 2)
-			Map::MoveScreenTopLeft(dx, 0);//螢幕移動
-
-		if (dy > 0 && this->y + this->height / 2 >= Map::GetSY() + SIZE_Y * 3 / 4)
-			Map::MoveScreenTopLeft(0, dy);//螢幕移動
-		else if (dy < 0 && this->y + this->height / 2 < Map::GetSY() + SIZE_Y / 4)
-			Map::MoveScreenTopLeft(0, dy);//螢幕移動
+		this->x += dx;//玩家x移動
 	}
+
+	this->y += dy;//玩家y移動
+
+	if (dx > 0 && this->x + this->width / 2 >= Map::GetSX() + SIZE_X / 2)
+		Map::MoveScreenTopLeft(dx, 0);//螢幕移動
+	else if (dx < 0 && this->x + this->width / 2 < Map::GetSX() + SIZE_X / 2)
+		Map::MoveScreenTopLeft(dx, 0);//螢幕移動
+
+	if (dy > 0 && this->y + this->height / 2 >= Map::GetSY() + SIZE_Y * 3 / 4)
+		Map::MoveScreenTopLeft(0, dy);//螢幕移動
+	else if (dy < 0 && this->y + this->height / 2 < Map::GetSY() + SIZE_Y / 4)
+		Map::MoveScreenTopLeft(0, dy);//螢幕移動
 }
 
 void Player::SetIsMoveLeft(bool isMoveLeft)
@@ -125,10 +112,7 @@ void Player::Move()//移動方向
 
 void Player::Fall()
 {
-	//如果腳下沒東西
-	if (!Map::HasObject(this->x + this->width / 10, this->y + this->height + fallDisplacement)//人物左邊的下方
-		&& !Map::HasObject(this->x + this->width - this->width / 10, this->y + this->height + fallDisplacement)//人物右邊的下方
-		&& !Map::HasObject(this->x + this->width / 2, this->y + this->height + fallDisplacement))//人物中間的下方													 
+	if (CanMoveDown(fallDisplacement))//如果腳下沒東西
 	{
 		isFall = true;//正在下降
 		isGrounded = false;//不在地上
@@ -137,10 +121,8 @@ void Player::Fall()
 	}
 	else
 	{
-		while (!Map::HasObject(this->x + this->width / 10, this->y + this->height + 1)
-			&& !Map::HasObject(this->x + this->width - this->width / 10, this->y + this->height + 1)//人物右邊的下方
-			&& !Map::HasObject(this->x + this->width / 2, this->y + this->height + 1))
-			Move(0,1);
+		while (CanMoveDown(1))//再繼續用下降位移量下降，將會卡進地板，所以一次向下位移1進行微調
+			Move(0, 1);
 
 		fallDisplacement = 0;
 		isGrounded = true;//在地上
@@ -178,7 +160,7 @@ void Player::Interact()
 	{
 		if (i->GetTag() == "Item" || i->GetTag() == "Potion")//是物品
 		{
-			if(i->GetX() > this->x && i->GetX() < this->x + this->width
+			if (i->GetX() > this->x && i->GetX() < this->x + this->width
 				&& i->GetY() > this->y && i->GetY() < this->y + this->height)
 				static_cast<Item*>(i)->Picked();
 		}
@@ -265,4 +247,46 @@ void Player::LoadAni()
 
 	char* aniJumpRight = ".\\res\\player_jump_right.bmp";
 	AddAniBitMap(aniJumpRight, ANI_JUMP_RIGHT);
+}
+
+bool Player::CanMoveLeft(int perDisplacement)
+{
+	bool canMoveLeft = true;
+	for (int i = y; i < y + height; i++)
+	{
+		if (Map::HasObject(this->x - perDisplacement, i))//左半邊有東西
+		{
+			canMoveLeft = false;
+			return canMoveLeft;
+		}
+	}
+	return canMoveLeft;
+}
+
+bool Player::CanMoveRight(int perDisplacement)
+{
+	bool canMoveRight = true;
+	for (int i = y; i < y + height; i++)
+	{
+		if (Map::HasObject(this->x + this->width + perDisplacement, i))//右半邊有東西
+		{
+			canMoveRight = false;
+			return canMoveRight;
+		}
+	}
+	return canMoveRight;
+}
+
+bool Player::CanMoveDown(int perDisplacement)
+{
+	bool canMoveDown = true;
+	for (int i = x; i < x + width; i++)
+	{
+		if (Map::HasObject(i, y + height + perDisplacement))//下面有東西
+		{
+			canMoveDown = false;
+			return canMoveDown;
+		}
+	}
+	return canMoveDown;
 }

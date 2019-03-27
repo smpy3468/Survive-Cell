@@ -94,6 +94,7 @@ namespace game_framework {
 		GameSystem::AddGameObject(new Floor("Floor", 0, Map::GetWorldSizeY() / 2 + 40, Map::GetWorldSizeX(), 100, IDB_GROUND));
 
 		GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2, SIZE_Y / 2 - 50, 80, 50, IDB_ERASER1));
+		GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 +160, SIZE_Y / 2 - 100, 80, 50, IDB_ERASER1));
 		//GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 - 30, SIZE_Y + 20, 80, 50, IDB_ERASER1));
 		//GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 - 120, SIZE_Y + 150, 80, 50, IDB_ERASER1));
 

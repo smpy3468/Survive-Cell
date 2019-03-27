@@ -41,6 +41,10 @@ private:
 	void LoadAni()override;//載入動畫
 	int currentAni = 0;//目前動畫
 
+	bool CanMoveLeft(int perDisplacement);//可以向左移動
+	bool CanMoveRight(int perDisplacement);//可以向右移動
+	bool CanMoveDown(int perDisplacement);//可以向下移動，perDisplacement:每次向下位移多少
+
 	const unsigned int ANI_IDLE = 0;//靜止動畫，預設的動畫
 	const unsigned int ANI_LEFT = 1;//左動畫
 	const unsigned int ANI_RIGHT = 2;//右動畫
