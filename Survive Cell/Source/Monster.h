@@ -24,11 +24,15 @@ public:
 
 	void Move(int dx, int dy) {}
 
+	//----------------移動相關---------------------//
 	void AutoMove(); //在防守區域內來回走動
+
+	//----------------攻擊相關---------------------//
 	bool IsInAttackField(int playerX, int playerY,int right_fix, int left_fix, int up_fix, int down_fix);   //是的話，衝向主角 #和IsPlayerInRange一樣之後要virtual
 	int  PlaceRelativePlayer(Player* player); //怪物相對於腳色的位置
 	void Attack()override;//當Player進入防守區，攻擊他
-
+	void AttackToHurtPlayer();
+	
 
 	void ShowBitMap()override;
 
@@ -46,6 +50,8 @@ private:
 	int currentAni = 0; //現在執行得動畫
 
 	const int ANI_IDLE = 0; //原地
-	const int ANI_LEFT = 1; //左動畫
-	const int ANI_RIGHT = 2; //右動畫
+	const int ANI_LEFT = 1; //左移動動畫
+	const int ANI_RIGHT = 2; //右移動動畫
+	const int ANI_ATTACK_LEFT = 3;  //左邊攻擊動畫
+	const int ANI_ATTACK_RIGHT = 4; //右邊攻擊動畫
 };

@@ -141,10 +141,10 @@ void Monster::Attack() {
 		}
 		else {
 			if (PlaceRelativePlayer(player) == RIGHT)	//如果怪物在人的右邊
-				currentAni = ANI_LEFT;      //設定往左的動畫
+				currentAni = ANI_ATTACK_LEFT;      //設定往左的動畫
 
 			else if (PlaceRelativePlayer(player) == LEFT)  //如果怪物在人的左邊
-				currentAni = ANI_RIGHT;     //設定往右的動畫
+				currentAni = ANI_ATTACK_RIGHT;     //設定往右的動畫
 		}
 	}
 	else {												 //脫離警戒領域 回復來回走動
@@ -156,6 +156,10 @@ void Monster::Attack() {
 		status = STANDBY;
 		moveSpeed = originMoveSpeed;
 	}	
+}
+
+void Monster::AttackToHurtPlayer() {
+
 }
 
 void Monster::ShowBitMap()
@@ -170,6 +174,8 @@ void Monster::Dead()
 	GameSystem::DeleteGameObject(this);
 }
 
+
+
 void Monster::LoadAni()
 {
 	char* aniIdle[1] = { ".\\res\\demon_idle.bmp" };
@@ -182,4 +188,16 @@ void Monster::LoadAni()
 	char* aniRight[6] = { ".\\res\\demon_right_0.bmp", ".\\res\\demon_right_1.bmp" ,".\\res\\demon_right_2.bmp" ,
 									".\\res\\demon_right_3.bmp" ,".\\res\\demon_right_4.bmp" ,".\\res\\demon_right_5.bmp" };
 	AddAniBitMaps(aniRight, ANI_RIGHT, 6);
+
+	char* aniAttack_left[11] = { ".\\res\\demon_attackleft_0.bmp", ".\\res\\demon_attackleft_1.bmp", ".\\res\\demon_attackleft_2.bmp",
+								".\\res\\demon_attackleft_3.bmp", ".\\res\\demon_attackleft_4.bmp", ".\\res\\demon_attackleft_5.bmp",
+								".\\res\\demon_attackleft_6.bmp", ".\\res\\demon_attackleft_7.bmp", ".\\res\\demon_attackleft_7.bmp",
+								".\\res\\demon_attackleft_7.bmp", ".\\res\\demon_attackleft_7.bmp" };
+	AddAniBitMaps(aniAttack_left, ANI_ATTACK_LEFT, 11);
+
+	char* aniAttack_right[11] = { ".\\res\\demon_attackright_0.bmp", ".\\res\\demon_attackright_1.bmp", ".\\res\\demon_attackright_2.bmp",
+							".\\res\\demon_attackright_3.bmp", ".\\res\\demon_attackright_4.bmp", ".\\res\\demon_attackright_5.bmp",
+							".\\res\\demon_attackright_6.bmp", ".\\res\\demon_attackright_7.bmp", ".\\res\\demon_attackright_7.bmp",
+							".\\res\\demon_attackright_7.bmp", ".\\res\\demon_attackright_7.bmp" };
+	AddAniBitMaps(aniAttack_right, ANI_ATTACK_RIGHT, 11);
 }
