@@ -6,6 +6,7 @@
 
 #include "Character.h"
 #include "GameSystem.h"
+#include "Player.h"
 class Monster :public Character
 {
 public:
@@ -24,8 +25,10 @@ public:
 	void Move(int dx, int dy) {}
 
 	void AutoMove(); //在防守區域內來回走動
-	bool IsInAttackField(int playerX, int playerY);   //是的話，衝向主角
+	bool IsInAttackField(int playerX, int playerY,int right_fix, int left_fix, int up_fix, int down_fix);   //是的話，衝向主角 #和IsPlayerInRange一樣之後要virtual
+	int  PlaceRelativePlayer(Player* player); //怪物相對於腳色的位置
 	void Attack()override;//當Player進入防守區，攻擊他
+
 
 	void ShowBitMap()override;
 
@@ -37,6 +40,8 @@ private:
 
 	void Dead()override;
 
+	bool IsPlayerInRange(Player* player, int right_fix, int left_fix, int up_fix, int down_fix); //進入攻擊距離就停下來  #Attackfild要夠大這個設定了才有用
+	//之後要virtual 應應不同的怪做出攻擊範圍的平衡
 	void LoadAni()override; //載入動畫
 	int currentAni = 0; //現在執行得動畫
 
