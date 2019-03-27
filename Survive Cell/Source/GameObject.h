@@ -42,6 +42,8 @@ protected:
 	int width;//寬度
 	int height;//高度
 
+	virtual void Dead();//消滅時呼叫
+
 	CMovingBitmap objectPic;//物件圖片
 	int pictureID;//圖片編號
 };

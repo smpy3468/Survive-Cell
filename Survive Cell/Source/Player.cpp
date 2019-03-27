@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Monster.h"
 #include "Map.h"
+#include "Item.h"
 
 Player::Player()
 {
@@ -145,6 +146,19 @@ void Player::Jump()
 			isJump = false;
 			isFall = true;
 			jumpDisplacement = originJumpDisplacement;//跳躍位移量還原
+		}
+	}
+}
+
+void Player::Interact()
+{
+	for (auto& i : GameSystem::GetGameObjectsWithTag<Item>("Item"))//對物品互動
+	{
+		if (i->GetTag() == "Item")//是物品
+		{
+			if(i->GetX() > this->x && i->GetX() < this->x + this->width
+				&& i->GetY() > this->y && i->GetY() < this->y + this->height)
+				i->Picked();
 		}
 	}
 }

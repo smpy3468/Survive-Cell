@@ -112,3 +112,8 @@ bool GameObject::IsAnthorObjectInRange(GameObject* object) {
 		return true;
 	return false;
 }
+
+void GameObject::Dead()
+{
+	GameSystem::DeleteGameObject(this);//刪除此物件
+}

@@ -20,6 +20,7 @@ public:
 	void Move();//按下按鍵移動
 	void Fall();//下降
 	void Jump();//跳躍
+	void Interact();//互動
 
 	void ShowBitMap()override;//顯示動畫
 

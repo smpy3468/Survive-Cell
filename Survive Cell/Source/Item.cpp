@@ -10,3 +10,13 @@ Item::Item(string tag, int x, int y, int width, int height, int pictureID) :Game
 {
 
 }
+
+void Item::Picked()
+{
+	Dead();
+}
+
+void Item::Dead()
+{
+	GameSystem::DeleteGameObject(this);//刪除此物件
+}

@@ -186,6 +186,7 @@ namespace game_framework {
 		const char KEY_RIGHT = 0x27; // keyboard右箭頭
 		const char KEY_DOWN = 0x28; // keyboard下箭頭
 		const char KEY_SPACE = 0x20;//空白鍵
+		const char KEY_INTERACT = 0x5a;//互動鍵Z鍵
 
 		Player& player = *(GameSystem::GetGameObjectWithTag<Player>("Player"));//宣告一個玩家，避免每次都要打一長串GetGameObject...
 
@@ -208,6 +209,11 @@ namespace game_framework {
 		if (nChar == KEY_SPACE)
 		{
 			player.Attack();
+		}
+
+		if (nChar == KEY_INTERACT)
+		{
+			player.Interact();
 		}
 	}
 
