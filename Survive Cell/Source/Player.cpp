@@ -143,7 +143,8 @@ void Player::Jump()
 
 		if (jumpDisplacement >= 0)//往上升
 		{
-			Move(0, -jumpDisplacement);
+			if(CanMoveUp(jumpDisplacement))//可向上移動
+				Move(0, -jumpDisplacement);
 		}
 		else//往下降
 		{
@@ -275,6 +276,20 @@ bool Player::CanMoveRight(int perDisplacement)
 		}
 	}
 	return canMoveRight;
+}
+
+bool Player::CanMoveUp(int perDisplacement)
+{
+	bool canMoveUp = true;
+	for (int i = x; i < x + width; i++)
+	{
+		if (Map::HasObject(i, y - perDisplacement))//下面有東西
+		{
+			canMoveUp = false;
+			return canMoveUp;
+		}
+	}
+	return canMoveUp;
 }
 
 bool Player::CanMoveDown(int perDisplacement)
