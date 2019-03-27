@@ -45,7 +45,21 @@ void Player::Move(int dx, int dy)
 {
 	if (!Map::HasObject(x + dx, y + dy))//如果該座標沒有物件
 	{
-		this->x += dx;//玩家x移動
+		if (dx > 0)
+		{
+			if (!Map::HasObject(x + width + dx, y) && !Map::HasObject(x + width + dx, y + height / 2) && !Map::HasObject(x + width + dx, y + height - 1))//右邊沒東西
+			{
+				this->x += dx;//玩家x移動
+			}
+		}
+		else if (dx < 0)
+		{
+			if (!Map::HasObject(x + dx, y) && !Map::HasObject(x + dx, y + height / 2) && !Map::HasObject(x + dx, y + height - 1))//左邊沒東西
+			{
+				this->x += dx;//玩家x移動
+			}
+		}
+	
 		this->y += dy;//玩家y移動
 
 		if (dx > 0 && this->x + this->width / 2 >= Map::GetSX() + SIZE_X / 2)
@@ -123,6 +137,11 @@ void Player::Fall()
 	}
 	else
 	{
+		while (!Map::HasObject(this->x + this->width / 10, this->y + this->height + 1)
+			&& !Map::HasObject(this->x + this->width - this->width / 10, this->y + this->height + 1)//人物右邊的下方
+			&& !Map::HasObject(this->x + this->width / 2, this->y + this->height + 1))
+			Move(0,1);
+
 		fallDisplacement = 0;
 		isGrounded = true;//在地上
 		isFall = false;//沒在下降
