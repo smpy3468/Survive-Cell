@@ -123,8 +123,13 @@ int  Monster::PlaceRelativePlayer(Player* player) {
 void Monster::Attack() {
 	Player* player = GameSystem::GetGameObjectWithTag<Player>("Player");
 	const int ATTACK_SPEED = 4;
-
-	if (IsInAttackField(player->GetX(), player->GetY(), 100, -20, 0, 0)) {  //Player在怪物攻擊領域內 跟隨  #要增加跟隨感應距離改AttackField
+	if (ani[ANI_ATTACK_RIGHT]->GetCurrentBitmapNumber() != 0) {
+		currentAni = ANI_ATTACK_RIGHT;
+	}
+	else if (ani[ANI_ATTACK_LEFT]->GetCurrentBitmapNumber() != 0) {
+		currentAni = ANI_ATTACK_LEFT;
+	}
+	else if (IsInAttackField(player->GetX(), player->GetY(), 100, -20, 0, 0)) {  //Player在怪物攻擊領域內 跟隨  #要增加跟隨感應距離改AttackField
 		status = ATTACK;
 
 		moveSpeed = ATTACK_SPEED;
@@ -140,11 +145,12 @@ void Monster::Attack() {
 			}
 		}
 		else {
-			if (PlaceRelativePlayer(player) == RIGHT)	//如果怪物在人的右邊
-				currentAni = ANI_ATTACK_LEFT;      //設定往左的動畫
-
-			else if (PlaceRelativePlayer(player) == LEFT)  //如果怪物在人的左邊
-				currentAni = ANI_ATTACK_RIGHT;     //設定往右的動畫
+			if (PlaceRelativePlayer(player) == RIGHT) {	//如果怪物在人的右邊
+				currentAni = ANI_ATTACK_LEFT;      //設定往左攻擊的動畫
+			}
+			else if (PlaceRelativePlayer(player) == LEFT) {  //如果怪物在人的左邊
+				currentAni = ANI_ATTACK_RIGHT;		//設定往右攻擊的動畫
+			}
 		}
 	}
 	else {												 //脫離警戒領域 回復來回走動
@@ -164,7 +170,7 @@ void Monster::AttackToHurtPlayer() {
 
 void Monster::ShowBitMap()
 {
-	ani[currentAni]->OnShow();
+	ani[currentAni]->OnShow(); 
 }
 
 void Monster::Dead()
