@@ -24,6 +24,7 @@ Demon::Demon(string tag, int x, int y, int width, int height, int pictureID):Mon
 	fire = new Fire("Fire", x, y, 150, 130, IDB_0);
 }
 
+//-------------------------------------------------------------------------------------------------
 
 void Demon::AutoMove() {
 	if (GetRL() == LEFT && status == STANDBY) {			//如果GetLR == 0 , X 往左移動
@@ -102,6 +103,7 @@ void Demon::ShowBitMap(){
 	ani[currentAni]->OnShow();
 }
 
+//-------------------------------------------------------------------------------------------------
 
 void Demon::LoadAni()
 {
