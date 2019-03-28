@@ -260,8 +260,10 @@
     <ClCompile Include="Source\audio.cpp" />
     <ClCompile Include="Source\Buff.cpp" />
     <ClCompile Include="Source\Character.cpp" />
+    <ClCompile Include="Source\Demon.cpp" />
     <ClCompile Include="Source\Door.cpp" />
     <ClCompile Include="Source\Equipped.cpp" />
+    <ClCompile Include="Source\Fire.cpp" />
     <ClCompile Include="Source\Floor.cpp" />
     <ClCompile Include="Source\game.cpp">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -317,8 +319,10 @@
     <ClInclude Include="Source\audio.h" />
     <ClInclude Include="Source\Buff.h" />
     <ClInclude Include="Source\Character.h" />
+    <ClInclude Include="Source\Demon.h" />
     <ClInclude Include="Source\Door.h" />
     <ClInclude Include="Source\Equipped.h" />
+    <ClInclude Include="Source\Fire.h" />
     <ClInclude Include="Source\Floor.h" />
     <ClInclude Include="Source\game.h" />
     <ClInclude Include="Source\gameDoc.h" />

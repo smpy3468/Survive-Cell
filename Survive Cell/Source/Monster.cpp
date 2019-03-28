@@ -13,7 +13,8 @@ Monster::Monster()
 Monster::Monster(string tag, int x, int y, int width, int height, int pictureID) :Character(tag, x, y, width, height, pictureID)
 {
 	tag = "Monster";
-	defenseRange = 300;
+	rl = 1;
+	/*defenseRange = 300;
 	attackField = 125;
 	dX[0] = x - defenseRange; //左邊
 	dX[1] = x + defenseRange;	//右邊
@@ -25,17 +26,17 @@ Monster::Monster(string tag, int x, int y, int width, int height, int pictureID)
 	originMoveSpeed = 3;
 	SetMoveSpeed(GetOriginMoveSpeed());
 
-	//SetWidth(100);
-	//SetHeight(100);
-	LoadAni();
+	SetWidth(100);
+	SetHeight(100);
+	LoadAni();*/
 }
 
 void Monster::SetDefenseRange(int defenseRange) {
 	this->defenseRange = defenseRange;
 }
 
-int Monster::GetDefenseRange() {
-	return defenseRange;
+void Monster::SetRL(int rl) {
+	this->rl = rl;
 }
 
 void Monster::SetdX() {
@@ -43,9 +44,24 @@ void Monster::SetdX() {
 	dX[1] = x + defenseRange;	//右邊
 }
 
-void Monster::SetRL(int rl) {
-	this->rl = rl;
+void Monster::SetdY() {
+	this->dY[0] = y - defenseRange; //下
+	this->dY[1] = y + defenseRange;	//上
 }
+
+void Monster::SetAttackField(int attackField){
+	this->attackField = attackField;
+}
+
+void Monster::SetAttackRange(int attackRange) {
+	this->attackRange = attackRange;
+}
+
+//-----------------------------------GET------------------------------------------------//
+int Monster::GetDefenseRange() {
+	return defenseRange;
+}
+
 
 int Monster::GetRL() {
 	return rl;
@@ -58,13 +74,15 @@ int Monster::GetdX(int point) {
 		return dX[1];
 }
 
-void Monster::SetdY() {
-	this->dY[0] = y - defenseRange; //下
-	this->dY[1] = y + defenseRange;	//上
+
+
+int Monster::GetStatus() {
+	return status;
 }
 
+//--------------------------OTHER FUNCTION-----------------------------------//
 void Monster::AutoMove() {
-	if (rl == LEFT && status == STANDBY) {			//如果GetLR == 0 , X 往左移動
+	/*if (rl == LEFT && status == STANDBY) {			//如果GetLR == 0 , X 往左移動
 		this->x = x - moveSpeed;
 		currentAni = ANI_LEFT;					    //設定現在動畫為LEFT
 	}
@@ -79,7 +97,7 @@ void Monster::AutoMove() {
 		this->rl = RIGHT;
 
 	else if (x >= dX[1] && rl != 0) //GetdX[1]右邊警戒範圍，如果超過右邊 改左邊移動
-		this->rl = LEFT;
+		this->rl = LEFT;*/
 }
 
 bool Monster::IsInAttackField(int playerX, int playerY, int right_fix, int left_fix, int up_fix, int down_fix) {
@@ -121,7 +139,7 @@ int  Monster::PlaceRelativePlayer(Player* player) {
 }
 
 void Monster::Attack() {
-	Player* player = GameSystem::GetGameObjectWithTag<Player>("Player");
+	/*Player* player = GameSystem::GetGameObjectWithTag<Player>("Player");
 	const int ATTACK_SPEED = 4;
 	if (ani[ANI_ATTACK_RIGHT]->GetCurrentBitmapNumber() != 0) {
 		currentAni = ANI_ATTACK_RIGHT;
@@ -161,12 +179,10 @@ void Monster::Attack() {
 
 		status = STANDBY;
 		moveSpeed = originMoveSpeed;
-	}	
+	}	*/
 }
 
-void Monster::AttackToHurtPlayer() {
 
-}
 
 void Monster::ShowBitMap()
 {
@@ -180,9 +196,13 @@ void Monster::Dead()
 	GameSystem::DeleteGameObject(this);
 }
 
+int Monster::GetAttackAniNumber() {
+	if(currentAni == ANI_ATTACK_LEFT || currentAni ==ANI_ATTACK_RIGHT)
+		return ani[currentAni]->GetCurrentBitmapNumber();
+	return 0;
+}
 
-
-void Monster::LoadAni()
+/*void Monster::LoadAni()
 {
 	char* aniIdle[1] = { ".\\res\\demon_idle.bmp" };
 	AddAniBitMaps(aniIdle, ANI_IDLE, 1);
@@ -206,4 +226,5 @@ void Monster::LoadAni()
 							".\\res\\demon_attackright_6.bmp", ".\\res\\demon_attackright_7.bmp", ".\\res\\demon_attackright_7.bmp",
 							".\\res\\demon_attackright_7.bmp", ".\\res\\demon_attackright_7.bmp" };
 	AddAniBitMaps(aniAttack_right, ANI_ATTACK_RIGHT, 11);
-}
+}*/
+
