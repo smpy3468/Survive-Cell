@@ -5,7 +5,8 @@
 class Fire :public GameObject {
 	public:
 		Fire(string tag, int x, int y, int width, int height, int pictureID);
-		void ShowBitMap()override;
+		void ShowBitMap(int attackAniNumber0, int curentAni);
+		void SetXY(int demonX, int dmonY, int placeRelativePlayer);
 	private:
 		void LoadAni();
 		void AddAniBitMaps(char* pic[], int aniType, int picCount);//增加多張動畫圖片
@@ -17,5 +18,6 @@ class Fire :public GameObject {
 
 		const int ANI_FIRE_LEFT = 0;
 		const int ANI_FIRE_RIGHT = 1;
+		const int ANI_ATTACK_LEFT = 3, ANI_ATTACK_RIGHT = 4; 
 		const int LEFT = 1, RIGHT = 2;
 }; 

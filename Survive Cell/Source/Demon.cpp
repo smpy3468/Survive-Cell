@@ -4,7 +4,6 @@
 
 Demon::Demon() {
 	tag = "Demon";
-
 }
 
 Demon::Demon(string tag, int x, int y, int width, int height, int pictureID):Monster(tag, x, y, width, height, pictureID) {
@@ -20,17 +19,21 @@ Demon::Demon(string tag, int x, int y, int width, int height, int pictureID):Mon
 	originMoveSpeed = 3;
 	SetMoveSpeed(GetOriginMoveSpeed());
 
-	//SetWidth(100);
-	//SetHeight(100);
+
 	LoadAni();
+	fire = new Fire("Fire", x, y, 150, 130, IDB_0);
 }
+
+
 void Demon::AutoMove() {
 	if (GetRL() == LEFT && status == STANDBY) {			//如果GetLR == 0 , X 往左移動
 		this->x = x - moveSpeed;
+		//fire->SetXY(x, y);
 		currentAni = ANI_LEFT;					    //設定現在動畫為LEFT
 	}
 	else if (GetRL() == RIGHT && status == STANDBY) {
 		this->x = x + moveSpeed;					//如果GetLR == 1 , X 往右移動
+		//fire->SetXY(x, y);
 		currentAni = ANI_RIGHT;						//設定現在動畫為RIGHT
 	}
 
@@ -46,8 +49,9 @@ void Demon::AutoMove() {
 
 
 void Demon::Attack() {
-	Player* player = GameSystem::GetGameObjectWithTag<Player>("Player");
 	const int ATTACK_SPEED = 4;
+	int placeRelativePlayer = PlaceRelativePlayer(player);
+
 	if (ani[ANI_ATTACK_RIGHT]->GetCurrentBitmapNumber() != 0) {
 		currentAni = ANI_ATTACK_RIGHT;
 	}
@@ -60,28 +64,30 @@ void Demon::Attack() {
 		moveSpeed = ATTACK_SPEED;
 		if (IsPlayerInRange(player, 50, -20, 0, 0) == false) {	//如果怪物還沒撞到腳色
 
-			if (PlaceRelativePlayer(player) == RIGHT) {		//如果怪物在人的右邊 
+			if (placeRelativePlayer == RIGHT) {		//如果怪物在人的右邊 
 				x -= moveSpeed;
+				//fire->SetXY(x, y);
 				currentAni = ANI_LEFT;
 			}
-			else if (PlaceRelativePlayer(player) == LEFT) {  //如果怪物在人的左邊
+			else if (placeRelativePlayer == LEFT) {  //如果怪物在人的左邊
 				x += moveSpeed;
+				//fire->SetXY(x, y);
 				currentAni = ANI_RIGHT;     //設定往右的動畫
 			}
 		}
 		else {
-			if (PlaceRelativePlayer(player) == RIGHT) {	//如果怪物在人的右邊
+			if (placeRelativePlayer == RIGHT) {	//如果怪物在人的右邊
 				currentAni = ANI_ATTACK_LEFT;      //設定往左攻擊的動畫
 			}
-			else if (PlaceRelativePlayer(player) == LEFT) {  //如果怪物在人的左邊
+			else if (placeRelativePlayer == LEFT) {  //如果怪物在人的左邊
 				currentAni = ANI_ATTACK_RIGHT;		//設定往右攻擊的動畫
 			}
 		}
 	}
 	else {												 //脫離警戒領域 回復來回走動
-		if (PlaceRelativePlayer(player) == RIGHT)
+		if (placeRelativePlayer == RIGHT)
 			currentAni = ANI_RIGHT;
-		else if (PlaceRelativePlayer(player) == LEFT)
+		else if (placeRelativePlayer == LEFT)
 			currentAni = ANI_LEFT;
 
 		status = STANDBY;
@@ -89,6 +95,12 @@ void Demon::Attack() {
 	}
 }
 
+
+void Demon::ShowBitMap(){
+	fire->SetXY(x, y, currentAni);
+	fire->ShowBitMap(ani[currentAni]->GetCurrentBitmapNumber(), currentAni);
+	ani[currentAni]->OnShow();
+}
 
 
 void Demon::LoadAni()

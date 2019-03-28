@@ -17,24 +17,32 @@ void Fire::SetBitMapPosition ()
 	}
 }
 
+void Fire::SetXY(int demonX, int demonY, int currentAni) {
+	if (currentAni == ANI_ATTACK_RIGHT) {       //3¬O¥ª§ðÀ»ª¬ºA
+		this->x = demonX + 80;
+		this->y = demonY + 85;
+	}
+	else if (currentAni == ANI_ATTACK_LEFT) {
+		this->x = demonX - 50;
+		this->y = demonY + 85;
+	}
 
-void Fire::ShowBitMap() {
-	vector<Monster*> allMonsters = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
-	Player * player = GameSystem::GetGameObjectWithTag<Player>("Player");
-	
- 	for (auto& i : allMonsters) {
-		if (i->PlaceRelativePlayer(player) == LEFT && i->GetAttackAniNumber() >= 6) { //2¬O§ðÀ»ª¬ºA
-			currentAni = ANI_FIRE_LEFT;
-			x = i->GetX()+145;
-			y = i->GetY()+100;
-			ani[currentAni]->OnShow();
-		}
-		else if (i->PlaceRelativePlayer(player) == RIGHT && i->GetAttackAniNumber() >= 6) {
-			x = i->GetX()+145;
-			y = i->GetY()+100;
-			currentAni = ANI_FIRE_RIGHT;
-			ani[currentAni]->OnShow();
-		}
+}
+
+//---------------------------------------------------------------------------------------
+
+void Fire::ShowBitMap(int attackAniNumber, int currentAni) {
+	if (attackAniNumber >= 6 && currentAni == ANI_ATTACK_LEFT) { //3¬O¥ª§ðÀ»ª¬ºA
+		currentAni = ANI_FIRE_LEFT;
+		SetBitMapPosition();
+		ani[currentAni]->OnMove();
+		ani[currentAni]->OnShow();
+	}
+	else if (attackAniNumber >= 6 && currentAni == ANI_ATTACK_RIGHT) {//4¬O¥k§ðÀ»ª¬ºA
+		currentAni = ANI_FIRE_RIGHT;
+		SetBitMapPosition();
+		ani[currentAni]->OnMove();
+		ani[currentAni]->OnShow();
 	}
 }
 
@@ -58,10 +66,12 @@ void Fire::AddAniBitMap(char* pic, int aniType)
 
 void Fire::LoadAni() {
 
-	char* aniFire_left[5] = { ".\\res\\fire0.bmp", ".\\res\\fire1.bmp", ".\\res\\fire2.bmp" , ".\\res\\fire3.bmp" , ".\\res\\fire4.bmp" };
+	char* aniFire_left[5] = { ".\\res\\fire_left_0.bmp", ".\\res\\fire_left_1.bmp",
+							".\\res\\fire_left_2.bmp" , ".\\res\\fire_left_3.bmp" , ".\\res\\fire_left_4.bmp" };
 	AddAniBitMaps(aniFire_left, ANI_FIRE_LEFT, 5);
 
-	char* aniFire_right[5] = { ".\\res\\fire0.bmp", ".\\res\\fire1.bmp", ".\\res\\fire2.bmp" , ".\\res\\fire3.bmp" , ".\\res\\fire4.bmp" };
+	char* aniFire_right[5] = { ".\\res\\fire_right_0.bmp", ".\\res\\fire_right_1.bmp", 
+						".\\res\\fire_right_2.bmp" , ".\\res\\fire_right_3.bmp" , ".\\res\\fire_right_4.bmp" };
 	AddAniBitMaps(aniFire_right, ANI_FIRE_RIGHT, 5);
 }
 
