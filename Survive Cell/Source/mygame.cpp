@@ -66,7 +66,8 @@
 #include "Monster.h"
 #include "Floor.h"
 #include "Item.h"
-
+#include "Fire.h"
+#include "Demon.h"
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class為遊戲的遊戲開頭畫面物件
@@ -85,9 +86,10 @@ namespace game_framework {
 
 		GameSystem::AddGameObject((new Player("Player", SIZE_X / 2, SIZE_Y / 2 - 100, 50, 80, IDB_PLAYER)));
 
-		GameSystem::AddGameObject((new Monster("Monster", SIZE_X / 2, SIZE_Y / 2 - 133, 149, 133, IDB_0)));
-		//GameSystem::AddGameObject((new Monster("Monster", SIZE_X / 2 + 30, SIZE_Y / 2 - 133, 149, 133, IDB_1)));
+		GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 - 30, SIZE_Y / 2 - 133, 149, 133, IDB_0)));
 
+		//GameSystem::AddGameObject((new Monster("Monster", SIZE_X / 2 + 30, SIZE_Y / 2 - 133, 149, 133, IDB_1)));
+		//GameSystem::AddGameObject((new Fire("Fire", SIZE_X / 2 - 30, SIZE_Y / 2 - 133, 150, 100, IDB_0)));
 
 		//GameSystem::AddGameObject((new Monster("Monster", SIZE_X / 2 - 30, SIZE_Y / 2 - 133, 149, 133, IDB_0)));
 		//GameSystem::AddGameObject((new Monster("Monster", SIZE_X / 2 + 30, SIZE_Y / 2 - 133, 149, 133, IDB_1)));
