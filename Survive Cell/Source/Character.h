@@ -41,7 +41,7 @@ public:
 	void DecreaseHP(int dhp);//扣血
 	void IncreaseHP(int ihp);//加血
 	virtual void Attack() = 0;//攻擊
-	virtual void Move(int dx, int dy) = 0;
+	virtual void Move(int dx, int dy) = 0;//移動
 
 protected:
 	int maxHP, HP;//最大血量、目前血量
