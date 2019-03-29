@@ -14,21 +14,7 @@ Monster::Monster(string tag, int x, int y, int width, int height, int pictureID)
 {
 	tag = "Monster";
 	rl = 1;
-	/*defenseRange = 300;
-	attackField = 125;
-	dX[0] = x - defenseRange; //¥ªÃä
-	dX[1] = x + defenseRange;	//¥kÃä
-	rl = 1;
-	SetOriginAttackRange(10);
-	HP = 10;
-	SetAttackRange(GetOriginAttackRange());
 
-	originMoveSpeed = 3;
-	SetMoveSpeed(GetOriginMoveSpeed());
-
-	SetWidth(100);
-	SetHeight(100);
-	LoadAni();*/
 }
 
 void Monster::SetDefenseRange(int defenseRange) {
@@ -130,7 +116,8 @@ void Monster::Attack() {}
 
 
 void Monster::ShowBitMap()
-{
+{	
+	ani[currentAni]->OnMove();
 	ani[currentAni]->OnShow(); 
 }
 

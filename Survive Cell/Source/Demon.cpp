@@ -15,6 +15,7 @@ Demon::Demon(string tag, int x, int y, int width, int height, int pictureID):Mon
 	SetOriginAttackRange(10);
 
 	HP = 10;
+	attackDamage = 100;
 	SetAttackRange(GetOriginAttackRange());
 	originMoveSpeed = 3;
 	SetMoveSpeed(GetOriginMoveSpeed());
@@ -98,7 +99,8 @@ void Demon::Attack() {
 
 
 void Demon::ShowBitMap(){
-	fire->SetXY(x, y, currentAni);
+ 	fire->SetXY(x, y, currentAni);
+	currentBitMapNumber = ani[currentAni]->GetCurrentBitmapNumber();
 	fire->ShowBitMap(ani[currentAni]->GetCurrentBitmapNumber(), currentAni);
 	ani[currentAni]->OnShow();
 }

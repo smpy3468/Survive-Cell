@@ -228,7 +228,6 @@ void Player::ShowBitMap()
 void Player::Dead()
 {
 
-
 	GameSystem::DeleteGameObject(this);
 }
 

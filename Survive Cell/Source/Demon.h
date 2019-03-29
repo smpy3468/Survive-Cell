@@ -13,4 +13,5 @@ class Demon:public Monster {
 		void LoadAni()override;																//載入所有動畫
 		Player* player = GameSystem::GetGameObjectWithTag<Player>("Player");				//常用到就先記錄下來
 		Fire* fire;																			//自帶火焰特效
+		int currentBitMapNumber;
 };
