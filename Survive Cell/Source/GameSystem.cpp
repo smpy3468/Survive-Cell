@@ -1,5 +1,5 @@
 #include"Stdafx.h"
-#include <iostream>
+#include "audio.h"
 #include "GameSystem.h"
 #include "Monster.h"
 
@@ -51,6 +51,14 @@ void GameSystem::DeleteGameObject(GameObject * obj)
 	}
 }
 
+void GameSystem::DeleteAllGameObject()
+{
+	while (!gameObjectList.empty())
+	{
+		DeleteGameObject(gameObjectList[0]);
+	}
+}
+
 /*GameObject* GameSystem::GetGameObjectWithTag(string tag)//取得特定標籤的遊戲物件(單一個)
 {
 	for (auto& i : gameObjectList)
@@ -92,6 +100,29 @@ void GameSystem::ShowAllObject()//顯示所有物件
 	{
 		i->ShowBitMap();
 	}
+}
+
+void GameSystem::Load()
+{
+	CAudio::Instance()->Load(AUDIO::AUDIO_GAME_INIT, ".\\res\\game_init.mp3");
+	CAudio::Instance()->Load(AUDIO::AUDIO_GAME_RUN, ".\\res\\game_run.mp3");
+	CAudio::Instance()->Load(AUDIO::AUDIO_GAME_OVER, ".\\res\\game_over.mp3");
+}
+
+void GameSystem::Init()
+{
+	isGameOver = false;
+	DeleteAllGameObject();
+}
+
+void GameSystem::PlayAudio(AUDIO id)
+{
+	CAudio::Instance()->Play(id, true);
+}
+
+void GameSystem::StopAudio(AUDIO id)
+{
+	CAudio::Instance()->Stop(id);
 }
 
 void GameSystem::MonstersAutoMove() {

@@ -80,28 +80,24 @@ namespace game_framework {
 
 	void CGameStateInit::OnInit()
 	{
-		GameSystem::AddGameObject((new Player("Player", SIZE_X / 2, SIZE_Y / 2 - 100, 50, 80, IDB_PLAYER)));
-
-		GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 - 30, SIZE_Y / 2 - 133, 149, 133, IDB_0)));
-
-		//GameSystem::AddGameObject((new Monster("Monster", SIZE_X / 2 + 30, SIZE_Y / 2 - 133, 149, 133, IDB_1)));
-		//GameSystem::AddGameObject((new Fire("Fire", SIZE_X / 2 - 30, SIZE_Y / 2 - 133, 150, 100, IDB_0)));
-
-		//GameSystem::AddGameObject((new Monster("Monster", SIZE_X / 2 - 30, SIZE_Y / 2 - 133, 149, 133, IDB_0)));
-		//GameSystem::AddGameObject((new Monster("Monster", SIZE_X / 2 + 30, SIZE_Y / 2 - 133, 149, 133, IDB_1)));
-		GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y / 2 + 40, Map::WORLD_SIZE_X, 100, IDB_GROUND));
-
-		GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2, SIZE_Y / 2 - 10, 80, 50, IDB_ERASER1));
-		GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 +160, SIZE_Y / 2 - 100, 80, 50, IDB_ERASER1));
-		//GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 - 30, SIZE_Y + 20, 80, 50, IDB_ERASER1));
-		//GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 - 120, SIZE_Y + 150, 80, 50, IDB_ERASER1));
-
+		GameSystem::Load();
 		Map::Load();
 	}
 
 	void CGameStateInit::OnBeginState()
 	{
+		GameSystem::Init();
 
+		GameSystem::AddGameObject((new Player("Player", SIZE_X / 2, SIZE_Y / 2 - 100, 50, 80, IDB_PLAYER)));
+		GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 - 30, SIZE_Y / 2 - 133, 149, 133, IDB_0)));
+		GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y / 2 + 40, Map::WORLD_SIZE_X, 100, IDB_GROUND));
+		GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2, SIZE_Y / 2 - 10, 80, 50, IDB_ERASER1));
+		GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 +160, SIZE_Y / 2 - 100, 80, 50, IDB_ERASER1));
+
+		Map::SetStaticObject();
+
+		//GameSystem::StopAudio(GameSystem::AUDIO::AUDIO_GAME_OVER);//停止遊戲中的音樂
+		//GameSystem::PlayAudio(GameSystem::AUDIO::AUDIO_GAME_INIT);//播放遊戲結束的音樂
 	}
 
 	void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -133,17 +129,24 @@ namespace game_framework {
 	{
 		countDown--;
 		if (countDown <= 0)
+		{
 			GotoGameState(GAME_STATE_INIT);
+		}
 	}
 
 	void CGameStateOver::OnBeginState()
 	{
+		countDown = 3 * 30;
+		//GameSystem::StopAudio(GameSystem::AUDIO::AUDIO_GAME_OVER);//停止遊戲結束的音樂
+		//GameSystem::PlayAudio(GameSystem::AUDIO::AUDIO_GAME_INIT);//播放遊戲開始的音樂
 
+		GameSystem::StopAudio(GameSystem::AUDIO::AUDIO_GAME_RUN);//停止遊戲中的音樂
+		GameSystem::PlayAudio(GameSystem::AUDIO::AUDIO_GAME_OVER);//播放遊戲結束的音樂
 	}
 
 	void CGameStateOver::OnInit()
 	{
-
+		
 	}
 
 	void CGameStateOver::OnShow()
@@ -175,7 +178,8 @@ namespace game_framework {
 
 	void CGameStateRun::OnBeginState()
 	{
-
+		GameSystem::StopAudio(GameSystem::AUDIO::AUDIO_GAME_OVER);//停止結束的音樂
+		GameSystem::PlayAudio(GameSystem::AUDIO::AUDIO_GAME_RUN);//播放遊戲的音樂
 	}
 
 	void CGameStateRun::OnMove()							// 移動遊戲元素

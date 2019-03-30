@@ -15,7 +15,6 @@ void Map::Load()
 {
 	startMenu.LoadBitmap(".\\res\\start_menu.bmp");
 	backgroundPic.LoadBitmap(IDB_BACKGROUND);
-	SetStaticObject();
 }
 
 void Map::ShowStartMenu()
