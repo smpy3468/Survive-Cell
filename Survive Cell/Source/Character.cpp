@@ -165,3 +165,59 @@ void Character::AddAniBitMap(char* pic, int aniType)
 
 	ani[aniType]->AddBitmap(pic, RGB(255, 255, 255));
 }
+
+bool Character::CanMoveLeft(int perDisplacement)
+{
+	bool canMoveLeft = true;
+	for (int i = y; i < y + height; i++)
+	{
+		if (Map::HasObject(this->x - perDisplacement, i))//左半邊有東西
+		{
+			canMoveLeft = false;
+			return canMoveLeft;
+		}
+	}
+	return canMoveLeft;
+}
+
+bool Character::CanMoveRight(int perDisplacement)
+{
+	bool canMoveRight = true;
+	for (int i = y; i < y + height; i++)
+	{
+		if (Map::HasObject(this->x + this->width + perDisplacement, i))//右半邊有東西
+		{
+			canMoveRight = false;
+			return canMoveRight;
+		}
+	}
+	return canMoveRight;
+}
+
+bool Character::CanMoveUp(int perDisplacement)
+{
+	bool canMoveUp = true;
+	for (int i = x; i < x + width; i++)
+	{
+		if (Map::HasObject(i, y - perDisplacement))//下面有東西
+		{
+			canMoveUp = false;
+			return canMoveUp;
+		}
+	}
+	return canMoveUp;
+}
+
+bool Character::CanMoveDown(int perDisplacement)
+{
+	bool canMoveDown = true;
+	for (int i = x; i < x + width; i++)
+	{
+		if (Map::HasObject(i, y + height + perDisplacement))//下面有東西
+		{
+			canMoveDown = false;
+			return canMoveDown;
+		}
+	}
+	return canMoveDown;
+}

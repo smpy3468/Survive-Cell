@@ -136,7 +136,9 @@ namespace game_framework {
 
 	void CGameStateOver::OnMove()
 	{
-
+		countDown--;
+		if (countDown <= 0)
+			GotoGameState(GAME_STATE_INIT);
 	}
 
 	void CGameStateOver::OnBeginState()
@@ -151,7 +153,17 @@ namespace game_framework {
 
 	void CGameStateOver::OnShow()
 	{
-
+		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+		CFont f, *fp;
+		f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
+		fp = pDC->SelectObject(&f);					// 選用 font f
+		pDC->SetBkColor(RGB(255, 255, 255));
+		pDC->SetTextColor(RGB(0, 0, 0));
+		char str[80];								// Demo 數字對字串的轉換
+		sprintf(str, "你已經死了 ! ");
+		pDC->TextOut(240, 210, str);
+		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 	}
 
 
@@ -173,6 +185,9 @@ namespace game_framework {
 
 	void CGameStateRun::OnMove()							// 移動遊戲元素
 	{
+		if (GameSystem::IsGameOver())//遊戲結束
+			GotoGameState(GAME_STATE_OVER);//跳至遊戲結束狀態
+
 		Player& player = *(GameSystem::GetGameObjectWithTag<Player>("Player"));//宣告一個玩家，避免每次都要打一長串GetGameObject...
 		player.Move();
 		GameSystem::MonstersAttackPlayer(); //攻擊Player
@@ -279,5 +294,9 @@ namespace game_framework {
 	{
 		Map::ShowBackgroundPic();
 		GameSystem::ShowAllObject();
+
+		Player& player = *(GameSystem::GetGameObjectWithTag<Player>("Player"));
+
+		player.ShowInformation();//顯示玩家資訊
 	}
 }

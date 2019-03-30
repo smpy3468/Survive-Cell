@@ -18,6 +18,9 @@ class GameSystem
 public:
 	GameSystem();
 
+	static bool IsGameOver();//是否遊戲結束
+	static void SetGameOver();//設定遊戲結束
+
 	static vector<GameObject*>& GetAllGameObject();//取得所有遊戲物件
 	static void AddGameObject(GameObject* obj);//加入遊戲物件
 	static void DeleteGameObject(GameObject* obj);//刪除遊戲物件
@@ -57,7 +60,9 @@ public:
 	
 	static void MonstersAutoMove();    //全部怪物在defenseRange內移動
 	static void MonstersAttackPlayer();//全部怪物在Player進入attackField時會追Player
-	
+
 private:
 	static vector<GameObject*> gameObjectList;//存放所有遊戲物件的列表
+
+	static bool isGameOver;//遊戲是否結束
 };

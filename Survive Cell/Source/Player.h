@@ -11,20 +11,27 @@ class Player :public Character
 public:
 	Player();
 	Player(string tag, int x, int y, int width, int height, int pictureID);
-	void Move(int dx, int dy)override;//移動特定距離
 
+	//----------------按鍵相關---------------------//
 	void SetIsMoveLeft(bool isMoveLeft);//設定是否向左移動
 	void SetIsMoveRight(bool isMoveRight);//設定是否向右移動
 	void SetIsGrounded(bool isGrounded);//設定是否在地上
 	void SetIsJump(bool isJump);//設定是否按下跳躍
+	
+	//----------------動作相關---------------------//
 	void Move();//按下按鍵移動
 	void Fall();//下降
 	void Jump();//跳躍
 	void Interact();//互動
+	void Move(int dx, int dy)override;//移動特定距離
+	void Attack()override;//攻擊
 
+	//----------------動畫相關---------------------//
 	void ShowBitMap()override;//顯示動畫
 
-	void Attack()override;//攻擊
+	//----------------顯示玩家資訊---------------------//
+	void ShowInformation();//顯示玩家資訊
+	
 private:
 	bool isMoveLeft;//是否向左移動
 	bool isMoveRight;//是否向右移動
@@ -40,11 +47,6 @@ private:
 
 	void LoadAni()override;//載入動畫
 	int currentAni = 0;//目前動畫
-
-	bool CanMoveLeft(int perDisplacement);//可以向左移動，perDisplacement:每次位移多少
-	bool CanMoveRight(int perDisplacement);//可以向右移動
-	bool CanMoveUp(int perDisplacement);//可以向上移動
-	bool CanMoveDown(int perDisplacement);//可以向下移動
 
 	const unsigned int ANI_IDLE = 0;//靜止動畫，預設的動畫
 	const unsigned int ANI_LEFT = 1;//左動畫

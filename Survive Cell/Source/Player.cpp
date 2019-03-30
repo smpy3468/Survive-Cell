@@ -14,7 +14,7 @@ Player::Player(string tag, int x, int y, int width, int height, int pictureID) :
 {
 	tag = "Player";
 
-	maxHP = 10;
+	maxHP = 3;
 	HP = maxHP;
 
 	originMoveSpeed = 5;
@@ -225,10 +225,27 @@ void Player::ShowBitMap()
 	ani[currentAni]->OnShow();
 }
 
+void Player::ShowInformation()
+{
+	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+	CFont f, *fp;
+	f.CreatePointFont(80, "Times New Roman");	// 產生 font f; 160表示16 point的字
+	fp = pDC->SelectObject(&f);					// 選用 font f
+	pDC->SetBkColor(RGB(255, 255, 255));
+	pDC->SetTextColor(RGB(0, 0, 0));
+	char str[800];								// Demo 數字對字串的轉換
+
+	sprintf(str, "HP:%d", GetHP());
+	pDC->TextOut(0, 0, str);
+
+	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+}
+
 void Player::Dead()
 {
-
-	GameSystem::DeleteGameObject(this);
+	GameSystem::SetGameOver();//遊戲結束
+	//GameSystem::DeleteGameObject(this);
 }
 
 void Player::LoadAni()
@@ -247,60 +264,4 @@ void Player::LoadAni()
 
 	char* aniJumpRight = ".\\res\\player_jump_right.bmp";
 	AddAniBitMap(aniJumpRight, ANI_JUMP_RIGHT);
-}
-
-bool Player::CanMoveLeft(int perDisplacement)
-{
-	bool canMoveLeft = true;
-	for (int i = y; i < y + height; i++)
-	{
-		if (Map::HasObject(this->x - perDisplacement, i))//左半邊有東西
-		{
-			canMoveLeft = false;
-			return canMoveLeft;
-		}
-	}
-	return canMoveLeft;
-}
-
-bool Player::CanMoveRight(int perDisplacement)
-{
-	bool canMoveRight = true;
-	for (int i = y; i < y + height; i++)
-	{
-		if (Map::HasObject(this->x + this->width + perDisplacement, i))//右半邊有東西
-		{
-			canMoveRight = false;
-			return canMoveRight;
-		}
-	}
-	return canMoveRight;
-}
-
-bool Player::CanMoveUp(int perDisplacement)
-{
-	bool canMoveUp = true;
-	for (int i = x; i < x + width; i++)
-	{
-		if (Map::HasObject(i, y - perDisplacement))//下面有東西
-		{
-			canMoveUp = false;
-			return canMoveUp;
-		}
-	}
-	return canMoveUp;
-}
-
-bool Player::CanMoveDown(int perDisplacement)
-{
-	bool canMoveDown = true;
-	for (int i = x; i < x + width; i++)
-	{
-		if (Map::HasObject(i, y + height + perDisplacement))//下面有東西
-		{
-			canMoveDown = false;
-			return canMoveDown;
-		}
-	}
-	return canMoveDown;
 }
