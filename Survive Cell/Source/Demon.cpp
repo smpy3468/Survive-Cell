@@ -20,6 +20,7 @@ Demon::Demon(string tag, int x, int y, int width, int height, int pictureID):Mon
 	originMoveSpeed = 3;
 	SetMoveSpeed(GetOriginMoveSpeed());
 
+	aniSpeed = 5;
 	LoadAni();
 	fire = new Fire("Fire", x, y, 150, 130, IDB_0);
 }
@@ -109,25 +110,25 @@ void Demon::ShowBitMap(){
 void Demon::LoadAni()
 {
 	char* aniIdle[1] = { ".\\res\\demon_idle.bmp" };
-	AddAniBitMaps(aniIdle, ANI_IDLE, 1);
+	AddAniBitMaps(aniIdle, ANI_IDLE, 1, aniSpeed);
 
 	char* aniLeft[6] = { ".\\res\\demon_left_0.bmp",".\\res\\demon_left_1.bmp" ,".\\res\\demon_left_2.bmp"
 									,".\\res\\demon_left_3.bmp" ,".\\res\\demon_left_4.bmp" ,".\\res\\demon_left_5.bmp" };
-	AddAniBitMaps(aniLeft, ANI_LEFT, 6);
+	AddAniBitMaps(aniLeft, ANI_LEFT, 6, aniSpeed);
 
 	char* aniRight[6] = { ".\\res\\demon_right_0.bmp", ".\\res\\demon_right_1.bmp" ,".\\res\\demon_right_2.bmp" ,
 									".\\res\\demon_right_3.bmp" ,".\\res\\demon_right_4.bmp" ,".\\res\\demon_right_5.bmp" };
-	AddAniBitMaps(aniRight, ANI_RIGHT, 6);
+	AddAniBitMaps(aniRight, ANI_RIGHT, 6, aniSpeed);
 
 	char* aniAttack_left[11] = { ".\\res\\demon_attackleft_0.bmp", ".\\res\\demon_attackleft_1.bmp", ".\\res\\demon_attackleft_2.bmp",
 								".\\res\\demon_attackleft_3.bmp", ".\\res\\demon_attackleft_4.bmp", ".\\res\\demon_attackleft_5.bmp",
 								".\\res\\demon_attackleft_6.bmp", ".\\res\\demon_attackleft_7.bmp", ".\\res\\demon_attackleft_7.bmp",
 								".\\res\\demon_attackleft_7.bmp", ".\\res\\demon_attackleft_7.bmp" };
-	AddAniBitMaps(aniAttack_left, ANI_ATTACK_LEFT, 11);
+	AddAniBitMaps(aniAttack_left, ANI_ATTACK_LEFT, 11, aniSpeed);
 
 	char* aniAttack_right[11] = { ".\\res\\demon_attackright_0.bmp", ".\\res\\demon_attackright_1.bmp", ".\\res\\demon_attackright_2.bmp",
 							".\\res\\demon_attackright_3.bmp", ".\\res\\demon_attackright_4.bmp", ".\\res\\demon_attackright_5.bmp",
 							".\\res\\demon_attackright_6.bmp", ".\\res\\demon_attackright_7.bmp", ".\\res\\demon_attackright_7.bmp",
 							".\\res\\demon_attackright_7.bmp", ".\\res\\demon_attackright_7.bmp" };
-	AddAniBitMaps(aniAttack_right, ANI_ATTACK_RIGHT, 11);
+	AddAniBitMaps(aniAttack_right, ANI_ATTACK_RIGHT, 11, aniSpeed);
 }

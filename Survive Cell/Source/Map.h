@@ -12,7 +12,8 @@ class Map
 public:
 	Map();
 
-	static void LoadBackgroundPic();//載入背景圖片
+	static void Load();//載入地圖
+	static void ShowStartMenu();//顯示開始選單
 	static void ShowBackgroundPic();//顯示背景圖片
 
 	static int GetSX();//取得螢幕左上角X座標
@@ -30,5 +31,6 @@ public:
 private:
 	static bool coordinate[WORLD_SIZE_X][WORLD_SIZE_Y];//紀錄哪個座標有物件
 	static int sx, sy;//螢幕左上角的座標在地圖座標的哪裡
+	static CMovingBitmap startMenu;//開始選單
 	static CMovingBitmap backgroundPic;//背景圖片
 };

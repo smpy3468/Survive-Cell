@@ -71,6 +71,6 @@ public:
 	};
 private:
 	static vector<GameObject*> gameObjectList;//存放所有遊戲物件的列表
-
+	
 	static bool isGameOver;//遊戲是否結束
 };

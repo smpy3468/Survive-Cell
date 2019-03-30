@@ -56,8 +56,9 @@ protected:
 
 	vector<CAnimation*> ani;//動畫
 	virtual void LoadAni(); //載入動畫
-	void AddAniBitMaps(char* pic[], int aniType, int picCount);//增加多張動畫圖片
-	void AddAniBitMap(char* pic, int aniType);//增加動畫圖片
+	int aniSpeed = 10;//動畫播放速度
+	void AddAniBitMaps(char* pic[], int aniType, int picCount, int aniSpeed=10);//增加多張動畫圖片
+	void AddAniBitMap(char* pic, int aniType, int aniSpeed=10);//增加動畫圖片
 
 	bool CanMoveLeft(int perDisplacement);//可以向左移動，perDisplacement:每次的位移量是多少
 	bool CanMoveRight(int perDisplacement);//可以向右移動

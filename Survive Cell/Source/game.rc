@@ -110,7 +110,7 @@ IDB_GROUND              BITMAP                  "..\\res\\ground.bmp"
 
 IDB_CELL_GREEN          BITMAP                  ".\\res\\cell_green.bmp"
 
-IDB_MENU                BITMAP                  ".\\res\\menu.bmp"
+IDB_START_MENU          BITMAP                  ".\\res\\start_menu.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

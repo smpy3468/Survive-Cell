@@ -5,14 +5,23 @@ using namespace game_framework;
 #include "GameSystem.h"
 #include "Map.h"
 
+CMovingBitmap Map::startMenu;//開始選單
 CMovingBitmap Map::backgroundPic;//背景圖片
 bool Map::coordinate[WORLD_SIZE_X][WORLD_SIZE_Y] = { false };//紀錄哪個座標有物件
 int Map::sx = 0;//預設螢幕左上角在地圖座標的0,0 
 int Map::sy = 0;//預設螢幕左上角在地圖座標的0,0 
 
-void Map::LoadBackgroundPic()
+void Map::Load()
 {
+	startMenu.LoadBitmap(".\\res\\start_menu.bmp");
 	backgroundPic.LoadBitmap(IDB_BACKGROUND);
+	SetStaticObject();
+}
+
+void Map::ShowStartMenu()
+{
+	startMenu.SetTopLeft(0, 0);
+	startMenu.ShowBitmap();
 }
 
 void Map::ShowBackgroundPic()
@@ -23,7 +32,7 @@ void Map::ShowBackgroundPic()
 
 void Map::SetSX(int x)
 {
-	if(x >= 0 && x + SIZE_X < WORLD_SIZE_X)//確保螢幕在遊戲畫面中
+	if (x >= 0 && x + SIZE_X < WORLD_SIZE_X)//確保螢幕在遊戲畫面中
 		sx = x;
 	else
 	{
