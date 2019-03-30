@@ -38,6 +38,8 @@ Player::Player(string tag, int x, int y, int width, int height, int pictureID) :
 
 	currentAni = ANI_IDLE;
 
+	layer = GameSystem::LAYER_PLAYER;
+
 	LoadAni();
 }
 
@@ -91,7 +93,7 @@ void Player::Move()//²¾°Ê¤è¦V
 
 	if (this->isMoveRight)
 	{
-		if (this->x + this->width < Map::GetWorldSizeX())
+		if (this->x + this->width < Map::WORLD_SIZE_X)
 			Move(moveSpeed, 0);
 	}
 

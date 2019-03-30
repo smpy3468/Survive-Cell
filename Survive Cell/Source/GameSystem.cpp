@@ -27,7 +27,22 @@ vector<GameObject*>& GameSystem::GetAllGameObject()//取得所有物件
 
 void GameSystem::AddGameObject(GameObject* obj)//增加遊戲物件
 {
-	gameObjectList.push_back(obj);
+	if (gameObjectList.empty())//還沒有任何物件
+	{
+		gameObjectList.push_back(obj);//直接加入
+	}
+	else
+	{
+		for (unsigned int i = 0; i < gameObjectList.size(); i++)//用圖層進行排序後插入
+		{
+			if (gameObjectList[i]->GetLayer() >= obj->GetLayer())//相同圖層 或是 更高的圖層
+			{
+				gameObjectList.insert(gameObjectList.begin() + i, obj);//在此位置加入物件
+				return;
+			}
+		}
+		gameObjectList.push_back(obj);//還沒有與此物件相同圖層的物件，將此物件加到最尾端
+	}
 }
 
 void GameSystem::DeleteGameObject(GameObject * obj)

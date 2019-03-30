@@ -21,16 +21,6 @@ void Map::ShowBackgroundPic()
 	backgroundPic.ShowBitmap();
 }
 
-int Map::GetWorldSizeX()
-{
-	return WORLD_SIZE_X;
-}
-
-int Map::GetWorldSizeY()
-{
-	return WORLD_SIZE_Y;
-}
-
 void Map::SetSX(int x)
 {
 	if(x >= 0 && x + SIZE_X < WORLD_SIZE_X)//確保螢幕在遊戲畫面中

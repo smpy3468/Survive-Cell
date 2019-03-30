@@ -28,6 +28,7 @@ public:
 	int GetY();
 	int GetWidth();
 	int GetHeight();
+	int GetLayer();//取得圖層
 
 	void LoadBitMap(char* pictureAddress);//用路徑載入圖片
 	void LoadBitMap(int pictureID);//用編號載入圖片
@@ -46,4 +47,6 @@ protected:
 
 	CMovingBitmap objectPic;//物件圖片
 	int pictureID;//圖片編號
+
+	int layer;//圖層
 };

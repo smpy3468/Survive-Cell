@@ -20,7 +20,6 @@ Demon::Demon(string tag, int x, int y, int width, int height, int pictureID):Mon
 	originMoveSpeed = 3;
 	SetMoveSpeed(GetOriginMoveSpeed());
 
-
 	LoadAni();
 	fire = new Fire("Fire", x, y, 150, 130, IDB_0);
 }

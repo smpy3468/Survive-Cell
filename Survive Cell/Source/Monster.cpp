@@ -14,7 +14,7 @@ Monster::Monster(string tag, int x, int y, int width, int height, int pictureID)
 {
 	tag = "Monster";
 	rl = 1;
-
+	layer = GameSystem::LAYER_MONSTER;
 }
 
 void Monster::SetDefenseRange(int defenseRange) {

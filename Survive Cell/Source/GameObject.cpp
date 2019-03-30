@@ -11,6 +11,7 @@ GameObject::GameObject()
 	y = 0;
 	width = 10;
 	height = 10;
+	layer = 0;
 }
 
 GameObject::GameObject(string tag, int x, int y, int width, int height, int pictureID)
@@ -72,6 +73,11 @@ int GameObject::GetWidth()
 int GameObject::GetHeight()
 {
 	return height;
+}
+
+int GameObject::GetLayer()
+{
+	return layer;
 }
 
 void GameObject::LoadBitMap(char* pictureAddress)
