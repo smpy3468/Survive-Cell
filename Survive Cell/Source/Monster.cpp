@@ -14,7 +14,7 @@ Monster::Monster(string tag, int x, int y, int width, int height, int pictureID)
 {
 	tag = "Monster";
 	rl = 1;
-	layer = GameSystem::LAYER_MONSTER;
+	layer = GameSystem::LAYER::LAYER_MONSTER;
 }
 
 void Monster::SetDefenseRange(int defenseRange) {
@@ -129,7 +129,7 @@ void Monster::Dead()
 }
 
 int Monster::GetAttackAniNumber() {
-	if(currentAni == ANI_ATTACK_LEFT || currentAni ==ANI_ATTACK_RIGHT)
+	if(currentAni == ANI::ANI_ATTACK_LEFT || currentAni ==ANI::ANI_ATTACK_RIGHT)
 		return ani[currentAni]->GetCurrentBitmapNumber();
 	return 0;
 }

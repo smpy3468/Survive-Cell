@@ -44,13 +44,17 @@ public:
 protected:
 	static const int LEFT = 1, RIGHT = 2, STANDBY = 0, ATTACK = 2; //怪物的狀態
 	int status;													   //
+	
 	int currentAni = 0;                                            //現在執行得動畫
+	enum ANI
+	{
+		ANI_IDLE = 0,		   //原地
+		ANI_LEFT,			   //左移動動畫
+		ANI_RIGHT,			   //右移動動畫
+		ANI_ATTACK_LEFT,	   //左邊攻擊動畫
+		ANI_ATTACK_RIGHT	   //右邊攻擊動畫
+	};
 
-	const int ANI_IDLE = 0;										   //原地
-	const int ANI_LEFT = 1;										   //左移動動畫
-	const int ANI_RIGHT = 2;									   //右移動動畫
-	const int ANI_ATTACK_LEFT = 3;								   //左邊攻擊動畫
-	const int ANI_ATTACK_RIGHT = 4;							       //右邊攻擊動畫
 private:
 
 	int dX[2], dY[2];											   //0左1右、0上1下

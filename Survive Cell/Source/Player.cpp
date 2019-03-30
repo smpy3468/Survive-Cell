@@ -36,9 +36,9 @@ Player::Player(string tag, int x, int y, int width, int height, int pictureID) :
 	isFall = false;
 	isGrounded = false;
 
-	currentAni = ANI_IDLE;
+	currentAni = ANI::ANI_IDLE;
 
-	layer = GameSystem::LAYER_PLAYER;
+	layer = GameSystem::LAYER::LAYER_PLAYER;
 
 	LoadAni();
 }
@@ -130,10 +130,10 @@ void Player::Fall()
 		isGrounded = true;//在地上
 		isFall = false;//沒在下降
 
-		if (currentAni == ANI_JUMP_LEFT)//將跳躍動畫還原
-			currentAni = ANI_LEFT;
-		else if (currentAni == ANI_JUMP_RIGHT)
-			currentAni = ANI_RIGHT;
+		if (currentAni == ANI::ANI_JUMP_LEFT)//將跳躍動畫還原
+			currentAni = ANI::ANI_LEFT;
+		else if (currentAni == ANI::ANI_JUMP_RIGHT)
+			currentAni = ANI::ANI_RIGHT;
 	}
 }
 
@@ -188,33 +188,33 @@ void Player::ShowBitMap()
 {
 	if (isJump || isFall)//跳躍動畫
 	{
-		if (currentAni == ANI_LEFT)
+		if (currentAni == ANI::ANI_LEFT)
 		{
-			currentAni = ANI_JUMP_LEFT;
+			currentAni = ANI::ANI_JUMP_LEFT;
 		}
-		else if (currentAni == ANI_RIGHT)
+		else if (currentAni == ANI::ANI_RIGHT)
 		{
-			currentAni = ANI_JUMP_RIGHT;
+			currentAni = ANI::ANI_JUMP_RIGHT;
 		}
-		else if (currentAni == ANI_JUMP_LEFT && isMoveRight)//面向左邊跳躍時按下右鍵要面向右邊
+		else if (currentAni == ANI::ANI_JUMP_LEFT && isMoveRight)//面向左邊跳躍時按下右鍵要面向右邊
 		{
-			currentAni = ANI_JUMP_RIGHT;
+			currentAni = ANI::ANI_JUMP_RIGHT;
 		}
-		else if (currentAni == ANI_JUMP_RIGHT && isMoveLeft)//面向右邊跳躍時按下左鍵要面向左邊
+		else if (currentAni == ANI::ANI_JUMP_RIGHT && isMoveLeft)//面向右邊跳躍時按下左鍵要面向左邊
 		{
-			currentAni = ANI_JUMP_LEFT;
+			currentAni = ANI::ANI_JUMP_LEFT;
 		}
 	}
 	else if (isMoveLeft)//左移動畫
 	{
-		currentAni = ANI_LEFT;
-		ani[ANI_LEFT]->OnMove();
+		currentAni = ANI::ANI_LEFT;
+		ani[ANI::ANI_LEFT]->OnMove();
 
 	}
 	else if (isMoveRight)//右移動畫
 	{
-		currentAni = ANI_RIGHT;
-		ani[ANI_RIGHT]->OnMove();
+		currentAni = ANI::ANI_RIGHT;
+		ani[ANI::ANI_RIGHT]->OnMove();
 	}
 	else
 	{
@@ -253,17 +253,17 @@ void Player::Dead()
 void Player::LoadAni()
 {
 	char* aniIdle[1] = { ".\\res\\player_idle.bmp" };
-	AddAniBitMaps(aniIdle, ANI_IDLE, 1);
+	AddAniBitMaps(aniIdle, ANI::ANI_IDLE, 1);
 
 	char* aniLeft[4] = { ".\\res\\player_left_0.bmp", ".\\res\\player_left_1.bmp", ".\\res\\player_left_2.bmp", ".\\res\\player_left_3.bmp" };
-	AddAniBitMaps(aniLeft, ANI_LEFT, 4);
+	AddAniBitMaps(aniLeft, ANI::ANI_LEFT, 4);
 
 	char* aniRight[4] = { ".\\res\\player_right_0.bmp", ".\\res\\player_right_1.bmp", ".\\res\\player_right_2.bmp", ".\\res\\player_right_3.bmp" };
-	AddAniBitMaps(aniRight, ANI_RIGHT, 4);
+	AddAniBitMaps(aniRight, ANI::ANI_RIGHT, 4);
 
 	char* aniJumpLeft = ".\\res\\player_jump_left.bmp";
-	AddAniBitMap(aniJumpLeft, ANI_JUMP_LEFT);
+	AddAniBitMap(aniJumpLeft, ANI::ANI_JUMP_LEFT);
 
 	char* aniJumpRight = ".\\res\\player_jump_right.bmp";
-	AddAniBitMap(aniJumpRight, ANI_JUMP_RIGHT);
+	AddAniBitMap(aniJumpRight, ANI::ANI_JUMP_RIGHT);
 }

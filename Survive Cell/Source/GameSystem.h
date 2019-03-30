@@ -62,10 +62,13 @@ public:
 	static void MonstersAttackPlayer();//全部怪物在Player進入attackField時會追Player
 
 	//------------圖層相關------------//
-	static const int LAYER_FLOOR = 1;
-	static const int LAYER_ITEM = 2;
-	static const int LAYER_MONSTER = 3;
-	static const int LAYER_PLAYER = 4;
+	enum LAYER//圖層編號
+	{
+		LAYER_FLOOR = 0,
+		LAYER_ITEM,
+		LAYER_MONSTER,
+		LAYER_PLAYER
+	};
 private:
 	static vector<GameObject*> gameObjectList;//存放所有遊戲物件的列表
 
