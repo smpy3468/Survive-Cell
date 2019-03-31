@@ -22,7 +22,7 @@ Demon::Demon(string tag, int x, int y, int width, int height, int pictureID):Mon
 
 	aniSpeed = 5;
 	LoadAni();
-	fire = new Fire("Fire", x, y, 150, 130, IDB_0);
+	fire = new Fire("Fire", x, y, 110, 75, IDB_0);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -64,7 +64,7 @@ void Demon::Attack() {
 		status = ATTACK;
 
 		moveSpeed = ATTACK_SPEED;
-		if (IsPlayerInRange(player, 50, -20, 0, 0) == false) {	//如果怪物還沒撞到腳色
+		if (IsPlayerInRange(player, 0, 0, 0, 0) == false) {	//如果怪物還沒撞到腳色
 
 			if (placeRelativePlayer == RIGHT) {		//如果怪物在人的右邊 
 				x -= moveSpeed;

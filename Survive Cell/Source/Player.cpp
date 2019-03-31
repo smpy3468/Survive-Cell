@@ -14,7 +14,7 @@ Player::Player(string tag, int x, int y, int width, int height, int pictureID) :
 {
 	tag = "Player";
 
-	maxHP = 3;
+	maxHP = 10;
 	HP = maxHP;
 
 	originMoveSpeed = 5;
