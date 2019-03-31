@@ -262,6 +262,7 @@
     <ClCompile Include="Source\Character.cpp" />
     <ClCompile Include="Source\Demon.cpp" />
     <ClCompile Include="Source\Door.cpp" />
+    <ClCompile Include="Source\Effect.cpp" />
     <ClCompile Include="Source\Equipped.cpp" />
     <ClCompile Include="Source\Fire.cpp" />
     <ClCompile Include="Source\Floor.cpp" />
@@ -321,6 +322,7 @@
     <ClInclude Include="Source\Character.h" />
     <ClInclude Include="Source\Demon.h" />
     <ClInclude Include="Source\Door.h" />
+    <ClInclude Include="Source\Effect.h" />
     <ClInclude Include="Source\Equipped.h" />
     <ClInclude Include="Source\Fire.h" />
     <ClInclude Include="Source\Floor.h" />

@@ -4,18 +4,11 @@
 #include "GameSystem.h"
 #include "Player.h"
 #include <vector>
-Fire::Fire(string tag, int x, int y, int width, int height, int pictureID):GameObject(tag, x, y, width, height, pictureID) {
+Fire::Fire(string tag, int x, int y, int width, int height, int pictureID):Effect(tag, x, y, width, height, pictureID) {
 	tag = "Fire";
 	LoadAni();
 }
 
-void Fire::SetBitMapPosition ()
-{
-	for (auto& i : ani)
-	{
-		i->SetTopLeft(this->x - Map::GetSX(), this->y - Map::GetSY());
-	}
-}
 
 void Fire::SetXY(int demonX, int demonY, int currentAni) {
 	if (currentAni == ANI_ATTACK_RIGHT) {       //3是左攻擊狀態
@@ -38,7 +31,7 @@ void Fire::ShowBitMap(int attackAniNumber, int currentAni) {
 		SetBitMapPosition();
 		ani[currentAni]->OnMove();
 		ani[currentAni]->OnShow();
-		if (IsPlayerInRange(0,0,0,0) && ani[currentAni]->GetCurrentBitmapNumber()>=2 && hit ==0){
+		if (IsPlayerInRange(player , 0, 0, 0, 0) && ani[currentAni]->GetCurrentBitmapNumber()>=2 && hit ==0){
 			player->DecreaseHP(1);
 			hit = 1;
 		}
@@ -49,7 +42,7 @@ void Fire::ShowBitMap(int attackAniNumber, int currentAni) {
 		SetBitMapPosition();
 		ani[currentAni]->OnMove();
 		ani[currentAni]->OnShow();
-		if (IsPlayerInRange(0,0,0,0) && ani[currentAni]->GetCurrentBitmapNumber() >= 2 && hit ==0){
+		if (IsPlayerInRange(player,0,0,0,0) && ani[currentAni]->GetCurrentBitmapNumber() >= 2 && hit ==0){
 			player->DecreaseHP(1);
 			hit = 1;
 		}
@@ -58,7 +51,7 @@ void Fire::ShowBitMap(int attackAniNumber, int currentAni) {
 }
 
 
-void Fire::AddAniBitMaps(char * pic[], int aniType, int picCount)
+/*void Fire::AddAniBitMaps(char * pic[], int aniType, int picCount)
 {
 	for (int i = 0; i < picCount; i++)
 	{
@@ -72,9 +65,9 @@ void Fire::AddAniBitMap(char* pic, int aniType)
 		ani.push_back(new CAnimation);//增加大小
 
 	ani[aniType]->AddBitmap(pic, RGB(255, 255, 255));
-}
+}*/
 
-bool Fire::IsPlayerInRange(int right_fix, int left_fix, int up_fix, int down_fix) {
+/*bool Fire::IsPlayerInRange(int right_fix, int left_fix, int up_fix, int down_fix) {
 	int RIGHT_EDGE = x + width + right_fix, LEFT_EDGE = x - left_fix,
 		UP_EDGE = y - up_fix, DOWN_EDGE = y + height + down_fix;
 
@@ -90,9 +83,9 @@ bool Fire::IsPlayerInRange(int right_fix, int left_fix, int up_fix, int down_fix
 	/*else if (OB_DOWN_EDGE > UP_EDGE)       //人在下, 怪物在上
 			return true;
 	else if (OB_UP_EDGE < DOWN_EDGE)	   //人在上, 怪物在下
-			return true;*/
+			return true;
 	return false;
-}
+}*/
 
 void Fire::LoadAni() {
 
@@ -102,6 +95,7 @@ void Fire::LoadAni() {
 
 	char* aniFire_right[5] = { ".\\res\\fire_right_0.bmp", ".\\res\\fire_right_1.bmp", 
 						".\\res\\fire_right_2.bmp" , ".\\res\\fire_right_3.bmp" , ".\\res\\fire_right_4.bmp" };
+
 	AddAniBitMaps(aniFire_right, ANI_FIRE_RIGHT, 5);
 }
 
