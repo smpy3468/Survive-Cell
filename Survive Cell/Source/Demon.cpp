@@ -28,15 +28,26 @@ Demon::Demon(string tag, int x, int y, int width, int height, int pictureID):Mon
 //-------------------------------------------------------------------------------------------------
 
 void Demon::AutoMove() {
-	if (GetRL() == LEFT && status == STANDBY) {			//如果GetLR == 0 , X 往左移動
-		this->x = x - moveSpeed;
-		//fire->SetXY(x, y);
-		currentAni = ANI_LEFT;					    //設定現在動畫為LEFT
+	if (GetRL() == LEFT && status == STANDBY ) {			//如果GetLR == LEFT 
+		if (CanMoveLeft(moveSpeed)) {					//如果往左沒有卡住
+			this->x = x - moveSpeed;					//X 往左移動
+			currentAni = ANI_LEFT;					    //設定現在動畫為LEFT
+		}
+		else                                            //如果往左遇到障礙物、地形卡住
+		{
+			SetRL(RIGHT) ;								//換往右
+		}	
 	}
-	else if (GetRL() == RIGHT && status == STANDBY) {
-		this->x = x + moveSpeed;					//如果GetLR == 1 , X 往右移動
-		//fire->SetXY(x, y);
-		currentAni = ANI_RIGHT;						//設定現在動畫為RIGHT
+	else if (GetRL() == RIGHT && status == STANDBY) {	//如果GetLR == R ,
+		if (CanMoveRight(moveSpeed)) {					//如果往右沒有卡住
+			this->x = x + moveSpeed;					 //X 往右移動
+			currentAni = ANI_RIGHT;						//設定現在動畫為RIGHT
+		}
+		else                                            //如果往右遇到障礙物、地形卡住
+		{
+			SetRL(LEFT);								//換往左
+		}
+			
 	}
 
 	ani[currentAni]->OnMove();						//顯示動畫

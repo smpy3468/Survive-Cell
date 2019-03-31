@@ -69,9 +69,7 @@ int Monster::GetStatus() {
 //--------------------------OTHER FUNCTION-----------------------------------//
 void Monster::AutoMove() {}
 
-void Monster::Move(int dx, int dy)
-{
-}
+void Monster::Move(int dx, int dy){}
 
 bool Monster::IsInAttackField(int playerX, int playerY, int right_fix, int left_fix, int up_fix, int down_fix) {
 	int attackXField_Left = x - attackField - left_fix, attackXField_Right = x + attackField + right_fix;
