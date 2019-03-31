@@ -32,6 +32,8 @@ public:
 	int GetMoveSpeed();//取得目前移動速度
 	int GetOriginAttackDamage();//取得原始攻擊力
 	int GetAttackDamage();//取得目前攻擊力
+	int GetOriginAttackSpeed();//取得原始攻擊速度
+	int GetAttackSpeed();//取得攻擊速度
 	int GetOriginAttackRange();//取得原始攻擊範圍
 	int GetAttackRange();//取得攻擊範圍
 	bool IsDead();//確認是否死亡

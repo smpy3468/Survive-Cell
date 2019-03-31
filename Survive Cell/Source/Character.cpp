@@ -98,6 +98,16 @@ int Character::GetAttackDamage()
 	return this->attackDamage;
 }
 
+int Character::GetOriginAttackSpeed()
+{
+	return originAttackSpeed;
+}
+
+int Character::GetAttackSpeed()
+{
+	return attackSpeed;
+}
+
 int Character::GetOriginAttackRange()
 {
 	return this->originAttackRange;

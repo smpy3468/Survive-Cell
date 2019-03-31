@@ -92,7 +92,7 @@ namespace game_framework {
 		GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 - 30, SIZE_Y / 2 - 133, 149, 133, IDB_0)));
 		GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y / 2 + 40, Map::WORLD_SIZE_X, 100, IDB_GROUND));
 		GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2, SIZE_Y / 2 - 10, 80, 50, IDB_ERASER1));
-		GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 +160, SIZE_Y / 2 - 100, 80, 50, IDB_ERASER1));
+		GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 + 160, SIZE_Y / 2 - 100, 80, 50, IDB_ERASER1));
 
 		Map::SetStaticObject();
 
@@ -146,7 +146,7 @@ namespace game_framework {
 
 	void CGameStateOver::OnInit()
 	{
-		
+
 	}
 
 	void CGameStateOver::OnShow()
@@ -155,11 +155,21 @@ namespace game_framework {
 		CFont f, *fp;
 		f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
 		fp = pDC->SelectObject(&f);					// 選用 font f
-		pDC->SetBkColor(RGB(255, 255, 255));
-		pDC->SetTextColor(RGB(0, 0, 0));
+		pDC->SetBkMode(TRANSPARENT);
+		pDC->SetTextColor(RGB(0, 0, 255));
+
 		char str[80];								// Demo 數字對字串的轉換
-		sprintf(str, "你已經死了 ! ");
-		pDC->TextOut(240, 210, str);
+		sprintf(str, "你已經死了 ! \n畫面有夠藍黑");		
+		
+		CRect rect = { 0,0,SIZE_X,SIZE_Y };//設定矩形左、上、右、下的座標
+
+		//這裡在設定垂直置中
+		CRect temp = rect;
+		int height = pDC->DrawText(str,temp,DT_CENTER | DT_WORDBREAK | DT_CALCRECT);
+		rect.DeflateRect(0,(rect.Height() - height) / 2);
+
+		pDC->DrawText(str, rect, DT_CENTER | DT_WORDBREAK);//水平置中
+
 		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 	}

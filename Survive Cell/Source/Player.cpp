@@ -27,6 +27,7 @@ Player::Player(string tag, int x, int y, int width, int height, int pictureID) :
 
 	attackRange = 10;
 	attackDamage = 5;
+	attackSpeed = 5;
 
 	isMoveLeft = false;
 	isMoveRight = false;
@@ -145,7 +146,7 @@ void Player::Jump()
 
 		if (jumpDisplacement >= 0)//往上升
 		{
-			if(CanMoveUp(jumpDisplacement))//可向上移動
+			if (CanMoveUp(jumpDisplacement))//可向上移動
 				Move(0, -jumpDisplacement);
 		}
 		else//往下降
@@ -233,12 +234,16 @@ void Player::ShowInformation()
 	CFont f, *fp;
 	f.CreatePointFont(80, "Times New Roman");	// 產生 font f; 160表示16 point的字
 	fp = pDC->SelectObject(&f);					// 選用 font f
-	pDC->SetBkColor(RGB(255, 255, 255));
-	pDC->SetTextColor(RGB(0, 0, 0));
+	pDC->SetBkMode(TRANSPARENT);				//透明背景
+	pDC->SetTextColor(RGB(0, 0, 255));
+	
 	char str[800];								// Demo 數字對字串的轉換
 
-	sprintf(str, "HP:%d", GetHP());
-	pDC->TextOut(0, 0, str);
+	sprintf(str, "HP:%d\nAttack:%d\nAttack Speed:%d\nAttackRange:%d\nMoveSpeed:%d"
+		, GetHP(), GetAttackDamage(), GetAttackSpeed(), GetAttackRange(), GetMoveSpeed());
+
+	CRect rect = { 0,0,SIZE_X,SIZE_Y };//設定矩形左、上、右、下的座標
+	pDC->DrawText(str, rect, DT_LEFT | DT_WORDBREAK);//靠左對齊，可換行
 
 	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
