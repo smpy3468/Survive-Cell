@@ -238,7 +238,7 @@ namespace game_framework {
 		}
 		if (nChar == KEY_SPACE)
 		{
-			player.Attack();
+			player.SetIsAttack(true);
 		}
 
 		if (nChar == KEY_INTERACT)

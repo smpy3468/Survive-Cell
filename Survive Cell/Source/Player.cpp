@@ -37,6 +37,10 @@ Player::Player(string tag, int x, int y, int width, int height, int pictureID) :
 	isFall = false;
 	isGrounded = false;
 
+	isAttack = false;
+
+	faceLR = FACE_RIGHT;
+
 	currentAni = ANI::ANI_IDLE;
 
 	layer = GameSystem::LAYER::LAYER_PLAYER;
@@ -67,16 +71,23 @@ void Player::Move(int dx, int dy)
 void Player::SetIsMoveLeft(bool isMoveLeft)
 {
 	this->isMoveLeft = isMoveLeft;
+	faceLR = FACE_LEFT;//面向左邊
 }
 
 void Player::SetIsMoveRight(bool isMoveRight)
 {
 	this->isMoveRight = isMoveRight;
+	faceLR = FACE_RIGHT;//面向右邊
 }
 
 void Player::SetIsJump(bool isJump)
 {
 	this->isJumpKeyDown = isJump;
+}
+
+void Player::SetIsAttack(bool isAttack)
+{
+	this->isAttack = isAttack;
 }
 
 void Player::SetIsGrounded(bool isGrounded)
@@ -105,6 +116,11 @@ void Player::Move()//移動方向
 			isJump = true;//正在跳躍
 			isGrounded = false;//沒在地上
 		}
+	}
+
+	if (this->isAttack)//如果按下攻擊
+	{
+		Attack();
 	}
 
 	if (isJump)
@@ -173,37 +189,47 @@ void Player::Interact()
 
 void Player::Attack()
 {
-	vector<Monster*> monsters = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
-
-	for (auto& i : monsters)//對怪物攻擊
+	if (ani[currentAni]->IsFinalBitmap())//攻擊動畫播放到最後一張
 	{
-		if (i->GetX() + i->GetWidth() > this->x - attackRange && i->GetX() < this->x + this->width + attackRange
-			&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height)//怪物在攻擊範圍內
+		vector<Monster*> monsters = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
+
+		for (auto& i : monsters)//對怪物攻擊
 		{
-			i->DecreaseHP(attackDamage);
+			if (i->GetX() + i->GetWidth() > this->x - attackRange && i->GetX() < this->x + this->width + attackRange
+				&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height)//怪物在攻擊範圍內
+			{
+				i->DecreaseHP(attackDamage);
+			}
 		}
+
+		isAttack = false;//攻擊結束
 	}
 }
 
 void Player::ShowBitMap()
 {
-	if (isJump || isFall)//跳躍動畫
+	if (isAttack)
 	{
-		if (currentAni == ANI::ANI_LEFT)
+		if (faceLR == FACE_LEFT)
+		{
+			currentAni = ANI::ANI_ATTACK_LEFT;
+			ani[ANI::ANI_ATTACK_LEFT]->OnMove();
+		}
+		else
+		{
+			currentAni = ANI::ANI_ATTACK_RIGHT;
+			ani[ANI::ANI_ATTACK_RIGHT]->OnMove();
+		}
+	}
+	else if (isJump || isFall)//跳躍動畫
+	{
+		if (faceLR == FACE_LEFT)
 		{
 			currentAni = ANI::ANI_JUMP_LEFT;
 		}
-		else if (currentAni == ANI::ANI_RIGHT)
+		else
 		{
 			currentAni = ANI::ANI_JUMP_RIGHT;
-		}
-		else if (currentAni == ANI::ANI_JUMP_LEFT && isMoveRight)//面向左邊跳躍時按下右鍵要面向右邊
-		{
-			currentAni = ANI::ANI_JUMP_RIGHT;
-		}
-		else if (currentAni == ANI::ANI_JUMP_RIGHT && isMoveLeft)//面向右邊跳躍時按下左鍵要面向左邊
-		{
-			currentAni = ANI::ANI_JUMP_LEFT;
 		}
 	}
 	else if (isMoveLeft)//左移動畫
@@ -223,6 +249,11 @@ void Player::ShowBitMap()
 		{
 			i->Reset();//重置所有動畫
 		}
+
+		if (faceLR == FACE_LEFT)
+			currentAni = ANI::ANI_LEFT;
+		else
+			currentAni = ANI::ANI_RIGHT;
 	}
 
 	ani[currentAni]->OnShow();
@@ -236,7 +267,7 @@ void Player::ShowInformation()
 	fp = pDC->SelectObject(&f);					// 選用 font f
 	pDC->SetBkMode(TRANSPARENT);				//透明背景
 	pDC->SetTextColor(RGB(0, 0, 255));
-	
+
 	char str[800];								// Demo 數字對字串的轉換
 
 	sprintf(str, "HP:%d\nAttack:%d\nAttack Speed:%d\nAttackRange:%d\nMoveSpeed:%d"
@@ -257,18 +288,39 @@ void Player::Dead()
 
 void Player::LoadAni()
 {
+	//---------------靜止
 	char* aniIdle[1] = { ".\\res\\player_idle.bmp" };
 	AddAniBitMaps(aniIdle, ANI::ANI_IDLE, 1);
 
+	//---------------左走
 	char* aniLeft[4] = { ".\\res\\player_left_0.bmp", ".\\res\\player_left_1.bmp", ".\\res\\player_left_2.bmp", ".\\res\\player_left_3.bmp" };
 	AddAniBitMaps(aniLeft, ANI::ANI_LEFT, 4);
 
+	//---------------右走
 	char* aniRight[4] = { ".\\res\\player_right_0.bmp", ".\\res\\player_right_1.bmp", ".\\res\\player_right_2.bmp", ".\\res\\player_right_3.bmp" };
 	AddAniBitMaps(aniRight, ANI::ANI_RIGHT, 4);
 
+	//---------------左跳
 	char* aniJumpLeft = ".\\res\\player_jump_left.bmp";
 	AddAniBitMap(aniJumpLeft, ANI::ANI_JUMP_LEFT);
 
+	//---------------右跳
 	char* aniJumpRight = ".\\res\\player_jump_right.bmp";
 	AddAniBitMap(aniJumpRight, ANI::ANI_JUMP_RIGHT);
+
+	//---------------左攻
+	char* aniAttackLeft[3] = { ".\\res\\player_attack_left_0.bmp", ".\\res\\player_attack_left_1.bmp", ".\\res\\player_attack_left_2.bmp" };
+	AddAniBitMaps(aniAttackLeft, ANI::ANI_ATTACK_LEFT, 3, 5);
+
+	//---------------右攻
+	char* aniAttackRight[3] = { ".\\res\\player_attack_right_0.bmp", ".\\res\\player_attack_right_1.bmp", ".\\res\\player_attack_right_2.bmp" };
+	AddAniBitMaps(aniAttackRight, ANI::ANI_ATTACK_RIGHT, 3, 5);
+
+	//---------------左被擊
+	char* aniGetHitLeft = ".\\res\\player_get_hit_left.bmp";
+	AddAniBitMap(aniGetHitLeft, ANI::ANI_GET_HIT_LEFT);
+
+	//---------------右被擊
+	char* aniGetHitRight = ".\\res\\player_get_hit_right.bmp";
+	AddAniBitMap(aniGetHitRight, ANI::ANI_GET_HIT_RIGHT);
 }

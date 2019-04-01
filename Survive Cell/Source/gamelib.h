@@ -229,7 +229,6 @@ public:
 	void  AddBitmap(char *,COLORREF=CLR_INVALID);
 									// 增加一張圖形至動畫(圖的編號及透明色)
 	int   GetCurrentBitmapNumber();	// 取得正在撥放的bitmap是第幾個bitmap
-	int   Height();					// 取得動畫的高度
 	bool  IsFinalBitmap();			// 回傳正在撥放的bitmap是否為最後一個bitmap
 	int   Left();					// 取得動畫的左上角的 x 座標
 	void  OnMove();					// 依頻率更換bitmap
@@ -239,6 +238,7 @@ public:
 	void  SetTopLeft(int,int);		// 將動畫的左上角座標移至 (x,y)
 	int   Top();					// 取得動畫的左上角的 y 座標
 	int   Width();					// 取得動畫的寬度
+	int   Height();					// 取得動畫的高度
 private:
 	list<CMovingBitmap>				bmp;			// list of CMovingBitmap
 	list<CMovingBitmap>::iterator	bmp_iter;		// list iterator
