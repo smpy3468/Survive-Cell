@@ -69,9 +69,7 @@ int Monster::GetStatus() {
 //--------------------------OTHER FUNCTION-----------------------------------//
 void Monster::AutoMove() {}
 
-void Monster::Move(int dx, int dy)
-{
-}
+void Monster::Move(int dx, int dy){}
 
 bool Monster::IsInAttackField(int playerX, int playerY, int right_fix, int left_fix, int up_fix, int down_fix) {
 	int attackXField_Left = x - attackField - left_fix, attackXField_Right = x + attackField + right_fix;
@@ -85,13 +83,13 @@ bool Monster::IsInAttackField(int playerX, int playerY, int right_fix, int left_
 }
 
 bool Monster::IsPlayerInRange(Player* player, int right_fix, int left_fix, int up_fix, int down_fix) {
-	int RIGHT_EDGE = x + width / 2 + right_fix, LEFT_EDGE = x - width / 2 - left_fix,
-		UP_EDGE = y - height / 2 - up_fix, DOWN_EDGE = y + height / 2 + down_fix;
+	int RIGHT_EDGE = x + width + right_fix, LEFT_EDGE = x - left_fix,
+		UP_EDGE = y - up_fix, DOWN_EDGE = y + height + down_fix;
 
 	int OB_X = player->GetX(), OB_Y = player->GetY(), OB_WIDTH = player->GetWidth(), OB_HEIGHT = player->GetHeight();
 
-	int OB_RIGHT_EDGE = OB_X + OB_WIDTH / 2, OB_LEFT_EDGE = OB_X - OB_WIDTH / 2,
-		OB_UP_EDGE = OB_Y - OB_HEIGHT / 2, OB_DOWN_EDGE = OB_Y + OB_HEIGHT / 2;
+	int OB_RIGHT_EDGE = OB_X + OB_WIDTH , OB_LEFT_EDGE = OB_X,
+		OB_UP_EDGE = OB_Y, OB_DOWN_EDGE = OB_Y + OB_HEIGHT;
 
 	if (OB_RIGHT_EDGE >= LEFT_EDGE - attackRange && PlaceRelativePlayer(player) == RIGHT)        //人在左, 怪物在右
 		return true;

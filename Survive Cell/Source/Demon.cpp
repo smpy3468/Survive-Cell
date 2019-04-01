@@ -22,21 +22,32 @@ Demon::Demon(string tag, int x, int y, int width, int height, int pictureID):Mon
 
 	aniSpeed = 5;
 	LoadAni();
-	fire = new Fire("Fire", x, y, 150, 130, IDB_0);
+	fire = new Fire("Fire", x, y, 110, 75, IDB_0);
 }
 
 //-------------------------------------------------------------------------------------------------
 
 void Demon::AutoMove() {
-	if (GetRL() == LEFT && status == STANDBY) {			//如果GetLR == 0 , X 往左移動
-		this->x = x - moveSpeed;
-		//fire->SetXY(x, y);
-		currentAni = ANI_LEFT;					    //設定現在動畫為LEFT
+	if (GetRL() == LEFT && status == STANDBY ) {			//如果GetLR == LEFT 
+		if (CanMoveLeft(moveSpeed)) {					//如果往左沒有卡住
+			this->x = x - moveSpeed;					//X 往左移動
+			currentAni = ANI_LEFT;					    //設定現在動畫為LEFT
+		}
+		else                                            //如果往左遇到障礙物、地形卡住
+		{
+			SetRL(RIGHT) ;								//換往右
+		}	
 	}
-	else if (GetRL() == RIGHT && status == STANDBY) {
-		this->x = x + moveSpeed;					//如果GetLR == 1 , X 往右移動
-		//fire->SetXY(x, y);
-		currentAni = ANI_RIGHT;						//設定現在動畫為RIGHT
+	else if (GetRL() == RIGHT && status == STANDBY) {	//如果GetLR == R ,
+		if (CanMoveRight(moveSpeed)) {					//如果往右沒有卡住
+			this->x = x + moveSpeed;					 //X 往右移動
+			currentAni = ANI_RIGHT;						//設定現在動畫為RIGHT
+		}
+		else                                            //如果往右遇到障礙物、地形卡住
+		{
+			SetRL(LEFT);								//換往左
+		}
+			
 	}
 
 	ani[currentAni]->OnMove();						//顯示動畫
@@ -64,7 +75,7 @@ void Demon::Attack() {
 		status = ATTACK;
 
 		moveSpeed = ATTACK_SPEED;
-		if (IsPlayerInRange(player, 50, -20, 0, 0) == false) {	//如果怪物還沒撞到腳色
+		if (IsPlayerInRange(player, 0, 0, 0, 0) == false) {	//如果怪物還沒撞到腳色
 
 			if (placeRelativePlayer == RIGHT) {		//如果怪物在人的右邊 
 				x -= moveSpeed;
