@@ -175,16 +175,6 @@ bool CAnimation::IsFinalBitmap()
 	return bmp_counter == (bmp.size()-1);
 }
 
-bool CAnimation::IsEnd()
-{
-	if (isEnd == true)
-	{
-		isEnd = false;
-		return true;
-	}
-	return false;
-}
-
 int CAnimation::Left()
 {
 	GAME_ASSERT(bmp.size() != 0,"CAnimation: Bitmaps must be loaded first.");
@@ -195,10 +185,6 @@ void CAnimation::OnMove()
 {
 	GAME_ASSERT(bmp.size() != 0,"CAnimation: Bitmaps must be loaded first.");
 	if (--delay_counter <= 0)  {
-		
-		if (IsFinalBitmap())
-			isEnd = true;
-
 		delay_counter = delay_count;
 		bmp_iter++;
 		bmp_counter++;
