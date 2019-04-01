@@ -230,7 +230,6 @@ public:
 									// 增加一張圖形至動畫(圖的編號及透明色)
 	int   GetCurrentBitmapNumber();	// 取得正在撥放的bitmap是第幾個bitmap
 	bool  IsFinalBitmap();			// 回傳正在撥放的bitmap是否為最後一個bitmap
-	bool  IsEnd();					// 完全播完一輪
 	int   Left();					// 取得動畫的左上角的 x 座標
 	void  OnMove();					// 依頻率更換bitmap
 	void  OnShow();					// 將動畫貼到螢幕
@@ -247,8 +246,6 @@ private:
 	int								delay_counter;	// 延緩動畫播放速度的計數器
 	int								delay_count;	// 動畫播放速度的常數
 	int								x, y;			// 動畫的座標
-
-	bool							isEnd = false;			// 完全播完
 };
 
 /////////////////////////////////////////////////////////////////////////////

@@ -11,7 +11,6 @@ Character::Character() :GameObject()
 Character::Character(string tag, int x, int y, int width, int height, int pictureID) : GameObject(tag, x, y, width, height, pictureID)
 {
 	tag = "Character";
-	isGetHit = false;
 }
 
 void Character::SetMaxHP(int maxHp)
@@ -134,8 +133,6 @@ void Character::SetBitMapPosition()
 
 void Character::DecreaseHP(int dhp)
 {
-	isGetHit = true;
-
 	this->HP -= dhp;
 	if (this->HP <= 0)//¦º¤`
 	{
