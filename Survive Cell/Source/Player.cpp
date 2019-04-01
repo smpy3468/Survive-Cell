@@ -118,6 +118,11 @@ void Player::Move()//移動方向
 		}
 	}
 
+	if (this->isAttack)//如果按下攻擊
+	{
+		Attack();
+	}
+
 	if (isJump)
 		Jump();//跳躍
 	else
@@ -184,58 +189,38 @@ void Player::Interact()
 
 void Player::Attack()
 {
-	vector<Monster*> monsters = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
-
-	for (auto& i : monsters)//對怪物攻擊
+	if (ani[currentAni]->IsFinalBitmap())//攻擊動畫播放到最後一張
 	{
-		if (i->GetX() + i->GetWidth() > this->x - attackRange && i->GetX() < this->x + this->width + attackRange
-			&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height)//怪物在攻擊範圍內
+		vector<Monster*> monsters = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
+
+		for (auto& i : monsters)//對怪物攻擊
 		{
-			i->DecreaseHP(attackDamage);
+			if (i->GetX() + i->GetWidth() > this->x - attackRange && i->GetX() < this->x + this->width + attackRange
+				&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height)//怪物在攻擊範圍內
+			{
+				i->DecreaseHP(attackDamage);
+			}
 		}
+
+		isAttack = false;//攻擊結束
 	}
 }
 
 void Player::ShowBitMap()
 {
-	if (isGetHit)
-	{
-		if (faceLR == FACE_LEFT)
-		{
-			currentAni = ANI::ANI_GET_HIT_LEFT;
-		}
-		else
-		{
-			currentAni = ANI::ANI_GET_HIT_RIGHT;
-		}
-
-		ani[currentAni]->OnMove();
-
-		if (ani[currentAni]->IsEnd())
-		{
-			isGetHit = false;
-		}
-	}
-	else if (isAttack)
+	if (isAttack)
 	{
 		if (faceLR == FACE_LEFT)
 		{
 			currentAni = ANI::ANI_ATTACK_LEFT;
+			ani[ANI::ANI_ATTACK_LEFT]->OnMove();
 		}
 		else
 		{
 			currentAni = ANI::ANI_ATTACK_RIGHT;
-		}
-
-		ani[currentAni]->OnMove();
-
-		if (ani[currentAni]->IsEnd())
-		{
-			Attack();
-			isAttack = false;
+			ani[ANI::ANI_ATTACK_RIGHT]->OnMove();
 		}
 	}
-
 	else if (isJump || isFall)//跳躍動畫
 	{
 		if (faceLR == FACE_LEFT)
@@ -266,9 +251,9 @@ void Player::ShowBitMap()
 		}
 
 		if (faceLR == FACE_LEFT)
-			currentAni = ANI::ANI_LEFT;//換回行走動畫
+			currentAni = ANI::ANI_LEFT;
 		else
-			currentAni = ANI::ANI_RIGHT;//換回行走動畫
+			currentAni = ANI::ANI_RIGHT;
 	}
 
 	ani[currentAni]->OnShow();

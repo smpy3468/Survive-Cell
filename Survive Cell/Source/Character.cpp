@@ -211,7 +211,7 @@ bool Character::CanMoveUp(int perDisplacement)
 	bool canMoveUp = true;
 	for (int i = x; i < x + width; i++)
 	{
-		if (Map::HasObject(i, y - perDisplacement))//下面有東西
+		if (Map::HasObject(i, y - perDisplacement) || y < 0)//上面有東西
 		{
 			canMoveUp = false;
 			return canMoveUp;

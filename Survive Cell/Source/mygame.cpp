@@ -90,9 +90,14 @@ namespace game_framework {
 
 		GameSystem::AddGameObject((new Player("Player", SIZE_X / 2, SIZE_Y / 2 - 100, 50, 80, IDB_PLAYER)));
 		GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 - 30, SIZE_Y / 2 - 133, 149, 133, IDB_0)));
-		GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y / 2 + 40, Map::WORLD_SIZE_X, 100, IDB_GROUND));
-		GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2, SIZE_Y / 2 - 10, 80, 50, IDB_ERASER1));
-		GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 + 160, SIZE_Y / 2 - 100, 80, 50, IDB_ERASER1));
+
+		GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y / 2 + 80, Map::WORLD_SIZE_X / 2, 100, IDB_GROUND));
+
+		for (int i = 0; i < 3; i++)
+		{
+			GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 + 150 * i, SIZE_Y / 2 - 80 * i, 80, 50, IDB_ERASER1));
+		}
+		GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 + 150 * 3, SIZE_Y / 2 - 80 * 2, 80, 50, IDB_ERASER1));
 
 		Map::SetStaticObject();
 
