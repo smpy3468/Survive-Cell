@@ -12,8 +12,25 @@ class Item :public GameObject
 public:
 	Item();
 	Item(string tag, int x, int y, int width, int height, int pictureID);
-
 	virtual void Picked();//被撿起
-protected:
+	
+				
+protected:	
+	bool IsPlayerInRange(GameObject* obj, int right_fix, int left_fix, int up_fix, int down_fix);//判斷動畫是否即擊中
+	void AddAniBitMaps(char* pic[], int aniType, int picCount);					//增加多張動畫圖片
+	void AddAniBitMap(char* pic, int aniType);									//增加動畫圖片
 	virtual void Dead()override;
+	virtual void LoadAni();
+	virtual void ShowBitMap();
+	void SetBitMapPosition()override;
+
+	int currentAni = ANI_IDLE;     //IDLE 動畫
+	vector<CAnimation*> ani;//動畫
+	int attackDamage;		//攻擊力
+	int attackRange;		//攻擊範圍
+	int defense;			//防禦力
+	int haveEffect;  //使否 有特效;
+	enum ANI {
+		ANI_IDLE = 0,
+	};
 };

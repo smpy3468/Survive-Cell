@@ -7,6 +7,7 @@
 #include "Character.h"
 #include "GameSystem.h"
 #include "Player.h"
+
 class Monster :public Character
 {
 public:
