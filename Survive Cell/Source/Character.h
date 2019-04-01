@@ -52,6 +52,8 @@ protected:
 	int	originAttackSpeed, attackSpeed;//原始攻擊速度、目前攻擊速度
 	int originAttackRange, attackRange;//原始攻擊範圍、目前攻擊範圍
 
+	bool isGetHit;//被擊
+
 	vector<Buff> buff;//套用中的BUFF
 	bool isDead;//是否死亡
 	void Dead()override;//死亡時呼叫
