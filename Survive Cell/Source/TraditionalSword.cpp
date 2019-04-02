@@ -1,6 +1,6 @@
 #include"StdAfx.h"
 #include "TraditionalSword.h"
-
+#include "Player.h"
 TraditionalSword::TraditionalSword() {
 	tag = "TraditionalSword";
 }
@@ -9,11 +9,12 @@ TraditionalSword::TraditionalSword() {
 
 TraditionalSword::TraditionalSword(string tag, int x, int y, int width, int height, int pictureID):Item(tag, x, y, width, height, pictureID) {
 	tag = "TraditionalSword";
-	attackDamage = 10;
-	attackRange = 10;
+	attackDamage = 100;
+	attackRange = 100;
 	defense = 2;
 	LoadAni();
 }
+
 
 void TraditionalSword::LoadAni() {
 	char* aniIdle[1] = { ".\\res\\sword_01d.bmp" };
@@ -23,3 +24,13 @@ void TraditionalSword::LoadAni() {
 void TraditionalSword::ShowBitMap() {
 	ani[currentAni]->OnShow();
 }
+
+void TraditionalSword::Picked() {
+	Player* player = GameSystem::GetGameObjectWithTag<Player>("Player");
+
+	player->SetAttackDamage(attackDamage);
+	player->SetAttackRange(attackRange);
+	player->SetDefense(defense);
+	Dead();
+}
+

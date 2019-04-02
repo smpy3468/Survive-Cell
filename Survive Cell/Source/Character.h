@@ -24,6 +24,7 @@ public:
 	void SetAttackSpeed(int attackSpeed);//設定目前攻擊速度
 	void SetOriginAttackRange(int originAttackRange);//設定原始攻擊範圍
 	void SetAttackRange(int attackRange);//設定目前攻擊範圍
+	void SetDefense(int defense);
 	void SetIsDead(bool isDead);//設定是否死亡
 
 	int GetMaxHP();//取得最大血量
@@ -36,6 +37,7 @@ public:
 	int GetAttackSpeed();//取得攻擊速度
 	int GetOriginAttackRange();//取得原始攻擊範圍
 	int GetAttackRange();//取得攻擊範圍
+	int GetDefense();
 	bool IsDead();//確認是否死亡
 
 	void SetBitMapPosition()override;//設定動畫位置
@@ -51,6 +53,7 @@ protected:
 	int originAttackDamage, attackDamage;//原始攻擊力、目前攻擊力
 	int	originAttackSpeed, attackSpeed;//原始攻擊速度、目前攻擊速度
 	int originAttackRange, attackRange;//原始攻擊範圍、目前攻擊範圍
+	int originDefense, defense;//原始防禦力、目前防禦力
 
 	bool isGetHit;//被擊
 

@@ -15,10 +15,11 @@ Demon::Demon(string tag, int x, int y, int width, int height, int pictureID):Mon
 	SetOriginAttackRange(10);
 
 	HP = 10;
-	attackDamage = 100;
+	attackDamage = 1;
 	SetAttackRange(GetOriginAttackRange());
 	originMoveSpeed = 3;
 	SetMoveSpeed(GetOriginMoveSpeed());
+	SetDefense(0);
 
 	aniSpeed = 5;
 	LoadAni();

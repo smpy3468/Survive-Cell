@@ -8,6 +8,7 @@ class TraditionalSword:public Item{
 	private:
 		void LoadAni()override;
 		void ShowBitMap()override;
+		void Picked()override;
 		enum ANI {
 			ANI_IDLE = 0,
 		};

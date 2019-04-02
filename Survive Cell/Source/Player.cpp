@@ -28,6 +28,7 @@ Player::Player(string tag, int x, int y, int width, int height, int pictureID) :
 	attackRange = 10;
 	attackDamage = 5;
 	attackSpeed = 5;
+	defense = 0;
 
 	isMoveLeft = false;
 	isMoveRight = false;
@@ -178,7 +179,7 @@ void Player::Interact()
 {
 	for (auto& i : GameSystem::GetAllGameObject())//對物件互動
 	{
-		if (i->GetTag() == "Item" || i->GetTag() == "Potion")//是物品
+		if (i->GetTag() == "Item" || i->GetTag() == "Potion" || i->GetTag()=="TraditionalSword")//是物品
 		{
 			if (i->GetX() > this->x && i->GetX() < this->x + this->width
 				&& i->GetY() > this->y && i->GetY() < this->y + this->height)
@@ -270,8 +271,8 @@ void Player::ShowInformation()
 
 	char str[800];								// Demo 數字對字串的轉換
 
-	sprintf(str, "HP:%d\nAttack:%d\nAttack Speed:%d\nAttackRange:%d\nMoveSpeed:%d"
-		, GetHP(), GetAttackDamage(), GetAttackSpeed(), GetAttackRange(), GetMoveSpeed());
+	sprintf(str, "HP:%d\nAttack:%d\nAttack Speed:%d\nAttackRange:%d\nMoveSpeed:%d\nDefense:%d\n"
+		, GetHP(), GetAttackDamage(), GetAttackSpeed(), GetAttackRange(), GetMoveSpeed(),GetDefense());
 
 	CRect rect = { 0,0,SIZE_X,SIZE_Y };//設定矩形左、上、右、下的座標
 	pDC->DrawText(str, rect, DT_LEFT | DT_WORDBREAK);//靠左對齊，可換行

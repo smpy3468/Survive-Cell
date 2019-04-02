@@ -64,6 +64,10 @@ void Character::SetAttackRange(int attackRange)
 	this->attackRange = attackRange;
 }
 
+void Character::SetDefense(int defense){
+	this->defense = defense;
+}
+
 void Character::SetIsDead(bool isDead)
 {
 	this->isDead = isDead;
@@ -117,6 +121,11 @@ int Character::GetOriginAttackRange()
 int Character::GetAttackRange()
 {
 	return this->attackRange;
+}
+
+int Character::GetDefense()
+{
+	return this->defense;
 }
 
 bool Character::IsDead()
