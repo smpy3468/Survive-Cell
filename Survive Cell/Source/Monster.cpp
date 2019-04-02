@@ -1,9 +1,11 @@
 #include "StdAfx.h"
+#include <ctime>
 #include "Monster.h"
 #include "Player.h"
 #include "Item.h"
 #include "Potion.h"
 #include "TraditionalSword.h"
+
 Monster::Monster()
 {
 	tag = "Monster";
@@ -120,9 +122,11 @@ void Monster::ShowBitMap()
 }
 
 void Monster::Dead()
-{
+{	
 	//GameSystem::AddGameObject(new Potion("Potion", x + width / 2, y + height, 20, 10, IDB_CELL_GREEN));//產生一個細胞道具
-	GameSystem::AddGameObject(new TraditionalSword("TraditionalSword", x + width / 2, y + height, 32, 32, IDB_CELL_GREEN));
+
+	if (rand() % 3 >= 1)
+		GameSystem::AddGameObject(new TraditionalSword("TraditionalSword", x + width / 2, y + height, 32, 32, IDB_CELL_GREEN));
 	GameSystem::DeleteGameObject(this);
 }
 
