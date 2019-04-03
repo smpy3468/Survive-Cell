@@ -111,9 +111,8 @@ void Demon::Attack() {
 
 
 void Demon::ShowBitMap(){
- 	fire->SetXY(x, y, currentAni);
 	currentBitMapNumber = ani[currentAni]->GetCurrentBitmapNumber();
-	fire->ShowBitMap(ani[currentAni]->GetCurrentBitmapNumber(), currentAni);
+	fire->ShowBitMap(x, y,  currentAni, ani[currentAni]->GetCurrentBitmapNumber());
 	ani[currentAni]->OnShow();
 }
 

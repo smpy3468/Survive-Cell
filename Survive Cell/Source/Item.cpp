@@ -56,7 +56,7 @@ void Item::AddAniBitMap(char* pic, int aniType)
 }
 
 void Item::LoadAni(){}
-
+void Item::SetXY(int hostX, int hostY, int playerCurrentAni, int  playerAniNumber){}
 void Item::ShowBitMap() {
 	ani[currentAni]->OnShow();
 }

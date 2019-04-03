@@ -5,7 +5,7 @@
 //Ä~©ÓCharacter
 
 #include "Character.h"
-
+#include "Item.h"
 class Player :public Character
 {
 public:
@@ -59,11 +59,16 @@ private:
 		ANI_IDLE = 0,
 		ANI_LEFT,
 		ANI_RIGHT,
-		ANI_JUMP_LEFT,
-		ANI_JUMP_RIGHT,
 		ANI_ATTACK_LEFT,
 		ANI_ATTACK_RIGHT,
+		ANI_JUMP_LEFT,
+		ANI_JUMP_RIGHT,
 		ANI_GET_HIT_LEFT,
 		ANI_GET_HIT_RIGHT
 	};
+
+
+	//«Û¿A¥[ªº
+	Item* equipment;
+	bool getSword=false;
 };

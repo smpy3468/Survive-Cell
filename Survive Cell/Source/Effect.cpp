@@ -7,7 +7,7 @@ Effect::Effect(string tag, int x, int y, int width, int height, int pictureID):G
 	currentAni = 0;
 }
 
-void Effect::SetXY(int demonX, int demonY, int currentAni) {}
+void Effect::SetXY(int hostX, int hostY, int hostCurrentAni) {}
 
 void Effect::SetHit(int hit) {
 	this->hit = hit;
@@ -22,7 +22,7 @@ void Effect::SetBitMapPosition()
 	}
 }
 void Effect::LoadAni() {}
-void Effect::ShowBitMap(int attackAniNumber, int currentAni){}
+void Effect::ShowBitMap(int hostX, int hostY, int hostCurrentAni, int attackAniNumber){}
 
 /*void Effect::ShowBitMap(int attackAniNumber, int currentAni) {
 	if (attackAniNumber >= 6 && currentAni == ANI_ATTACK_LEFT) { //3¬O¥ª§ðÀ»ª¬ºA

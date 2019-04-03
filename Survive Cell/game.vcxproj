@@ -313,6 +313,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='UnitTest|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <ClCompile Include="Source\SwordWave.cpp" />
     <ClCompile Include="Source\TraditionalSword.cpp" />
     <ClCompile Include="Source\Trap.cpp" />
     <ClCompile Include="Source\Weapon.cpp" />
@@ -342,6 +343,7 @@
     <ClInclude Include="Source\StdAfx.h" />
     <ClInclude Include="Source\gamelib.h" />
     <ClInclude Include="Source\mygame.h" />
+    <ClInclude Include="Source\SwordWave.h" />
     <ClInclude Include="Source\TraditionalSword.h" />
     <ClInclude Include="Source\Trap.h" />
     <ClInclude Include="Source\Weapon.h" />

@@ -10,14 +10,14 @@ Fire::Fire(string tag, int x, int y, int width, int height, int pictureID):Effec
 }
 
 
-void Fire::SetXY(int demonX, int demonY, int currentAni) {
-	if (currentAni == ANI_ATTACK_RIGHT) {       //3¬O¥ª§ðÀ»ª¬ºA
-		this->x = demonX + 80;
-		this->y = demonY + 85;
+void Fire::SetXY(int hostX, int hostY, int hostCurrentAni) {
+	if (hostCurrentAni == ANI_ATTACK_RIGHT) {       //3¬O¥ª§ðÀ»ª¬ºA
+		this->x = hostX + 80;
+		this->y = hostY + 85;
 	}
-	else if (currentAni == ANI_ATTACK_LEFT) {
-		this->x = demonX - 50;
-		this->y = demonY + 85;
+	else if (hostCurrentAni == ANI_ATTACK_LEFT) {
+		this->x = hostX - 50;
+		this->y = hostY + 85;
 	}
 
 }
@@ -25,8 +25,10 @@ void Fire::SetXY(int demonX, int demonY, int currentAni) {
 
 //---------------------------------------------------------------------------------------
 
-void Fire::ShowBitMap(int attackAniNumber, int currentAni) {
-	if (attackAniNumber >= 6 && currentAni == ANI_ATTACK_LEFT) { //3¬O¥ª§ðÀ»ª¬ºA
+void Fire::ShowBitMap(int hostX, int hostY, int hostCurrentAni, int attackAniNumber) {
+	SetXY(x, y, currentAni);
+
+	if (attackAniNumber >= 6 && hostCurrentAni == ANI_ATTACK_LEFT) { //3¬O¥ª§ðÀ»ª¬ºA
 		currentAni = ANI_FIRE_LEFT;
 		SetBitMapPosition();
 		ani[currentAni]->OnMove();
@@ -37,7 +39,7 @@ void Fire::ShowBitMap(int attackAniNumber, int currentAni) {
 		}
 			
 	}
-	else if (attackAniNumber >= 6 && currentAni == ANI_ATTACK_RIGHT) {//4¬O¥k§ðÀ»ª¬ºA
+	else if (attackAniNumber >= 6 && hostCurrentAni == ANI_ATTACK_RIGHT) {//4¬O¥k§ðÀ»ª¬ºA
 		currentAni = ANI_FIRE_RIGHT;
 		SetBitMapPosition();
 		ani[currentAni]->OnMove();

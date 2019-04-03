@@ -182,8 +182,13 @@ void Player::Interact()
 		if (i->GetTag() == "Item" || i->GetTag() == "Potion" || i->GetTag()=="TraditionalSword")//是物品
 		{
 			if (i->GetX() > this->x && i->GetX() < this->x + this->width
-				&& i->GetY() > this->y && i->GetY() < this->y + this->height)
+				&& i->GetY() > this->y && i->GetY() < this->y + this->height){ 
 				static_cast<Item*>(i)->Picked();
+				//彥澤加的
+				equipment = static_cast<Item*>(i);	
+				getSword = true;
+			}
+				
 		}
 	}
 }
@@ -215,11 +220,20 @@ void Player::ShowBitMap()
 		{
 			currentAni = ANI::ANI_ATTACK_LEFT;
 			ani[ANI::ANI_ATTACK_LEFT]->OnMove();
+			if (getSword==true) {
+				equipment->SetXY(x, y, ANI_ATTACK_LEFT, ani[ANI::ANI_ATTACK_LEFT]->GetCurrentBitmapNumber());
+				equipment->ShowBitMap();
+			}
+				
 		}
 		else
 		{
 			currentAni = ANI::ANI_ATTACK_RIGHT;
 			ani[ANI::ANI_ATTACK_RIGHT]->OnMove();
+			if (getSword == true){
+				equipment->SetXY(x, y, ANI_ATTACK_RIGHT ,ani[ANI::ANI_ATTACK_RIGHT]->GetCurrentBitmapNumber());
+ 				equipment->ShowBitMap();
+			}
 		}
 	}
 	else if (isJump || isFall)//跳躍動畫
