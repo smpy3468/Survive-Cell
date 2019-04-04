@@ -9,7 +9,8 @@ class SwordWave :public Effect {
 		/*void FlyAni();	*/
 		void LoadAni()override;
 		enum ANI{
-			ANI_SWORDWAVE_LEFT=0,
+			ANI_SWORDWAVE_IDLE =0,
+			ANI_SWORDWAVE_LEFT,
 			ANI_SWORDWAVE_RIGHT
 		};
 };

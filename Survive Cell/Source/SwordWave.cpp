@@ -10,10 +10,8 @@ SwordWave::SwordWave(string tag, int x, int y, int width, int height, int pictur
 void SwordWave::ShowBitMap(int hostX, int hostY, int hostCurrentAni, int attackAniNumber) {
 	if((attackAniNumber == 0)){
 		SetXY(hostX, hostY, hostCurrentAni);
-
 	}
-	else if (attackAniNumber >= 1 && hostCurrentAni == ANI_ATTACK_LEFT) { //3¬O¥ª§ðÀ»ª¬ºA
-		currentAni = ANI::ANI_SWORDWAVE_LEFT;
+	else if (attackAniNumber >= 1 && currentAni == ANI_SWORDWAVE_LEFT) { //3¬O¥ª§ðÀ»ª¬ºA
 		x -= 10;																//ÅýWave©¹¥ª­¸
 		SetBitMapPosition();
 		ani[currentAni]->OnMove();
@@ -24,8 +22,7 @@ void SwordWave::ShowBitMap(int hostX, int hostY, int hostCurrentAni, int attackA
 		}
 
 	}
-	else if (attackAniNumber >= 1 && hostCurrentAni == ANI_ATTACK_RIGHT) {//4¬O¥k§ðÀ»ª¬ºA
-		currentAni = ANI_SWORDWAVE_RIGHT;
+	else if (attackAniNumber >= 1 && currentAni == ANI_SWORDWAVE_RIGHT) {       //4¬O¥k§ðÀ»ª¬ºA
 		x += 10;																//ÅýWave©¹¥k­¸
 		SetBitMapPosition();
 		ani[currentAni]->OnMove();
@@ -35,15 +32,21 @@ void SwordWave::ShowBitMap(int hostX, int hostY, int hostCurrentAni, int attackA
 			hit = 1;
 		}
 	}
-	else hit = 0;
+	else {
+		hit = 0;
+		currentAni = ANI_SWORDWAVE_IDLE;
+	}
+
 
 }
 
 void SwordWave::SetXY(int hostX, int hostY, int hostCurrentAni) {
 	this->x = hostX + 80;
  	this->y = hostY + 85;
-
-	//SetBitMapPosition();
+	if (hostCurrentAni == ANI_ATTACK_LEFT && currentAni== ANI_SWORDWAVE_IDLE)
+		currentAni = ANI_SWORDWAVE_LEFT;
+	else if (hostCurrentAni == ANI_ATTACK_RIGHT && currentAni == ANI_SWORDWAVE_IDLE)
+		currentAni = ANI_SWORDWAVE_RIGHT;
 }
 
 
@@ -53,6 +56,8 @@ void SwordWave::SetXY(int hostX, int hostY, int hostCurrentAni) {
 
 
 void SwordWave::LoadAni() {
+	char* aniSwordWave_idle[1] = { ".\\res\\swordwave_left_0.bmp" };
+	AddAniBitMaps(aniSwordWave_idle, ANI_SWORDWAVE_IDLE, 1);
 	char* aniSwordWave_left[3] = { ".\\res\\swordwave_left_0.bmp", ".\\res\\swordwave_left_1.bmp", ".\\res\\swordwave_left_2.bmp" };
 	AddAniBitMaps(aniSwordWave_left, ANI_SWORDWAVE_LEFT, 3);
 
