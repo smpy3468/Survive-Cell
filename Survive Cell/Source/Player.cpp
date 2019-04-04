@@ -72,13 +72,11 @@ void Player::Move(int dx, int dy)
 void Player::SetIsMoveLeft(bool isMoveLeft)
 {
 	this->isMoveLeft = isMoveLeft;
-	faceLR = FACE_LEFT;//面向左邊
 }
 
 void Player::SetIsMoveRight(bool isMoveRight)
 {
 	this->isMoveRight = isMoveRight;
-	faceLR = FACE_RIGHT;//面向右邊
 }
 
 void Player::SetIsJump(bool isJump)
@@ -98,30 +96,34 @@ void Player::SetIsGrounded(bool isGrounded)
 
 void Player::Move()//移動方向
 {
-	if (this->isMoveLeft)
+	if (!this->isAttack)//如果不是在攻擊狀態
 	{
-		if (this->x > 0)
-			Move(-moveSpeed, 0);
-	}
-
-	if (this->isMoveRight)
-	{
-		if (this->x + this->width < Map::WORLD_SIZE_X)
-			Move(moveSpeed, 0);
-	}
-
-	if (this->isJumpKeyDown)//如果按下跳躍
-	{
-		if (isGrounded)//如果在地上
+		if (this->isMoveLeft)
 		{
-			isJump = true;//正在跳躍
-			isGrounded = false;//沒在地上
+			if (this->x > 0)
+			{
+				faceLR = FACE_LEFT;//面向左邊
+				Move(-moveSpeed, 0);
+			}
 		}
-	}
 
-	if (this->isAttack)//如果按下攻擊
-	{
-		Attack();
+		if (this->isMoveRight)
+		{
+			if (this->x + this->width < Map::WORLD_SIZE_X)
+			{
+				faceLR = FACE_RIGHT;//面向右邊
+				Move(moveSpeed, 0);
+			}
+		}
+
+		if (this->isJumpKeyDown)//如果按下跳躍
+		{
+			if (isGrounded)//如果在地上
+			{
+				isJump = true;//正在跳躍
+				isGrounded = false;//沒在地上
+			}
+		}
 	}
 
 	if (isJump)
@@ -165,6 +167,8 @@ void Player::Jump()
 		{
 			if (CanMoveUp(jumpDisplacement))//可向上移動
 				Move(0, -jumpDisplacement);
+			else
+				jumpDisplacement = 0;//開始往下掉
 		}
 		else//往下降
 		{
@@ -179,37 +183,34 @@ void Player::Interact()
 {
 	for (auto& i : GameSystem::GetAllGameObject())//對物件互動
 	{
-		if (i->GetTag() == "Item" || i->GetTag() == "Potion" || i->GetTag()=="TraditionalSword")//是物品
+		if (i->GetTag() == "Item" || i->GetTag() == "Potion" || i->GetTag() == "TraditionalSword")//是物品
 		{
 			if (i->GetX() > this->x && i->GetX() < this->x + this->width
-				&& i->GetY() > this->y && i->GetY() < this->y + this->height){ 
+				&& i->GetY() > this->y && i->GetY() < this->y + this->height) {
 				static_cast<Item*>(i)->Picked();
 				//彥澤加的
-				equipment = static_cast<Item*>(i);	
+				equipment = static_cast<Item*>(i);
 				getSword = true;
 			}
-				
+
 		}
 	}
 }
 
 void Player::Attack()
 {
-	if (ani[currentAni]->IsFinalBitmap())//攻擊動畫播放到最後一張
+	vector<Monster*> monsters = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
+
+	for (auto& i : monsters)//對怪物攻擊
 	{
-		vector<Monster*> monsters = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
-
-		for (auto& i : monsters)//對怪物攻擊
+		if (i->GetX() + i->GetWidth() > this->x - attackRange && i->GetX() < this->x + this->width + attackRange
+			&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height)//怪物在攻擊範圍內
 		{
-			if (i->GetX() + i->GetWidth() > this->x - attackRange && i->GetX() < this->x + this->width + attackRange
-				&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height)//怪物在攻擊範圍內
-			{
-				i->DecreaseHP(attackDamage);
-			}
+			i->DecreaseHP(attackDamage);
 		}
-
-		isAttack = false;//攻擊結束
 	}
+
+	isAttack = false;//攻擊結束
 }
 
 void Player::ShowBitMap()
@@ -220,20 +221,25 @@ void Player::ShowBitMap()
 		{
 			currentAni = ANI::ANI_ATTACK_LEFT;
 			ani[ANI::ANI_ATTACK_LEFT]->OnMove();
-			if (getSword==true) {
+			if (getSword == true) {
 				equipment->SetXY(x, y, ANI_ATTACK_LEFT, ani[ANI::ANI_ATTACK_LEFT]->GetCurrentBitmapNumber());
 				equipment->ShowBitMap();
 			}
-				
+
 		}
 		else
 		{
 			currentAni = ANI::ANI_ATTACK_RIGHT;
 			ani[ANI::ANI_ATTACK_RIGHT]->OnMove();
-			if (getSword == true){
-				equipment->SetXY(x, y, ANI_ATTACK_RIGHT ,ani[ANI::ANI_ATTACK_RIGHT]->GetCurrentBitmapNumber());
- 				equipment->ShowBitMap();
+			if (getSword == true) {
+				equipment->SetXY(x, y, ANI_ATTACK_RIGHT, ani[ANI::ANI_ATTACK_RIGHT]->GetCurrentBitmapNumber());
+				equipment->ShowBitMap();
 			}
+		}
+
+		if (ani[currentAni]->IsEnd())
+		{
+			Attack();
 		}
 	}
 	else if (isJump || isFall)//跳躍動畫
@@ -286,7 +292,7 @@ void Player::ShowInformation()
 	char str[800];								// Demo 數字對字串的轉換
 
 	sprintf(str, "HP:%d\nAttack:%d\nAttack Speed:%d\nAttackRange:%d\nMoveSpeed:%d\nDefense:%d\n"
-		, GetHP(), GetAttackDamage(), GetAttackSpeed(), GetAttackRange(), GetMoveSpeed(),GetDefense());
+		, GetHP(), GetAttackDamage(), GetAttackSpeed(), GetAttackRange(), GetMoveSpeed(), GetDefense());
 
 	CRect rect = { 0,0,SIZE_X,SIZE_Y };//設定矩形左、上、右、下的座標
 	pDC->DrawText(str, rect, DT_LEFT | DT_WORDBREAK);//靠左對齊，可換行
@@ -325,11 +331,11 @@ void Player::LoadAni()
 
 	//---------------左攻
 	char* aniAttackLeft[3] = { ".\\res\\player_attack_left_0.bmp", ".\\res\\player_attack_left_1.bmp", ".\\res\\player_attack_left_2.bmp" };
-	AddAniBitMaps(aniAttackLeft, ANI::ANI_ATTACK_LEFT, 3, 5);
+	AddAniBitMaps(aniAttackLeft, ANI::ANI_ATTACK_LEFT, 3, 3);
 
 	//---------------右攻
 	char* aniAttackRight[3] = { ".\\res\\player_attack_right_0.bmp", ".\\res\\player_attack_right_1.bmp", ".\\res\\player_attack_right_2.bmp" };
-	AddAniBitMaps(aniAttackRight, ANI::ANI_ATTACK_RIGHT, 3, 5);
+	AddAniBitMaps(aniAttackRight, ANI::ANI_ATTACK_RIGHT, 3, 3);
 
 	//---------------左被擊
 	char* aniGetHitLeft = ".\\res\\player_get_hit_left.bmp";
