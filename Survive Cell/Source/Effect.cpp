@@ -64,7 +64,7 @@ void Effect::AddAniBitMap(char* pic, int aniType)
 	ani[aniType]->AddBitmap(pic, RGB(255, 255, 255));
 }
 
-bool Effect::IsPlayerInRange(GameObject* obj, int right_fix, int left_fix, int up_fix, int down_fix) {
+bool Effect::IsObjectInRange(GameObject* obj, int right_fix, int left_fix, int up_fix, int down_fix) {
 	int RIGHT_EDGE = x + width + right_fix, LEFT_EDGE = x - left_fix,
 		UP_EDGE = y - up_fix, DOWN_EDGE = y + height + down_fix;
 
@@ -82,4 +82,61 @@ bool Effect::IsPlayerInRange(GameObject* obj, int right_fix, int left_fix, int u
 	else if (OB_UP_EDGE < DOWN_EDGE)	   //人在上, 怪物在下
 			return true;*/
 	return false;
+}
+
+
+bool Effect::CanMoveLeft(int perDisplacement)
+{
+	bool canMoveLeft = true;
+	for (int i = y; i < y + height; i++)
+	{
+		if (Map::HasObject(this->x - perDisplacement, i))//左半邊有東西
+		{
+			canMoveLeft = false;
+			return canMoveLeft;
+		}
+	}
+	return canMoveLeft;
+}
+
+bool Effect::CanMoveRight(int perDisplacement)
+{
+	bool canMoveRight = true;
+	for (int i = y; i < y + height; i++)
+	{
+		if (Map::HasObject(this->x + this->width + perDisplacement, i))//右半邊有東西
+		{
+			canMoveRight = false;
+			return canMoveRight;
+		}
+	}
+	return canMoveRight;
+}
+
+bool Effect::CanMoveUp(int perDisplacement)
+{
+	bool canMoveUp = true;
+	for (int i = x; i < x + width; i++)
+	{
+		if (Map::HasObject(i, y - perDisplacement) || y < 0)//上面有東西
+		{
+			canMoveUp = false;
+			return canMoveUp;
+		}
+	}
+	return canMoveUp;
+}
+
+bool Effect::CanMoveDown(int perDisplacement)
+{
+	bool canMoveDown = true;
+	for (int i = x; i < x + width; i++)
+	{
+		if (Map::HasObject(i, y + height + perDisplacement))//下面有東西
+		{
+			canMoveDown = false;
+			return canMoveDown;
+		}
+	}
+	return canMoveDown;
 }
