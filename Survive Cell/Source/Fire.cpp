@@ -26,7 +26,7 @@ void Fire::SetXY(int hostX, int hostY, int hostCurrentAni) {
 //---------------------------------------------------------------------------------------
 
 void Fire::ShowBitMap(int hostX, int hostY, int hostCurrentAni, int attackAniNumber) {
-	SetXY(x, y, currentAni);
+	SetXY(hostX, hostY, hostCurrentAni);
 
 	if (attackAniNumber >= 6 && hostCurrentAni == ANI_ATTACK_LEFT) { //3¬O¥ª§ðÀ»ª¬ºA
 		currentAni = ANI_FIRE_LEFT;

@@ -5,14 +5,15 @@ SwordWave::SwordWave(string tag, int x, int y, int width, int height, int pictur
 	tag = "SwordWave";
 	LoadAni();
 	SetBitMapPosition(); 
+	currentAni = ANI_SWORDWAVE_IDLE;
 }
 
 void SwordWave::ShowBitMap(int hostX, int hostY, int hostCurrentAni, int attackAniNumber) {
-	if((attackAniNumber == 0)){
+	if(attackAniNumber == 0&&(hostCurrentAni== ANI_ATTACK_LEFT || hostCurrentAni == ANI_ATTACK_RIGHT)){
 		SetXY(hostX, hostY, hostCurrentAni);
 	}
 	else if (attackAniNumber >= 1 && currentAni == ANI_SWORDWAVE_LEFT) { //3是左攻擊狀態
-		x -= 10;																//讓Wave往左飛
+		x -= 5;																//讓Wave往左飛
 		SetBitMapPosition();
 		ani[currentAni]->OnMove();
 		ani[currentAni]->OnShow();
@@ -20,10 +21,9 @@ void SwordWave::ShowBitMap(int hostX, int hostY, int hostCurrentAni, int attackA
 			player->DecreaseHP(1);
 			hit = 1;
 		}
-
 	}
 	else if (attackAniNumber >= 1 && currentAni == ANI_SWORDWAVE_RIGHT) {       //4是右攻擊狀態
-		x += 10;																//讓Wave往右飛
+		x += 5;																//讓Wave往右飛
 		SetBitMapPosition();
 		ani[currentAni]->OnMove();
 		ani[currentAni]->OnShow();
@@ -31,6 +31,7 @@ void SwordWave::ShowBitMap(int hostX, int hostY, int hostCurrentAni, int attackA
 			player->DecreaseHP(1);
 			hit = 1;
 		}
+
 	}
 	else {
 		hit = 0;
@@ -43,10 +44,16 @@ void SwordWave::ShowBitMap(int hostX, int hostY, int hostCurrentAni, int attackA
 void SwordWave::SetXY(int hostX, int hostY, int hostCurrentAni) {
 	this->x = hostX + 80;
  	this->y = hostY + 85;
-	if (hostCurrentAni == ANI_ATTACK_LEFT && currentAni== ANI_SWORDWAVE_IDLE)
+	if (hostCurrentAni == ANI_ATTACK_LEFT) {//為了確保腳色攻擊變換方向時 特效不會換方向
 		currentAni = ANI_SWORDWAVE_LEFT;
-	else if (hostCurrentAni == ANI_ATTACK_RIGHT && currentAni == ANI_SWORDWAVE_IDLE)
+		this->x = hostX - 80;
+		this->y = hostY + 85;
+	}
+	else if (hostCurrentAni == ANI_ATTACK_RIGHT) { //為了確保腳色攻擊變換方向時 特效不會換方向
 		currentAni = ANI_SWORDWAVE_RIGHT;
+		this->x = hostX + 80;
+		this->y = hostY + 85;
+	}
 }
 
 
