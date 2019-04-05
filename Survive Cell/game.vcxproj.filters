@@ -177,6 +177,12 @@
     <ClCompile Include="Source\SwordWave.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Interface.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EquippedSlot.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h">
@@ -261,6 +267,12 @@
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\SwordWave.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Interface.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EquippedSlot.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>

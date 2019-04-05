@@ -13,7 +13,7 @@ void SwordWave::ShowBitMap(int hostX, int hostY, int hostCurrentAni, int attackA
 		SetXY(hostX, hostY, hostCurrentAni);
 	}
 	else if (attackAniNumber >= 1 && currentAni == ANI_SWORDWAVE_LEFT && CanMoveLeft(5)) { //3是左攻擊狀態
-		x -= 5;																//讓Wave往左飛
+		x -= 10;																//讓Wave往左飛
 		SetBitMapPosition();
 		ani[currentAni]->OnMove();
 		ani[currentAni]->OnShow();
@@ -23,7 +23,7 @@ void SwordWave::ShowBitMap(int hostX, int hostY, int hostCurrentAni, int attackA
 		}
 	}
 	else if (attackAniNumber >= 1 && currentAni == ANI_SWORDWAVE_RIGHT && CanMoveRight(5)) {       //4是右攻擊狀態
-		x += 5;																//讓Wave往右飛
+		x += 10;																//讓Wave往右飛
 		SetBitMapPosition();
 		ani[currentAni]->OnMove();
 		ani[currentAni]->OnShow();

@@ -264,6 +264,7 @@
     <ClCompile Include="Source\Door.cpp" />
     <ClCompile Include="Source\Effect.cpp" />
     <ClCompile Include="Source\Equipped.cpp" />
+    <ClCompile Include="Source\EquippedSlot.cpp" />
     <ClCompile Include="Source\Fire.cpp" />
     <ClCompile Include="Source\Floor.cpp" />
     <ClCompile Include="Source\game.cpp">
@@ -283,6 +284,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='UnitTest|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <ClCompile Include="Source\Interface.cpp" />
     <ClCompile Include="Source\Item.cpp" />
     <ClCompile Include="Source\MainFrm.cpp">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -326,6 +328,7 @@
     <ClInclude Include="Source\Door.h" />
     <ClInclude Include="Source\Effect.h" />
     <ClInclude Include="Source\Equipped.h" />
+    <ClInclude Include="Source\EquippedSlot.h" />
     <ClInclude Include="Source\Fire.h" />
     <ClInclude Include="Source\Floor.h" />
     <ClInclude Include="Source\game.h" />
@@ -333,6 +336,7 @@
     <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\GameSystem.h" />
     <ClInclude Include="Source\gameView.h" />
+    <ClInclude Include="Source\Interface.h" />
     <ClInclude Include="Source\Item.h" />
     <ClInclude Include="Source\MainFrm.h" />
     <ClInclude Include="Source\Map.h" />
