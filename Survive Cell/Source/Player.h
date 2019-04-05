@@ -6,6 +6,9 @@
 
 #include "Character.h"
 #include "Item.h"
+#include "Weapon.h"
+#include "Equipped.h"
+
 class Player :public Character
 {
 public:
@@ -30,9 +33,12 @@ public:
 	//----------------動畫相關---------------------//
 	void ShowBitMap()override;//顯示動畫
 
-	//----------------顯示玩家資訊---------------------//
+	//-------------顯示玩家資訊------------------//
 	void ShowInformation();//顯示玩家資訊
 	
+	//-------------系統相關------------------//
+	void AddEquipment(Item* equiped);//增加裝備
+
 private:
 	bool isMoveLeft;//是否向左移動
 	bool isMoveRight;//是否向右移動
@@ -67,6 +73,7 @@ private:
 		ANI_GET_HIT_RIGHT
 	};
 
+	//vector<Equipped*> equipped;//裝備
 
 	//彥澤加的
 	Item* equipment;

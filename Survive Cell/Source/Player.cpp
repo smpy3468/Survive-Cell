@@ -25,7 +25,7 @@ Player::Player(string tag, int x, int y, int width, int height, int pictureID) :
 	originJumpDisplacement = 15;
 	jumpDisplacement = originJumpDisplacement;
 
-	attackRange = 10;
+	attackRange = 3;
 	attackDamage = 5;
 	attackSpeed = 5;
 	defense = 0;
@@ -299,6 +299,11 @@ void Player::ShowInformation()
 
 	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+}
+
+void Player::AddEquipment(Item * equipment)
+{
+	//this->equipped->push_back(equipment);
 }
 
 void Player::Dead()
