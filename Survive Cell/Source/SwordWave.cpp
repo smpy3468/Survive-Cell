@@ -47,10 +47,6 @@ void SwordWave::SetXY(int hostX, int hostY, int hostCurrentAni) {
 }
 
 
-/*void SwordWave::FlyAni(int waveX, int waveY, int) {
-
-}*/
-
 
 void SwordWave::LoadAni() {
 	char* aniSwordWave_idle[1] = { ".\\res\\swordwave_left_0.bmp" };

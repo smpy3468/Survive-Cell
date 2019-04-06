@@ -12,8 +12,8 @@ class Item :public GameObject
 public:
 	Item();
 	Item(string tag, int x, int y, int width, int height, int pictureID);
-	virtual void Picked();//被撿起
-    virtual void ShowBitMap();
+	virtual void Picked();														//被撿起
+    virtual void ShowBitMap();													//顯示動畫
 	virtual void SetXY(int hostX, int hostY, int playerCurrentAni, int  playerAniNumber);	//隨著擁有者移動 設定XY
 				
 protected:	
@@ -25,8 +25,6 @@ protected:
 	virtual void LoadAni();
 
 	void SetBitMapPosition()override;
-	const int ANI_ATTACK_LEFT = 3, ANI_ATTACK_RIGHT = 4;						//攻擊動編碼
-
 
 	int currentAni = ANI_IDLE;     //IDLE 動畫
 	vector<CAnimation*> ani;//動畫

@@ -12,33 +12,33 @@ class UInterface{
 		UInterface();
 		UInterface(string tag, int x, int y, int width, int height);
 
-		void SetX(int x);
-		void SetY(int y);
-		void SetWidth(int width);
-		void SetHeight(int height);
+		void SetX(int x);													//設定UI的X座標
+		void SetY(int y);													//設定UI的Y座標
+		void SetWidth(int width);											//設定UI的width
+		void SetHeight(int height);											//設定UI的Height
 
-		int GetX();
-		int GetY();
-		int GetWidth();
-		int GetHeight();
+		int GetX();															//回傳UI的X座標
+		int GetY();															//回傳UI的Y座標
+		int GetWidth();													    //回傳UI的width
+		int GetHeight();												    //回傳UI的height
 
-		void ShowBitMap();
+		void ShowBitMap();													//顯示UI圖片
 
 	protected:
-		CMovingBitmap UIpicture;
-		vector<string> UItext;
-		string tag;
-		int x, y;
-		int width, height; 
+		CMovingBitmap UIpicture;											//儲存UI圖片
+		vector<string> UItext;												//儲存UI文字
+		string tag;															//分類tag
+		int x, y;															//座標	
+		int width, height;													//寬、高
 		
-		vector<CAnimation*> ani;
-		void AddAniBitMaps(char* pic[], int aniType, int picCount);					//增加多張動畫圖片
-		void AddAniBitMap(char* pic, int aniType);									//增加動畫圖片
-		void LoadBitMap(int pictureID);
-		void LoadBitMap(char* picAddress);
+		vector<CAnimation*> ani;											//儲存動畫(有必要的話)
+		void AddAniBitMaps(char* pic[], int aniType, int picCount);			//增加多張動畫圖片(有必要的話)
+		void AddAniBitMap(char* pic, int aniType);							//增加動畫圖片(有必要的話)
+		void LoadBitMap(int pictureID);										//加入UI圖片-方法1
+		void LoadBitMap(char* picAddress);									//加入UI圖片-方法
 		
 
-		virtual void LoadAni();														//載入動畫
+		virtual void LoadAni();												//載入動畫
 		
 };
 
