@@ -5,7 +5,7 @@
 
 vector<GameObject*> GameSystem::gameObjectList;//初始化物件列表
 bool GameSystem::isGameOver = false;
-
+vector<UInterface*> GameSystem::gameUIList;//初始化物件列表
 GameSystem::GameSystem()
 {
 }
@@ -38,6 +38,11 @@ void GameSystem::AddGameObject(GameObject* obj)//增加遊戲物件
 
 	gameObjectList.push_back(obj);//還沒有與此物件相同圖層的物件，將此物件加到最尾端
 }
+
+void GameSystem::AddUserInterface(UInterface* ui) {
+	gameUIList.push_back(ui);
+}
+
 
 void GameSystem::DeleteGameObject(GameObject * obj)
 {
@@ -97,6 +102,14 @@ void GameSystem::SetAllObjectBitMapPosition()//設定所有物件圖片位置
 void GameSystem::ShowAllObject()//顯示所有物件
 {
 	for (auto& i : gameObjectList)
+	{
+		i->ShowBitMap();
+	}
+}
+
+void GameSystem::ShowAllUI()
+{
+	for (auto& i : gameUIList)
 	{
 		i->ShowBitMap();
 	}

@@ -68,6 +68,7 @@
 #include "Item.h"
 #include "Fire.h"
 #include "Demon.h"
+#include "EquipedSlot.h"
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class為遊戲的遊戲開頭畫面物件
@@ -99,8 +100,10 @@ namespace game_framework {
 			GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 + 150 * i, SIZE_Y / 2 - 80 * i, 80, 50, IDB_ERASER1));
 		}
 		GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 + 150 * 3, SIZE_Y / 2 - 80 * 2, 80, 50, IDB_ERASER1));
-
+		GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 2-230, SIZE_Y / 2+175, 64, 60));
+		GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 2-310, SIZE_Y / 2+175, 64, 60));
 		Map::SetStaticObject();
+
 
 		//GameSystem::StopAudio(GameSystem::AUDIO::AUDIO_GAME_OVER);//停止遊戲中的音樂
 		//GameSystem::PlayAudio(GameSystem::AUDIO::AUDIO_GAME_INIT);//播放遊戲結束的音樂
@@ -309,7 +312,7 @@ namespace game_framework {
 	{
 		Map::ShowBackgroundPic();
 		GameSystem::ShowAllObject();
-
+		GameSystem::ShowAllUI();
 		Player& player = *(GameSystem::GetGameObjectWithTag<Player>("Player"));
 
 		player.ShowInformation();//顯示玩家資訊

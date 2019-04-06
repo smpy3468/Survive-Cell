@@ -177,10 +177,10 @@
     <ClCompile Include="Source\SwordWave.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Interface.cpp">
+    <ClCompile Include="Source\EquipedSlot.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EquippedSlot.cpp">
+    <ClCompile Include="Source\UInterface.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
   </ItemGroup>
@@ -269,10 +269,10 @@
     <ClInclude Include="Source\SwordWave.h">
       <Filter>MyGame</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Interface.h">
+    <ClInclude Include="Source\EquipedSlot.h">
       <Filter>MyGame</Filter>
     </ClInclude>
-    <ClInclude Include="Source\EquippedSlot.h">
+    <ClInclude Include="Source\UInterface.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>

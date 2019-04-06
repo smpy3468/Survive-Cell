@@ -12,6 +12,7 @@ using namespace game_framework;
 
 #include "Map.h"
 #include "GameObject.h"
+#include "UInterface.h"
 
 class GameSystem
 {
@@ -25,6 +26,7 @@ public:
 
 	static vector<GameObject*>& GetAllGameObject();//取得所有遊戲物件
 	static void AddGameObject(GameObject* obj);//加入遊戲物件
+	static void AddUserInterface(UInterface* ui); //加入UI物件
 	static void DeleteGameObject(GameObject* obj);//刪除遊戲物件
 	static void DeleteAllGameObject();//刪除所有物件
 	
@@ -60,6 +62,7 @@ public:
 
 	static void SetAllObjectBitMapPosition();//設定所有物件的圖片位置
 	static void ShowAllObject();//顯示所有物件
+	static void ShowAllUI();//顯示所有UI物件
 	
 	//------------音訊相關-------------//
 	enum AUDIO
@@ -74,6 +77,7 @@ public:
 	static void MonstersAutoMove();    //全部怪物在defenseRange內移動
 	static void MonstersAttackPlayer();//全部怪物在Player進入attackField時會追Player
 
+
 	//------------圖層相關------------//
 	enum LAYER//圖層編號
 	{
@@ -84,6 +88,7 @@ public:
 	};
 private:
 	static vector<GameObject*> gameObjectList;//存放所有遊戲物件的列表
-	
+	static vector<UInterface*> gameUIList;//存放所有遊戲UI物件列表
+
 	static bool isGameOver;//遊戲是否結束
 };
