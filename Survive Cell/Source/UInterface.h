@@ -23,6 +23,7 @@ class UInterface{
 		int GetHeight();
 
 		void ShowBitMap();
+
 	protected:
 		CMovingBitmap UIpicture;
 		vector<string> UItext;

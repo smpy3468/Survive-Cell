@@ -12,28 +12,23 @@ void SwordWave::ShowBitMap(int hostX, int hostY, int hostCurrentAni, int attackA
 	if(attackAniNumber == 0&&(hostCurrentAni== ANI_ATTACK_LEFT || hostCurrentAni == ANI_ATTACK_RIGHT)){
 		SetXY(hostX, hostY, hostCurrentAni);
 	}
-	else if (attackAniNumber >= 1 && currentAni == ANI_SWORDWAVE_LEFT && CanMoveLeft(5)) { //3¬O¥ª§ðÀ»ª¬ºA
+	else if (attackAniNumber >= 1 && currentAni == ANI_SWORDWAVE_LEFT && CanMoveLeft(5) && isHit == 0) { //3¬O¥ª§ðÀ»ª¬ºA
 		x -= 10;																//ÅýWave©¹¥ª­¸
 		SetBitMapPosition();
 		ani[currentAni]->OnMove();
 		ani[currentAni]->OnShow();
-		if (IsObjectInRange(player, 0, 0, 0, 0) && ani[currentAni]->GetCurrentBitmapNumber() >= 2 && hit == 0) {
-			player->DecreaseHP(1);
-			hit = 1;
-		}
-	}
-	else if (attackAniNumber >= 1 && currentAni == ANI_SWORDWAVE_RIGHT && CanMoveRight(5)) {       //4¬O¥k§ðÀ»ª¬ºA
+		EffectAttackMonster(player->GetAttackDamage());
+	} 
+	else if (attackAniNumber >= 1 && currentAni == ANI_SWORDWAVE_RIGHT && CanMoveRight(5) && isHit == 0) {       //4¬O¥k§ðÀ»ª¬ºA
 		x += 10;																//ÅýWave©¹¥k­¸
 		SetBitMapPosition();
 		ani[currentAni]->OnMove();
 		ani[currentAni]->OnShow();
-		if (IsObjectInRange(player, 0, 0, 0, 0) && ani[currentAni]->GetCurrentBitmapNumber() >= 0 && hit == 0) {
-			player->DecreaseHP(1);
-			hit = 1;
-		}
+			EffectAttackMonster(player->GetAttackDamage());
+
 	}
 	else {
-		hit = 0;
+		isHit = 0;
 		currentAni = ANI_SWORDWAVE_IDLE;
 	}
 }

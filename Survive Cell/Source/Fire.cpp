@@ -33,9 +33,9 @@ void Fire::ShowBitMap(int hostX, int hostY, int hostCurrentAni, int attackAniNum
 		SetBitMapPosition();
 		ani[currentAni]->OnMove();
 		ani[currentAni]->OnShow();
-		if (IsObjectInRange(player , 0, 0, 0, 0) && ani[currentAni]->GetCurrentBitmapNumber()>=2 && hit ==0){
+		if (IsObjectInRange(player , 0, 0, 0, 0) && ani[currentAni]->GetCurrentBitmapNumber()>=2 && isHit ==0){
 			player->DecreaseHP(1);
-			hit = 1;
+			isHit = 1;
 		}
 			
 	}
@@ -44,12 +44,12 @@ void Fire::ShowBitMap(int hostX, int hostY, int hostCurrentAni, int attackAniNum
 		SetBitMapPosition();
 		ani[currentAni]->OnMove();
 		ani[currentAni]->OnShow();
-		if (IsObjectInRange(player,0,0,0,0) && ani[currentAni]->GetCurrentBitmapNumber() >= 2 && hit ==0){
+		if (IsObjectInRange(player,0,0,0,0) && ani[currentAni]->GetCurrentBitmapNumber() >= 2 && isHit ==0){
 			player->DecreaseHP(1);
-			hit = 1;
+			isHit = 1;
 		}
 	}
-	else hit = 0;
+	else isHit = 0;
 }
 
 
