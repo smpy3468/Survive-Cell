@@ -3,7 +3,7 @@
 #include"UInterface.h"
 
 UInterface::UInterface() {
-	this->tag = "UserInterface";
+	this->tag = "UInterface";
 	x = 0;
 	y = 0;
 	width = 32;
@@ -11,7 +11,7 @@ UInterface::UInterface() {
 }
 
 UInterface::UInterface(string tag, int x, int y, int width, int height){
-	tag = "UserInterface";
+	this->tag = "UInterface";
 	this->x = x;
 	this->y = y;
 	this->width=width;
@@ -33,6 +33,10 @@ void UInterface::SetHeight(int height) {
 
 
 //-----------------GET----------------------------------//
+string UInterface::GetTag() {
+	return this->tag;
+}
+
 int UInterface::GetX() {
 	return this->x;
 }
@@ -50,7 +54,6 @@ int UInterface::GetHeight() {
 }
 
 void UInterface::ShowBitMap() {
-	UIpicture.ShowBitmap();
 }
 
 //-----------------PROTECTED-----------------------------//

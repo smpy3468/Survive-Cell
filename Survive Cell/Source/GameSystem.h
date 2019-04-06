@@ -46,7 +46,7 @@ public:
 	{
 		vector<T*> targetObjects;
 		for (auto& i : gameObjectList)
-		{
+		{	
 			if (typeid(T) == typeid(GameObject))
 			{
 
@@ -58,6 +58,39 @@ public:
 		}
 
 		return targetObjects;
+	}
+
+	template <class T>static T* GetUInterfaceWithTag(string tag) //取得特定標籤的遊戲物件(單一個)
+	{
+		for (auto& i : gameUIList) {
+
+			int x = i->GetX();
+			if (i->GetTag() == tag)
+			{
+				return static_cast<T*>(i);
+			}
+		}
+				
+		return NULL;
+	}
+
+	template <class T>static vector<T*> GetUInterfacesWithTag(string tag) //取得特定標籤的UI物件(多個)
+	{
+		vector<T*> targetUIs;
+		for (auto& i : gameUIList)
+		{
+			
+			if (typeid(T) == typeid(UInterface))
+			{
+
+			}
+			if (i->GetTag() == tag)
+			{
+				targetUIs.push_back(static_cast<T*>(i));
+			}
+
+		}
+		return targetUIs;
 	}
 
 	static void SetAllObjectBitMapPosition();//設定所有物件的圖片位置

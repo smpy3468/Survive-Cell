@@ -17,16 +17,17 @@ class UInterface{
 		void SetWidth(int width);											//設定UI的width
 		void SetHeight(int height);											//設定UI的Height
 
+		string GetTag();													//回傳Tag
 		int GetX();															//回傳UI的X座標
 		int GetY();															//回傳UI的Y座標
 		int GetWidth();													    //回傳UI的width
 		int GetHeight();												    //回傳UI的height
 
-		void ShowBitMap();													//顯示UI圖片
+		virtual void ShowBitMap();													//顯示UI圖片
 
 	protected:
 		CMovingBitmap UIpicture;											//儲存UI圖片
-		vector<string> UItext;												//儲存UI文字
+		vector<string> UItexts;												//儲存UI文字
 		string tag;															//分類tag
 		int x, y;															//座標	
 		int width, height;													//寬、高

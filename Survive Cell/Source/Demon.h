@@ -1,3 +1,4 @@
+#pragma once
 #include "Monster.h"
 #include "Fire.h"
 #include "Player.h"

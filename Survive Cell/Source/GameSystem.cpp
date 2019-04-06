@@ -4,8 +4,9 @@
 #include "Monster.h"
 
 vector<GameObject*> GameSystem::gameObjectList;//初始化物件列表
-bool GameSystem::isGameOver = false;
 vector<UInterface*> GameSystem::gameUIList;//初始化物件列表
+bool GameSystem::isGameOver = false;
+
 GameSystem::GameSystem()
 {
 }
