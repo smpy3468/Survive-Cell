@@ -16,7 +16,7 @@ Item::Item(string tag, int x, int y, int width, int height, int pictureID) :Game
 		this->y++;//將道具往下移至地板外
 }
 
-
+/*void Item::SetXY(int hostX, int hostY, int playerCurrentAni, int  playerAniNumber) {}
 bool Item::IsPlayerInRange(GameObject* obj, int right_fix, int left_fix, int up_fix, int down_fix) {
 	int RIGHT_EDGE = x + width + right_fix, LEFT_EDGE = x - left_fix,
 		UP_EDGE = y - up_fix, DOWN_EDGE = y + height + down_fix;
@@ -33,9 +33,9 @@ bool Item::IsPlayerInRange(GameObject* obj, int right_fix, int left_fix, int up_
 	/*else if (OB_DOWN_EDGE > UP_EDGE)       //人在下, 怪物在上
 			return true;
 	else if (OB_UP_EDGE < DOWN_EDGE)	   //人在上, 怪物在下
-			return true;*/
+			return true;
 	return false;
-}
+}*/
 
 
 void Item::AddAniBitMaps(char * pic[], int aniType, int picCount)
@@ -55,7 +55,7 @@ void Item::AddAniBitMap(char* pic, int aniType)
 }
 
 void Item::LoadAni(){}
-void Item::SetXY(int hostX, int hostY, int playerCurrentAni, int  playerAniNumber){}
+
 void Item::ShowBitMap() {
 	ani[currentAni]->OnShow();
 }

@@ -2,21 +2,40 @@
 
 //PlayerEquipment
 //主角穿著的裝備
-
+#include "Player.h"
 #include "Item.h"
-#include "Weapon.h"
+#include "ItemWeapon.h"
+#include "GameSystem.h"
+
 
 class PlayerEquipment
 {
 public:
 	PlayerEquipment();
-	PlayerEquipment(Weapon rhs);
-	PlayerEquipment* operator=(Weapon rhs);//增加裝備時可直接轉換
+	PlayerEquipment(ItemWeapon rhs);
+	PlayerEquipment* operator=(ItemWeapon rhs);//增加裝備時可直接轉換
 
 	void SetXY(int hostX, int hostY, int playerCurrentAni, int  palyerAniNumber);
 	void ShowBitMap();//顯示圖片
-private:
+protected:
+	bool IsObjectInRange(GameObject* obj, int right_fix, int left_fix, int up_fix, int down_fix);//判斷動畫是否即擊中
+	void AddAniBitMaps(char* pic[], int aniType, int picCount);					//增加多張動畫圖片
+	void AddAniBitMap(char* pic, int aniType);									//增加動畫圖片
+	virtual void LoadAni();
+
+
+
+	int currentAni = ANI_IDLE;     //IDLE 動畫
+	vector<CAnimation*> ani;//動畫
+
+	enum ANI {
+		ANI_IDLE = 0,
+	};
+private:	
+
 	int x, y;
-	int attack;
+	int attackDamage;		//攻擊力
+	int attackRange;		//攻擊範圍
+	int defense;			//防禦力
 	CMovingBitmap pic;
 };

@@ -303,7 +303,7 @@ void Player::ShowInformation()
 	CDDraw::ReleaseBackCDC();					// ©ñ±¼ Back Plain ªº CDC
 }
 
-void Player::AddEquipment(Weapon * equipment)
+void Player::AddEquipment(ItemWeapon * equipment)
 {
 	this->equipments.push_back(new PlayerEquipment(*equipment));
 

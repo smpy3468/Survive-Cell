@@ -3,10 +3,10 @@
 //Player
 //玩家
 //繼承Character
-
+#include "StdAfx.h"
 #include "Character.h"
 #include "Item.h"
-#include "Weapon.h"
+#include "ItemWeapon.h"
 #include "PlayerEquipment.h"
 
 class Player :public Character
@@ -39,7 +39,7 @@ public:
 	void ShowInformation();//顯示玩家資訊
 	
 	//-------------系統相關------------------//
-	void AddEquipment(Weapon* equiped);//增加裝備
+	void AddEquipment(ItemWeapon* equiped);//增加裝備
 
 private:
 	bool isMoveLeft;//是否向左移動

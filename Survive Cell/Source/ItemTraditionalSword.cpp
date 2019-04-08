@@ -1,13 +1,13 @@
 #include"StdAfx.h"
-#include "TraditionalSword.h"
+#include "ItemTraditionalSword.h"
 
-TraditionalSword::TraditionalSword() {
+ItemTraditionalSword::ItemTraditionalSword() {
 	tag = "TraditionalSword";
 }
 
 
 
-TraditionalSword::TraditionalSword(string tag, int x, int y, int width, int height, int pictureID) :Weapon(tag, x, y, width, height, pictureID) {
+ItemTraditionalSword::ItemTraditionalSword(string tag, int x, int y, int width, int height, int pictureID) :ItemWeapon(tag, x, y, width, height, pictureID) {
 	tag = "TraditionalSword";
 	attackDamage = 100;
 	attackRange = 100;
@@ -17,18 +17,18 @@ TraditionalSword::TraditionalSword(string tag, int x, int y, int width, int heig
 
 
 
-void TraditionalSword::LoadAni() {
+void ItemTraditionalSword::LoadAni() {
 	char* aniIdle[1] = { ".\\res\\sword_01d.bmp" };
 	AddAniBitMaps(aniIdle, ANI_IDLE, 1);
 }
 
-void TraditionalSword::ShowBitMap() {
+/*void TraditionalSword::ShowBitMap() {
 
 	wave->ShowBitMap(x, y, playerCurrentAni, playerAniNumber);  //int hostX, int hostY, int hostCurrentAni, int attackAniNumber
 	ani[currentAni]->OnShow();
-}
+}*/
 
-void TraditionalSword::Picked() {
+void ItemTraditionalSword::Picked() {
 	Player* player = GameSystem::GetGameObjectWithTag<Player>("Player");
 	
 	//®a¦ö´ú¸Õªº
@@ -57,11 +57,11 @@ void TraditionalSword::Picked() {
 	Dead();
 }
 
-void TraditionalSword::SetXY(int hostX, int hostY, int playerCurrentAni, int  playerAniNumber) {
+/*void ItemTraditionalSword::SetXY(int hostX, int hostY, int playerCurrentAni, int  playerAniNumber) {
 
 	this->x = hostX;
 	this->y = hostY;
 	this->playerCurrentAni = playerCurrentAni;
 	this->playerAniNumber = playerAniNumber;
-}
+}*/
 

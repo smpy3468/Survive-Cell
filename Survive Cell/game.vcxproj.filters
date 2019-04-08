@@ -153,9 +153,6 @@
     <ClCompile Include="Source\Trap.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Weapon.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Map.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
@@ -168,9 +165,6 @@
     <ClCompile Include="Source\Effect.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
-    <ClCompile Include="Source\TraditionalSword.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
     <ClCompile Include="Source\SwordWave.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
@@ -181,6 +175,15 @@
       <Filter>MyGame</Filter>
     </ClCompile>
     <ClCompile Include="Source\PlayerEquipment.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerWeapon.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ItemTraditionalSword.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ItemWeapon.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
   </ItemGroup>
@@ -245,9 +248,6 @@
     <ClInclude Include="Source\Trap.h">
       <Filter>MyGame</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Weapon.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Map.h">
       <Filter>MyGame</Filter>
     </ClInclude>
@@ -260,9 +260,6 @@
     <ClInclude Include="Source\Effect.h">
       <Filter>MyGame</Filter>
     </ClInclude>
-    <ClInclude Include="Source\TraditionalSword.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
     <ClInclude Include="Source\SwordWave.h">
       <Filter>MyGame</Filter>
     </ClInclude>
@@ -273,6 +270,15 @@
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\PlayerEquipment.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerWeapon.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ItemTraditionalSword.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ItemWeapon.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>

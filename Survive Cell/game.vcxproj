@@ -284,6 +284,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='UnitTest|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <ClCompile Include="Source\PlayerWeapon.cpp" />
     <ClCompile Include="Source\UInterface.cpp" />
     <ClCompile Include="Source\Item.cpp" />
     <ClCompile Include="Source\MainFrm.cpp">
@@ -316,9 +317,9 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='UnitTest|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="Source\SwordWave.cpp" />
-    <ClCompile Include="Source\TraditionalSword.cpp" />
+    <ClCompile Include="Source\ItemTraditionalSword.cpp" />
     <ClCompile Include="Source\Trap.cpp" />
-    <ClCompile Include="Source\Weapon.cpp" />
+    <ClCompile Include="Source\ItemWeapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h" />
@@ -336,6 +337,7 @@
     <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\GameSystem.h" />
     <ClInclude Include="Source\gameView.h" />
+    <ClInclude Include="Source\PlayerWeapon.h" />
     <ClInclude Include="Source\UInterface.h" />
     <ClInclude Include="Source\Item.h" />
     <ClInclude Include="Source\MainFrm.h" />
@@ -348,9 +350,9 @@
     <ClInclude Include="Source\gamelib.h" />
     <ClInclude Include="Source\mygame.h" />
     <ClInclude Include="Source\SwordWave.h" />
-    <ClInclude Include="Source\TraditionalSword.h" />
+    <ClInclude Include="Source\ItemTraditionalSword.h" />
     <ClInclude Include="Source\Trap.h" />
-    <ClInclude Include="Source\Weapon.h" />
+    <ClInclude Include="Source\ItemWeapon.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Source\game.rc">
