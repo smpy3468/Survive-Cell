@@ -56,6 +56,8 @@ private:
 	void Dead()override;//死亡時呼叫
 
 	//---------------動畫相關---------------//
+	void ShowWeapon();//顯示武器
+
 	bool faceLR;//面向左邊或面向右邊
 	const bool FACE_LEFT = true;//面向左邊
 	const bool FACE_RIGHT = false;//面向右邊
@@ -76,7 +78,7 @@ private:
 	};
 
 	vector<PlayerEquipment*> equipments;//裝備
-	Weapon* weapon;//武器
+	PlayerEquipment* weapon;//武器
 
 	//彥澤加的
 	//Item* equipment;

@@ -193,10 +193,10 @@ void Player::Interact()
 			if (i->GetX() > this->x && i->GetX() < this->x + this->width
 				&& i->GetY() > this->y && i->GetY() < this->y + this->height) {
 				static_cast<Item*>(i)->Picked();
-				
+
 				//彥澤加的
 				//equipment = static_cast<Item*>(i);
-				hasWeapon = true;	
+				hasWeapon = true;
 			}
 
 		}
@@ -221,28 +221,22 @@ void Player::Attack()
 
 void Player::ShowBitMap()
 {
+	if (hasWeapon)
+	{
+		ShowWeapon();
+	}
+
 	if (isAttack)
 	{
 		if (faceLR == FACE_LEFT)
 		{
 			currentAni = ANI::ANI_ATTACK_LEFT;
 			ani[ANI::ANI_ATTACK_LEFT]->OnMove();
-
-			if (hasWeapon)
-			{
-				weapon->SetXY(x, y, ANI_ATTACK_LEFT, ani[ANI::ANI_ATTACK_LEFT]->GetCurrentBitmapNumber());
-				weapon->ShowBitMap();
-			}
-
 		}
 		else
 		{
 			currentAni = ANI::ANI_ATTACK_RIGHT;
 			ani[ANI::ANI_ATTACK_RIGHT]->OnMove();
-			if (hasWeapon == true) {
-				weapon->SetXY(x, y, ANI_ATTACK_RIGHT, ani[ANI::ANI_ATTACK_RIGHT]->GetCurrentBitmapNumber());
-				weapon->ShowBitMap();
-			}
 		}
 
 		if (ani[currentAni]->IsEnd())
@@ -311,19 +305,33 @@ void Player::ShowInformation()
 
 void Player::AddEquipment(Weapon * equipment)
 {
-	this->equipments.push_back(new PlayerEquipment(equipment));
-	
+	this->equipments.push_back(new PlayerEquipment(*equipment));
+
 	if (equipment->GetTag() == "Weapon" || equipment->GetTag() == "TraditionalSword")//是武器
 	{
-		this->weapon = equipment;
+		this->weapon = new PlayerEquipment(*equipment);
 	}
-	
+
 }
 
 void Player::Dead()
 {
 	GameSystem::SetGameOver();//遊戲結束
 	//GameSystem::DeleteGameObject(this);
+}
+
+void Player::ShowWeapon()
+{
+	if (faceLR == FACE_LEFT)
+	{
+		weapon->SetXY(x, y, ANI_ATTACK_LEFT, ani[ANI::ANI_ATTACK_LEFT]->GetCurrentBitmapNumber());
+		weapon->ShowBitMap();
+	}
+	else
+	{
+		weapon->SetXY(x, y, ANI_ATTACK_RIGHT, ani[ANI::ANI_ATTACK_RIGHT]->GetCurrentBitmapNumber());
+		weapon->ShowBitMap();
+	}
 }
 
 void Player::LoadAni()

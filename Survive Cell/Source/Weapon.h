@@ -9,6 +9,7 @@
 
 class Weapon :public Item
 {
+	friend class PlayerEquipment;
 	public:
 		Weapon();
 		Weapon(string tag, int x, int y, int width, int height, int pictureID);
