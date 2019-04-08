@@ -30,6 +30,9 @@ void TraditionalSword::ShowBitMap() {
 
 void TraditionalSword::Picked() {
 	Player* player = GameSystem::GetGameObjectWithTag<Player>("Player");
+	
+	//家佑測試的
+	player->AddEquipment(this);
 
 	//-----------玩家設定-----------------------//
 	player->SetAttackDamage(attackDamage);
@@ -51,7 +54,7 @@ void TraditionalSword::Picked() {
 	}
 
 	//家佑註解掉的
-	//Dead();
+	Dead();
 }
 
 void TraditionalSword::SetXY(int hostX, int hostY, int playerCurrentAni, int  playerAniNumber) {

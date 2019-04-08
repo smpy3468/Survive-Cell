@@ -12,6 +12,7 @@ class Weapon :public Item
 	public:
 		Weapon();
 		Weapon(string tag, int x, int y, int width, int height, int pictureID);
+		int GetAttackDamage();
 
 	protected:
 		int attackDamage;		//§ðÀ»¤O

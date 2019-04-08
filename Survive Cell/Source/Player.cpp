@@ -89,6 +89,11 @@ void Player::SetIsAttack(bool isAttack)
 	this->isAttack = isAttack;
 }
 
+bool Player::HasWeapon()
+{
+	return hasWeapon;
+}
+
 void Player::SetIsGrounded(bool isGrounded)
 {
 	this->isGrounded = isGrounded;
@@ -188,9 +193,10 @@ void Player::Interact()
 			if (i->GetX() > this->x && i->GetX() < this->x + this->width
 				&& i->GetY() > this->y && i->GetY() < this->y + this->height) {
 				static_cast<Item*>(i)->Picked();
+				
 				//彥澤加的
-				equipment = static_cast<Item*>(i);
-				getSword = true;
+				//equipment = static_cast<Item*>(i);
+				hasWeapon = true;	
 			}
 
 		}
@@ -221,9 +227,11 @@ void Player::ShowBitMap()
 		{
 			currentAni = ANI::ANI_ATTACK_LEFT;
 			ani[ANI::ANI_ATTACK_LEFT]->OnMove();
-			if (getSword == true) {
-				equipment->SetXY(x, y, ANI_ATTACK_LEFT, ani[ANI::ANI_ATTACK_LEFT]->GetCurrentBitmapNumber());
-				equipment->ShowBitMap();
+
+			if (hasWeapon)
+			{
+				weapon->SetXY(x, y, ANI_ATTACK_LEFT, ani[ANI::ANI_ATTACK_LEFT]->GetCurrentBitmapNumber());
+				weapon->ShowBitMap();
 			}
 
 		}
@@ -231,9 +239,9 @@ void Player::ShowBitMap()
 		{
 			currentAni = ANI::ANI_ATTACK_RIGHT;
 			ani[ANI::ANI_ATTACK_RIGHT]->OnMove();
-			if (getSword == true) {
-				equipment->SetXY(x, y, ANI_ATTACK_RIGHT, ani[ANI::ANI_ATTACK_RIGHT]->GetCurrentBitmapNumber());
-				equipment->ShowBitMap();
+			if (hasWeapon == true) {
+				weapon->SetXY(x, y, ANI_ATTACK_RIGHT, ani[ANI::ANI_ATTACK_RIGHT]->GetCurrentBitmapNumber());
+				weapon->ShowBitMap();
 			}
 		}
 
@@ -301,9 +309,15 @@ void Player::ShowInformation()
 	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 }
 
-void Player::AddEquipment(Item * equipment)
+void Player::AddEquipment(Weapon * equipment)
 {
-	//this->equipped->push_back(equipment);
+	this->equipments.push_back(new PlayerEquipment(equipment));
+	
+	if (equipment->GetTag() == "Weapon" || equipment->GetTag() == "TraditionalSword")//是武器
+	{
+		this->weapon = equipment;
+	}
+	
 }
 
 void Player::Dead()

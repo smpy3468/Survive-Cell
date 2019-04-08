@@ -7,7 +7,7 @@
 #include "Character.h"
 #include "Item.h"
 #include "Weapon.h"
-#include "Equipped.h"
+#include "PlayerEquipment.h"
 
 class Player :public Character
 {
@@ -21,6 +21,8 @@ public:
 	void SetIsGrounded(bool isGrounded);//設定是否在地上
 	void SetIsJump(bool isJump);//設定是否按下跳躍
 	void SetIsAttack(bool isAttack);//設定是否按下攻擊
+
+	bool HasWeapon();//是否有武器
 	
 	//----------------動作相關---------------------//
 	void Move();//按下按鍵移動
@@ -37,7 +39,7 @@ public:
 	void ShowInformation();//顯示玩家資訊
 	
 	//-------------系統相關------------------//
-	void AddEquipment(Item* equiped);//增加裝備
+	void AddEquipment(Weapon* equiped);//增加裝備
 
 private:
 	bool isMoveLeft;//是否向左移動
@@ -73,9 +75,10 @@ private:
 		ANI_GET_HIT_RIGHT
 	};
 
-	//vector<Equipped*> equipped;//裝備
+	vector<PlayerEquipment*> equipments;//裝備
+	Weapon* weapon;//武器
 
 	//彥澤加的
-	Item* equipment;
-	bool getSword=false;
+	//Item* equipment;
+	bool hasWeapon=false;
 };

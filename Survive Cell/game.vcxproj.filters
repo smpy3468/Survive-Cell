@@ -135,9 +135,6 @@
     <ClCompile Include="Source\Door.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Equipped.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Floor.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
@@ -181,6 +178,9 @@
       <Filter>MyGame</Filter>
     </ClCompile>
     <ClCompile Include="Source\UInterface.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerEquipment.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
   </ItemGroup>
@@ -227,9 +227,6 @@
     <ClInclude Include="Source\Door.h">
       <Filter>MyGame</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Equipped.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Floor.h">
       <Filter>MyGame</Filter>
     </ClInclude>
@@ -273,6 +270,9 @@
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\UInterface.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerEquipment.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>
