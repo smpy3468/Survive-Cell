@@ -4,7 +4,7 @@
 #include "GameSystem.h"
 
 //---------------------------------Constructor------------------------------//
-Effect::Effect(string tag, int x, int y, int width, int height, int pictureID):GameObject(tag, x, y, width, height, pictureID){
+Effect::Effect(string tag, int x, int y, int width, int height):GameObject(tag, x, y, width, height){
 	isHit = 0;
 	currentAni = 0;
 }

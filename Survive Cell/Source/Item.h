@@ -12,6 +12,7 @@ class Item :public GameObject
 public:
 	Item();
 	Item(string tag, int x, int y, int width, int height, int pictureID);
+	Item(string tag, int x, int y, int width, int height);		//沒有pictureID 的 Constructor
 	virtual void Picked();														//被撿起
     virtual void ShowBitMap();													//顯示動畫
 	//virtual void SetXY(int hostX, int hostY, int playerCurrentAni, int  playerAniNumber);	//隨著擁有者移動 設定XY

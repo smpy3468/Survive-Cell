@@ -284,6 +284,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='UnitTest|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <ClCompile Include="Source\PlayerTraditionalSword.cpp" />
     <ClCompile Include="Source\PlayerWeapon.cpp" />
     <ClCompile Include="Source\UInterface.cpp" />
     <ClCompile Include="Source\Item.cpp" />
@@ -337,6 +338,7 @@
     <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\GameSystem.h" />
     <ClInclude Include="Source\gameView.h" />
+    <ClInclude Include="Source\PlayerTradationalSword.h" />
     <ClInclude Include="Source\PlayerWeapon.h" />
     <ClInclude Include="Source\UInterface.h" />
     <ClInclude Include="Source\Item.h" />

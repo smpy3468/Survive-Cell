@@ -15,14 +15,19 @@ public:
 	PlayerEquipment(ItemWeapon rhs);
 	PlayerEquipment* operator=(ItemWeapon rhs);//增加裝備時可直接轉換
 
-	void SetXY(int hostX, int hostY, int playerCurrentAni, int  palyerAniNumber);
-	void ShowBitMap();//顯示圖片
+	void SetX(int x);
+	void SetY(int y);
+
+	virtual void SetXY(int hostX, int hostY, int playerCurrentAni, int  palyerAniNumber);	//
+	virtual void ShowBitMap();//顯示圖片
+
+
 protected:
 	bool IsObjectInRange(GameObject* obj, int right_fix, int left_fix, int up_fix, int down_fix);//判斷動畫是否即擊中
 	void AddAniBitMaps(char* pic[], int aniType, int picCount);					//增加多張動畫圖片
 	void AddAniBitMap(char* pic, int aniType);									//增加動畫圖片
-	virtual void LoadAni();
-
+	void LoadBitMap(char* picAddress);											//載入圖片(CMovingBitamp pic)
+	virtual void LoadAni();														//載入動畫(CAnimation ani)
 
 
 	int currentAni = ANI_IDLE;     //IDLE 動畫
@@ -31,7 +36,6 @@ protected:
 	enum ANI {
 		ANI_IDLE = 0,
 	};
-private:	
 
 	int x, y;
 	int attackDamage;		//攻擊力

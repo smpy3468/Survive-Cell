@@ -1,11 +1,12 @@
 #include"StdAfx.h"
 #include"SwordWave.h"
 
-SwordWave::SwordWave(string tag, int x, int y, int width, int height, int pictureID) :Effect(tag, x, y, width, height, pictureID) {
+SwordWave::SwordWave(string tag, int x, int y, int width, int height) :Effect(tag, x, y, width, height) {
 	tag = "SwordWave";
 	LoadAni();
 	SetBitMapPosition(); 
 	currentAni = ANI_SWORDWAVE_IDLE;
+	LoadBitMap(".\\res\\swordwave_left_0.bmp");
 }
 
 void SwordWave::ShowBitMap(int hostX, int hostY, int hostCurrentAni, int attackAniNumber) {
@@ -51,6 +52,7 @@ void SwordWave::SetXY(int hostX, int hostY, int hostCurrentAni) {
 void SwordWave::LoadAni() {
 	char* aniSwordWave_idle[1] = { ".\\res\\swordwave_left_0.bmp" };
 	AddAniBitMaps(aniSwordWave_idle, ANI_SWORDWAVE_IDLE, 1);
+
 	char* aniSwordWave_left[3] = { ".\\res\\swordwave_left_0.bmp", ".\\res\\swordwave_left_1.bmp", ".\\res\\swordwave_left_2.bmp" };
 	AddAniBitMaps(aniSwordWave_left, ANI_SWORDWAVE_LEFT, 3);
 

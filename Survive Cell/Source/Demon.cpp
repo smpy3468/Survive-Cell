@@ -6,7 +6,7 @@ Demon::Demon() {
 	tag = "Demon";
 }
 
-Demon::Demon(string tag, int x, int y, int width, int height, int pictureID):Monster(tag, x, y, width, height, pictureID) {
+Demon::Demon(string tag, int x, int y, int width, int height):Monster(tag, x, y, width, height) {
 	tag = "Monster";
 	SetDefenseRange(300);
 	SetAttackField(125);
@@ -23,7 +23,9 @@ Demon::Demon(string tag, int x, int y, int width, int height, int pictureID):Mon
 
 	aniSpeed = 5;
 	LoadAni();
-	fire = new Fire("Fire", x, y, 110, 75, IDB_0);
+	LoadBitMap(".\\res\\demon_idle.bmp");
+	fire = new Fire("Fire", x, y, 110, 75);
+	
 }
 
 //-------------------------------------------------------------------------------------------------

@@ -3,7 +3,7 @@
 #include"Effect.h"
 class SwordWave :public Effect {
 	public:
-		SwordWave(string tag, int x, int y, int width, int height, int pictureI);
+		SwordWave(string tag, int x, int y, int width, int height);
 		void ShowBitMap(int hostX, int hostY, int hostCurrentAni, int attackAniNumber)override;	//顯示動畫
 		
 	private:

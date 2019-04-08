@@ -186,6 +186,9 @@
     <ClCompile Include="Source\ItemWeapon.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PlayerTraditionalSword.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h">
@@ -279,6 +282,9 @@
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\ItemWeapon.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerTradationalSword.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>

@@ -4,7 +4,8 @@
 #include "GameSystem.h"
 #include "Player.h"
 #include <vector>
-Fire::Fire(string tag, int x, int y, int width, int height, int pictureID):Effect(tag, x, y, width, height, pictureID) {
+
+Fire::Fire(string tag, int x, int y, int width, int height):Effect(tag, x, y, width, height) {
 	tag = "Fire";
 	LoadAni();
 }

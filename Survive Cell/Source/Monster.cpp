@@ -13,7 +13,7 @@ Monster::Monster()
 }
 
 
-Monster::Monster(string tag, int x, int y, int width, int height, int pictureID) :Character(tag, x, y, width, height, pictureID)
+Monster::Monster(string tag, int x, int y, int width, int height) :Character(tag, x, y, width, height)
 {
 	tag = "Monster";
 	rl = 1;
@@ -127,7 +127,7 @@ void Monster::Dead()
 	//GameSystem::AddGameObject(new Potion("Potion", x + width / 2, y + height, 20, 10, IDB_CELL_GREEN));//產生一個細胞道具
 
 	//if (rand() % 3 >= 1)
-		GameSystem::AddGameObject(new ItemTraditionalSword("TraditionalSword", x + width / 2, y + height, 32, 32, IDB_CELL_GREEN));
+	GameSystem::AddGameObject(new ItemTraditionalSword("TraditionalSword", x + width / 2, y + height, 32, 32));
 	GameSystem::DeleteGameObject(this);
 }
 

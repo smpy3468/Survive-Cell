@@ -1,5 +1,5 @@
 #pragma once
-#include "StdAfx.h"
+
 #include "UInterface.h"
 
 class EquipedSlot :public UInterface {

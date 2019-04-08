@@ -2,17 +2,18 @@
 #include "ItemTraditionalSword.h"
 
 ItemTraditionalSword::ItemTraditionalSword() {
-	tag = "TraditionalSword";
+	tag = "ItemWeapon";
 }
 
 
 
-ItemTraditionalSword::ItemTraditionalSword(string tag, int x, int y, int width, int height, int pictureID) :ItemWeapon(tag, x, y, width, height, pictureID) {
-	tag = "TraditionalSword";
+ItemTraditionalSword::ItemTraditionalSword(string tag, int x, int y, int width, int height) :ItemWeapon(tag, x, y, width, height) {
+	tag = "ItemWeapon";
 	attackDamage = 100;
 	attackRange = 100;
 	defense = 2;
 	LoadAni();
+	LoadBitMap(".\\res\\sword_01d.bmp");
 }
 
 

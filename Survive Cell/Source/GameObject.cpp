@@ -25,6 +25,16 @@ GameObject::GameObject(string tag, int x, int y, int width, int height, int pict
 	this->LoadBitMap(pictureID);//載入圖片
 }
 
+GameObject::GameObject(string tag, int x, int y, int width, int height)  //沒有pictureID的Contructor
+{
+	this->tag = tag;
+	this->x = x;
+	this->y = y;
+	this->width = width;
+	this->height = height;
+	//this->LoadBitMap(pictureID);//載入圖片
+}
+
 string GameObject::GetTag()
 {
 	return tag;

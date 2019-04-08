@@ -4,7 +4,7 @@
 #include"Player.h"
 class Fire :public Effect {
 	public:
-		Fire(string tag, int x, int y, int width, int height, int pictureID);		//Constructor
+		Fire(string tag, int x, int y, int width, int height);		//Constructor
 		void ShowBitMap(int hostX, int hostY,  int hostCurrentAni, int attackAniNumber)override;						//顯示動畫(有條件)
 		
 

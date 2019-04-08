@@ -188,7 +188,7 @@ void Player::Interact()
 {
 	for (auto& i : GameSystem::GetAllGameObject())//對物件互動
 	{
-		if (i->GetTag() == "Item" || i->GetTag() == "Potion" || i->GetTag() == "TraditionalSword")//是物品
+		if (i->GetTag() == "Item" || i->GetTag() == "Potion" || i->GetTag() == "ItemWeapon")//是物品
 		{
 			if (i->GetX() > this->x && i->GetX() < this->x + this->width
 				&& i->GetY() > this->y && i->GetY() < this->y + this->height) {
@@ -307,7 +307,7 @@ void Player::AddEquipment(ItemWeapon * equipment)
 {
 	this->equipments.push_back(new PlayerEquipment(*equipment));
 
-	if (equipment->GetTag() == "Weapon" || equipment->GetTag() == "TraditionalSword")//是武器
+	if (equipment->GetTag() == "ItemWeapon")//是武器
 	{
 		this->weapon = new PlayerEquipment(*equipment);
 	}

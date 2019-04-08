@@ -3,11 +3,11 @@
 
 ItemWeapon::ItemWeapon()
 {
-	tag = "Weapon";
+	tag = "ItemWeapon";
 }
 
-ItemWeapon::ItemWeapon(string tag, int x, int y, int width, int height, int pictureID):Item(tag, x, y, width, height, pictureID){
-	tag = "Weapon";
+ItemWeapon::ItemWeapon(string tag, int x, int y, int width, int height):Item(tag, x, y, width, height){
+	tag = "ItemWeapon";
 }
 
 int ItemWeapon::GetAttackDamage()

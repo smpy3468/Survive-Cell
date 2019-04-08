@@ -20,6 +20,16 @@ PlayerEquipment* PlayerEquipment::operator=(ItemWeapon rhs)
 	return this;
 }
 
+void PlayerEquipment::SetX(int x)
+{
+	this->x = x;
+}
+
+void PlayerEquipment::SetY(int y)
+{
+	this->y = y;
+}
+
 void PlayerEquipment::SetXY(int hostX, int hostY, int playerCurrentAni, int  playerAniNumber) {
 
 	this->x = hostX;
@@ -36,6 +46,7 @@ void PlayerEquipment::ShowBitMap()
 //-----------------------------PROTECTED-----------------------------------//
 bool PlayerEquipment::IsObjectInRange(GameObject* obj, int right_fix, int left_fix, int up_fix, int down_fix) {
 	Player* player = GameSystem::GetGameObjectWithTag<Player>("Player");
+
 	int width = player->GetWidth(), height = player->GetHeight();
 
 	int RIGHT_EDGE = x + player->GetWidth() + right_fix, LEFT_EDGE = x - left_fix,
@@ -71,6 +82,11 @@ void PlayerEquipment::AddAniBitMap(char* pic, int aniType)
 		ani.push_back(new CAnimation);//增加大小
 
 	ani[aniType]->AddBitmap(pic, RGB(255, 255, 255));
+}
+
+void PlayerEquipment::LoadBitMap(char* picAddress)
+{
+	pic.LoadBitmap(picAddress);
 }
 
 void PlayerEquipment::LoadAni() {}

@@ -13,6 +13,7 @@ class Character :public GameObject
 public:
 	Character();
 	Character::Character(string tag, int x, int y, int width, int height, int pictureID);
+	Character::Character(string tag, int x, int y, int width, int height); //No PictureID 的 Contructor
 
 	void SetMaxHP(int maxHp);//設定最大血量
 	void SetHP(int hp);//設定目前血量

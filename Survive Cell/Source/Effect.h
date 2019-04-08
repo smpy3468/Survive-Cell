@@ -5,7 +5,7 @@
 
 class Effect :public GameObject{
 public:
-	Effect(string tag, int x, int y, int width, int height, int pictureID);
+	Effect(string tag, int x, int y, int width, int height);
 	
 	void SetHit(int hit);														//設定是否有打中(每一組動畫只能造成一次傷害)
 

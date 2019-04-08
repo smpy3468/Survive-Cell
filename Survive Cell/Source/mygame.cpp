@@ -90,8 +90,8 @@ namespace game_framework {
 		GameSystem::Init();
 
 		GameSystem::AddGameObject((new Player("Player", SIZE_X / 2, SIZE_Y / 2 - 100, 50, 80, IDB_PLAYER)));
-		GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 + 100, SIZE_Y / 2 - 133, 149, 133, IDB_0)));
-		GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 -150, SIZE_Y / 2 - 133, 149, 133, IDB_0)));
+		GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 + 100, SIZE_Y / 2 - 133, 149, 133)));
+		GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 -150, SIZE_Y / 2 - 133, 149, 133)));
 
 		GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y / 2 + 80, Map::WORLD_SIZE_X / 2, 100, IDB_GROUND));
 

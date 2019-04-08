@@ -8,7 +8,7 @@
 class ItemTraditionalSword:public ItemWeapon {
 	public:
 		ItemTraditionalSword();
-		ItemTraditionalSword(string tag, int x, int y, int width, int height, int pictureID);
+		ItemTraditionalSword(string tag, int x, int y, int width, int height);
 	private:
 		void LoadAni()override;							//載入動畫
 		//void ShowBitMap()override;						//顯示動畫
@@ -18,9 +18,5 @@ class ItemTraditionalSword:public ItemWeapon {
 		//TraditionalSword GetThisEquipment(); //提供Class:Equipment用
 		
 		//SwordWave* wave = new SwordWave("SwordWave", x, y, 77, 70, IDB_0);
-		enum ANI {
-			ANI_IDLE = 0,
-			ANI_LEFT,
-			ANI_RIGHT
-		};
+		
 };

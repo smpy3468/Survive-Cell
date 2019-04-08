@@ -14,6 +14,12 @@ Character::Character(string tag, int x, int y, int width, int height, int pictur
 	isGetHit = false;
 }
 
+Character::Character(string tag, int x, int y, int width, int height) : GameObject(tag, x, y, width, height) //No PictureID ªº Contructor
+{
+	tag = "Character";
+	isGetHit = false;
+}
+
 void Character::SetMaxHP(int maxHp)
 {
 	this->maxHP = maxHp;
