@@ -38,7 +38,6 @@ class UInterface{
 		void LoadBitMap(int pictureID);										//加入UI圖片-方法1
 		void LoadBitMap(char* picAddress);									//加入UI圖片-方法
 		
-
 		virtual void LoadAni();												//載入動畫
 		
 };

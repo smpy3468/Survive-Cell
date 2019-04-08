@@ -184,6 +184,8 @@ void Character::AddAniBitMap(char* pic, int aniType, int aniSpeed)
 	while ((int)ani.size() <= aniType)//vector的大小不夠大
 		ani.push_back(new CAnimation(aniSpeed));//增加大小
 
+	ani[aniType]->SetDelayCount(aniSpeed);//設定動畫速度
+
 	ani[aniType]->AddBitmap(pic, RGB(255, 255, 255));
 }
 

@@ -336,11 +336,11 @@ void Player::LoadAni()
 
 	//---------------¥ª§ð
 	char* aniAttackLeft[3] = { ".\\res\\player_attack_left_0.bmp", ".\\res\\player_attack_left_1.bmp", ".\\res\\player_attack_left_2.bmp" };
-	AddAniBitMaps(aniAttackLeft, ANI::ANI_ATTACK_LEFT, 3, 1);
+	AddAniBitMaps(aniAttackLeft, ANI::ANI_ATTACK_LEFT, 3, 5);
 
 	//---------------¥k§ð
 	char* aniAttackRight[3] = { ".\\res\\player_attack_right_0.bmp", ".\\res\\player_attack_right_1.bmp", ".\\res\\player_attack_right_2.bmp" };
-	AddAniBitMaps(aniAttackRight, ANI::ANI_ATTACK_RIGHT, 3, 1);
+	AddAniBitMaps(aniAttackRight, ANI::ANI_ATTACK_RIGHT, 3, 5);
 
 	//---------------¥ª³QÀ»
 	char* aniGetHitLeft = ".\\res\\player_get_hit_left.bmp";

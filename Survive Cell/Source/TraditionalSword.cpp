@@ -49,7 +49,9 @@ void TraditionalSword::Picked() {
 		}
 		//還有後續
 	}
-	Dead();
+
+	//家佑註解掉的
+	//Dead();
 }
 
 void TraditionalSword::SetXY(int hostX, int hostY, int playerCurrentAni, int  playerAniNumber) {
