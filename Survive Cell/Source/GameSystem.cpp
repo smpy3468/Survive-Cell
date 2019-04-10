@@ -125,8 +125,10 @@ void GameSystem::Load()
 
 void GameSystem::Init()
 {
-	isGameOver = false;
-	DeleteAllGameObject();
+	isGameOver = false;//重置遊戲狀態
+	Map::SetSX(0);
+	Map::SetSY(0);
+	DeleteAllGameObject();//刪除所有物件
 }
 
 void GameSystem::PlayAudio(AUDIO id)
