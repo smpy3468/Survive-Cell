@@ -39,7 +39,19 @@ public:
 	void ShowInformation();//顯示玩家資訊
 	
 	//-------------系統相關------------------//
-	void AddEquipment(ItemWeapon* equiped);//增加裝備
+	template <class T> void AddEquipment(T* equipment)//增加裝備
+	{
+		this->equipments.push_back(equipment);
+
+		if (!this->hasWeapon)//沒有武器
+		{
+			if (equipment->GetTag() == "PlayerWeapon")//是武器
+			{
+				this->weapon = equipments[equipments.size() - 1];
+				hasWeapon = true;//有武器了
+			}
+		}
+	}
 
 private:
 	bool isMoveLeft;//是否向左移動

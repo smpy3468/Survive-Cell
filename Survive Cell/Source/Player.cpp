@@ -4,6 +4,7 @@
 #include "Monster.h"
 #include "Map.h"
 #include "Item.h"
+#include "PlayerTradationalSword.h"
 
 Player::Player()
 {
@@ -193,10 +194,6 @@ void Player::Interact()
 			if (i->GetX() > this->x && i->GetX() < this->x + this->width
 				&& i->GetY() > this->y && i->GetY() < this->y + this->height) {
 				static_cast<Item*>(i)->Picked();
-
-				//彥澤加的
-				//equipment = static_cast<Item*>(i);
-				hasWeapon = true;
 			}
 
 		}
@@ -303,16 +300,27 @@ void Player::ShowInformation()
 	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 }
 
-void Player::AddEquipment(ItemWeapon * equipment)
+/*void Player::AddEquipment(int equipmentID, ItemWeapon* equipment)
 {
-	this->equipments.push_back(new PlayerEquipment(*equipment));
-
-	if (equipment->GetTag() == "ItemWeapon")//是武器
+	switch (equipmentID)
 	{
-		this->weapon = new PlayerEquipment(*equipment);
+		case GameSystem::EQUIPMENT_ID::EQUIPMENT_TRADITIONAL_SWORD:
+			this->equipments.push_back(new PlayerTraditionalSword(equipment));
+		break;
+		
+		default:
+		break;
 	}
 
-}
+	if (!hasWeapon)//還沒有武器
+	{
+		if (equipment->GetTag() == "ItemWeapon")//是武器
+		{
+			this->weapon = new PlayerEquipment(equipment);//此處有問題
+		}
+	}
+
+}*/
 
 void Player::Dead()
 {

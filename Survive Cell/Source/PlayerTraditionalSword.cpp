@@ -3,11 +3,12 @@
 
 PlayerTraditionalSword::PlayerTraditionalSword() 
 {
-
+	
 }
 
-PlayerTraditionalSword::PlayerTraditionalSword(ItemWeapon rhs):PlayerWeapon(rhs)
+PlayerTraditionalSword::PlayerTraditionalSword(ItemWeapon* rhs):PlayerWeapon(rhs)
 {
+	LoadAni();
 	wave = new SwordWave("SwordWave", x, y, 77, 70);
 	haveEffect = true;
 }
@@ -23,6 +24,7 @@ void PlayerTraditionalSword::SetXY(int hostX, int hostY, int playerCurrentAni, i
 void PlayerTraditionalSword::ShowBitMap()
 {
 	wave->ShowBitMap(x, y, playerCurrentAni, playerAniNumber);  //int hostX, int hostY, int hostCurrentAni, int attackAniNumber
+	//SetXY(player->GetX(), player->GetY(), playerCurrentAni, playerAniNumber);
 	ani[currentAni]->OnShow();
 }
 

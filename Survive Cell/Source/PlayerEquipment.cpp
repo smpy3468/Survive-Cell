@@ -3,20 +3,21 @@
 
 PlayerEquipment::PlayerEquipment()
 {
-	attackDamage = 0;
+	tag = "PlayerEquipment";
 }
 
-PlayerEquipment::PlayerEquipment(ItemWeapon rhs)
+PlayerEquipment::PlayerEquipment(ItemWeapon* rhs):PlayerEquipment()
 {
+	tag = "PlayerEquipment";
 	operator=(rhs);
 }
 
-PlayerEquipment* PlayerEquipment::operator=(ItemWeapon rhs)
+PlayerEquipment* PlayerEquipment::operator=(ItemWeapon* rhs)
 {
-	attackDamage = rhs.GetAttackDamage();
-	attackRange = rhs.GetAttackRange();
-	defense = rhs.GetDefense();
-	pic = rhs.objectPic;
+	attackDamage = rhs->GetAttackDamage();
+	attackRange = rhs->GetAttackRange();
+	defense = rhs->GetDefense();
+	pic = rhs->objectPic;
 	return this;
 }
 
@@ -28,6 +29,11 @@ void PlayerEquipment::SetX(int x)
 void PlayerEquipment::SetY(int y)
 {
 	this->y = y;
+}
+
+string PlayerEquipment::GetTag()
+{
+	return tag;
 }
 
 void PlayerEquipment::SetXY(int hostX, int hostY, int playerCurrentAni, int  playerAniNumber) {

@@ -1,5 +1,6 @@
 #include"StdAfx.h"
 #include "ItemTraditionalSword.h"
+#include "PlayerTradationalSword.h"
 
 ItemTraditionalSword::ItemTraditionalSword() {
 	tag = "ItemWeapon";
@@ -31,9 +32,9 @@ void ItemTraditionalSword::LoadAni() {
 
 void ItemTraditionalSword::Picked() {
 	Player* player = GameSystem::GetGameObjectWithTag<Player>("Player");
-	
+
 	//家佑測試的
-	player->AddEquipment(this);
+	player->AddEquipment<PlayerTraditionalSword>(new PlayerTraditionalSword(this));
 
 	//-----------玩家設定-----------------------//
 	player->SetAttackDamage(attackDamage);
@@ -43,18 +44,17 @@ void ItemTraditionalSword::Picked() {
 	//--------------UI設定--------------------------//
 	vector<EquipedSlot*> equipedSlots = GameSystem::GetUInterfacesWithTag<EquipedSlot>("EquipedSlot");
 
-	
-	for (auto& i: equipedSlots)
+
+	for (auto& i : equipedSlots)
 	{
 		if (i->GetIsEquipmentPicSet() == false)
 		{
-			i->SetEquipmentPicture(".\\res\\sword_01d.bmp",i->GetX()+15, i->GetY()+8);
+			i->SetEquipmentPicture(".\\res\\sword_01d.bmp", i->GetX() + 15, i->GetY() + 8);
 			break;
 		}
 		//還有後續
 	}
 
-	//家佑註解掉的
 	Dead();
 }
 

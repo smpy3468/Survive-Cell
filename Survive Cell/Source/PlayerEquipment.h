@@ -12,11 +12,13 @@ class PlayerEquipment
 {
 public:
 	PlayerEquipment();
-	PlayerEquipment(ItemWeapon rhs);
-	PlayerEquipment* operator=(ItemWeapon rhs);//增加裝備時可直接轉換
+	PlayerEquipment(ItemWeapon* rhs);
+	PlayerEquipment* operator=(ItemWeapon* rhs);//增加裝備時可直接轉換
 
 	void SetX(int x);
 	void SetY(int y);
+
+	string GetTag();
 
 	virtual void SetXY(int hostX, int hostY, int playerCurrentAni, int  palyerAniNumber);	//
 	virtual void ShowBitMap();//顯示圖片
@@ -29,7 +31,6 @@ protected:
 	void LoadBitMap(char* picAddress);											//載入圖片(CMovingBitamp pic)
 	virtual void LoadAni();														//載入動畫(CAnimation ani)
 
-
 	int currentAni = ANI_IDLE;     //IDLE 動畫
 	vector<CAnimation*> ani;//動畫
 
@@ -37,6 +38,7 @@ protected:
 		ANI_IDLE = 0,
 	};
 
+	string tag;				//
 	int x, y;
 	int attackDamage;		//攻擊力
 	int attackRange;		//攻擊範圍

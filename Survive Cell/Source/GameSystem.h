@@ -119,6 +119,14 @@ public:
 		LAYER_MONSTER,
 		LAYER_PLAYER
 	};
+
+	//------------裝備ID------------//
+	enum EQUIPMENT_ID
+	{
+		EQUIPMENT_WEAPON,
+		EQUIPMENT_TRADITIONAL_SWORD
+	};
+
 private:
 	static vector<GameObject*> gameObjectList;//存放所有遊戲物件的列表
 	static vector<UInterface*> gameUIList;//存放所有遊戲UI物件列表
