@@ -329,7 +329,6 @@
     <ClInclude Include="Source\Demon.h" />
     <ClInclude Include="Source\Door.h" />
     <ClInclude Include="Source\Effect.h" />
-    <ClInclude Include="Source\PlayerEquipment.h" />
     <ClInclude Include="Source\EquipedSlot.h" />
     <ClInclude Include="Source\Fire.h" />
     <ClInclude Include="Source\Floor.h" />
@@ -339,6 +338,7 @@
     <ClInclude Include="Source\GameSystem.h" />
     <ClInclude Include="Source\gameView.h" />
     <ClInclude Include="Source\PlayerTradationalSword.h" />
+    <ClInclude Include="Source\PlayerEquipment.h" />
     <ClInclude Include="Source\PlayerWeapon.h" />
     <ClInclude Include="Source\UInterface.h" />
     <ClInclude Include="Source\Item.h" />

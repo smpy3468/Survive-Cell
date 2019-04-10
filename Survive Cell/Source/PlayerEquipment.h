@@ -43,5 +43,6 @@ protected:
 	int attackRange;		//§ðÀ»½d³ò
 	int defense;			//¨¾¿m¤O
 	CMovingBitmap pic;
-	Player* player = GameSystem::GetGameObjectWithTag<Player>("Player");
+	Player* player= GameSystem::GetGameObjectWithTag<Player>("Player"); 
+
 };
