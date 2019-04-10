@@ -272,9 +272,6 @@
     <ClInclude Include="Source\UInterface.h">
       <Filter>MyGame</Filter>
     </ClInclude>
-    <ClInclude Include="Source\PlayerEquipment.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
     <ClInclude Include="Source\PlayerWeapon.h">
       <Filter>MyGame</Filter>
     </ClInclude>
@@ -285,6 +282,9 @@
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\PlayerTradationalSword.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerEquipment.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>

@@ -57,11 +57,33 @@ void GameSystem::DeleteGameObject(GameObject * obj)
 	}
 }
 
+void GameSystem::DeleteUInterface(UInterface* ui)
+{
+	for (auto i = gameUIList.begin(); i != gameUIList.end(); i++)
+	{
+		if (*i == ui)
+		{
+			gameUIList.erase(i);
+			return;
+		}
+	}
+}
+
 void GameSystem::DeleteAllGameObject()
 {
 	while (!gameObjectList.empty())
 	{
 		DeleteGameObject(gameObjectList[0]);
+	}
+}
+
+
+
+void GameSystem::DeleteAllUI()
+{
+	while (!gameUIList.empty())
+	{
+		DeleteUInterface(gameUIList[0]);
 	}
 }
 
@@ -129,6 +151,9 @@ void GameSystem::Init()
 	Map::SetSX(0);
 	Map::SetSY(0);
 	DeleteAllGameObject();//刪除所有物件
+	isGameOver = false;
+	DeleteAllGameObject();
+	DeleteAllUI();
 }
 
 void GameSystem::PlayAudio(AUDIO id)

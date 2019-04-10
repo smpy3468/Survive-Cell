@@ -45,7 +45,8 @@ public:
 protected:
 	static const int LEFT = 1, RIGHT = 2, STANDBY = 0, ATTACK = 2; //怪物的狀態
 	int status;													   //
-	
+	Player* player = GameSystem::GetGameObjectWithTag<Player>("Player");				//常用到就先記錄下來
+
 	int currentAni = 0;                                            //現在執行得動畫
 	enum ANI
 	{
