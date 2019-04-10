@@ -11,6 +11,8 @@ public:
 	void ShowBitMap()override;
 private:
 	void LoadAni()override;
+	
+
 	SwordWave* wave;
 	enum ANI {
 		ANI_IDLE = 0,

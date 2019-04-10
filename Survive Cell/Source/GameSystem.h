@@ -28,7 +28,9 @@ public:
 	static void AddGameObject(GameObject* obj);//加入遊戲物件
 	static void AddUserInterface(UInterface* ui); //加入UI物件
 	static void DeleteGameObject(GameObject* obj);//刪除遊戲物件
-	static void DeleteAllGameObject();//刪除所有物件
+	static void DeleteUInterface(UInterface* ui);//刪除UI物件
+	static void DeleteAllGameObject();//刪除所有遊戲物件
+	static void DeleteAllUI();//刪除所有UI物件
 	
 	template <class T> static T* GetGameObjectWithTag(string tag)//取得特定標籤的遊戲物件(單一個)
 	{

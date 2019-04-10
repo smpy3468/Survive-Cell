@@ -1,11 +1,10 @@
 #pragma once
 
 //PlayerEquipment
-//主角穿著的裝備
+//主角穿著的裝備#include "GameSystem.h"
 #include "Player.h"
-#include "Item.h"
 #include "ItemWeapon.h"
-#include "GameSystem.h"
+
 
 
 class PlayerEquipment
@@ -29,6 +28,7 @@ protected:
 	void AddAniBitMaps(char* pic[], int aniType, int picCount);					//增加多張動畫圖片
 	void AddAniBitMap(char* pic, int aniType);									//增加動畫圖片
 	void LoadBitMap(char* picAddress);											//載入圖片(CMovingBitamp pic)
+	void SetBitMapPosition();									//設定動畫位置
 	virtual void LoadAni();														//載入動畫(CAnimation ani)
 
 	int currentAni = ANI_IDLE;     //IDLE 動畫
@@ -44,4 +44,5 @@ protected:
 	int attackRange;		//攻擊範圍
 	int defense;			//防禦力
 	CMovingBitmap pic;
+	//	Player* player= GameSystem::GetGameObjectWithTag<Player>("Player"); //Player為宣告的識別向//
 };
