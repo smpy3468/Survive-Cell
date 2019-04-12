@@ -2,10 +2,9 @@
 
 //PlayerEquipment
 //主角穿著的裝備#include "GameSystem.h"
-#include "Player.h"
 #include "ItemWeapon.h"
 
-
+class Player;
 
 class PlayerEquipment
 {
@@ -24,7 +23,7 @@ public:
 
 	virtual void SetXY(int hostX, int hostY, int playerCurrentAni, int  palyerAniNumber);	//
 	virtual void ShowBitMap();//顯示圖片
-
+	
 
 protected:
 	bool IsObjectInRange(GameObject* obj, int right_fix, int left_fix, int up_fix, int down_fix);//判斷動畫是否即擊中
@@ -47,5 +46,6 @@ protected:
 	int attackRange;		//攻擊範圍
 	int defense;			//防禦力
 	CMovingBitmap pic;
-	Player* player= GameSystem::GetGameObjectWithTag<Player>("Player"); //Player為宣告的識別向//
+	Player* player= GameSystem::GetGameObjectWithTag<Player>("Player"); 
+
 };

@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "PlayerEquipment.h"
+#include "Player.h"
 
 PlayerEquipment::PlayerEquipment()
 {
@@ -11,13 +12,6 @@ PlayerEquipment::PlayerEquipment(ItemWeapon* rhs):PlayerEquipment()
 	//player = GameSystem::GetGameObjectWithTag<Player>("Player");				//常用到就先記錄下來
 	tag = "PlayerEquipment";
 	operator=(rhs);
-	//this-> x = player->GetX();
-	//this-> y = player->GetY();
-
-	/*attackDamage = rhs->GetAttackDamage();
-	attackRange = rhs->GetAttackRange();
-	defense = rhs->GetDefense();
-	pic = rhs->objectPic;*/
 }
 
 PlayerEquipment* PlayerEquipment::operator=(ItemWeapon* rhs)
@@ -74,7 +68,6 @@ void PlayerEquipment::ShowBitMap()
 
 //-----------------------------PROTECTED-----------------------------------//
 bool PlayerEquipment::IsObjectInRange(GameObject* obj, int right_fix, int left_fix, int up_fix, int down_fix) {
-	Player* player = GameSystem::GetGameObjectWithTag<Player>("Player"); //如果.h有宣告過了就可以註解
 
 	int width = player->GetWidth(), height = player->GetHeight();
 
