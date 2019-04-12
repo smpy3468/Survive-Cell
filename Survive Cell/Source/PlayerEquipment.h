@@ -18,6 +18,9 @@ public:
 	void SetY(int y);
 
 	string GetTag();
+	int GetAttackDamage();
+	int GetAttackRange();
+	int GetDefense();
 
 	virtual void SetXY(int hostX, int hostY, int playerCurrentAni, int  palyerAniNumber);	//
 	virtual void ShowBitMap();//顯示圖片

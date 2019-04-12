@@ -195,7 +195,6 @@ void Player::Interact()
 				&& i->GetY() > this->y && i->GetY() < this->y + this->height) {
 				static_cast<Item*>(i)->Picked();
 			}
-
 		}
 	}
 }
@@ -307,7 +306,7 @@ void Player::ShowInformation()
 		case GameSystem::EQUIPMENT_ID::EQUIPMENT_TRADITIONAL_SWORD:
 			this->equipments.push_back(new PlayerTraditionalSword(equipment));
 		break;
-		
+
 		default:
 		break;
 	}
@@ -321,6 +320,16 @@ void Player::ShowInformation()
 	}
 
 }*/
+
+void Player::CalculateAbility(PlayerEquipment* equipment)
+{
+	//攻擊力與防禦累加上去
+	this->attackDamage += equipment->GetAttackDamage();
+	this->defense += equipment->GetDefense();
+
+	//攻擊距離使用武器的攻擊距離
+	this->attackRange = equipment->GetAttackRange();
+}
 
 void Player::Dead()
 {

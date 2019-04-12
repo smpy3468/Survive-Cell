@@ -44,6 +44,21 @@ string PlayerEquipment::GetTag()
 	return tag;
 }
 
+int PlayerEquipment::GetAttackDamage()
+{
+	return attackDamage;
+}
+
+int PlayerEquipment::GetAttackRange()
+{
+	return attackRange;
+}
+
+int PlayerEquipment::GetDefense()
+{
+	return defense;
+}
+
 void PlayerEquipment::SetXY(int hostX, int hostY, int playerCurrentAni, int  playerAniNumber) {
 
 	this->x = hostX;
