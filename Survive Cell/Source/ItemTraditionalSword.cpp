@@ -36,11 +36,6 @@ void ItemTraditionalSword::Picked() {
 	//家佑測試的
 	player->AddEquipment<PlayerTraditionalSword>(new PlayerTraditionalSword(this));
 
-	//-----------玩家設定-----------------------//
-	player->SetAttackDamage(attackDamage);
-	player->SetAttackRange(attackRange);
-	player->SetDefense(defense);
-
 	//--------------UI設定--------------------------//
 	vector<EquipedSlot*> equipedSlots = GameSystem::GetUInterfacesWithTag<EquipedSlot>("EquipedSlot");
 

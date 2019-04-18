@@ -50,6 +50,8 @@ public:
 				hasWeapon = true;//有武器了
 			}
 		}
+
+		CalculateAbility(equipment);//計算能力值
 	}
 
 private:
@@ -63,6 +65,8 @@ private:
 	int fallDisplacement;//下降位移量(移動到沒有地板的位置會用到)
 	int originJumpDisplacement, jumpDisplacement;//跳躍位移量
 	bool isGrounded;//是否在地上
+
+	void CalculateAbility(PlayerEquipment* equipment);//計算能力值
 
 	void Dead()override;//死亡時呼叫
 
