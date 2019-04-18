@@ -69,6 +69,7 @@
 #include "Fire.h"
 #include "Demon.h"
 #include "EquipedSlot.h"
+#include "UIBlood.h"
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class為遊戲的遊戲開頭畫面物件
@@ -102,7 +103,7 @@ namespace game_framework {
 		
 		GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 2-230, SIZE_Y / 2+175, 64, 60));
 		GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 2-310, SIZE_Y / 2+175, 64, 60));
-		
+		GameSystem::AddUserInterface(new UIBlood("UIBlood", 0, 0, 400, 30));
 		Map::SetStaticObject();
 
 

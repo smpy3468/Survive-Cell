@@ -15,7 +15,7 @@ Player::Player(string tag, int x, int y, int width, int height, int pictureID) :
 {
 	tag = "Player";
 
-	maxHP = 10;
+	maxHP = 100;
 	HP = maxHP;
 
 	originMoveSpeed = 5;
@@ -292,7 +292,7 @@ void Player::ShowInformation()
 	sprintf(str, "HP:%d\nAttack:%d\nAttack Speed:%d\nAttackRange:%d\nMoveSpeed:%d\nDefense:%d\n"
 		, GetHP(), GetAttackDamage(), GetAttackSpeed(), GetAttackRange(), GetMoveSpeed(), GetDefense());
 
-	CRect rect = { 0,0,SIZE_X,SIZE_Y };//設定矩形左、上、右、下的座標
+	CRect rect = { 0,30,SIZE_X,SIZE_Y };//設定矩形左、上、右、下的座標
 	pDC->DrawText(str, rect, DT_LEFT | DT_WORDBREAK);//靠左對齊，可換行
 
 	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
