@@ -50,6 +50,14 @@ Player::Player(string tag, int x, int y, int width, int height) :Character(tag, 
 	LoadAni();
 }
 
+void Player::AdjustPositionOnBegin()
+{
+	while (Map::HasObject(x, y + this->height + 1))
+	{
+		this->y--;
+	}
+}
+
 void Player::Move(int dx, int dy)
 {
 	if ((dx > 0 && CanMoveRight(moveSpeed)) || (dx < 0 && CanMoveLeft(moveSpeed)))//x位移量往右而且右邊沒東西 或者 x位移量往左而且左邊沒東西

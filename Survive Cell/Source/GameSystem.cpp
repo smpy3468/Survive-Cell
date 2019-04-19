@@ -2,6 +2,7 @@
 #include "audio.h"
 #include "GameSystem.h"
 #include "Monster.h"
+#include "Floor.h"
 
 vector<GameObject*> GameSystem::gameObjectList;//初始化物件列表
 vector<UInterface*> GameSystem::gameUIList;//初始化物件列表
@@ -84,6 +85,17 @@ void GameSystem::DeleteAllUI()
 	while (!gameUIList.empty())
 	{
 		DeleteUInterface(gameUIList[0]);
+	}
+}
+
+void GameSystem::CreateFloor(int x, int y, int width, int height)
+{
+	for (int currentY = y; currentY < y + height; currentY += FLOOR_HEIGHT)
+	{
+		for (int currentX = x; currentX < x + width; currentX += FLOOR_WIDTH)
+		{
+			AddGameObject(new Floor("Floor", currentX, currentY, FLOOR_WIDTH, FLOOR_HEIGHT));
+		}
 	}
 }
 

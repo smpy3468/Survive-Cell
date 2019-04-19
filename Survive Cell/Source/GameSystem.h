@@ -31,7 +31,9 @@ public:
 	static void DeleteUInterface(UInterface* ui);//刪除UI物件
 	static void DeleteAllGameObject();//刪除所有遊戲物件
 	static void DeleteAllUI();//刪除所有UI物件
-	
+
+	static void CreateFloor(int x, int y, int width, int height);//拼地板，傳入座標與寬高
+
 	template <class T> static T* GetGameObjectWithTag(string tag)//取得特定標籤的遊戲物件(單一個)
 	{
 		for (auto& i : gameObjectList)
@@ -48,7 +50,7 @@ public:
 	{
 		vector<T*> targetObjects;
 		for (auto& i : gameObjectList)
-		{	
+		{
 			if (typeid(T) == typeid(GameObject))
 			{
 
@@ -72,7 +74,7 @@ public:
 				return static_cast<T*>(i);
 			}
 		}
-				
+
 		return NULL;
 	}
 
@@ -81,7 +83,7 @@ public:
 		vector<T*> targetUIs;
 		for (auto& i : gameUIList)
 		{
-			
+
 			if (typeid(T) == typeid(UInterface))
 			{
 
@@ -98,7 +100,7 @@ public:
 	static void SetAllObjectBitMapPosition();//設定所有物件的圖片位置
 	static void ShowAllObject();//顯示所有物件
 	static void ShowAllUI();//顯示所有UI物件
-	
+
 	//------------音訊相關-------------//
 	enum AUDIO
 	{
@@ -132,6 +134,8 @@ public:
 private:
 	static vector<GameObject*> gameObjectList;//存放所有遊戲物件的列表
 	static vector<UInterface*> gameUIList;//存放所有遊戲UI物件列表
+
+	const static int FLOOR_WIDTH = 80, FLOOR_HEIGHT = 50;
 
 	static bool isGameOver;//遊戲是否結束
 };

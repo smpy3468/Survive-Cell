@@ -14,6 +14,8 @@ public:
 	Player();
 	Player(string tag, int x, int y, int width, int height);
 
+	void AdjustPositionOnBegin();//載入遊戲時微調玩家位置，避免玩家跟地板重疊
+
 	//----------------按鍵相關---------------------//
 	void SetIsMoveLeft(bool isMoveLeft);//設定是否向左移動
 	void SetIsMoveRight(bool isMoveRight);//設定是否向右移動

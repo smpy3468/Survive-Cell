@@ -92,17 +92,18 @@ namespace game_framework {
 
 		GameSystem::AddGameObject((new Player("Player", SIZE_X / 2, SIZE_Y / 2 - 100, 50, 80)));
 		GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 + 100, SIZE_Y / 2 - 133, 149, 133)));
-		GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 -150, SIZE_Y / 2 - 133, 149, 133)));
+		GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 - 150, SIZE_Y / 2 - 133, 149, 133)));
 
 		GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y / 2 + 80, Map::WORLD_SIZE_X, 100, IDB_GROUND));
 
 		for (int i = 0; i < 3; i++)
 		{
-			GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 + 150 * i, SIZE_Y / 2 - 80 * i, 80, 50));
+			//GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 + 150 * i, SIZE_Y / 2 - 80 * i, 80, 50));
+			GameSystem::CreateFloor(SIZE_X / 2, SIZE_Y / 2 - 50, 300, 100);
 		}
-		
-		GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 2-230, SIZE_Y / 2+175, 64, 60));
-		GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 2-310, SIZE_Y / 2+175, 64, 60));
+
+		GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 2 - 230, SIZE_Y / 2 + 175, 64, 60));
+		GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 2 - 310, SIZE_Y / 2 + 175, 64, 60));
 		GameSystem::AddUserInterface(new UIBlood("UIBlood", 0, 0, 400, 30));
 		Map::SetStaticObject();
 
@@ -170,14 +171,14 @@ namespace game_framework {
 		pDC->SetTextColor(RGB(0, 0, 255));
 
 		char str[80];								// Demo 數字對字串的轉換
-		sprintf(str, "你已經死了 ! \n畫面有夠藍黑");		
-		
+		sprintf(str, "你已經死了 ! \n畫面有夠藍黑");
+
 		CRect rect = { 0,0,SIZE_X,SIZE_Y };//設定矩形左、上、右、下的座標
 
 		//這裡在設定垂直置中
 		CRect temp = rect;
-		int height = pDC->DrawText(str,temp,DT_CENTER | DT_WORDBREAK | DT_CALCRECT);
-		rect.DeflateRect(0,(rect.Height() - height) / 2);
+		int height = pDC->DrawText(str, temp, DT_CENTER | DT_WORDBREAK | DT_CALCRECT);
+		rect.DeflateRect(0, (rect.Height() - height) / 2);
 
 		pDC->DrawText(str, rect, DT_CENTER | DT_WORDBREAK);//水平置中
 
@@ -199,6 +200,9 @@ namespace game_framework {
 
 	void CGameStateRun::OnBeginState()
 	{
+		Player& player = *(GameSystem::GetGameObjectWithTag<Player>("Player"));
+		player.AdjustPositionOnBegin();
+
 		GameSystem::StopAudio(GameSystem::AUDIO::AUDIO_GAME_OVER);//停止結束的音樂
 		GameSystem::PlayAudio(GameSystem::AUDIO::AUDIO_GAME_RUN);//播放遊戲的音樂
 	}
