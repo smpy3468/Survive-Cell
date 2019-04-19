@@ -64,7 +64,7 @@ END
 
 IDB_BALL                BITMAP                  "..\\res\\ball.bmp"
 
-IDB_ERASER1             BITMAP                  "..\\res\\eraser1.bmp"
+IDB_FLOOR             BITMAP                  "..\\res\\floor.bmp"
 
 IDB_CORNER              BITMAP                  "..\\res\\corner.bmp"
 

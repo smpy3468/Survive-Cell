@@ -11,3 +11,9 @@ Floor::Floor(string tag, int x, int y, int width, int height, int pictureID) :Ga
 {
 	layer = GameSystem::LAYER::LAYER_FLOOR;
 }
+
+Floor::Floor(string tag, int x, int y, int width, int height) : GameObject(tag, x, y, width, height)
+{
+	layer = GameSystem::LAYER::LAYER_FLOOR;
+	LoadBitMap(".\\res\\floor.bmp");
+}

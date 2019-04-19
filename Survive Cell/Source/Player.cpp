@@ -11,7 +11,7 @@ Player::Player()
 	tag = "Player";
 }
 
-Player::Player(string tag, int x, int y, int width, int height, int pictureID) :Character(tag, x, y, width, height, pictureID)
+Player::Player(string tag, int x, int y, int width, int height) :Character(tag, x, y, width, height)
 {
 	tag = "Player";
 
@@ -353,6 +353,8 @@ void Player::ShowWeapon()
 
 void Player::LoadAni()
 {
+	objectPic.LoadBitmap(".\\res\\player.bmp");
+
 	//---------------ÀR¤î
 	char* aniIdle[1] = { ".\\res\\player_idle.bmp" };
 	AddAniBitMaps(aniIdle, ANI::ANI_IDLE, 1);

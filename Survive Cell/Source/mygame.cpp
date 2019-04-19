@@ -90,7 +90,7 @@ namespace game_framework {
 	{
 		GameSystem::Init();
 
-		GameSystem::AddGameObject((new Player("Player", SIZE_X / 2, SIZE_Y / 2 - 100, 50, 80, IDB_PLAYER)));
+		GameSystem::AddGameObject((new Player("Player", SIZE_X / 2, SIZE_Y / 2 - 100, 50, 80)));
 		GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 + 100, SIZE_Y / 2 - 133, 149, 133)));
 		GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 -150, SIZE_Y / 2 - 133, 149, 133)));
 
@@ -98,7 +98,7 @@ namespace game_framework {
 
 		for (int i = 0; i < 3; i++)
 		{
-			GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 + 150 * i, SIZE_Y / 2 - 80 * i, 80, 50, IDB_ERASER1));
+			GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 + 150 * i, SIZE_Y / 2 - 80 * i, 80, 50));
 		}
 		
 		GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 2-230, SIZE_Y / 2+175, 64, 60));

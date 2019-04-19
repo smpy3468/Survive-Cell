@@ -11,5 +11,6 @@ class Floor :public GameObject
 public:
 	Floor();
 	Floor(string tag, int x, int y, int width, int height, int pictureID);
+	Floor(string tag, int x, int y, int width, int height);
 private:
 };

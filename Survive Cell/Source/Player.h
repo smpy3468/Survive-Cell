@@ -12,7 +12,7 @@ class Player :public Character
 {
 public:
 	Player();
-	Player(string tag, int x, int y, int width, int height, int pictureID);
+	Player(string tag, int x, int y, int width, int height);
 
 	//----------------按鍵相關---------------------//
 	void SetIsMoveLeft(bool isMoveLeft);//設定是否向左移動
