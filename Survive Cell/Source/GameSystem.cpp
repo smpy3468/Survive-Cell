@@ -90,9 +90,9 @@ void GameSystem::DeleteAllUI()
 
 void GameSystem::CreateFloor(int x, int y, int width, int height)
 {
-	for (int currentY = y; currentY < y + height; currentY += FLOOR_HEIGHT)
+	for (int currentY = y; currentY < y + height; currentY += FLOOR_HEIGHT)//從y座標開始，持續往下增加地板
 	{
-		for (int currentX = x; currentX < x + width; currentX += FLOOR_WIDTH)
+		for (int currentX = x; currentX < x + width; currentX += FLOOR_WIDTH)//從x座標開始，持續往右增加地板
 		{
 			AddGameObject(new Floor("Floor", currentX, currentY, FLOOR_WIDTH, FLOOR_HEIGHT));
 		}

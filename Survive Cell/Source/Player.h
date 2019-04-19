@@ -21,6 +21,7 @@ public:
 	void SetIsMoveRight(bool isMoveRight);//設定是否向右移動
 	void SetIsGrounded(bool isGrounded);//設定是否在地上
 	void SetIsJump(bool isJump);//設定是否按下跳躍
+	void SetIsDownJump(bool isDownJump);//設定是否下跳
 	void SetIsAttack(bool isAttack);//設定是否按下攻擊
 
 	bool HasWeapon();//是否有武器
@@ -29,6 +30,7 @@ public:
 	void Move();//按下按鍵移動
 	void Fall();//下降
 	void Jump();//跳躍
+	void DownJump();//下跳
 	void Interact();//互動
 	void Move(int dx, int dy)override;//移動特定距離
 	void Attack()override;//攻擊
@@ -61,6 +63,7 @@ private:
 	bool isMoveRight;//是否向右移動
 	bool isJumpKeyDown;//是否按下跳躍
 	bool isJump;//是否正在跳躍
+	bool isDownJump;//是否正在下跳
 	bool isFall;//是否正在下降
 	bool isAttack;//是否正在攻擊
 
@@ -71,6 +74,9 @@ private:
 	void CalculateAbility(PlayerEquipment* equipment);//計算能力值
 
 	void Dead()override;//死亡時呼叫
+
+	//下跳時用到
+	bool IsFloorOnGround();//地板跟最底層地板剛好貼合，代表不能下跳
 
 	//---------------動畫相關---------------//
 	void ShowWeapon();//顯示武器

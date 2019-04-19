@@ -94,13 +94,23 @@ namespace game_framework {
 		GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 + 100, SIZE_Y / 2 - 133, 149, 133)));
 		GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 - 150, SIZE_Y / 2 - 133, 149, 133)));
 
-		GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y / 2 + 80, Map::WORLD_SIZE_X, 100, IDB_GROUND));
+		GameSystem::AddGameObject(new Floor("Ground", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//地圖最下方的地板
+		GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//地圖最下方的地板
 
-		for (int i = 0; i < 3; i++)
+		GameSystem::CreateFloor(SIZE_X / 2, Map::WORLD_SIZE_Y / 2 + 400, 1000, 80);
+		GameSystem::CreateFloor(SIZE_X / 2 + 1000, Map::WORLD_SIZE_Y / 2 + 500, 300, 80);
+		GameSystem::CreateFloor(SIZE_X / 2 + 1000 + 300, Map::WORLD_SIZE_Y / 2 + 400, 1000, 80);
+		GameSystem::CreateFloor(SIZE_X / 2 - 400, Map::WORLD_SIZE_Y - 150, 300, 80);
+
+		GameSystem::CreateFloor(SIZE_X / 2 + 900, Map::WORLD_SIZE_Y / 2, 300, 80);
+		GameSystem::CreateFloor(SIZE_X / 2 + 600, Map::WORLD_SIZE_Y / 2 + 100, 300, 80);
+		GameSystem::CreateFloor(SIZE_X / 2 + 300, Map::WORLD_SIZE_Y /2 + 200, 300, 80);
+		/*for (int i = 0; i < 3; i++)
 		{
 			//GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 + 150 * i, SIZE_Y / 2 - 80 * i, 80, 50));
-			GameSystem::CreateFloor(SIZE_X / 2, SIZE_Y / 2 - 50, 300, 100);
-		}
+			
+		}*/
+		
 
 		GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 2 - 230, SIZE_Y / 2 + 175, 64, 60));
 		GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 2 - 310, SIZE_Y / 2 + 175, 64, 60));
@@ -249,6 +259,7 @@ namespace game_framework {
 		}
 		if (nChar == KEY_DOWN)
 		{
+			player.SetIsDownJump(true);
 			//player.SetIsMoveDown(true);
 		}
 		if (nChar == KEY_SPACE)

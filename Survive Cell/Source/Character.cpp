@@ -70,7 +70,7 @@ void Character::SetAttackRange(int attackRange)
 	this->attackRange = attackRange;
 }
 
-void Character::SetDefense(int defense){
+void Character::SetDefense(int defense) {
 	this->defense = defense;
 }
 
@@ -165,7 +165,7 @@ void Character::IncreaseHP(int ihp)
 {
 	this->HP += ihp;
 	if (this->HP > this->maxHP)//超過最大血量
-		this->HP = this->maxHP;		
+		this->HP = this->maxHP;
 }
 
 void Character::Dead()
@@ -249,4 +249,18 @@ bool Character::CanMoveDown(int perDisplacement)
 		}
 	}
 	return canMoveDown;
+}
+
+bool Character::IsInFloor()
+{
+	for (int i = x; i < x + width; i++)
+	{
+		for (int j = y; j < y + height; j++)
+		{
+			if (Map::HasObject(i, y + height))
+				return true;
+		}
+	}
+
+	return false;
 }

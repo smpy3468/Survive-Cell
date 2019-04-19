@@ -5,6 +5,7 @@
 #include "Map.h"
 #include "Item.h"
 #include "PlayerTradationalSword.h"
+#include "Floor.h"
 
 Player::Player()
 {
@@ -93,6 +94,11 @@ void Player::SetIsJump(bool isJump)
 	this->isJumpKeyDown = isJump;
 }
 
+void Player::SetIsDownJump(bool isDownJump)
+{
+	this->isDownJump = isDownJump;
+}
+
 void Player::SetIsAttack(bool isAttack)
 {
 	this->isAttack = isAttack;
@@ -140,10 +146,17 @@ void Player::Move()//移動方向
 		}
 	}
 
-	if (isJump)
-		Jump();//跳躍
+	if (isDownJump)
+	{
+		DownJump();
+	}
 	else
-		Fall();//下降
+	{
+		if (isJump)
+			Jump();//跳躍
+		else
+			Fall();//下降
+	}
 }
 
 void Player::Fall()
@@ -190,6 +203,19 @@ void Player::Jump()
 			isFall = true;
 			jumpDisplacement = originJumpDisplacement;//跳躍位移量還原
 		}
+	}
+}
+
+void Player::DownJump()
+{
+	Move(0, fallDisplacement);//向下移動
+	fallDisplacement++;
+
+	if (IsInFloor() == false//不在地板中
+		|| y + height + 1 >= GameSystem::GetGameObjectWithTag<Floor>("Ground")->GetY()//已在最底層地板
+		|| IsFloorOnGround())//地板跟最底層地板剛好貼合，代表不能下跳
+	{
+		isDownJump = false;
 	}
 }
 
@@ -248,7 +274,7 @@ void Player::ShowBitMap()
 			Attack();
 		}
 	}
-	else if (isJump || isFall)//跳躍動畫
+	else if (isJump || isFall || isDownJump)//跳躍動畫
 	{
 		if (faceLR == FACE_LEFT)
 		{
@@ -343,6 +369,37 @@ void Player::Dead()
 {
 	GameSystem::SetGameOver();//遊戲結束
 	//GameSystem::DeleteGameObject(this);
+}
+
+bool Player::IsFloorOnGround()
+{
+	int cy = y + height + 1;//玩家腳底的位置
+
+	for (int i = x; i < x + width; i++)
+	{
+		while (Map::HasObject(i, cy))//此處有地板
+		{
+			cy++;//繼續往下確認是否還是地板
+			if (cy >= GameSystem::GetGameObjectWithTag<Floor>("Ground")->GetY())//如果已到達最底層地板
+			{
+				return true;
+			}
+		}
+		int h = 0;//確認高度是否足夠讓玩家進入
+		while (cy < GameSystem::GetGameObjectWithTag<Floor>("Ground")->GetY())
+		{
+			h++;//高度增加
+			cy++;//cy往下移動
+
+			if (h > height)
+			{
+				return false;
+			}
+		}
+		return true;
+
+	}
+	return false;
 }
 
 void Player::ShowWeapon()

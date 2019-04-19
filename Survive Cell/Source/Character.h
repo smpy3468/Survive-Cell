@@ -72,4 +72,5 @@ protected:
 	bool CanMoveRight(int perDisplacement);//可以向右移動
 	bool CanMoveUp(int perDisplacement);//可以向上移動
 	bool CanMoveDown(int perDisplacement);//可以向下移動
+	bool IsInFloor();//是否卡在地板中
 };
