@@ -386,7 +386,8 @@ bool Player::IsFloorOnGround()
 			}
 		}
 		int h = 0;//確認高度是否足夠讓玩家進入
-		while (cy < GameSystem::GetGameObjectWithTag<Floor>("Ground")->GetY())
+		while (cy < GameSystem::GetGameObjectWithTag<Floor>("Ground")->GetY() && !Map::HasObject(i,cy))//還沒到達最下層地板，且這一格沒有地板。
+			//(總之就是，上下兩層地板之間的高度差必須能容納玩家的高度)
 		{
 			h++;//高度增加
 			cy++;//cy往下移動
