@@ -225,7 +225,7 @@ namespace game_framework {
 			GotoGameState(GAME_STATE_OVER);//跳至遊戲結束狀態
 
 		Player& player = *(GameSystem::GetGameObjectWithTag<Player>("Player"));//宣告一個玩家，避免每次都要打一長串GetGameObject...
-		player.Move();
+		player.Act();
 		GameSystem::MonstersAttackPlayer(); //攻擊Player
 		GameSystem::MonstersAutoMove();//怪物來回移動
 		GameSystem::SetAllObjectBitMapPosition();//設定所有物件圖片位置
@@ -242,8 +242,9 @@ namespace game_framework {
 		const char KEY_UP = 0x26; // keyboard上箭頭
 		const char KEY_RIGHT = 0x27; // keyboard右箭頭
 		const char KEY_DOWN = 0x28; // keyboard下箭頭
-		const char KEY_SPACE = 0x20;//空白鍵
-		const char KEY_INTERACT = 0x5a;//互動鍵Z鍵
+		const char KEY_ATTACK = 0x58;//攻擊鍵X鍵
+		const char KEY_INTERACT = 0x46;//互動鍵F鍵
+		const char KEY_ROLL = 0x5a;//翻滾鍵Z鍵
 
 		Player& player = *(GameSystem::GetGameObjectWithTag<Player>("Player"));//宣告一個玩家，避免每次都要打一長串GetGameObject...
 
@@ -264,7 +265,7 @@ namespace game_framework {
 			player.SetIsDownJump(true);
 			//player.SetIsMoveDown(true);
 		}
-		if (nChar == KEY_SPACE)
+		if (nChar == KEY_ATTACK)
 		{
 			player.SetIsAttack(true);
 		}
@@ -272,6 +273,11 @@ namespace game_framework {
 		if (nChar == KEY_INTERACT)
 		{
 			player.Interact();
+		}
+
+		if (nChar == KEY_ROLL)
+		{
+			player.SetIsRoll(true);
 		}
 	}
 

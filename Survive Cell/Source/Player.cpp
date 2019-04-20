@@ -19,6 +19,9 @@ Player::Player(string tag, int x, int y, int width, int height) :Character(tag, 
 	maxHP = 100;
 	HP = maxHP;
 
+	originWidth = width;
+	originHeight = height;
+
 	originMoveSpeed = 5;
 	moveSpeed = originMoveSpeed;
 
@@ -26,6 +29,9 @@ Player::Player(string tag, int x, int y, int width, int height) :Character(tag, 
 
 	originJumpDisplacement = 15;
 	jumpDisplacement = originJumpDisplacement;
+
+	originRollDisplacement = 15;
+	rollDisplacement = originRollDisplacement;
 
 	attackRange = 3;
 	attackDamage = 5;
@@ -104,6 +110,11 @@ void Player::SetIsAttack(bool isAttack)
 	this->isAttack = isAttack;
 }
 
+void Player::SetIsRoll(bool isRoll)
+{
+	this->isRoll = isRoll;
+}
+
 bool Player::HasWeapon()
 {
 	return hasWeapon;
@@ -114,32 +125,37 @@ void Player::SetIsGrounded(bool isGrounded)
 	this->isGrounded = isGrounded;
 }
 
-void Player::Move()//移動方向
+void Player::Act()//移動
 {
 	if (!this->isAttack)//如果不是在攻擊狀態
 	{
-		if (this->isMoveLeft)
+		if (isRoll && isGrounded)//翻滾，而且要在地上才能翻滾
+			Roll();
+		else
 		{
-			if (this->x > 0)
+			if (this->isMoveLeft)
 			{
-				faceLR = FACE_LEFT;//面向左邊
-				Move(-moveSpeed, 0);
+				if (this->x > 0)
+				{
+					faceLR = FACE_LEFT;//面向左邊
+					Move(-moveSpeed, 0);
+				}
 			}
-		}
 
-		if (this->isMoveRight)
-		{
-			if (this->x + this->width < Map::WORLD_SIZE_X)
+			if (this->isMoveRight)
 			{
-				faceLR = FACE_RIGHT;//面向右邊
-				Move(moveSpeed, 0);
+				if (this->x + this->width < Map::WORLD_SIZE_X)
+				{
+					faceLR = FACE_RIGHT;//面向右邊
+					Move(moveSpeed, 0);
+				}
 			}
 		}
 
 		if (this->isJumpKeyDown)//如果按下跳躍
 		{
 			isJumpKeyDown = false;//跳躍鍵不能持續按住
-			
+
 			if (isGrounded)//如果在地上
 			{
 				isJump = true;//正在跳躍
@@ -341,6 +357,7 @@ void Player::ShowBitMap()
 			Attack();
 		}
 	}
+
 	else if (isJump || isFall || isDownJump)//跳躍動畫
 	{
 		if (faceLR == FACE_LEFT)
@@ -350,6 +367,17 @@ void Player::ShowBitMap()
 		else
 		{
 			currentAni = ANI::ANI_JUMP_RIGHT;
+		}
+	}
+	else if (isRoll)
+	{
+		if (faceLR == FACE_LEFT)
+		{
+			currentAni = ANI::ANI_ROLL_LEFT;
+		}
+		else
+		{
+			currentAni = ANI::ANI_ROLL_RIGHT;
 		}
 	}
 	else if (isMoveLeft)//左移動畫
@@ -438,6 +466,38 @@ void Player::Dead()
 	//GameSystem::DeleteGameObject(this);
 }
 
+void Player::Roll()
+{
+	int tempWidth = height, tempHeight = width;//翻滾時角色是倒下的，將寬高互換
+
+	width = tempWidth;
+	height = tempHeight;
+
+	while (CanMoveDown(1))//因長寬對調，重新調整玩家位置到地板上
+		y++;
+
+	if (faceLR == FACE_LEFT)
+	{
+		if (isMoveLeft)
+			Move(-rollDisplacement, 0);
+	}
+	else
+	{
+		if (isMoveRight)
+			Move(rollDisplacement, 0);
+	}
+	if (rollDisplacement-- <= 0)
+	{
+		isRoll = false;
+		rollDisplacement = originRollDisplacement;
+		width = originWidth;
+		height = originHeight;
+
+		while (CanMoveUp(1) && !CanMoveDown(1))//因長寬對調，重新調整玩家位置到地板上
+			y--;
+	}
+}
+
 void Player::ShowWeapon()
 {
 	if (faceLR == FACE_LEFT)
@@ -491,4 +551,12 @@ void Player::LoadAni()
 	//---------------右被擊
 	char* aniGetHitRight = ".\\res\\player_get_hit_right.bmp";
 	AddAniBitMap(aniGetHitRight, ANI::ANI_GET_HIT_RIGHT);
+
+	//---------------左翻滾
+	char* aniRollLeft = ".\\res\\player_roll_left.bmp";
+	AddAniBitMap(aniRollLeft, ANI::ANI_ROLL_LEFT);
+
+	//---------------右翻滾
+	char* aniRollRight = ".\\res\\player_roll_right.bmp";
+	AddAniBitMap(aniRollRight, ANI::ANI_ROLL_RIGHT);
 }

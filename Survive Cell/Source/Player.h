@@ -23,11 +23,12 @@ public:
 	void SetIsJump(bool isJump);//設定是否按下跳躍
 	void SetIsDownJump(bool isDownJump);//設定是否下跳
 	void SetIsAttack(bool isAttack);//設定是否按下攻擊
+	void SetIsRoll(bool isRoll);//設定是否按下翻滾
 
 	bool HasWeapon();//是否有武器
 
 	//----------------動作相關---------------------//
-	void Move();//按下按鍵移動
+	void Act();//按下按鍵行動
 	void Fall();//下降
 	void Jump();//跳躍
 	void DownJump();//下跳
@@ -66,12 +67,13 @@ private:
 	bool isDownJump;//是否正在下跳
 	bool isFall;//是否正在下降
 	bool isAttack;//是否正在攻擊
+	bool isRoll;//是否正在翻滾
 
 	//---------------跳躍相關---------------//
 	int fallDisplacement;//下降位移量(移動到沒有地板的位置會用到)
 	int originJumpDisplacement, jumpDisplacement;//跳躍位移量
 	bool isGrounded;//是否在地上
-	int jumpCount = 0;//跳躍段數，用來做二段跳
+	int jumpCount = 0;//跳躍段數計數
 	const int MAX_JUMP_COUNT = 2;//最多能幾段跳
 
 	//---------------下跳相關---------------//
@@ -81,6 +83,11 @@ private:
 	void CalculateAbility(PlayerEquipment* equipment);//計算能力值
 
 	void Dead()override;//死亡時呼叫
+
+	//---------------翻滾相關---------------//
+	void Roll();//翻滾
+	int originRollDisplacement, rollDisplacement;//翻滾位移量
+	int originWidth, originHeight;//翻滾時角色是倒下的，寬高會互換，用origin變數儲存原本的寬高
 
 	//---------------動畫相關---------------//
 	void ShowWeapon();//顯示武器
@@ -101,7 +108,9 @@ private:
 		ANI_JUMP_LEFT,
 		ANI_JUMP_RIGHT,
 		ANI_GET_HIT_LEFT,
-		ANI_GET_HIT_RIGHT
+		ANI_GET_HIT_RIGHT,
+		ANI_ROLL_LEFT,
+		ANI_ROLL_RIGHT
 	};
 
 	vector<PlayerEquipment*> equipments;//裝備
