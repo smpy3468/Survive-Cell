@@ -112,7 +112,7 @@ void Player::SetIsAttack(bool isAttack)
 
 void Player::SetIsRoll(bool isRoll)
 {
-	this->isRoll = isRoll;
+	this->isRollKeyDown = isRoll;
 }
 
 bool Player::HasWeapon()
@@ -129,9 +129,17 @@ void Player::Act()//移動
 {
 	if (!this->isAttack)//如果不是在攻擊狀態
 	{
-		if (isRoll && isGrounded)//翻滾，而且要在地上才能翻滾
-			Roll();
-		else
+		if (isRollKeyDown)//按下翻滾
+		{
+			isRollKeyDown = false;
+
+			if (isGrounded)//在地上才能開始翻
+			{
+				isRoll = true;
+				FlipWidthHeight();
+			}
+		}
+		else if(isRoll == false)
 		{
 			if (this->isMoveLeft)
 			{
@@ -151,6 +159,9 @@ void Player::Act()//移動
 				}
 			}
 		}
+
+		if(isRoll)
+			Roll();
 
 		if (this->isJumpKeyDown)//如果按下跳躍
 		{
@@ -358,6 +369,18 @@ void Player::ShowBitMap()
 		}
 	}
 
+	else if (isRoll)//翻滾動畫
+	{
+		if (faceLR == FACE_LEFT)
+		{
+			currentAni = ANI::ANI_ROLL_LEFT;
+		}
+		else
+		{
+			currentAni = ANI::ANI_ROLL_RIGHT;
+		}
+	}
+
 	else if (isJump || isFall || isDownJump)//跳躍動畫
 	{
 		if (faceLR == FACE_LEFT)
@@ -369,17 +392,7 @@ void Player::ShowBitMap()
 			currentAni = ANI::ANI_JUMP_RIGHT;
 		}
 	}
-	else if (isRoll)
-	{
-		if (faceLR == FACE_LEFT)
-		{
-			currentAni = ANI::ANI_ROLL_LEFT;
-		}
-		else
-		{
-			currentAni = ANI::ANI_ROLL_RIGHT;
-		}
-	}
+	
 	else if (isMoveLeft)//左移動畫
 	{
 		currentAni = ANI::ANI_LEFT;
@@ -468,34 +481,41 @@ void Player::Dead()
 
 void Player::Roll()
 {
-	int tempWidth = height, tempHeight = width;//翻滾時角色是倒下的，將寬高互換
-
-	width = tempWidth;
-	height = tempHeight;
-
-	while (CanMoveDown(1))//因長寬對調，重新調整玩家位置到地板上
-		y++;
-
 	if (faceLR == FACE_LEFT)
 	{
-		if (isMoveLeft)
-			Move(-rollDisplacement, 0);
+		Move(-rollDisplacement, 0);
 	}
 	else
 	{
-		if (isMoveRight)
-			Move(rollDisplacement, 0);
+		Move(rollDisplacement, 0);
 	}
+
 	if (rollDisplacement-- <= 0)
 	{
 		isRoll = false;
 		rollDisplacement = originRollDisplacement;
-		width = originWidth;
-		height = originHeight;
 
-		while (CanMoveUp(1) && !CanMoveDown(1))//因長寬對調，重新調整玩家位置到地板上
-			y--;
+		FlipWidthHeight();//還原寬高
+
+		/*if (!CanMoveUp(0))//如果無法站起來
+		{
+			FlipWidthHeight();
+		}*/
 	}
+}
+
+void Player::FlipWidthHeight()
+{
+	int temp = width;
+	width = height;
+	height = temp;
+
+	AdjustY(width - height);
+}
+
+void Player::AdjustY(int dy)
+{
+	y += dy;
 }
 
 void Player::ShowWeapon()

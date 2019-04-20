@@ -100,7 +100,7 @@ namespace game_framework {
 		GameSystem::CreateFloor(SIZE_X / 2, SIZE_Y / 2 + 400, 1000, 80);
 
 		GameSystem::CreateFloor(SIZE_X / 2, Map::WORLD_SIZE_Y / 2 + 400, 1000, 80);
-		GameSystem::CreateFloor(SIZE_X / 2 + 1000, Map::WORLD_SIZE_Y / 2 + 500, 300, 80);
+		GameSystem::CreateFloor(SIZE_X / 2 + 1000, Map::WORLD_SIZE_Y / 2 + 450, 300, 80);
 		GameSystem::CreateFloor(SIZE_X / 2 + 1000 + 300, Map::WORLD_SIZE_Y / 2 + 400, 1000, 80);
 		GameSystem::CreateFloor(SIZE_X / 2 - 400, Map::WORLD_SIZE_Y - 150, 300, 80);
 

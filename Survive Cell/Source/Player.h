@@ -68,6 +68,7 @@ private:
 	bool isFall;//是否正在下降
 	bool isAttack;//是否正在攻擊
 	bool isRoll;//是否正在翻滾
+	bool isRollKeyDown;//是否按下翻滾
 
 	//---------------跳躍相關---------------//
 	int fallDisplacement;//下降位移量(移動到沒有地板的位置會用到)
@@ -88,6 +89,8 @@ private:
 	void Roll();//翻滾
 	int originRollDisplacement, rollDisplacement;//翻滾位移量
 	int originWidth, originHeight;//翻滾時角色是倒下的，寬高會互換，用origin變數儲存原本的寬高
+	void FlipWidthHeight();//對調寬高
+	void AdjustY(int dy);//調整y座標
 
 	//---------------動畫相關---------------//
 	void ShowWeapon();//顯示武器
