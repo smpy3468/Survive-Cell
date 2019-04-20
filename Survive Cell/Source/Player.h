@@ -25,7 +25,7 @@ public:
 	void SetIsAttack(bool isAttack);//設定是否按下攻擊
 
 	bool HasWeapon();//是否有武器
-	
+
 	//----------------動作相關---------------------//
 	void Move();//按下按鍵移動
 	void Fall();//下降
@@ -40,7 +40,7 @@ public:
 
 	//-------------顯示玩家資訊------------------//
 	void ShowInformation();//顯示玩家資訊
-	
+
 	//-------------系統相關------------------//
 	template <class T> void AddEquipment(T* equipment)//增加裝備
 	{
@@ -67,17 +67,20 @@ private:
 	bool isFall;//是否正在下降
 	bool isAttack;//是否正在攻擊
 
+	//---------------跳躍相關---------------//
 	int fallDisplacement;//下降位移量(移動到沒有地板的位置會用到)
 	int originJumpDisplacement, jumpDisplacement;//跳躍位移量
 	bool isGrounded;//是否在地上
+	int jumpCount = 0;//跳躍段數，用來做二段跳
+	const int MAX_JUMP_COUNT = 2;//最多能幾段跳
+
+	//---------------下跳相關---------------//
+	bool IsFloorOnGround();//地板跟最底層地板剛好貼合，代表不能下跳
+	bool HasSpaceToDownJump();//下方有足夠的高度可以容納玩家
 
 	void CalculateAbility(PlayerEquipment* equipment);//計算能力值
 
 	void Dead()override;//死亡時呼叫
-
-	//下跳時用到
-	bool IsFloorOnGround();//地板跟最底層地板剛好貼合，代表不能下跳
-	bool HasSpaceToDownJump();//下方有足夠的高度可以容納玩家
 
 	//---------------動畫相關---------------//
 	void ShowWeapon();//顯示武器
@@ -106,5 +109,5 @@ private:
 
 	//彥澤加的
 	//Item* equipment;
-	bool hasWeapon=false;
+	bool hasWeapon = false;
 };

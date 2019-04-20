@@ -138,10 +138,23 @@ void Player::Move()//移動方向
 
 		if (this->isJumpKeyDown)//如果按下跳躍
 		{
+			isJumpKeyDown = false;//跳躍鍵不能持續按住
+			
 			if (isGrounded)//如果在地上
 			{
 				isJump = true;//正在跳躍
 				isGrounded = false;//沒在地上
+			}
+
+			if (jumpCount < MAX_JUMP_COUNT)//小於最大跳躍段數
+			{
+				jumpCount++;//計數目前是幾段跳
+				jumpDisplacement = originJumpDisplacement;//重置跳躍位移量，呈現二段跳的效果
+
+				//以下是:若在下降中按下二段跳
+				isFall = false;//如果原本在下降，則不再下降
+				fallDisplacement = 0;//下降位移量重置
+				isJump = true;//重新往上跳跳躍
 			}
 		}
 	}
@@ -176,6 +189,7 @@ void Player::Fall()
 		fallDisplacement = 0;
 		isGrounded = true;//在地上
 		isFall = false;//沒在下降
+		jumpCount = 0;//跳躍段數重置
 
 		if (currentAni == ANI::ANI_JUMP_LEFT)//將跳躍動畫還原
 			currentAni = ANI::ANI_LEFT;
@@ -218,6 +232,58 @@ void Player::DownJump()
 	{
 		isDownJump = false;//沒有下跳
 	}
+}
+
+bool Player::HasSpaceToDownJump()
+{
+	int returnValue = true;//回傳值
+
+	for (int i = x; i < x + width; i++)
+	{
+		int cy = y + height + 1;//玩家腳底的位置
+
+		while (Map::HasObject(i, cy))//此處有地板
+		{
+			cy++;//cy往下移動直到沒有地板
+
+			if (cy >= Map::WORLD_SIZE_Y)//cy已超出地圖範圍
+			{
+				return false;//沒有空間可以下跳
+			}
+		}
+
+		int h = 0;//確認高度是否足夠讓玩家進入
+
+		while (!Map::HasObject(i, cy))//此處沒有地板
+		{
+			h++;//高度增加
+			cy++;//cy往下移動
+		}
+
+		if (h < height)//沒有足夠的高度
+		{
+			return false;//不能下跳
+		}
+	}
+	return true;
+}
+
+bool Player::IsFloorOnGround()
+{
+	int cy = y + height + 1;//玩家腳底的位置
+
+	for (int i = x; i < x + width; i++)
+	{
+		while (Map::HasObject(i, cy))//此處有地板
+		{
+			cy++;//繼續往下確認是否還是地板
+			if (cy >= GameSystem::GetGameObjectWithTag<Floor>("Ground")->GetY())//如果已到達最底層地板
+			{
+				return true;
+			}
+		}
+	}
+	return false;
 }
 
 void Player::Interact()
@@ -370,58 +436,6 @@ void Player::Dead()
 {
 	GameSystem::SetGameOver();//遊戲結束
 	//GameSystem::DeleteGameObject(this);
-}
-
-bool Player::HasSpaceToDownJump()
-{	
-	int returnValue = true;//回傳值
-
-	for (int i = x; i < x + width; i++)
-	{
-		int cy = y + height + 1;//玩家腳底的位置
-
-		while (Map::HasObject(i, cy))//此處有地板
-		{
-			cy++;//cy往下移動直到沒有地板
-
-			if (cy >= Map::WORLD_SIZE_Y)//cy已超出地圖範圍
-			{
-				return false;//沒有空間可以下跳
-			}
-		}
-
-		int h = 0;//確認高度是否足夠讓玩家進入
-		
-		while (!Map::HasObject(i, cy))//此處沒有地板
-		{
-			h++;//高度增加
-			cy++;//cy往下移動
-		}
-
-		if (h < height)//沒有足夠的高度
-		{
-			return false;//不能下跳
-		}
-	}
-	return true;
-}
-
-bool Player::IsFloorOnGround()
-{
-	int cy = y + height + 1;//玩家腳底的位置
-
-	for (int i = x; i < x + width; i++)
-	{
-		while (Map::HasObject(i, cy))//此處有地板
-		{
-			cy++;//繼續往下確認是否還是地板
-			if (cy >= GameSystem::GetGameObjectWithTag<Floor>("Ground")->GetY())//如果已到達最底層地板
-			{
-				return true;
-			}
-		}
-	}
-	return false;
 }
 
 void Player::ShowWeapon()
