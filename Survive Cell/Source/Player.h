@@ -75,7 +75,7 @@ private:
 	int originJumpDisplacement, jumpDisplacement;//跳躍位移量
 	bool isGrounded;//是否在地上
 	int jumpCount = 0;//跳躍段數計數
-	const int MAX_JUMP_COUNT = 2;//最多能幾段跳
+	const int MAX_JUMP_COUNT = 10;//最多能幾段跳
 
 	//---------------下跳相關---------------//
 	bool IsFloorOnGround();//地板跟最底層地板剛好貼合，代表不能下跳

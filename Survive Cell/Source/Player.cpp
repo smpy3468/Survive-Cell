@@ -45,6 +45,7 @@ Player::Player(string tag, int x, int y, int width, int height) :Character(tag, 
 	isJump = false;
 	isFall = false;
 	isGrounded = false;
+	isRoll = false;
 
 	isAttack = false;
 
