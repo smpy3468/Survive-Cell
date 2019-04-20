@@ -77,6 +77,7 @@ private:
 
 	//下跳時用到
 	bool IsFloorOnGround();//地板跟最底層地板剛好貼合，代表不能下跳
+	bool HasSpaceToDownJump();//下方有足夠的高度可以容納玩家
 
 	//---------------動畫相關---------------//
 	void ShowWeapon();//顯示武器

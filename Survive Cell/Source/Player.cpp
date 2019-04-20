@@ -213,9 +213,10 @@ void Player::DownJump()
 
 	if (IsInFloor() == false//不在地板中
 		|| y + height + 1 >= GameSystem::GetGameObjectWithTag<Floor>("Ground")->GetY()//已在最底層地板
-		|| IsFloorOnGround())//地板跟最底層地板剛好貼合，代表不能下跳
+		|| IsFloorOnGround()//地板跟最底層地板剛好貼合，代表不能下跳
+		|| !HasSpaceToDownJump())//下方沒有足夠的空間可以下跳
 	{
-		isDownJump = false;
+		isDownJump = false;//沒有下跳
 	}
 }
 
@@ -371,6 +372,40 @@ void Player::Dead()
 	//GameSystem::DeleteGameObject(this);
 }
 
+bool Player::HasSpaceToDownJump()
+{	
+	int returnValue = true;//回傳值
+
+	for (int i = x; i < x + width; i++)
+	{
+		int cy = y + height + 1;//玩家腳底的位置
+
+		while (Map::HasObject(i, cy))//此處有地板
+		{
+			cy++;//cy往下移動直到沒有地板
+
+			if (cy >= Map::WORLD_SIZE_Y)//cy已超出地圖範圍
+			{
+				return false;//沒有空間可以下跳
+			}
+		}
+
+		int h = 0;//確認高度是否足夠讓玩家進入
+		
+		while (!Map::HasObject(i, cy))//此處沒有地板
+		{
+			h++;//高度增加
+			cy++;//cy往下移動
+		}
+
+		if (h < height)//沒有足夠的高度
+		{
+			return false;//不能下跳
+		}
+	}
+	return true;
+}
+
 bool Player::IsFloorOnGround()
 {
 	int cy = y + height + 1;//玩家腳底的位置
@@ -385,20 +420,6 @@ bool Player::IsFloorOnGround()
 				return true;
 			}
 		}
-		int h = 0;//確認高度是否足夠讓玩家進入
-		while (cy < GameSystem::GetGameObjectWithTag<Floor>("Ground")->GetY() && !Map::HasObject(i,cy))//還沒到達最下層地板，且這一格沒有地板。
-			//(總之就是，上下兩層地板之間的高度差必須能容納玩家的高度)
-		{
-			h++;//高度增加
-			cy++;//cy往下移動
-
-			if (h > height)
-			{
-				return false;
-			}
-		}
-		return true;
-
 	}
 	return false;
 }
