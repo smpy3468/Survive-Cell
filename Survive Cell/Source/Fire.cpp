@@ -17,7 +17,7 @@ void Fire::SetXY(int hostX, int hostY, int hostCurrentAni) {
 		this->y = hostY + 85;
 	}
 	else if (hostCurrentAni == ANI_ATTACK_LEFT) {
-		this->x = hostX - 50;
+		this->x = hostX - 95;
 		this->y = hostY + 85;
 	}
 

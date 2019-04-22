@@ -30,6 +30,8 @@ public:
 	//----------------移動相關---------------------//
 	virtual void AutoMove(); //在防守區域內來回走動
 	void Move(int dx, int dy)override;
+	void Fall(int perDisplacement);
+	void Up();								  //怪物走上地形
 
 	//----------------攻擊相關---------------------//
 	bool IsInAttackField(int playerX, int playerY, int right_fix, int left_fix, int up_fix, int down_fix);   //Player是否在AttackField內, 是的話，衝向主角 
@@ -43,10 +45,10 @@ public:
 	int GetAttackAniNumber();
 
 protected:
-	static const int LEFT = 1, RIGHT = 2, STANDBY = 0, ATTACK = 2; //怪物的狀態
-	int status;													   //
+	static const int LEFT = 1, RIGHT = 2, STANDBY = 0, ATTACK = 3, FALL = 4; //怪物的狀態
+	int status = STANDBY;													   //
 	Player* player = GameSystem::GetGameObjectWithTag<Player>("Player");				//常用到就先記錄下來
-
+	int fallDisplacement = 0;
 	int currentAni = 0;                                            //現在執行得動畫
 	enum ANI
 	{
@@ -62,6 +64,7 @@ private:
 	int dX[2], dY[2];											   //0左1右、0上1下
 	int rl;														   //現在往哪邊走	
 	int defenseRange, attackField;								   //defenseRange 來回走動的範圍, attackfield衝過去攻擊主角的範圍
+	
 
 	void Dead()override;										   //死亡
 };

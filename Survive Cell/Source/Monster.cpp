@@ -72,7 +72,38 @@ int Monster::GetStatus() {
 //--------------------------OTHER FUNCTION-----------------------------------//
 void Monster::AutoMove() {}
 
-void Monster::Move(int dx, int dy){}
+void Monster::Move(int dx, int dy){ 
+	this->x += dx;
+	this->y += dy;
+}
+
+void Monster::Fall(int perDisplacement)
+{
+	if (CanMoveDown(fallDisplacement))//如果腳下沒東西
+	{
+
+		fallDisplacement++;
+		Move(0, fallDisplacement);
+	}
+	else
+	{
+		while (CanMoveDown(1))//再繼續用下降位移量下降，將會卡進地板，所以一次向下位移1進行微調0
+			Move(0, 1);
+
+		fallDisplacement = 0;
+		dX[0] = x - defenseRange;
+		dX[1] = x + defenseRange;
+
+	}
+}
+
+void Monster::Up() 
+{
+	while (Map::HasObject(x + width, y + height)) {
+		y-=1;
+	}
+}
+
 
 bool Monster::IsInAttackField(int playerX, int playerY, int right_fix, int left_fix, int up_fix, int down_fix) {
 	int attackXField_Left = x - attackField - left_fix, attackXField_Right = x + attackField + right_fix;

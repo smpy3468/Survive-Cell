@@ -6,7 +6,7 @@ Demon::Demon() {
 	tag = "Demon";
 }
 
-Demon::Demon(string tag, int x, int y, int width, int height):Monster(tag, x, y, width, height) {
+Demon::Demon(string tag, int x, int y, int width, int height) :Monster(tag, x, y, width, height) {
 	tag = "Monster";
 	SetDefenseRange(300);
 	SetAttackField(125);
@@ -24,34 +24,37 @@ Demon::Demon(string tag, int x, int y, int width, int height):Monster(tag, x, y,
 	aniSpeed = 5;
 	LoadAni();
 	LoadBitMap(".\\res\\demon_idle.bmp");
-	fire = new Fire("Fire", x, y, 110, 75);
-	
+	fire = new Fire("Fire", x, y, 154, 105);
+
 }
 
 //-------------------------------------------------------------------------------------------------
 
 void Demon::AutoMove() {
-	if (GetRL() == LEFT && status == STANDBY ) {			//如果GetLR == LEFT 
+
+	if (GetRL() == LEFT && status == STANDBY) {			//如果GetLR == LEFT 
 		if (CanMoveLeft(moveSpeed)) {					//如果往左沒有卡住
 			this->x = x - moveSpeed;					//X 往左移動
 			currentAni = ANI_LEFT;					    //設定現在動畫為LEFT
 		}
 		else                                            //如果往左遇到障礙物、地形卡住
 		{
-			SetRL(RIGHT) ;								//換往右
-		}	
+			SetRL(RIGHT);								//換往右
+		}
 	}
 	else if (GetRL() == RIGHT && status == STANDBY) {	//如果GetLR == R ,
 		if (CanMoveRight(moveSpeed)) {					//如果往右沒有卡住
 			this->x = x + moveSpeed;					 //X 往右移動
 			currentAni = ANI_RIGHT;						//設定現在動畫為RIGHT
+
 		}
 		else                                            //如果往右遇到障礙物、地形卡住
 		{
 			SetRL(LEFT);								//換往左
 		}
-			
+
 	}
+
 
 	ani[currentAni]->OnMove();						//顯示動畫
 
@@ -68,27 +71,41 @@ void Demon::Attack() {
 	const int ATTACK_SPEED = 4;
 	int placeRelativePlayer = PlaceRelativePlayer(player);
 
-	if (ani[ANI_ATTACK_RIGHT]->GetCurrentBitmapNumber() != 0) {
+	Fall(moveSpeed);
+	if (ani[ANI_ATTACK_RIGHT]->GetCurrentBitmapNumber() != 0 ) {
 		currentAni = ANI_ATTACK_RIGHT;
 	}
 	else if (ani[ANI_ATTACK_LEFT]->GetCurrentBitmapNumber() != 0) {
 		currentAni = ANI_ATTACK_LEFT;
 	}
-	else if (IsInAttackField(player->GetX(), player->GetY(), 100, -20, 0, 0)) {  //Player在怪物攻擊領域內 跟隨  #要增加跟隨感應距離改AttackField
+	else if (IsInAttackField(player->GetX(), player->GetY(), 100, -20, 0, 0) && status != FALL) {  //Player在怪物攻擊領域內 跟隨  #要增加跟隨感應距離改AttackField
 		status = ATTACK;
 
 		moveSpeed = ATTACK_SPEED;
 		if (IsPlayerInRange(player, 0, 0, 0, 0) == false) {	//如果怪物還沒撞到腳色
 
-			if (placeRelativePlayer == RIGHT) {		//如果怪物在人的右邊 
+			if (placeRelativePlayer == RIGHT)		//如果怪物在人的右邊
+			{		 
+				if (!CanMoveLeft(moveSpeed))			//可以往左追
+				{
+					Monster::Up();			//怪物往上移(走道地形上)
+
+				}
+
 				x -= moveSpeed;
-				//fire->SetXY(x, y);
 				currentAni = ANI_LEFT;
 			}
-			else if (placeRelativePlayer == LEFT) {  //如果怪物在人的左邊
+			else if (placeRelativePlayer == LEFT )  //如果怪物在人的左邊
+			{ 
+				if(!CanMoveRight(moveSpeed))			//可以往右追
+				{
+				
+					Monster::Up();		//怪物往上移(走道地形上)	
+				}		
+
 				x += moveSpeed;
-				//fire->SetXY(x, y);
 				currentAni = ANI_RIGHT;     //設定往右的動畫
+
 			}
 		}
 		else {
@@ -100,7 +117,7 @@ void Demon::Attack() {
 			}
 		}
 	}
-	else {												 //脫離警戒領域 回復來回走動
+	else{												 //脫離警戒領域 回復來回走動
 		if (placeRelativePlayer == RIGHT)
 			currentAni = ANI_RIGHT;
 		else if (placeRelativePlayer == LEFT)
@@ -112,9 +129,9 @@ void Demon::Attack() {
 }
 
 
-void Demon::ShowBitMap(){
+void Demon::ShowBitMap() {
 	currentBitMapNumber = ani[currentAni]->GetCurrentBitmapNumber();
-	fire->ShowBitMap(x, y,  currentAni, ani[currentAni]->GetCurrentBitmapNumber());
+	fire->ShowBitMap(x, y, currentAni, ani[currentAni]->GetCurrentBitmapNumber());
 	ani[currentAni]->OnShow();
 }
 

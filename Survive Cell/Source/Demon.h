@@ -12,7 +12,9 @@ class Demon:public Monster {
 		void ShowBitMap()override;															//顯示動畫
 	private:
 		void LoadAni()override;																//載入所有動畫
-		
+
+
 		Fire* fire;																			//自帶火焰特效
 		int currentBitMapNumber;
+		bool aniFix=false;
 };
