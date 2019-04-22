@@ -192,3 +192,9 @@ void GameSystem::MonstersAttackPlayer() {
 	}
 }
 
+void GameSystem::MonstersAct() {
+	vector<Monster*> allMonster = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
+	for (auto& i : allMonster) {
+		i->Act();
+	}
+}

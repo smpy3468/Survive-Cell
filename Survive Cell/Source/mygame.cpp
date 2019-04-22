@@ -225,9 +225,11 @@ namespace game_framework {
 			GotoGameState(GAME_STATE_OVER);//跳至遊戲結束狀態
 
 		Player& player = *(GameSystem::GetGameObjectWithTag<Player>("Player"));//宣告一個玩家，避免每次都要打一長串GetGameObject...
+
 		player.Act();
-		GameSystem::MonstersAttackPlayer(); //攻擊Player
-		GameSystem::MonstersAutoMove();//怪物來回移動
+		/*GameSystem::MonstersAttackPlayer(); //攻擊Player
+		GameSystem::MonstersAutoMove();//怪物來回移動*/
+		GameSystem::MonstersAct();
 		GameSystem::SetAllObjectBitMapPosition();//設定所有物件圖片位置
 	}
 

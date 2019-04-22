@@ -113,7 +113,7 @@ public:
 
 	static void MonstersAutoMove();    //全部怪物在defenseRange內移動
 	static void MonstersAttackPlayer();//全部怪物在Player進入attackField時會追Player
-
+	static void MonstersAct();
 
 	//------------圖層相關------------//
 	enum LAYER//圖層編號

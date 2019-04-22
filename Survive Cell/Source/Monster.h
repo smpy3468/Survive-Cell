@@ -20,7 +20,6 @@ public:
 	void SetAttackField(int attackField);		//設定觸發跟隨的距離
 	void SetAttackRange(int attackRange);		//設定攻擊距離;
 
-
 	int GetDefenseRange();						//取得來回走動距離(從中間到兩邊)
 	int GetRL();								//取得現在是往右移動還是往左移動
 	int GetdX(int point);						//GetdX(0)取得左邊防守邊線, GetdX(1)取得右邊防守邊線
@@ -29,8 +28,8 @@ public:
 
 	//----------------移動相關---------------------//
 	virtual void AutoMove(); //在防守區域內來回走動
-	void Move(int dx, int dy)override;
-	void Fall(int perDisplacement);
+	void Move(int dx, int dy)override;		   
+	void Fall(int perDisplacement);			  //落下
 	void Up();								  //怪物走上地形
 
 	//----------------攻擊相關---------------------//
@@ -39,25 +38,33 @@ public:
 	int  PlaceRelativePlayer(Player* player); //怪物相對於腳色的位置
 
 	virtual void Attack();//當Player進入防守區，攻擊他
+	void IsAttack(int damage);
 
 	//-----------------Animation------------------///
 	void ShowBitMap()override;
 	int GetAttackAniNumber();
 
+	virtual void Act();   //組合各種動作(ISATTACK, AUTOMOVE, ATTACK)
+
 protected:
-	static const int LEFT = 1, RIGHT = 2, STANDBY = 0, ATTACK = 3, FALL = 4; //怪物的狀態
+	static const int LEFT = 1, RIGHT = 2, STANDBY = 0, ATTACK = 3, FALL = 4, ISATTACK=5; //怪物的狀態
 	int status = STANDBY;													   //
 	Player* player = GameSystem::GetGameObjectWithTag<Player>("Player");				//常用到就先記錄下來
+	
 	int fallDisplacement = 0;
-	int currentAni = 0;                                            //現在執行得動畫
+	int currentAni = 0;                                            //現在執行得動畫  
 	enum ANI
 	{
 		ANI_IDLE = 0,		   //原地
 		ANI_LEFT,			   //左移動動畫
 		ANI_RIGHT,			   //右移動動畫
 		ANI_ATTACK_LEFT,	   //左邊攻擊動畫
-		ANI_ATTACK_RIGHT	   //右邊攻擊動畫
+		ANI_ATTACK_RIGHT,	   //右邊攻擊動畫
+		ANI_ISATTACK_RIGHT,	   //被攻擊右邊動畫
+		ANI_ISATTACK_LEFT		   //被攻擊左邊動畫
 	};
+
+	
 
 private:
 

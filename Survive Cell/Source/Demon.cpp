@@ -3,7 +3,7 @@
 
 
 Demon::Demon() {
-	tag = "Demon";
+	tag = "Monster";
 }
 
 Demon::Demon(string tag, int x, int y, int width, int height) :Monster(tag, x, y, width, height) {
@@ -30,9 +30,10 @@ Demon::Demon(string tag, int x, int y, int width, int height) :Monster(tag, x, y
 
 //-------------------------------------------------------------------------------------------------
 
+
 void Demon::AutoMove() {
 
-	if (GetRL() == LEFT && status == STANDBY) {			//如果GetLR == LEFT 
+	if (GetRL() == LEFT) {			//如果GetLR == LEFT 
 		if (CanMoveLeft(moveSpeed)) {					//如果往左沒有卡住
 			this->x = x - moveSpeed;					//X 往左移動
 			currentAni = ANI_LEFT;					    //設定現在動畫為LEFT
@@ -42,7 +43,7 @@ void Demon::AutoMove() {
 			SetRL(RIGHT);								//換往右
 		}
 	}
-	else if (GetRL() == RIGHT && status == STANDBY) {	//如果GetLR == R ,
+	else if (GetRL() == RIGHT) {	//如果GetLR == R ,
 		if (CanMoveRight(moveSpeed)) {					//如果往右沒有卡住
 			this->x = x + moveSpeed;					 //X 往右移動
 			currentAni = ANI_RIGHT;						//設定現在動畫為RIGHT
@@ -55,14 +56,13 @@ void Demon::AutoMove() {
 
 	}
 
-
-	ani[currentAni]->OnMove();						//顯示動畫
-
 	if (x <= GetdX(0) && GetRL() != 0)       //GetdX[0]左邊警戒範圍，如果超過左邊 改右邊移動
 		SetRL(RIGHT);
 
 	else if (x >= GetdX(1) && GetRL() != 0) //GetdX[1]右邊警戒範圍，如果超過右邊 改左邊移動
 		SetRL(LEFT);
+
+
 }
 
 
@@ -71,37 +71,36 @@ void Demon::Attack() {
 	const int ATTACK_SPEED = 4;
 	int placeRelativePlayer = PlaceRelativePlayer(player);
 
-	Fall(moveSpeed);
-	if (ani[ANI_ATTACK_RIGHT]->GetCurrentBitmapNumber() != 0 ) {
+	if (ani[ANI_ATTACK_RIGHT]->GetCurrentBitmapNumber() != 0) {
+		status = ATTACK;
 		currentAni = ANI_ATTACK_RIGHT;
 	}
 	else if (ani[ANI_ATTACK_LEFT]->GetCurrentBitmapNumber() != 0) {
+		status = ATTACK;
 		currentAni = ANI_ATTACK_LEFT;
 	}
-	else if (IsInAttackField(player->GetX(), player->GetY(), 100, -20, 0, 0) && status != FALL) {  //Player在怪物攻擊領域內 跟隨  #要增加跟隨感應距離改AttackField
+	else if (IsInAttackField(player->GetX(), player->GetY(), 100, -20, 0, 0)) {  //Player在怪物攻擊領域內 跟隨  #要增加跟隨感應距離改AttackField
 		status = ATTACK;
-
 		moveSpeed = ATTACK_SPEED;
 		if (IsPlayerInRange(player, 0, 0, 0, 0) == false) {	//如果怪物還沒撞到腳色
 
 			if (placeRelativePlayer == RIGHT)		//如果怪物在人的右邊
-			{		 
+			{
 				if (!CanMoveLeft(moveSpeed))			//可以往左追
 				{
 					Monster::Up();			//怪物往上移(走道地形上)
-
 				}
 
 				x -= moveSpeed;
 				currentAni = ANI_LEFT;
 			}
-			else if (placeRelativePlayer == LEFT )  //如果怪物在人的左邊
-			{ 
-				if(!CanMoveRight(moveSpeed))			//可以往右追
+			else if (placeRelativePlayer == LEFT)  //如果怪物在人的左邊
+			{
+				if (!CanMoveRight(moveSpeed))			//可以往右追
 				{
-				
+
 					Monster::Up();		//怪物往上移(走道地形上)	
-				}		
+				}
 
 				x += moveSpeed;
 				currentAni = ANI_RIGHT;     //設定往右的動畫
@@ -117,20 +116,48 @@ void Demon::Attack() {
 			}
 		}
 	}
-	else{												 //脫離警戒領域 回復來回走動
+	else  {												 //脫離警戒領域 回復來回走動
 		if (placeRelativePlayer == RIGHT)
 			currentAni = ANI_RIGHT;
 		else if (placeRelativePlayer == LEFT)
 			currentAni = ANI_LEFT;
-
 		status = STANDBY;
 		moveSpeed = originMoveSpeed;
 	}
 }
 
+void Demon::Act()											//組合各種動作(ISATTACK, AUTOMOVE, ATTACK)
+{	
+	Fall(moveSpeed);
+	int placeRelativePlayer = PlaceRelativePlayer(player);
+	if (status == ISATTACK) {
+
+		if (placeRelativePlayer == RIGHT)
+			currentAni = ANI_ISATTACK_LEFT;
+		else if (placeRelativePlayer == LEFT)
+			currentAni = ANI_ISATTACK_RIGHT;
+	}
+
+	if (status != ISATTACK) {
+		Attack();
+	}
+	 
+	if (status == STANDBY || status == LEFT || status == RIGHT){
+		AutoMove();
+	}
+	ani[currentAni]->OnMove();						//顯示動畫
+}
+
+
 
 void Demon::ShowBitMap() {
 	currentBitMapNumber = ani[currentAni]->GetCurrentBitmapNumber();
+
+	if (ani[ANI_ISATTACK_LEFT]->GetCurrentBitmapNumber()>=2)		//reset state;(GetCurrentBitmapNumber()要在ShowBitMap才會動)
+		status = STANDBY;
+	if (ani[ANI_ISATTACK_RIGHT]->GetCurrentBitmapNumber()>=2)
+		status = STANDBY;
+
 	fire->ShowBitMap(x, y, currentAni, ani[currentAni]->GetCurrentBitmapNumber());
 	ani[currentAni]->OnShow();
 }
@@ -161,4 +188,10 @@ void Demon::LoadAni()
 							".\\res\\demon_attackright_6.bmp", ".\\res\\demon_attackright_7.bmp", ".\\res\\demon_attackright_7.bmp",
 							".\\res\\demon_attackright_7.bmp", ".\\res\\demon_attackright_7.bmp" };
 	AddAniBitMaps(aniAttack_right, ANI_ATTACK_RIGHT, 11, aniSpeed);
+
+	char* aniIsAttack_right[4] = { ".\\res\\isattack_right_0.bmp", ".\\res\\isattack_right_1.bmp", ".\\res\\isattack_right_2.bmp",".\\res\\isattack_right_2.bmp" };
+	AddAniBitMaps(aniIsAttack_right, ANI_ISATTACK_RIGHT, 4, aniSpeed);
+
+	char* aniIsAttack_left[4] = { ".\\res\\isattack_left_0.bmp", ".\\res\\isattack_left_1.bmp", ".\\res\\isattack_left_2.bmp", ".\\res\\isattack_right_2.bmp" };
+	AddAniBitMaps(aniIsAttack_left, ANI_ISATTACK_LEFT, 4, aniSpeed);
 }

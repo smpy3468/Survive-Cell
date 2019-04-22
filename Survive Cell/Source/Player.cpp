@@ -337,7 +337,7 @@ void Player::Attack()
 		if (i->GetX() + i->GetWidth() > this->x - attackRange && i->GetX() < this->x + this->width + attackRange
 			&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height)//©Çª«¦b§ðÀ»½d³ò¤º
 		{
-			i->DecreaseHP(attackDamage);
+			i->IsAttack(attackDamage);
 		}
 	}
 

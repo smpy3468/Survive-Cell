@@ -16,7 +16,7 @@ Monster::Monster()
 Monster::Monster(string tag, int x, int y, int width, int height) :Character(tag, x, y, width, height)
 {
 	tag = "Monster";
-	rl = 1;
+	rl = LEFT;
 	layer = GameSystem::LAYER::LAYER_MONSTER;
 }
 
@@ -89,7 +89,6 @@ void Monster::Fall(int perDisplacement)
 	{
 		while (CanMoveDown(1))//再繼續用下降位移量下降，將會卡進地板，所以一次向下位移1進行微調0
 			Move(0, 1);
-
 		fallDisplacement = 0;
 		dX[0] = x - defenseRange;
 		dX[1] = x + defenseRange;
@@ -143,8 +142,12 @@ int  Monster::PlaceRelativePlayer(Player* player) {
 		return LEFT;
 }
 
-void Monster::Attack() {}
 
+void Monster::IsAttack(int damage)
+{
+	DecreaseHP(damage);
+	status = ISATTACK;
+}
 
 
 void Monster::ShowBitMap()
@@ -168,3 +171,5 @@ int Monster::GetAttackAniNumber() {
 	return 0;
 }
 
+void Monster::Attack() {}
+void Monster::Act(){}

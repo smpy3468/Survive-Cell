@@ -10,6 +10,7 @@ class Demon:public Monster {
 		void Attack()override;																//攻擊
 		void AutoMove()override;															//移動
 		void ShowBitMap()override;															//顯示動畫
+		void Act()override;																	//組合各種動作(ISATTACK, AUTOMOVE, ATTACK)
 	private:
 		void LoadAni()override;																//載入所有動畫
 
