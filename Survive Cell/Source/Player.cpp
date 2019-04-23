@@ -134,10 +134,10 @@ void Player::Act()//移動
 		{
 			isRollKeyDown = false;
 
-			if (isGrounded)//在地上才能開始翻
+			if (isGrounded && isRoll == false)//在地上才能開始翻，而且目前還沒翻滾(翻轉寬高只需翻轉一次)
 			{
 				isRoll = true;
-				FlipWidthHeight();
+				FlipWidthHeight();//翻轉寬高
 			}
 		}
 		else if(isRoll == false)
