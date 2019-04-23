@@ -24,6 +24,7 @@ public:
 	void SetIsDownJump(bool isDownJump);//設定是否下跳
 	void SetIsAttack(bool isAttack);//設定是否按下攻擊
 	void SetIsRoll(bool isRoll);//設定是否按下翻滾
+	void SetIsSquat(bool isSquat);//設定是否蹲下
 
 	bool HasWeapon();//是否有武器
 
@@ -69,6 +70,7 @@ private:
 	bool isAttack;//是否正在攻擊
 	bool isRoll;//是否正在翻滾
 	bool isRollKeyDown;//是否按下翻滾
+	bool isSquat;//是否蹲下
 
 	//---------------跳躍相關---------------//
 	int fallDisplacement;//下降位移量(移動到沒有地板的位置會用到)
@@ -76,6 +78,9 @@ private:
 	bool isGrounded;//是否在地上
 	int jumpCount = 0;//跳躍段數計數
 	const int MAX_JUMP_COUNT = 10;//最多能幾段跳
+
+	//---------------蹲下相關---------------//
+	void ChangeHeight(int height);//讓寬高變一樣
 
 	//---------------下跳相關---------------//
 	bool IsFloorOnGround();//地板跟最底層地板剛好貼合，代表不能下跳

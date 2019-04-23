@@ -244,6 +244,7 @@ namespace game_framework {
 		const char KEY_UP = 0x26; // keyboard上箭頭
 		const char KEY_RIGHT = 0x27; // keyboard右箭頭
 		const char KEY_DOWN = 0x28; // keyboard下箭頭
+		const char KEY_SPACE = 0x20;//空白鍵
 		const char KEY_ATTACK = 0x58;//攻擊鍵X鍵
 		const char KEY_INTERACT = 0x43;//互動鍵c鍵
 		const char KEY_ROLL = 0x5a;//翻滾鍵Z鍵
@@ -264,9 +265,14 @@ namespace game_framework {
 		}
 		if (nChar == KEY_DOWN)
 		{
-			player.SetIsDownJump(true);
-			//player.SetIsMoveDown(true);
+			player.SetIsSquat(true);
 		}
+
+		if (nChar == KEY_SPACE)
+		{
+			player.SetIsDownJump(true);
+		}
+
 		if (nChar == KEY_ATTACK)
 		{
 			player.SetIsAttack(true);
@@ -306,7 +312,7 @@ namespace game_framework {
 		}
 		if (nChar == KEY_DOWN)
 		{
-			//player.SetIsMoveDown(false);
+			player.SetIsSquat(false);
 		}
 	}
 

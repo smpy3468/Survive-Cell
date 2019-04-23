@@ -116,6 +116,11 @@ void Player::SetIsRoll(bool isRoll)
 	this->isRollKeyDown = isRoll;
 }
 
+void Player::SetIsSquat(bool isSquat)
+{
+	this->isSquat = isSquat;
+}
+
 bool Player::HasWeapon()
 {
 	return hasWeapon;
@@ -142,6 +147,15 @@ void Player::Act()//移動
 		}
 		else if(isRoll == false)
 		{
+			if (this->isSquat)//蹲下
+			{
+				ChangeHeight(originWidth);//將高度變得跟寬度一樣
+			}
+			else
+			{
+				ChangeHeight(originHeight);//將高度還原
+			}
+
 			if (this->isMoveLeft)
 			{
 				if (this->x > 0)
@@ -294,6 +308,11 @@ bool Player::HasSpaceToDownJump()
 		}
 	}
 	return true;
+}
+
+void Player::ChangeHeight(int height)
+{
+	this->height = height;
 }
 
 bool Player::IsFloorOnGround()
