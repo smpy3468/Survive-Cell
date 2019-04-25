@@ -71,7 +71,8 @@ void Map::SetStaticObject()//設定不會移動的物件座標，只會在遊戲一開始呼叫
 			{
 				for (int y = i->GetY(); y < i->GetY() + i->GetHeight(); y++)
 				{
-					coordinate[x][y] = true;//物件的長寬範圍以內的座標都設為true
+					if(x >= 0 && x < Map::WORLD_SIZE_X && y >= 0 && y < Map::WORLD_SIZE_Y)//在地圖範圍內才紀錄
+						coordinate[x][y] = true;//物件的長寬範圍以內的座標都設為true
 				}
 			}
 		}

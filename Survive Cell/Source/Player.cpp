@@ -204,20 +204,25 @@ void Player::Act()//移動
 					ChangeHeight(originHeight);//將高度還原
 					SetMoveSpeed(originMoveSpeed);//將速度還原
 				}
-
-				isJump = true;//正在跳躍
+				else
+				{
+					isJump = true;//正在跳躍
+				}
 				isGrounded = false;//沒在地上
 			}
 
-			if (jumpCount < MAX_JUMP_COUNT)//小於最大跳躍段數
+			if (!isDownJump)//沒有下跳才能多段跳
 			{
-				jumpCount++;//計數目前是幾段跳
-				jumpDisplacement = originJumpDisplacement;//重置跳躍位移量，呈現二段跳的效果
+				if (jumpCount < MAX_JUMP_COUNT)//小於最大跳躍段數
+				{
+					jumpCount++;//計數目前是幾段跳
+					jumpDisplacement = originJumpDisplacement;//重置跳躍位移量，呈現二段跳的效果
 
-				//以下是:若在下降中按下二段跳
-				isFall = false;//如果原本在下降，則不再下降
-				fallDisplacement = 0;//下降位移量重置
-				isJump = true;//重新往上跳跳躍
+					//以下是:若在下降中按下二段跳
+					isFall = false;//如果原本在下降，則不再下降
+					fallDisplacement = 0;//下降位移量重置
+					isJump = true;//重新往上跳跳躍
+				}
 			}
 		}
 	}
