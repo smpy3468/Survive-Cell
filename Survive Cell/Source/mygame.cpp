@@ -106,16 +106,16 @@ namespace game_framework {
 
 		GameSystem::CreateFloor(SIZE_X / 2 + 900, Map::WORLD_SIZE_Y / 2, 300, 80);
 		GameSystem::CreateFloor(SIZE_X / 2 + 600, Map::WORLD_SIZE_Y / 2 + 100, 300, 80);
-		GameSystem::CreateFloor(SIZE_X / 2 + 300, Map::WORLD_SIZE_Y /2 + 200, 300, 80);
+		GameSystem::CreateFloor(SIZE_X / 2 + 300, Map::WORLD_SIZE_Y / 2 + 200, 300, 80);
 		/*for (int i = 0; i < 3; i++)
 		{
 			//GameSystem::AddGameObject(new Floor("Floor", SIZE_X / 2 + 150 * i, SIZE_Y / 2 - 80 * i, 80, 50));
-			
-		}*/
-		
 
-		GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10-100, SIZE_Y *9/10, 64, 60));
-		GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10-10, SIZE_Y *9/10 , 64, 60));
+		}*/
+
+
+		GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10 - 100, SIZE_Y * 9 / 10, 64, 60));
+		GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10 - 10, SIZE_Y * 9 / 10, 64, 60));
 		GameSystem::AddUserInterface(new UIBlood("UIBlood", 0, 0, 400, 30));
 		Map::SetStaticObject();
 
@@ -261,7 +261,7 @@ namespace game_framework {
 		}
 		if (nChar == KEY_UP)
 		{
-			player.SetIsJump(true);
+			//player.SetIsJump(true);
 		}
 		if (nChar == KEY_DOWN)
 		{
@@ -270,6 +270,7 @@ namespace game_framework {
 
 		if (nChar == KEY_SPACE)
 		{
+			player.SetIsJump(true);
 			//player.SetIsDownJump(true);
 		}
 
