@@ -70,6 +70,7 @@ private:
 	bool isAttack;//是否正在攻擊
 	bool isRoll;//是否正在翻滾
 	bool isRollKeyDown;//是否按下翻滾
+	bool isSquatKeyDown;//是否按下蹲下
 	bool isSquat;//是否蹲下
 
 	//---------------跳躍相關---------------//
