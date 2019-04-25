@@ -70,6 +70,7 @@
 #include "Demon.h"
 #include "EquipedSlot.h"
 #include "UIBlood.h"
+#include "UIMonsterBlood.h"
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class為遊戲的遊戲開頭畫面物件
@@ -92,7 +93,7 @@ namespace game_framework {
 
 		GameSystem::AddGameObject((new Player("Player", SIZE_X / 2, SIZE_Y / 2 - 100, 50, 80)));
 		GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 + 100, SIZE_Y / 2 - 133, 131, 141)));
-		GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 - 150, SIZE_Y / 2 - 133, 131, 141)));
+	//	GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 - 150, SIZE_Y / 2 - 133, 131, 141)));
 
 		GameSystem::AddGameObject(new Floor("Ground", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//地圖最下方的地板
 		GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//地圖最下方的地板
@@ -117,6 +118,7 @@ namespace game_framework {
 		GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10 - 100, SIZE_Y * 9 / 10, 64, 60));
 		GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10 - 10, SIZE_Y * 9 / 10, 64, 60));
 		GameSystem::AddUserInterface(new UIBlood("UIBlood", 0, 0, 400, 30));
+		GameSystem::AddUserInterface(new UIMonsterBlood("UIMonster", 0, 0, 0, 0));
 		Map::SetStaticObject();
 
 

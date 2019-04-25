@@ -226,8 +226,7 @@ public:
 	CAnimation(int=10);				// Constructor (預設動畫播放頻率每1/3秒換一張圖)
 	void  AddBitmap(int,COLORREF=CLR_INVALID);
 									// 增加一張圖形至動畫(圖的編號及透明色)
-	void  AddBitmap(char *,COLORREF=CLR_INVALID);
-									// 增加一張圖形至動畫(圖的編號及透明色)
+	void  AddBitmap(char *,COLORREF=CLR_INVALID);// 增加一張圖形至動畫(圖的編號及透明色)
 	int   GetCurrentBitmapNumber();	// 取得正在撥放的bitmap是第幾個bitmap
 	bool  IsFinalBitmap();			// 回傳正在撥放的bitmap是否為最後一個bitmap
 	bool  IsEnd();					// 完全播完一輪

@@ -34,7 +34,7 @@ Player::Player(string tag, int x, int y, int width, int height) :Character(tag, 
 	rollDisplacement = originRollDisplacement;
 
 	attackRange = 3;
-	attackDamage = 5;
+	attackDamage = 10;
 	attackSpeed = 5;
 	defense = 0;
 
@@ -388,7 +388,7 @@ void Player::Attack()
 		if (i->GetX() + i->GetWidth() > this->x - attackRange && i->GetX() < this->x + this->width + attackRange
 			&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height)//©Çª«¦b§ðÀ»½d³ò¤º
 		{
-			i->IsAttack(attackDamage);
+			i->PlayerAttack(attackDamage);
 		}
 	}
 

@@ -143,7 +143,7 @@ int  Monster::PlaceRelativePlayer(Player* player) {
 }
 
 
-void Monster::IsAttack(int damage)
+void Monster::PlayerAttack(int damage)
 {
 	DecreaseHP(damage);
 	status = ISATTACK;

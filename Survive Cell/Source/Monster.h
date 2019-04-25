@@ -38,7 +38,7 @@ public:
 	int  PlaceRelativePlayer(Player* player); //怪物相對於腳色的位置
 
 	virtual void Attack();//當Player進入防守區，攻擊他
-	void IsAttack(int damage);
+	void PlayerAttack(int damage);
 
 	//-----------------Animation------------------///
 	void ShowBitMap()override;
@@ -48,7 +48,7 @@ public:
 
 protected:
 	static const int LEFT = 1, RIGHT = 2, STANDBY = 0, ATTACK = 3, FALL = 4, ISATTACK=5; //怪物的狀態
-	int status = STANDBY;													   //
+	int status ;													   //現在狀態
 	Player* player = GameSystem::GetGameObjectWithTag<Player>("Player");				//常用到就先記錄下來
 	
 	int fallDisplacement = 0;
