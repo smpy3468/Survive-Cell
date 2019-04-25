@@ -270,7 +270,7 @@ namespace game_framework {
 
 		if (nChar == KEY_SPACE)
 		{
-			player.SetIsDownJump(true);
+			//player.SetIsDownJump(true);
 		}
 
 		if (nChar == KEY_ATTACK)

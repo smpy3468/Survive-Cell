@@ -146,7 +146,7 @@ void Player::Act()//移動
 				FlipWidthHeight();//翻轉寬高
 			}
 		}
-		else if(isRoll == false)
+		else if (isRoll == false)
 		{
 			if (this->isSquatKeyDown)//蹲下
 			{
@@ -156,10 +156,10 @@ void Player::Act()//移動
 					isSquat = true;//改變蹲下狀態
 
 					//if(height == originHeight)//高度跟原本一樣
-						ChangeHeight(originHeight / 2);//將高度變為一半
-						SetMoveSpeed(originMoveSpeed / 2);//速度變為一半
-					//else
-						//ChangeHeight(originHeight);//將高度還原		
+					ChangeHeight(originHeight / 2);//將高度變為一半
+					SetMoveSpeed(originMoveSpeed / 2);//速度變為一半
+				//else
+					//ChangeHeight(originHeight);//將高度還原		
 				}
 			}
 			else
@@ -188,7 +188,7 @@ void Player::Act()//移動
 			}
 		}
 
-		if(isRoll)
+		if (isRoll)
 			Roll();
 
 		if (this->isJumpKeyDown)//如果按下跳躍
@@ -197,10 +197,13 @@ void Player::Act()//移動
 
 			if (isGrounded)//如果在地上
 			{
-				//不再蹲下
-				isSquat = false;//跳躍時不再蹲下
-				ChangeHeight(originHeight);//將高度還原
-				SetMoveSpeed(originMoveSpeed);//將速度還原
+				if (isSquat)//蹲下且跳躍，進行下跳
+				{
+					SetIsDownJump(true);//下跳
+					isSquat = false;//下跳時不再蹲下
+					ChangeHeight(originHeight);//將高度還原
+					SetMoveSpeed(originMoveSpeed);//將速度還原
+				}
 
 				isJump = true;//正在跳躍
 				isGrounded = false;//沒在地上
@@ -448,7 +451,7 @@ void Player::ShowBitMap()
 			currentAni = ANI::ANI_JUMP_RIGHT;
 		}
 	}
-	
+
 	else if (isMoveLeft)//左移動畫
 	{
 		currentAni = ANI::ANI_LEFT;
