@@ -46,6 +46,7 @@ Player::Player(string tag, int x, int y, int width, int height) :Character(tag, 
 	isFall = false;
 	isGrounded = false;
 	isRoll = false;
+	isSquat = false;
 
 	isAttack = false;
 
@@ -149,16 +150,23 @@ void Player::Act()//移動
 		{
 			if (this->isSquatKeyDown)//蹲下
 			{
-				isSquatKeyDown = false;
+				//isSquatKeyDown = false;
 				if (isGrounded)
 				{
-					isSquat = !isSquat;//改變蹲下狀態
+					isSquat = true;//改變蹲下狀態
 
-					if(height == originHeight)//高度跟原本一樣
+					//if(height == originHeight)//高度跟原本一樣
 						ChangeHeight(originHeight / 2);//將高度變為一半
-					else
-						ChangeHeight(originHeight);//將高度還原		
+						SetMoveSpeed(originMoveSpeed / 2);//速度變為一半
+					//else
+						//ChangeHeight(originHeight);//將高度還原		
 				}
+			}
+			else
+			{
+				isSquat = false;
+				ChangeHeight(originHeight);//將高度還原
+				SetMoveSpeed(originMoveSpeed);//將速度還原
 			}
 
 			if (this->isMoveLeft)
@@ -189,8 +197,10 @@ void Player::Act()//移動
 
 			if (isGrounded)//如果在地上
 			{
-				isSquat = false;//如果是蹲下狀態，取消蹲下狀態
+				//不再蹲下
+				isSquat = false;//跳躍時不再蹲下
 				ChangeHeight(originHeight);//將高度還原
+				SetMoveSpeed(originMoveSpeed);//將速度還原
 
 				isJump = true;//正在跳躍
 				isGrounded = false;//沒在地上
@@ -207,6 +217,11 @@ void Player::Act()//移動
 				isJump = true;//重新往上跳跳躍
 			}
 		}
+	}
+	else//正在攻擊
+	{
+		isSquat = false;//攻擊時不再蹲下
+		ChangeHeight(originHeight);//將高度還原
 	}
 
 	if (isDownJump)
@@ -410,6 +425,18 @@ void Player::ShowBitMap()
 		}
 	}
 
+	else if (isSquat)
+	{
+		if (faceLR == FACE_LEFT)
+		{
+			currentAni = ANI::ANI_SQUAT_LEFT;
+		}
+		else
+		{
+			currentAni = ANI::ANI_SQUAT_RIGHT;
+		}
+	}
+
 	else if (isJump || isFall || isDownJump)//跳躍動畫
 	{
 		if (faceLR == FACE_LEFT)
@@ -608,4 +635,12 @@ void Player::LoadAni()
 	//---------------右翻滾
 	char* aniRollRight = ".\\res\\player_roll_right.bmp";
 	AddAniBitMap(aniRollRight, ANI::ANI_ROLL_RIGHT);
+
+	//左蹲下
+	char* aniSquatLeft = ".\\res\\player_squat_left.bmp";
+	AddAniBitMap(aniSquatLeft, ANI::ANI_SQUAT_LEFT);
+
+	//右蹲下
+	char* aniSquatRight = ".\\res\\player_squat_right.bmp";
+	AddAniBitMap(aniSquatRight, ANI::ANI_SQUAT_RIGHT);
 }

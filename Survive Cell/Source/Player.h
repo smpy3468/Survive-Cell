@@ -119,7 +119,9 @@ private:
 		ANI_GET_HIT_LEFT,
 		ANI_GET_HIT_RIGHT,
 		ANI_ROLL_LEFT,
-		ANI_ROLL_RIGHT
+		ANI_ROLL_RIGHT,
+		ANI_SQUAT_LEFT,
+		ANI_SQUAT_RIGHT
 	};
 
 	vector<PlayerEquipment*> equipments;//¸Ë³Æ
