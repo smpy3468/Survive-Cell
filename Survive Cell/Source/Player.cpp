@@ -6,6 +6,7 @@
 #include "Item.h"
 #include "PlayerTradationalSword.h"
 #include "Floor.h"
+#include "Door.h"
 
 Player::Player()
 {
@@ -552,6 +553,13 @@ void Player::Roll()
 	else
 	{
 		Move(rollDisplacement, 0);
+	}
+
+	for (auto& i : GameSystem::GetGameObjectsWithTag<Door>("Door"))//翻滾時踢門
+	{
+		if (i->GetX() < this->x + this->width && i->GetX() + i->GetWidth() > this->x
+			&& i->GetY() < this->y + this->height && i->GetY() + i->GetHeight() > this->y)//門在玩家範圍內
+			i->Kicked();//踢門
 	}
 
 	if (rollDisplacement-- <= 0)

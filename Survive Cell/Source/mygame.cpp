@@ -71,6 +71,8 @@
 #include "EquipedSlot.h"
 #include "UIBlood.h"
 #include "UIMonsterBlood.h"
+#include "Door.h"
+
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class為遊戲的遊戲開頭畫面物件
@@ -97,6 +99,8 @@ namespace game_framework {
 
 		GameSystem::AddGameObject(new Floor("Ground", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//地圖最下方的地板
 		GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//地圖最下方的地板
+
+		GameSystem::AddGameObject(new Door("Door",100,Map::WORLD_SIZE_Y - 200,10,100));//門
 
 		GameSystem::CreateFloor(SIZE_X / 2, SIZE_Y / 2 + 400, 1000, 80);
 

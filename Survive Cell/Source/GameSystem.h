@@ -118,7 +118,8 @@ public:
 	//------------圖層相關------------//
 	enum LAYER//圖層編號
 	{
-		LAYER_FLOOR = 0,
+		LAYER_DOOR = 0,
+		LAYER_FLOOR,
 		LAYER_ITEM,
 		LAYER_MONSTER,
 		LAYER_PLAYER
