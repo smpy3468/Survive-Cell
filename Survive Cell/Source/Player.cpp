@@ -398,11 +398,6 @@ void Player::Attack()
 
 void Player::ShowBitMap()
 {
-	if (hasWeapon)
-	{
-		ShowWeapon();
-	}
-
 	if (isAttack)
 	{
 		if (faceLR == FACE_LEFT)
@@ -483,6 +478,11 @@ void Player::ShowBitMap()
 	}
 
 	ani[currentAni]->OnShow();
+	
+	if (hasWeapon)//有武器就顯示武器
+	{
+		ShowWeapon();
+	}
 }
 
 void Player::ShowInformation()
