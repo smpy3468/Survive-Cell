@@ -10,5 +10,12 @@ class Door :public GameObject
 {
 public:
 	Door();
+	Door(string tag, int x, int y, int width, int height);
+	void Kicked();//³Q½ð
 private:
+	void Dead()override;
+	void ShowBitMap()override;
+
+	bool isRuin;//¬O§_³Q¯}Ãa
+	CAnimation* ani;
 };
