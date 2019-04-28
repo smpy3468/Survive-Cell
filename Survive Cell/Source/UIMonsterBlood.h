@@ -1,6 +1,5 @@
 #pragma once
 #include "UInterface.h"
-#include "GameSystem.h"
 #include "Monster.h"
 #include "Map.h"
 class UIMonsterBlood :public UInterface

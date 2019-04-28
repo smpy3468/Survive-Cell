@@ -1,5 +1,4 @@
 #include "StdAfx.h"
-#include "GameSystem.h"
 #include "Player.h"
 #include "Monster.h"
 #include "Map.h"

@@ -55,7 +55,6 @@
 #include "Resource.h"
 #include <mmsystem.h>
 #include <ddraw.h>
-#include "audio.h"
 #include "gamelib.h"
 #include "mygame.h"
 #include "Map.h"
@@ -72,6 +71,7 @@
 #include "UIBlood.h"
 #include "UIMonsterBlood.h"
 #include "Door.h"
+#include "Goal.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -91,36 +91,7 @@ namespace game_framework {
 
 	void CGameStateInit::OnBeginState()
 	{
-		GameSystem::Init();
-
-		GameSystem::AddGameObject((new Player("Player", SIZE_X / 2, SIZE_Y / 2 - 100, 50, 80)));
-		GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 + 100, SIZE_Y / 2 - 133, 131, 141)));
-	//	GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 - 150, SIZE_Y / 2 - 133, 131, 141)));
-
-		GameSystem::AddGameObject(new Floor("Ground", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//地圖最下方的地板
-		GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//地圖最下方的地板
-
-		GameSystem::AddGameObject(new Door("Door",100,Map::WORLD_SIZE_Y - 200,10,100));//門
-
-		GameSystem::CreateFloor(SIZE_X / 2, SIZE_Y / 2 + 400, 1000, 80);
-
-		GameSystem::CreateFloor(SIZE_X / 2, Map::WORLD_SIZE_Y / 2 + 400, 1000, 80);
-		GameSystem::CreateFloor(SIZE_X / 2 + 1000, Map::WORLD_SIZE_Y / 2 + 450, 300, 80);
-		GameSystem::CreateFloor(SIZE_X / 2 + 1000 + 300, Map::WORLD_SIZE_Y / 2 + 400, 1000, 80);
-		GameSystem::CreateFloor(SIZE_X / 2 - 400, Map::WORLD_SIZE_Y - 150, 300, 80);
-
-		GameSystem::CreateFloor(SIZE_X / 2 + 900, Map::WORLD_SIZE_Y / 2, 300, 80);
-		GameSystem::CreateFloor(SIZE_X / 2 + 600, Map::WORLD_SIZE_Y / 2 + 100, 300, 80);
-		GameSystem::CreateFloor(SIZE_X / 2 + 300, Map::WORLD_SIZE_Y / 2 + 200, 300, 80);
-
-
-		GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10 - 100, SIZE_Y * 9 / 10, 64, 60));
-		GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10 - 10, SIZE_Y * 9 / 10, 64, 60));
-		GameSystem::AddUserInterface(new UIBlood("UIBlood", 0, 0, 400, 30));
-		GameSystem::AddUserInterface(new UIMonsterBlood("UIMonster", 0, 0, 0, 0));
-		Map::SetStaticObject();
-
-
+		GameSystem::ChangeToStageX(1);
 		//GameSystem::StopAudio(GameSystem::AUDIO::AUDIO_GAME_OVER);//停止遊戲中的音樂
 		//GameSystem::PlayAudio(GameSystem::AUDIO::AUDIO_GAME_INIT);//播放遊戲結束的音樂
 	}

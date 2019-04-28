@@ -1,9 +1,23 @@
 #include"Stdafx.h"
-#include "audio.h"
 #include "GameSystem.h"
 #include "Monster.h"
+#include "Player.h"
+#include "GameObject.h"
+#include "UInterface.h"
+#include "gamelib.h"
+#include "Map.h"
+#include "GameObject.h"
+#include "Character.h"
+#include "Player.h"
 #include "Floor.h"
-
+#include "Item.h"
+#include "Fire.h"
+#include "Demon.h"
+#include "EquipedSlot.h"
+#include "UIBlood.h"
+#include "UIMonsterBlood.h"
+#include "Door.h"
+#include "Goal.h"
 vector<GameObject*> GameSystem::gameObjectList;//初始化物件列表
 vector<UInterface*> GameSystem::gameUIList;//初始化物件列表
 bool GameSystem::isGameOver = false;
@@ -198,3 +212,45 @@ void GameSystem::MonstersAct() {
 		i->Act();
 	}
 }
+
+void GameSystem::ChangeToStageX(int stageNumber)
+{
+	GameSystem::Init();
+	if (stageNumber == 1) {
+		CreatStage1Object();
+	}
+
+		
+}
+
+void GameSystem::CreatStage1Object() 
+{
+
+	GameSystem::AddGameObject((new Player("Player", SIZE_X / 2, SIZE_Y / 2 - 100, 50, 80)));
+	GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 + 100, SIZE_Y / 2 - 133, 131, 141)));
+	GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 - 150, SIZE_Y / 2 - 133, 131, 141)));
+
+	GameSystem::AddGameObject(new Floor("Ground", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//地圖最下方的地板
+	GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//地圖最下方的地板
+
+	GameSystem::AddGameObject(new Door("Door", 100, Map::WORLD_SIZE_Y - 200, 10, 100));//門
+	GameSystem::AddGameObject(new Goal("Gaol", 100, Map::WORLD_SIZE_Y - 200, 143, 212));
+	GameSystem::CreateFloor(SIZE_X / 2, SIZE_Y / 2 + 400, 1000, 80);
+
+	GameSystem::CreateFloor(SIZE_X / 2, Map::WORLD_SIZE_Y / 2 + 400, 1000, 80);
+	GameSystem::CreateFloor(SIZE_X / 2 + 1000, Map::WORLD_SIZE_Y / 2 + 450, 300, 80);
+	GameSystem::CreateFloor(SIZE_X / 2 + 1000 + 300, Map::WORLD_SIZE_Y / 2 + 400, 1000, 80);
+	GameSystem::CreateFloor(SIZE_X / 2 - 400, Map::WORLD_SIZE_Y - 150, 300, 80);
+
+	GameSystem::CreateFloor(SIZE_X / 2 + 900, Map::WORLD_SIZE_Y / 2, 300, 80);
+	GameSystem::CreateFloor(SIZE_X / 2 + 600, Map::WORLD_SIZE_Y / 2 + 100, 300, 80);
+	GameSystem::CreateFloor(SIZE_X / 2 + 300, Map::WORLD_SIZE_Y / 2 + 200, 300, 80);
+
+
+	GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10 - 100, SIZE_Y * 9 / 10, 64, 60));
+	GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10 - 10, SIZE_Y * 9 / 10, 64, 60));
+	GameSystem::AddUserInterface(new UIBlood("UIBlood", 0, 0, 400, 30));
+	GameSystem::AddUserInterface(new UIMonsterBlood("UIMonster", 0, 0, 0, 0));
+	Map::SetStaticObject();
+}
+

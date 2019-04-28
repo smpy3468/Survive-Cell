@@ -1,8 +1,7 @@
 #include "StdAfx.h"
 #include "GameObject.h"
-#include "GameSystem.h"
 #include "Player.h"
-
+#include "GameSystem.h"
 class Effect :public GameObject{
 public:
 	Effect(string tag, int x, int y, int width, int height);

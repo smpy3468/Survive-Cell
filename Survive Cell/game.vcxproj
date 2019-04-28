@@ -263,6 +263,7 @@
     <ClCompile Include="Source\Demon.cpp" />
     <ClCompile Include="Source\Door.cpp" />
     <ClCompile Include="Source\Effect.cpp" />
+    <ClCompile Include="Source\Goal.cpp" />
     <ClCompile Include="Source\PlayerEquipment.cpp" />
     <ClCompile Include="Source\EquipedSlot.cpp" />
     <ClCompile Include="Source\Fire.cpp" />
@@ -339,6 +340,7 @@
     <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\GameSystem.h" />
     <ClInclude Include="Source\gameView.h" />
+    <ClInclude Include="Source\Goal.h" />
     <ClInclude Include="Source\PlayerTradationalSword.h" />
     <ClInclude Include="Source\PlayerEquipment.h" />
     <ClInclude Include="Source\PlayerWeapon.h" />

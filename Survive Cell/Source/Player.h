@@ -7,7 +7,8 @@
 #include "Character.h"
 #include "Item.h"
 #include "ItemWeapon.h"
-
+#include "PlayerEquipment.h"
+#include "GameSystem.h"
 class Player :public Character
 {
 public:

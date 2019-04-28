@@ -1,7 +1,7 @@
 #include "StdAfx.h"
 #include "Effect.h"
 #include "Monster.h"
-#include "GameSystem.h"
+
 
 //---------------------------------Constructor------------------------------//
 Effect::Effect(string tag, int x, int y, int width, int height):GameObject(tag, x, y, width, height){
