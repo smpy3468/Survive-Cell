@@ -36,7 +36,7 @@ public:
 	bool IsInAttackField(int playerX, int playerY, int right_fix, int left_fix, int up_fix, int down_fix);   //Player是否在AttackField內, 是的話，衝向主角 
 	bool IsPlayerInRange(Player* player, int right_fix, int left_fix, int up_fix, int down_fix);			//兩者的圖形是否有觸碰到
 	int  PlaceRelativePlayer(Player* player); //怪物相對於腳色的位置
-
+	
 	virtual void Attack();//當Player進入防守區，攻擊他
 	void PlayerAttack(int damage);
 

@@ -559,8 +559,13 @@ void Player::Roll()
 	for (auto& i : GameSystem::GetGameObjectsWithTag<Door>("Door"))//翻滾時踢門
 	{
 		if (i->GetX() < this->x + this->width && i->GetX() + i->GetWidth() > this->x
-			&& i->GetY() < this->y + this->height && i->GetY() + i->GetHeight() > this->y)//門在玩家範圍內
+			&& i->GetY() < this->y + this->height && i->GetY() + i->GetHeight() > this->y && !i->GetRuin())//門在玩家範圍內 
+		{
 			i->Kicked();//踢門
+			break;
+		}
+			
+
 	}
 
 	if (rollDisplacement-- <= 0)
