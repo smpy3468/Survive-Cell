@@ -102,6 +102,8 @@ public:
 	static void ShowAllObject();//顯示所有物件
 	static void ShowAllUI();//顯示所有UI物件
 
+	static void ShowText(string text, string alignHor, string alignVer, int fontSize);//顯示文字,對齊方式
+
 	//------------音訊相關-------------//
 	enum AUDIO
 	{

@@ -164,6 +164,85 @@ void GameSystem::ShowAllUI()
 	}
 }
 
+void GameSystem::ShowText(string text, string alignHor, string alignVer, int fontSize)
+{
+	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+	CFont f, *fp;
+	f.CreatePointFont(fontSize * 10, "Times New Roman");	// 產生 font f; 160表示16 point的字
+	fp = pDC->SelectObject(&f);					// 選用 font f
+	pDC->SetBkMode(TRANSPARENT);
+	pDC->SetTextColor(RGB(0, 0, 255));
+
+	char str[80];								// Demo 數字對字串的轉換
+	sprintf(str, text.c_str());
+
+	CRect rect = { 0,0,SIZE_X,SIZE_Y };//設定矩形左、上、右、下的座標	
+
+	if (alignVer == "TOP")//上
+	{
+		if (alignHor == "LEFT")
+		{
+			pDC->DrawText(str, rect, DT_LEFT | DT_WORDBREAK);//靠左對齊，可換行
+		}
+		else if (alignHor == "CENTER")
+		{
+			pDC->DrawText(str, rect, DT_CENTER | DT_WORDBREAK);//靠中對齊，可換行
+		}
+		else if (alignHor == "RIGHT")
+		{
+			pDC->DrawText(str, rect, DT_RIGHT | DT_WORDBREAK);//靠右對齊，可換行
+		}
+	}
+
+	else if (alignVer == "CENTER")
+	{
+		//這裡在設定垂直置中
+		CRect temp = rect;
+		int height = pDC->DrawText(str, temp, DT_CENTER | DT_WORDBREAK | DT_CALCRECT);
+		rect.DeflateRect(0, (rect.Height() - height) / 2);
+
+		if (alignHor == "LEFT")
+		{
+			pDC->DrawText(str, rect, DT_LEFT | DT_WORDBREAK);//靠左對齊，可換行
+		}
+		else if (alignHor == "CENTER")
+		{
+			pDC->DrawText(str, rect, DT_CENTER | DT_WORDBREAK);
+		}
+		else if (alignHor == "RIGHT")
+		{
+			pDC->DrawText(str, rect, DT_RIGHT | DT_WORDBREAK);//靠右對齊，可換行
+		}
+	}
+
+	else if (alignVer == "BOTTOM")
+	{
+		//這裡在設定垂直置下
+		CRect temp = rect;
+		int height = pDC->DrawText(str, temp, DT_WORDBREAK | DT_CALCRECT);
+		rect.top += rect.Height() - height;
+		//rect.DeflateRect(0, (rect.Height() - height));
+
+		if (alignHor == "LEFT")
+		{
+			pDC->DrawText(str, rect, DT_LEFT | DT_WORDBREAK);//靠左對齊，可換行
+		}
+		else if (alignHor == "CENTER")
+		{
+			pDC->DrawText(str, rect, DT_CENTER | DT_WORDBREAK);
+		}
+		else if (alignHor == "RIGHT")
+		{
+			pDC->DrawText(str, rect, DT_RIGHT | DT_WORDBREAK);//靠右對齊，可換行
+		}
+	}
+
+	//pDC->DrawText(str, rect, DT_CENTER | DT_WORDBREAK);
+
+	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+}
+
 void GameSystem::Load()
 {
 	CAudio::Instance()->Load(AUDIO::AUDIO_GAME_INIT, ".\\res\\game_init.mp3");
@@ -220,10 +299,10 @@ void GameSystem::ChangeToStageX(int stageNumber)
 		CreatStage1Object();
 	}
 
-		
+
 }
 
-void GameSystem::CreatStage1Object() 
+void GameSystem::CreatStage1Object()
 {
 
 	GameSystem::AddGameObject((new Player("Player", SIZE_X / 2, SIZE_Y / 2 - 100, 50, 80)));

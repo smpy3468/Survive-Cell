@@ -47,6 +47,7 @@ Player::Player(string tag, int x, int y, int width, int height) :Character(tag, 
 	isGrounded = false;
 	isRollKeyDown = false;
 	isRoll = false;
+	isSquatKeyDown = false;
 	isSquat = false;
 
 	isAttack = false;
@@ -478,7 +479,7 @@ void Player::ShowBitMap()
 	}
 
 	ani[currentAni]->OnShow();
-	
+
 	if (hasWeapon)//有武器就顯示武器
 	{
 		ShowWeapon();
@@ -487,7 +488,14 @@ void Player::ShowBitMap()
 
 void Player::ShowInformation()
 {
-	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+	string information = "HP:" + to_string(GetHP()) + "\nAttack" + to_string(GetAttackDamage())
+		+ "\nAttackSpeed:" + to_string(GetAttackSpeed()) + "\nAttackRange:" + to_string(GetAttackRange())
+		+ "\nMoveSpeed:" + to_string(GetMoveSpeed()) + "\nDefense:" + to_string(GetDefense());
+
+	GameSystem::ShowText(information, "LEFT", "TOP", 8);
+
+	/*
+	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC
 	CFont f, *fp;
 	f.CreatePointFont(80, "Times New Roman");	// 產生 font f; 160表示16 point的字
 	fp = pDC->SelectObject(&f);					// 選用 font f
@@ -504,6 +512,7 @@ void Player::ShowInformation()
 
 	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+	*/
 }
 
 /*void Player::AddEquipment(int equipmentID, ItemWeapon* equipment)
@@ -563,7 +572,7 @@ void Player::Roll()
 			i->Kicked();//踢門
 			break;
 		}
-			
+
 
 	}
 
