@@ -147,7 +147,7 @@ namespace game_framework {
 
 	void CGameStateOver::OnShow()
 	{
-		GameSystem::ShowText("你已經死了 ! \n畫面有夠藍黑", "CENTER", "CENTER", 16);
+		GameSystem::ShowText("你已經死了 ! \n畫面有夠藍黑", "CENTER", "CENTER", 16, RGB(100, 100, 255), 0, 0, OPAQUE, RGB(0, 0, 0));
 		/*CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC
 		CFont f, *fp;
 		f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字

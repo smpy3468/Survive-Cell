@@ -492,7 +492,7 @@ void Player::ShowInformation()
 		+ "\nAttackSpeed:" + to_string(GetAttackSpeed()) + "\nAttackRange:" + to_string(GetAttackRange())
 		+ "\nMoveSpeed:" + to_string(GetMoveSpeed()) + "\nDefense:" + to_string(GetDefense());
 
-	GameSystem::ShowText(information, "LEFT", "TOP", 8);
+	GameSystem::ShowText(information, "LEFT", "TOP", 8, RGB(0, 0, 0), 0, 30);
 
 	/*
 	CDC *pDC = CDDraw::GetBackCDC();			// ¨ú±o Back Plain ªº CDC

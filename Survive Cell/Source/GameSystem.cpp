@@ -164,19 +164,20 @@ void GameSystem::ShowAllUI()
 	}
 }
 
-void GameSystem::ShowText(string text, string alignHor, string alignVer, int fontSize)
+void GameSystem::ShowText(string text, string alignHor, string alignVer, int fontSize, COLORREF textColor, int dx, int dy, int bkMode, COLORREF bkColor)
 {
 	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
 	CFont f, *fp;
 	f.CreatePointFont(fontSize * 10, "Times New Roman");	// 產生 font f; 160表示16 point的字
 	fp = pDC->SelectObject(&f);					// 選用 font f
-	pDC->SetBkMode(TRANSPARENT);
-	pDC->SetTextColor(RGB(0, 0, 255));
+	pDC->SetBkMode(bkMode);
+	pDC->SetBkColor(bkColor);
+	pDC->SetTextColor(textColor);
 
 	char str[80];								// Demo 數字對字串的轉換
 	sprintf(str, text.c_str());
 
-	CRect rect = { 0,0,SIZE_X,SIZE_Y };//設定矩形左、上、右、下的座標	
+	CRect rect = { dx,dy,SIZE_X,SIZE_Y };//設定矩形左、上、右、下的座標	
 
 	if (alignVer == "TOP")//上
 	{
