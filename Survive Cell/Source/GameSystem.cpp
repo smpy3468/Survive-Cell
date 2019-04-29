@@ -200,7 +200,8 @@ void GameSystem::ShowText(string text, string alignHor, string alignVer, int fon
 		//這裡在設定垂直置中
 		CRect temp = rect;
 		int height = pDC->DrawText(str, temp, DT_CENTER | DT_WORDBREAK | DT_CALCRECT);
-		rect.DeflateRect(0, (rect.Height() - height) / 2);
+		rect.top += (rect.Height() - height) / 2;
+		//rect.DeflateRect(0, (rect.Height() - height) / 2);
 
 		if (alignHor == "LEFT")
 		{
