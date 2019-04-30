@@ -169,19 +169,19 @@ void Player::Act()//移動
 	case STATE_ATTACK:
 		Attack();
 		break;
-	
+
 	case STATE_JUMP:
 		Jump();
 		break;
-	
+
 	case STATE_DOWN_JUMP:
 		DownJump();
 		break;
-	
+
 	case STATE_ROLL:
 		Roll();
 		break;
-	
+
 	case STATE_SQUAT:
 		ChangeHeight(originHeight / 2);//將高度變為一半
 		SetMoveSpeed(originMoveSpeed / 2);//速度變為一半
@@ -192,21 +192,10 @@ void Player::Act()//移動
 		Fall();
 	currentState = nextState;*/
 
-	if(isAttack && isRoll == false)//正在攻擊
-	{
-		if (isSquat == true)
-		{
-			isSquat = false;//攻擊時不再蹲下
-			ChangeHeight(originHeight);//將高度還原
-		}
-		if (isRoll == true)
-		{
-			isRoll = false;
-			FlipWidthHeight();
-		}
-	}
+	if (isRoll == true || isSquat)//翻滾中或蹲下中不能攻擊
+		isAttack = false;
 
-	else //如果不是在攻擊狀態
+	if (isAttack == false)//沒在攻擊
 	{
 		if (isRollKeyDown)//按下翻滾
 		{
@@ -264,33 +253,36 @@ void Player::Act()//移動
 		{
 			isJumpKeyDown = false;//跳躍鍵不能持續按住
 
-			if (isGrounded)//如果在地上
+			if (isRoll == false)//翻滾中不能跳躍
 			{
-				if (isSquat)//蹲下且跳躍，進行下跳
+				if (isGrounded)//如果在地上
 				{
-					SetIsDownJump(true);//下跳
-					isSquat = false;//下跳時不再蹲下
-					ChangeHeight(originHeight);//將高度還原
-					SetMoveSpeed(originMoveSpeed);//將速度還原
+					if (isSquat)//蹲下且跳躍，進行下跳
+					{
+						SetIsDownJump(true);//下跳
+						isSquat = false;//下跳時不再蹲下
+						ChangeHeight(originHeight);//將高度還原
+						SetMoveSpeed(originMoveSpeed);//將速度還原
+					}
+					else
+					{
+						isJump = true;//正在跳躍
+					}
+					isGrounded = false;//沒在地上
 				}
-				else
-				{
-					isJump = true;//正在跳躍
-				}
-				isGrounded = false;//沒在地上
-			}
 
-			if (!isDownJump)//沒有下跳才能多段跳
-			{
-				if (jumpCount < MAX_JUMP_COUNT)//小於最大跳躍段數
+				if (!isDownJump)//沒有下跳才能多段跳
 				{
-					jumpCount++;//計數目前是幾段跳
-					jumpDisplacement = originJumpDisplacement;//重置跳躍位移量，呈現二段跳的效果
+					if (jumpCount < MAX_JUMP_COUNT)//小於最大跳躍段數
+					{
+						jumpCount++;//計數目前是幾段跳
+						jumpDisplacement = originJumpDisplacement;//重置跳躍位移量，呈現二段跳的效果
 
-					//以下是:若在下降中按下二段跳
-					isFall = false;//如果原本在下降，則不再下降
-					fallDisplacement = 0;//下降位移量重置
-					isJump = true;//重新往上跳跳躍
+						//以下是:若在下降中按下二段跳
+						isFall = false;//如果原本在下降，則不再下降
+						fallDisplacement = 0;//下降位移量重置
+						isJump = true;//重新往上跳跳躍
+					}
 				}
 			}
 		}
@@ -464,18 +456,7 @@ void Player::Attack()
 
 void Player::ShowBitMap()
 {
-	if (isRoll)//翻滾動畫
-	{
-		if (faceLR == FACE_LEFT)
-		{
-			currentAni = ANI::ANI_ROLL_LEFT;
-		}
-		else
-		{
-			currentAni = ANI::ANI_ROLL_RIGHT;
-		}
-	}
-	else if (isAttack)
+	if (isAttack)
 	{
 		if (faceLR == FACE_LEFT)
 		{
@@ -493,7 +474,17 @@ void Player::ShowBitMap()
 			Attack();
 		}
 	}
-
+	else if (isRoll)//翻滾動畫
+	{
+		if (faceLR == FACE_LEFT)
+		{
+			currentAni = ANI::ANI_ROLL_LEFT;
+		}
+		else
+		{
+			currentAni = ANI::ANI_ROLL_RIGHT;
+		}
+	}
 	else if (isSquat)
 	{
 		if (faceLR == FACE_LEFT)
