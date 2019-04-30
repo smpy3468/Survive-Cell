@@ -18,6 +18,7 @@
 #include "UIMonsterBlood.h"
 #include "Door.h"
 #include "Goal.h"
+
 vector<GameObject*> GameSystem::gameObjectList;//初始化物件列表
 vector<UInterface*> GameSystem::gameUIList;//初始化物件列表
 bool GameSystem::isGameOver = false;

@@ -136,7 +136,77 @@ void Player::SetIsGrounded(bool isGrounded)
 
 void Player::Act()//移動
 {
-	if (!this->isAttack)//如果不是在攻擊狀態
+	/*switch (currentState)
+	{
+	case STATE_IDLE:
+		if (isMoveLeft)
+			nextState = STATE_MOVE_LEFT;
+		if (isMoveRight)
+			nextState = STATE_MOVE_RIGHT;
+		if (isSquat)
+		{
+			if (isJumpKeyDown)
+				nextState = STATE_DOWN_JUMP;
+			else
+				nextState = STATE_SQUAT;
+		}
+		if (isJumpKeyDown)
+			nextState = STATE_JUMP;
+		if (isAttack)
+			nextState = STATE_ATTACK;
+		break;
+
+	case STATE_MOVE_LEFT:
+		faceLR = FACE_LEFT;
+		Move(-moveSpeed, 0);
+		break;
+
+	case STATE_MOVE_RIGHT:
+		faceLR = FACE_RIGHT;
+		Move(moveSpeed, 0);
+		break;
+
+	case STATE_ATTACK:
+		Attack();
+		break;
+	
+	case STATE_JUMP:
+		Jump();
+		break;
+	
+	case STATE_DOWN_JUMP:
+		DownJump();
+		break;
+	
+	case STATE_ROLL:
+		Roll();
+		break;
+	
+	case STATE_SQUAT:
+		ChangeHeight(originHeight / 2);//將高度變為一半
+		SetMoveSpeed(originMoveSpeed / 2);//速度變為一半
+		break;
+	}
+
+	if(isJump == false)
+		Fall();
+	currentState = nextState;*/
+
+	if(isAttack && isRoll == false)//正在攻擊
+	{
+		if (isSquat == true)
+		{
+			isSquat = false;//攻擊時不再蹲下
+			ChangeHeight(originHeight);//將高度還原
+		}
+		if (isRoll == true)
+		{
+			isRoll = false;
+			FlipWidthHeight();
+		}
+	}
+
+	else //如果不是在攻擊狀態
 	{
 		if (isRollKeyDown)//按下翻滾
 		{
@@ -161,7 +231,7 @@ void Player::Act()//移動
 					ChangeHeight(originHeight / 2);//將高度變為一半
 					SetMoveSpeed(originMoveSpeed / 2);//速度變為一半
 				//else
-					//ChangeHeight(originHeight);//將高度還原		
+					//ChangeHeight(originHeight);//將高度還原
 				}
 			}
 			else
@@ -189,9 +259,6 @@ void Player::Act()//移動
 				}
 			}
 		}
-
-		if (isRoll)
-			Roll();
 
 		if (this->isJumpKeyDown)//如果按下跳躍
 		{
@@ -228,11 +295,9 @@ void Player::Act()//移動
 			}
 		}
 	}
-	else//正在攻擊
-	{
-		isSquat = false;//攻擊時不再蹲下
-		ChangeHeight(originHeight);//將高度還原
-	}
+
+	if (isRoll)
+		Roll();
 
 	if (isDownJump)
 	{
@@ -399,7 +464,18 @@ void Player::Attack()
 
 void Player::ShowBitMap()
 {
-	if (isAttack)
+	if (isRoll)//翻滾動畫
+	{
+		if (faceLR == FACE_LEFT)
+		{
+			currentAni = ANI::ANI_ROLL_LEFT;
+		}
+		else
+		{
+			currentAni = ANI::ANI_ROLL_RIGHT;
+		}
+	}
+	else if (isAttack)
 	{
 		if (faceLR == FACE_LEFT)
 		{
@@ -415,18 +491,6 @@ void Player::ShowBitMap()
 		if (ani[currentAni]->IsEnd())
 		{
 			Attack();
-		}
-	}
-
-	else if (isRoll)//翻滾動畫
-	{
-		if (faceLR == FACE_LEFT)
-		{
-			currentAni = ANI::ANI_ROLL_LEFT;
-		}
-		else
-		{
-			currentAni = ANI::ANI_ROLL_RIGHT;
 		}
 	}
 
