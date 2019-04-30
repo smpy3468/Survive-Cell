@@ -448,6 +448,7 @@ void Player::Attack()
 			&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height)//©Çª«¦b§ðÀ»½d³ò¤º
 		{
 			i->PlayerAttack(attackDamage);
+			GameSystem::ShowText(to_string(GetAttackDamage()),"LEFT","TOP",20,RGB(255,0,0),i->GetX() - Map::GetSX() + 10,i->GetY() - Map::GetSY() - 30);
 		}
 	}
 
