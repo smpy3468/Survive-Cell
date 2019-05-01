@@ -84,6 +84,14 @@ void GameSystem::DeleteUInterface(UInterface* ui)
 	}
 }
 
+void GameSystem::DeleteAllUI()
+{
+	while (!gameUIList.empty())
+	{
+		DeleteUInterface(gameUIList[0]);
+	}
+}
+
 void GameSystem::DeleteAllGameObject()
 {
 	while (!gameObjectList.empty())
@@ -92,15 +100,15 @@ void GameSystem::DeleteAllGameObject()
 	}
 }
 
-
-
-void GameSystem::DeleteAllUI()
+void GameSystem::DeleteAllGameObjectExcpetPlayer()
 {
-	while (!gameUIList.empty())
+	for (auto & i :gameObjectList)
 	{
-		DeleteUInterface(gameUIList[0]);
+		if (i->GetTag != "Player")
+			DeleteGameObject(i);
 	}
 }
+
 
 void GameSystem::CreateFloor(int x, int y, int width, int height)
 {
@@ -215,17 +223,16 @@ void GameSystem::MonstersAct() {
 
 void GameSystem::ChangeToStageX(int stageNumber)
 {
-	GameSystem::Init();
-	if (stageNumber == 1) {
+	DeleteAllGameObjectExcpetPlayer();
+
+	if (stageNumber == 2) {
 		CreatStage1Object();
 	}
-
-		
 }
 
 void GameSystem::CreatStage1Object() 
 {
-
+	GameSystem::Init();
 	GameSystem::AddGameObject((new Player("Player", SIZE_X / 2, SIZE_Y / 2 - 100, 50, 80)));
 	GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 + 100, SIZE_Y / 2 - 133, 131, 141)));
 	GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 - 150, SIZE_Y / 2 - 133, 131, 141)));
@@ -254,3 +261,16 @@ void GameSystem::CreatStage1Object()
 	Map::SetStaticObject();
 }
 
+void GameSystem::CreatStage2Object()
+{	
+	GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 + 100, SIZE_Y / 2 - 133, 131, 141)));
+	GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 - 150, SIZE_Y / 2 - 133, 131, 141)));
+
+	GameSystem::AddGameObject(new Floor("Ground", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//地圖最下方的地板
+	GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//地圖最下方的地板
+
+	GameSystem::AddGameObject(new Door("Door", 100, Map::WORLD_SIZE_Y - 200, 10, 100));//門
+	GameSystem::AddGameObject(new Goal("Gaol", 100, Map::WORLD_SIZE_Y - 200, 143, 212));
+	GameSystem::CreateFloor(SIZE_X / 2, SIZE_Y / 2 + 400, 1000, 80);
+	Map::SetStaticObject();
+}

@@ -91,7 +91,7 @@ namespace game_framework {
 
 	void CGameStateInit::OnBeginState()
 	{
-		GameSystem::ChangeToStageX(1);
+		GameSystem::CreatStage1Object();
 		//GameSystem::StopAudio(GameSystem::AUDIO::AUDIO_GAME_OVER);//停止遊戲中的音樂
 		//GameSystem::PlayAudio(GameSystem::AUDIO::AUDIO_GAME_INIT);//播放遊戲結束的音樂
 	}

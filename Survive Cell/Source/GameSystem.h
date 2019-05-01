@@ -32,6 +32,7 @@ public:
 	static void DeleteGameObject(GameObject* obj);//刪除遊戲物件
 	static void DeleteUInterface(UInterface* ui);//刪除UI物件
 	static void DeleteAllGameObject();//刪除所有遊戲物件
+	static void DeleteAllGameObjectExcpetPlayer(); //刪除所有遊戲物件(player除外)
 	static void DeleteAllUI();//刪除所有UI物件
 	static void CreateFloor(int x, int y, int width, int height);//拼地板，傳入座標與寬高
 	static void ChangeToStageX(int stageNumber);
@@ -115,7 +116,7 @@ public:
 	static void MonstersAutoMove();    //全部怪物在defenseRange內移動
 	static void MonstersAttackPlayer();//全部怪物在Player進入attackField時會追Player
 	static void MonstersAct();
-
+	static void CreatStage1Object();
 	//------------圖層相關------------//
 	enum LAYER//圖層編號
 	{
@@ -134,8 +135,7 @@ public:
 	};
 
 private:
-	static void CreatStage1Object();
-
+	static void CreatStage2Object();			//創建第二關(第一關以後要保留UI和Player)
 
 
 	static vector<GameObject*> gameObjectList;//存放所有遊戲物件的列表
