@@ -189,6 +189,7 @@ namespace game_framework {
 		Player& player = *(GameSystem::GetGameObjectWithTag<Player>("Player"));
 		player.AdjustPositionOnBegin();
 
+		GameSystem::ChangeToNextStage();
 		GameSystem::StopAudio(GameSystem::AUDIO::AUDIO_GAME_OVER);//停止結束的音樂
 		GameSystem::PlayAudio(GameSystem::AUDIO::AUDIO_GAME_RUN);//播放遊戲的音樂
 	}
@@ -197,6 +198,8 @@ namespace game_framework {
 	{
 		if (GameSystem::IsGameOver())//遊戲結束
 			GotoGameState(GAME_STATE_OVER);//跳至遊戲結束狀態
+		if (GameSystem::IsNextStage())
+			GotoGameState(GAME_STATE_RUN);//
 
 		Player& player = *(GameSystem::GetGameObjectWithTag<Player>("Player"));//宣告一個玩家，避免每次都要打一長串GetGameObject...
 

@@ -22,6 +22,8 @@
 vector<GameObject*> GameSystem::gameObjectList;//初始化物件列表
 vector<UInterface*> GameSystem::gameUIList;//初始化物件列表
 bool GameSystem::isGameOver = false;
+bool GameSystem::isNextStage = false;
+int  GameSystem::nowStage = 0;
 
 GameSystem::GameSystem()
 {
@@ -35,6 +37,22 @@ bool GameSystem::IsGameOver()
 void GameSystem::SetGameOver()
 {
 	isGameOver = true;
+}
+
+
+bool GameSystem::IsNextStage()
+{
+	return isNextStage;
+}
+
+void GameSystem::SetIsNextStage(bool nextStage)
+{
+	isNextStage = nextStage;
+}
+
+void GameSystem::StagePlusOne()
+{
+	nowStage = nowStage + 1;
 }
 
 vector<GameObject*>& GameSystem::GetAllGameObject()//取得所有物件
@@ -122,32 +140,6 @@ void GameSystem::CreateFloor(int x, int y, int width, int height)
 	}
 }
 
-/*GameObject* GameSystem::GetGameObjectWithTag(string tag)//取得特定標籤的遊戲物件(單一個)
-{
-	for (auto& i : gameObjectList)
-	{
-		if (i.GetTag() == tag)
-		{
-			return &i;
-		}
-	}
-	return NULL;
-}*/
-
-/*template <class T>
-vector<T*> GameSystem::GetGameObjectsWithTag(string tag)//取得特定標籤的遊戲物件(多個)
-{
-	vector<T*> targetObjects;
-	for (auto& i : gameObjectList)
-	{
-		if (i.GetTag() == tag)
-		{
-			targetObjects.push_back(&i);
-		}
-	}
-
-	return targetObjects;
-}*/
 
 void GameSystem::SetAllObjectBitMapPosition()//設定所有物件圖片位置
 {
@@ -161,6 +153,7 @@ void GameSystem::ShowAllObject()//顯示所有物件
 {
 	for (auto& i : gameObjectList)
 	{
+
 		i->ShowBitMap();
 	}
 }
@@ -264,6 +257,8 @@ void GameSystem::Load()
 void GameSystem::Init()
 {
 	isGameOver = false;//重置遊戲狀態
+	isNextStage = false;
+	nowStage = 1;
 	Map::SetSX(0);
 	Map::SetSY(0);
 	DeleteAllGameObject();//刪除所有物件
@@ -303,13 +298,15 @@ void GameSystem::MonstersAct() {
 	}
 }
 
-void GameSystem::ChangeToStageX(int stageNumber)
+void GameSystem::ChangeToNextStage()
 {
 	DeleteAllGameObjectExcpetPlayer();
 
-	if (stageNumber == 2) {
-		CreatStage1Object();
+	if (nowStage == 2) {
+		CreatStage2Object();
 	}
+
+	SetIsNextStage(false);
 }
 
 void GameSystem::CreatStage1Object()
@@ -323,7 +320,8 @@ void GameSystem::CreatStage1Object()
 	GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//地圖最下方的地板
 
 	GameSystem::AddGameObject(new Door("Door", 100, Map::WORLD_SIZE_Y - 200, 10, 100));//門
-	GameSystem::AddGameObject(new Goal("Gaol", 100, Map::WORLD_SIZE_Y - 200, 143, 212));
+	GameSystem::AddGameObject(new Door("Door", 150, Map::WORLD_SIZE_Y - 500, 10, 100)); //換下一關的門
+
 	GameSystem::CreateFloor(SIZE_X / 2, SIZE_Y / 2 + 400, 1000, 80);
 
 	GameSystem::CreateFloor(SIZE_X / 2, Map::WORLD_SIZE_Y / 2 + 400, 1000, 80);
@@ -352,7 +350,7 @@ void GameSystem::CreatStage2Object()
 	GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//地圖最下方的地板
 
 	GameSystem::AddGameObject(new Door("Door", 100, Map::WORLD_SIZE_Y - 200, 10, 100));//門
-	GameSystem::AddGameObject(new Goal("Gaol", 100, Map::WORLD_SIZE_Y - 200, 143, 212));
+	GameSystem::AddGameObject(new Goal("Goal", 100, Map::WORLD_SIZE_Y - 200, 143, 212));
 	GameSystem::CreateFloor(SIZE_X / 2, SIZE_Y / 2 + 400, 1000, 80);
 	Map::SetStaticObject();
 }

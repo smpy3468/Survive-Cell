@@ -6,7 +6,7 @@
 #include "PlayerTradationalSword.h"
 #include "Floor.h"
 #include "Door.h"
-
+#include "Goal.h"
 Player::Player()
 {
 	tag = "Player";
@@ -434,6 +434,10 @@ void Player::Interact()
 				&& i->GetY() > this->y && i->GetY() < this->y + this->height) {
 				static_cast<Item*>(i)->Picked();
 			}
+		}
+		if (i->GetTag() == "Goal")
+		{
+			static_cast<Goal*>(i)->Picked();
 		}
 	}
 }

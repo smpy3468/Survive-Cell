@@ -25,6 +25,9 @@ public:
 
 	static bool IsGameOver();//是否遊戲結束
 	static void SetGameOver();//設定遊戲結束
+	static bool IsNextStage();
+	static void SetIsNextStage(bool nextStage);
+	static void StagePlusOne();
 
 	static vector<GameObject*>& GetAllGameObject();//取得所有遊戲物件
 	static void AddGameObject(GameObject* obj);//加入遊戲物件
@@ -35,7 +38,7 @@ public:
 	static void DeleteAllGameObjectExcpetPlayer(); //刪除所有遊戲物件(player除外)
 	static void DeleteAllUI();//刪除所有UI物件
 	static void CreateFloor(int x, int y, int width, int height);//拼地板，傳入座標與寬高
-	static void ChangeToStageX(int stageNumber);
+	static void ChangeToNextStage();
 	template <class T> static T* GetGameObjectWithTag(string tag)//取得特定標籤的遊戲物件(單一個)
 	{
 		for (auto& i : gameObjectList)
@@ -149,4 +152,6 @@ private:
 
 	const static int FLOOR_WIDTH = 80, FLOOR_HEIGHT = 50;
 	static bool isGameOver;//遊戲是否結束
+	static bool isNextStage;
+	static int  nowStage;
 };
