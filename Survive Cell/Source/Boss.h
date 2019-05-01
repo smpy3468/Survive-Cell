@@ -1,0 +1,39 @@
+#pragma once
+
+#include "Character.h"
+
+//Boss
+//王
+
+class Boss:public Character
+{
+public:
+	Boss(string tag, int x, int y, int width, int height);
+	void Act();//行動
+
+private:
+	enum ATTACK_MODE
+	{
+		ATTACK_NEAR = 0,
+		ATTACK_FAR
+	};
+	int attackMode=ATTACK_NEAR;//攻擊模式
+
+	const bool FACE_LEFT = true;//面向左邊
+	const bool FACE_RIGHT = false;//面向右邊
+	bool faceLR = FACE_RIGHT;//面向左邊或面向右邊
+
+	int currentAni = 0;//目前動畫
+	enum ANI
+	{
+		ANI_IDLE = 0,
+		ANI_LEFT,
+		ANI_RIGHT,
+		ANI_ATTACK_LEFT,
+		ANI_ATTACK_RIGHT,
+		ANI_GET_HIT_LEFT,
+		ANI_GET_HIT_RIGHT,
+	};
+
+	void LoadAni()override;
+};

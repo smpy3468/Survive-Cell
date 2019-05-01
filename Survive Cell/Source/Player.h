@@ -74,6 +74,19 @@ private:
 	bool isSquatKeyDown;//是否按下蹲下
 	bool isSquat;//是否蹲下
 
+	int currentState = 0, nextState = 0;//現態,次態
+	enum STATE//狀態機
+	{
+		STATE_IDLE=0,
+		STATE_MOVE_LEFT,
+		STATE_MOVE_RIGHT,
+		STATE_JUMP,
+		STATE_DOWN_JUMP,
+		STATE_ATTACK,
+		STATE_ROLL,
+		STATE_SQUAT
+	};
+
 	//---------------跳躍相關---------------//
 	int fallDisplacement;//下降位移量(移動到沒有地板的位置會用到)
 	int originJumpDisplacement, jumpDisplacement;//跳躍位移量

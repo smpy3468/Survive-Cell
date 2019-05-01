@@ -47,6 +47,7 @@ Player::Player(string tag, int x, int y, int width, int height) :Character(tag, 
 	isGrounded = false;
 	isRollKeyDown = false;
 	isRoll = false;
+	isSquatKeyDown = false;
 	isSquat = false;
 
 	isAttack = false;
@@ -135,7 +136,66 @@ void Player::SetIsGrounded(bool isGrounded)
 
 void Player::Act()//移動
 {
-	if (!this->isAttack)//如果不是在攻擊狀態
+	/*switch (currentState)
+	{
+	case STATE_IDLE:
+		if (isMoveLeft)
+			nextState = STATE_MOVE_LEFT;
+		if (isMoveRight)
+			nextState = STATE_MOVE_RIGHT;
+		if (isSquat)
+		{
+			if (isJumpKeyDown)
+				nextState = STATE_DOWN_JUMP;
+			else
+				nextState = STATE_SQUAT;
+		}
+		if (isJumpKeyDown)
+			nextState = STATE_JUMP;
+		if (isAttack)
+			nextState = STATE_ATTACK;
+		break;
+
+	case STATE_MOVE_LEFT:
+		faceLR = FACE_LEFT;
+		Move(-moveSpeed, 0);
+		break;
+
+	case STATE_MOVE_RIGHT:
+		faceLR = FACE_RIGHT;
+		Move(moveSpeed, 0);
+		break;
+
+	case STATE_ATTACK:
+		Attack();
+		break;
+
+	case STATE_JUMP:
+		Jump();
+		break;
+
+	case STATE_DOWN_JUMP:
+		DownJump();
+		break;
+
+	case STATE_ROLL:
+		Roll();
+		break;
+
+	case STATE_SQUAT:
+		ChangeHeight(originHeight / 2);//將高度變為一半
+		SetMoveSpeed(originMoveSpeed / 2);//速度變為一半
+		break;
+	}
+
+	if(isJump == false)
+		Fall();
+	currentState = nextState;*/
+
+	if (isRoll == true || isSquat)//翻滾中或蹲下中不能攻擊
+		isAttack = false;
+
+	if (isAttack == false)//沒在攻擊
 	{
 		if (isRollKeyDown)//按下翻滾
 		{
@@ -160,7 +220,7 @@ void Player::Act()//移動
 					ChangeHeight(originHeight / 2);//將高度變為一半
 					SetMoveSpeed(originMoveSpeed / 2);//速度變為一半
 				//else
-					//ChangeHeight(originHeight);//將高度還原		
+					//ChangeHeight(originHeight);//將高度還原
 				}
 			}
 			else
@@ -189,49 +249,47 @@ void Player::Act()//移動
 			}
 		}
 
-		if (isRoll)
-			Roll();
-
 		if (this->isJumpKeyDown)//如果按下跳躍
 		{
 			isJumpKeyDown = false;//跳躍鍵不能持續按住
 
-			if (isGrounded)//如果在地上
+			if (isRoll == false)//翻滾中不能跳躍
 			{
-				if (isSquat)//蹲下且跳躍，進行下跳
+				if (isGrounded)//如果在地上
 				{
-					SetIsDownJump(true);//下跳
-					isSquat = false;//下跳時不再蹲下
-					ChangeHeight(originHeight);//將高度還原
-					SetMoveSpeed(originMoveSpeed);//將速度還原
+					if (isSquat)//蹲下且跳躍，進行下跳
+					{
+						SetIsDownJump(true);//下跳
+						isSquat = false;//下跳時不再蹲下
+						ChangeHeight(originHeight);//將高度還原
+						SetMoveSpeed(originMoveSpeed);//將速度還原
+					}
+					else
+					{
+						isJump = true;//正在跳躍
+					}
+					isGrounded = false;//沒在地上
 				}
-				else
-				{
-					isJump = true;//正在跳躍
-				}
-				isGrounded = false;//沒在地上
-			}
 
-			if (!isDownJump)//沒有下跳才能多段跳
-			{
-				if (jumpCount < MAX_JUMP_COUNT)//小於最大跳躍段數
+				if (!isDownJump)//沒有下跳才能多段跳
 				{
-					jumpCount++;//計數目前是幾段跳
-					jumpDisplacement = originJumpDisplacement;//重置跳躍位移量，呈現二段跳的效果
+					if (jumpCount < MAX_JUMP_COUNT)//小於最大跳躍段數
+					{
+						jumpCount++;//計數目前是幾段跳
+						jumpDisplacement = originJumpDisplacement;//重置跳躍位移量，呈現二段跳的效果
 
-					//以下是:若在下降中按下二段跳
-					isFall = false;//如果原本在下降，則不再下降
-					fallDisplacement = 0;//下降位移量重置
-					isJump = true;//重新往上跳跳躍
+						//以下是:若在下降中按下二段跳
+						isFall = false;//如果原本在下降，則不再下降
+						fallDisplacement = 0;//下降位移量重置
+						isJump = true;//重新往上跳跳躍
+					}
 				}
 			}
 		}
 	}
-	else//正在攻擊
-	{
-		isSquat = false;//攻擊時不再蹲下
-		ChangeHeight(originHeight);//將高度還原
-	}
+
+	if (isRoll)
+		Roll();
 
 	if (isDownJump)
 	{
@@ -390,6 +448,7 @@ void Player::Attack()
 			&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height)//怪物在攻擊範圍內
 		{
 			i->PlayerAttack(attackDamage);
+			GameSystem::ShowText(to_string(GetAttackDamage()),"LEFT","TOP",20,RGB(255,0,0),i->GetX() - Map::GetSX() + 10,i->GetY() - Map::GetSY() - 30);
 		}
 	}
 
@@ -416,7 +475,6 @@ void Player::ShowBitMap()
 			Attack();
 		}
 	}
-
 	else if (isRoll)//翻滾動畫
 	{
 		if (faceLR == FACE_LEFT)
@@ -428,7 +486,6 @@ void Player::ShowBitMap()
 			currentAni = ANI::ANI_ROLL_RIGHT;
 		}
 	}
-
 	else if (isSquat)
 	{
 		if (faceLR == FACE_LEFT)
@@ -478,7 +535,7 @@ void Player::ShowBitMap()
 	}
 
 	ani[currentAni]->OnShow();
-	
+
 	if (hasWeapon)//有武器就顯示武器
 	{
 		ShowWeapon();
@@ -487,7 +544,14 @@ void Player::ShowBitMap()
 
 void Player::ShowInformation()
 {
-	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+	string information = "HP:" + to_string(GetHP()) + "\nAttack" + to_string(GetAttackDamage())
+		+ "\nAttackSpeed:" + to_string(GetAttackSpeed()) + "\nAttackRange:" + to_string(GetAttackRange())
+		+ "\nMoveSpeed:" + to_string(GetMoveSpeed()) + "\nDefense:" + to_string(GetDefense());
+
+	GameSystem::ShowText(information, "LEFT", "TOP", 8, RGB(0, 0, 0), 0, 30);
+
+	/*
+	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC
 	CFont f, *fp;
 	f.CreatePointFont(80, "Times New Roman");	// 產生 font f; 160表示16 point的字
 	fp = pDC->SelectObject(&f);					// 選用 font f
@@ -504,6 +568,7 @@ void Player::ShowInformation()
 
 	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+	*/
 }
 
 /*void Player::AddEquipment(int equipmentID, ItemWeapon* equipment)
@@ -563,7 +628,7 @@ void Player::Roll()
 			i->Kicked();//踢門
 			break;
 		}
-			
+
 
 	}
 
