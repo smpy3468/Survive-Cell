@@ -435,9 +435,12 @@ void Player::Interact()
 				static_cast<Item*>(i)->Picked();
 			}
 		}
-		if (i->GetTag() == "Goal")
-		{
-			static_cast<Goal*>(i)->Picked();
+		else if (i->GetTag() == "Goal")
+		{	
+			if (i->GetX() > this->x && i->GetX() < this->x + this->width
+				&& i->GetY() > this->y && i->GetY() < this->y + this->height) {
+				static_cast<Goal*>(i)->Picked();
+			};
 		}
 	}
 }

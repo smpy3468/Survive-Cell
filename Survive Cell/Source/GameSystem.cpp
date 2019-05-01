@@ -121,13 +121,17 @@ void GameSystem::DeleteAllGameObject()
 
 void GameSystem::DeleteAllGameObjectExcpetPlayer()
 {
-	for (auto & i :gameObjectList)
+	int index = 0;
+	while (gameObjectList.size() != 1)
 	{
-		if (i->GetTag() != "Player")
-			DeleteGameObject(i);
+		if (gameObjectList[index]->GetTag() == "Player") 
+		{
+			index++;
+			continue;
+		}
+		DeleteGameObject(gameObjectList[index]);
 	}
 }
-
 
 void GameSystem::CreateFloor(int x, int y, int width, int height)
 {
@@ -302,9 +306,8 @@ void GameSystem::ChangeToNextStage()
 {
 	DeleteAllGameObjectExcpetPlayer();
 
-	if (nowStage == 2) {
-		CreatStage2Object();
-	}
+	CreatStage2Object();
+
 
 	SetIsNextStage(false);
 }
@@ -320,7 +323,7 @@ void GameSystem::CreatStage1Object()
 	GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//地圖最下方的地板
 
 	GameSystem::AddGameObject(new Door("Door", 100, Map::WORLD_SIZE_Y - 200, 10, 100));//門
-	GameSystem::AddGameObject(new Door("Door", 150, Map::WORLD_SIZE_Y - 500, 10, 100)); //換下一關的門
+	GameSystem::AddGameObject(new Goal("Goal", 150, Map::WORLD_SIZE_Y - 312, 143, 212));
 
 	GameSystem::CreateFloor(SIZE_X / 2, SIZE_Y / 2 + 400, 1000, 80);
 
@@ -342,7 +345,7 @@ void GameSystem::CreatStage1Object()
 }
 
 void GameSystem::CreatStage2Object()
-{	
+{
 	GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 + 100, SIZE_Y / 2 - 133, 131, 141)));
 	GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 - 150, SIZE_Y / 2 - 133, 131, 141)));
 
@@ -350,7 +353,7 @@ void GameSystem::CreatStage2Object()
 	GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//地圖最下方的地板
 
 	GameSystem::AddGameObject(new Door("Door", 100, Map::WORLD_SIZE_Y - 200, 10, 100));//門
-	GameSystem::AddGameObject(new Goal("Goal", 100, Map::WORLD_SIZE_Y - 200, 143, 212));
+	GameSystem::AddGameObject(new Goal("Goal", 150, Map::WORLD_SIZE_Y - 312, 143, 212));
 	GameSystem::CreateFloor(SIZE_X / 2, SIZE_Y / 2 + 400, 1000, 80);
 	Map::SetStaticObject();
 }
