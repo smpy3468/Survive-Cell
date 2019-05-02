@@ -12,6 +12,7 @@ class Map
 public:
 	Map();
 
+	static void Init();//初始化
 	static void Load();//載入地圖
 	static void ShowStartMenu();//顯示開始選單
 	static void ShowBackgroundPic();//顯示背景圖片

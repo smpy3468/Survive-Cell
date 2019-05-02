@@ -11,6 +11,17 @@ bool Map::coordinate[WORLD_SIZE_X][WORLD_SIZE_Y] = { false };//¬ö¿ý­þ­Ó®y¼Ð¦³ª«¥
 int Map::sx = 0;//¹w³]¿Ã¹õ¥ª¤W¨¤¦b¦a¹Ï®y¼Ðªº0,0 
 int Map::sy = 0;//¹w³]¿Ã¹õ¥ª¤W¨¤¦b¦a¹Ï®y¼Ðªº0,0 
 
+void Map::Init()
+{
+	for (int i = 0; i < WORLD_SIZE_X; i++)
+	{
+		for (int j = 0; j < WORLD_SIZE_Y; j++)
+		{
+			coordinate[i][j] = false;
+		}
+	}
+}
+
 void Map::Load()
 {
 	startMenu.LoadBitmap(".\\res\\start_menu.bmp");

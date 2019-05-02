@@ -119,15 +119,14 @@ void GameSystem::DeleteAllGameObject()
 	}
 }
 
-void GameSystem::DeleteAllGameObjectExcpetPlayer()
+void GameSystem::DeleteAllGameObjectExceptPlayer()
 {
 	int index = 0;
 	while (gameObjectList.size() != 1)
 	{
-		if (gameObjectList[index]->GetTag() == "Player") 
+		if (gameObjectList[0]->GetTag() == "Player")
 		{
 			index++;
-			continue;
 		}
 		DeleteGameObject(gameObjectList[index]);
 	}
@@ -304,7 +303,7 @@ void GameSystem::MonstersAct() {
 
 void GameSystem::ChangeToNextStage()
 {
-	DeleteAllGameObjectExcpetPlayer();
+	DeleteAllGameObjectExceptPlayer();
 
 	CreatStage2Object();
 
@@ -355,5 +354,6 @@ void GameSystem::CreatStage2Object()
 	GameSystem::AddGameObject(new Door("Door", 100, Map::WORLD_SIZE_Y - 200, 10, 100));//ªù
 	GameSystem::AddGameObject(new Goal("Goal", 150, Map::WORLD_SIZE_Y - 312, 143, 212));
 	GameSystem::CreateFloor(SIZE_X / 2, SIZE_Y / 2 + 400, 1000, 80);
+	Map::Init();
 	Map::SetStaticObject();
 }

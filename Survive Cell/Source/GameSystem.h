@@ -35,7 +35,7 @@ public:
 	static void DeleteGameObject(GameObject* obj);//刪除遊戲物件
 	static void DeleteUInterface(UInterface* ui);//刪除UI物件
 	static void DeleteAllGameObject();//刪除所有遊戲物件
-	static void DeleteAllGameObjectExcpetPlayer(); //刪除所有遊戲物件(player除外)
+	static void DeleteAllGameObjectExceptPlayer(); //刪除所有遊戲物件(player除外)
 	static void DeleteAllUI();//刪除所有UI物件
 	static void CreateFloor(int x, int y, int width, int height);//拼地板，傳入座標與寬高
 	static void ChangeToNextStage();

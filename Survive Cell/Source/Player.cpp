@@ -430,15 +430,15 @@ void Player::Interact()
 	{
 		if (i->GetTag() == "Item" || i->GetTag() == "Potion" || i->GetTag() == "ItemWeapon")//мOклл~
 		{
-			if (i->GetX() > this->x && i->GetX() < this->x + this->width
-				&& i->GetY() > this->y && i->GetY() < this->y + this->height) {
+			if (i->GetX() + i->GetWidth() > this->x && i->GetX() < this->x + this->width
+				&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height) {
 				static_cast<Item*>(i)->Picked();
 			}
 		}
 		else if (i->GetTag() == "Goal")
 		{	
-			if (i->GetX() > this->x && i->GetX() < this->x + this->width
-				&& i->GetY() > this->y && i->GetY() < this->y + this->height) {
+			if (i->GetX()+i->GetWidth() > this->x && i->GetX() < this->x + this->width
+				&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height) {
 				static_cast<Goal*>(i)->Picked();
 			};
 		}
