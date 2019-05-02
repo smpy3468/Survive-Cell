@@ -323,7 +323,7 @@ void GameSystem::CreatStage1Object()
 	GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//地圖最下方的地板
 
 	GameSystem::AddGameObject(new Door("Door", 100, Map::WORLD_SIZE_Y - 200, 10, 100));//門
-	GameSystem::AddGameObject(new Goal("Goal", 150, Map::WORLD_SIZE_Y - 312, 143, 212));
+	GameSystem::AddGameObject(new Goal("Goal", Map::WORLD_SIZE_X-500, Map::WORLD_SIZE_Y - 312, 143, 212));
 
 	GameSystem::CreateFloor(SIZE_X / 2, SIZE_Y / 2 + 400, 1000, 80);
 

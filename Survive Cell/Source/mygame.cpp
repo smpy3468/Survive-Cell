@@ -189,10 +189,16 @@ namespace game_framework {
 		Player& player = *(GameSystem::GetGameObjectWithTag<Player>("Player"));
 		player.AdjustPositionOnBegin();
 
-		if (GameSystem::IsNextStage())
+		if (GameSystem::IsNextStage()){
+			ShowInitProgress(30);				//換關卡的Loading
+			Sleep(300);							//Delay
 			GameSystem::ChangeToNextStage();
+			ShowInitProgress(50);
+			Sleep(300);
+		}
 		GameSystem::StopAudio(GameSystem::AUDIO::AUDIO_GAME_OVER);//停止結束的音樂
 		GameSystem::PlayAudio(GameSystem::AUDIO::AUDIO_GAME_RUN);//播放遊戲的音樂
+		ShowInitProgress(100);
 	}
 
 	void CGameStateRun::OnMove()							// 移動遊戲元素
