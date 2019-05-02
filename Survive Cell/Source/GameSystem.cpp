@@ -315,14 +315,16 @@ void GameSystem::ChangeToNextStage()
 void GameSystem::CreatStage1Object()
 {
 	GameSystem::Init();
-	GameSystem::AddGameObject((new Player("Player", SIZE_X / 2, SIZE_Y / 2 - 100, 50, 80)));
-	GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 + 100, SIZE_Y / 2 - 133, 131, 141)));
-	GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 - 150, SIZE_Y / 2 - 133, 131, 141)));
+	GameSystem::AddGameObject((new Player("Player", 0, 0, 50, 80)));
 
-	GameSystem::AddGameObject(new Floor("Ground", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//瓜程よ狾
-	GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//瓜程よ狾
+	GameSystem::CreateFloor(0, 600, 710, 120);
+	GameSystem::AddGameObject(new Door("Door", 530, 480, 12, 120));//
+	GameSystem::CreateFloor(330, 400, 410, 80);
+	GameSystem::CreateFloor(1090, 600, 850, 120);
+	//GameSystem::AddGameObject(new Floor("Floor", 0,600, 710, 120, IDB_GROUND));//瓜程よ狾
+	//GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//瓜程よ狾
 
-	GameSystem::AddGameObject(new Door("Door", 100, Map::WORLD_SIZE_Y - 200, 10, 100));//
+	/*GameSystem::AddGameObject(new Door("Door", 100, Map::WORLD_SIZE_Y - 200, 10, 100));//
 	GameSystem::AddGameObject(new Goal("Goal", Map::WORLD_SIZE_X-500, Map::WORLD_SIZE_Y - 312, 143, 212));
 
 	GameSystem::CreateFloor(SIZE_X / 2, SIZE_Y / 2 + 400, 1000, 80);
@@ -334,7 +336,7 @@ void GameSystem::CreatStage1Object()
 
 	GameSystem::CreateFloor(SIZE_X / 2 + 900, Map::WORLD_SIZE_Y / 2, 300, 80);
 	GameSystem::CreateFloor(SIZE_X / 2 + 600, Map::WORLD_SIZE_Y / 2 + 100, 300, 80);
-	GameSystem::CreateFloor(SIZE_X / 2 + 300, Map::WORLD_SIZE_Y / 2 + 200, 300, 80);
+	GameSystem::CreateFloor(SIZE_X / 2 + 300, Map::WORLD_SIZE_Y / 2 + 200, 300, 80);*/
 
 
 	GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10 - 100, SIZE_Y * 9 / 10, 64, 60));
@@ -353,7 +355,7 @@ void GameSystem::CreatStage2Object()
 	GameSystem::AddGameObject(new Floor("Ground", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//瓜程よ狾
 	GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//瓜程よ狾
 
-	GameSystem::AddGameObject(new Door("Door", 100, Map::WORLD_SIZE_Y - 200, 10, 100));//
+	GameSystem::AddGameObject(new Door("Door", 100, Map::WORLD_SIZE_Y - 220, 12, 120));//
 	GameSystem::AddGameObject(new Goal("Goal", 150, Map::WORLD_SIZE_Y - 312, 143, 212));
 	GameSystem::CreateFloor(SIZE_X / 2, SIZE_Y / 2 + 400, 1000, 80);
 	Map::Init();

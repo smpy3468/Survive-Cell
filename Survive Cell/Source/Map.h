@@ -28,7 +28,7 @@ public:
 	static void SetStaticObject();//設定不會移動的物件座標，只會在遊戲一開始呼叫
 	static bool HasObject(int x, int y);//該座標是否有物件
 
-	static const int WORLD_SIZE_X = 5 * 640, WORLD_SIZE_Y = 3 * 480;//整個遊戲地圖的長寬
+	static const int WORLD_SIZE_X = 6 * 640, WORLD_SIZE_Y = 4 * 480;//整個遊戲地圖的長寬
 private:
 	static bool coordinate[WORLD_SIZE_X][WORLD_SIZE_Y];//紀錄哪個座標有物件
 	static int sx, sy;//螢幕左上角的座標在地圖座標的哪裡
