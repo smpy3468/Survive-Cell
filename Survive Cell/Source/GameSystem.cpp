@@ -18,6 +18,7 @@
 #include "UIMonsterBlood.h"
 #include "Door.h"
 #include "Goal.h"
+#include "Boss.h"
 
 vector<GameObject*> GameSystem::gameObjectList;//初始化物件列表
 vector<UInterface*> GameSystem::gameUIList;//初始化物件列表
@@ -345,6 +346,7 @@ void GameSystem::CreatStage1Object()
 
 void GameSystem::CreatStage2Object()
 {
+	GameSystem::AddGameObject(new Boss("Monster", SIZE_X / 2, SIZE_Y / 2, 180, 90));
 	GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 + 100, SIZE_Y / 2 - 133, 131, 141)));
 	GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 - 150, SIZE_Y / 2 - 133, 131, 141)));
 

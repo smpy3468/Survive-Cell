@@ -1,17 +1,30 @@
 #pragma once
 
 #include "Character.h"
+#include "Monster.h"
 
 //Boss
 //王
 
-class Boss:public Character
+class Boss:public Monster
 {
 public:
 	Boss(string tag, int x, int y, int width, int height);
 	void Act();//行動
-
+	
+	void Attack()override;
+	void Move(int dx, int dy)override;
+	
 private:
+
+	void ShowBitMap()override;
+
+	void NearSlash();//砍
+	void JumpBack();//往後跳
+	void JumpFront();//往前跳
+	void FarSlash();//遠程劍波
+	void InstantDeath();//即死技能
+
 	enum ATTACK_MODE
 	{
 		ATTACK_NEAR = 0,
