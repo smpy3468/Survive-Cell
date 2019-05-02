@@ -134,7 +134,7 @@ void Player::SetIsGrounded(bool isGrounded)
 	this->isGrounded = isGrounded;
 }
 
-void Player::Act()//移動
+void Player::Act()//行動
 {
 	/*switch (currentState)
 	{
@@ -433,14 +433,16 @@ void Player::Interact()
 			if (i->GetX() + i->GetWidth() > this->x && i->GetX() < this->x + this->width
 				&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height) {
 				static_cast<Item*>(i)->Picked();
+				break;
 			}
 		}
 		else if (i->GetTag() == "Goal")
-		{	
-			if (i->GetX()+i->GetWidth() > this->x && i->GetX() < this->x + this->width
+		{
+			if (i->GetX() + i->GetWidth() > this->x && i->GetX() < this->x + this->width
 				&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height) {
 				static_cast<Goal*>(i)->Picked();
-			};
+				break;
+			}
 		}
 	}
 }
@@ -455,7 +457,7 @@ void Player::Attack()
 			&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height)//怪物在攻擊範圍內
 		{
 			i->PlayerAttack(attackDamage);
-			GameSystem::ShowText(to_string(GetAttackDamage()),"LEFT","TOP",20,RGB(255,0,0),i->GetX() - Map::GetSX() + 10,i->GetY() - Map::GetSY() - 30);
+			GameSystem::ShowText(to_string(GetAttackDamage()), i->GetX() - Map::GetSX() + 10, i->GetY() - Map::GetSY() - 30, i->GetX() + i->GetWidth() - Map::GetSX(), i->GetY() + i->GetHeight() - Map::GetSY(), "CENTER", "TOP", 20, RGB(255, 0, 0));
 		}
 	}
 
@@ -555,7 +557,7 @@ void Player::ShowInformation()
 		+ "\nAttackSpeed:" + to_string(GetAttackSpeed()) + "\nAttackRange:" + to_string(GetAttackRange())
 		+ "\nMoveSpeed:" + to_string(GetMoveSpeed()) + "\nDefense:" + to_string(GetDefense());
 
-	GameSystem::ShowText(information, "LEFT", "TOP", 8, RGB(0, 0, 0), 0, 30);
+	GameSystem::ShowText(information, 0, 30, SIZE_X, SIZE_Y, "LEFT", "TOP", 8, RGB(0, 0, 0));
 
 	/*
 	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC
@@ -603,8 +605,8 @@ void Player::ShowInformation()
 void Player::CalculateAbility(PlayerEquipment* equipment)
 {
 	//攻擊力與防禦累加上去
-	this->attackDamage += equipment->GetAttackDamage();
-	this->defense += equipment->GetDefense();
+	this->attackDamage = equipment->GetAttackDamage();
+	this->defense = equipment->GetDefense();
 
 	//攻擊距離使用武器的攻擊距離
 	this->attackRange = equipment->GetAttackRange();

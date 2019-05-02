@@ -15,7 +15,6 @@ using namespace game_framework;
 #include "GameObject.h"
 #include "UInterface.h"
 
-
 class GameSystem
 {
 public:
@@ -107,10 +106,11 @@ public:
 	static void ShowAllUI();//顯示所有UI物件
 
 	//顯示文字
-	static void ShowText(string text, string alignHor = "LEFT", string alignVer = "TOP"//顯示文字,對齊方式
+	static void ShowText(string text
+		, int left = 0, int top = 0, int right = SIZE_X, int bottom = SIZE_Y//矩形的四個點座標
+		, string alignHor = "LEFT", string alignVer = "TOP"//顯示文字,對齊方式
 		, int fontSize = 16, COLORREF textColor = RGB(0, 0, 0)//字體大小,字體顏色
-		, int dx = 0, int dy = 0,//偏移量
-		int bkMode = 1, COLORREF bkColor = RGB(255, 255, 255));//背景模式(OPAQUE:不透明, TRANSPARENT:透明),背景顏色
+		, int bkMode = 1, COLORREF bkColor = RGB(255, 255, 255));//背景模式(OPAQUE:不透明, TRANSPARENT:透明),背景顏色
 
 	//------------音訊相關-------------//
 	enum AUDIO

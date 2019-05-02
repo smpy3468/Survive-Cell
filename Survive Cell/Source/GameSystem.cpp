@@ -169,7 +169,7 @@ void GameSystem::ShowAllUI()
 	}
 }
 
-void GameSystem::ShowText(string text, string alignHor, string alignVer, int fontSize, COLORREF textColor, int dx, int dy, int bkMode, COLORREF bkColor)
+void GameSystem::ShowText(string text, int left, int top, int right, int bottom, string alignHor, string alignVer, int fontSize, COLORREF textColor, int bkMode, COLORREF bkColor)
 {
 	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
 	CFont f, *fp;
@@ -182,7 +182,7 @@ void GameSystem::ShowText(string text, string alignHor, string alignVer, int fon
 	char str[80];								// Demo 數字對字串的轉換
 	sprintf(str, text.c_str());
 
-	CRect rect = { dx,dy,SIZE_X,SIZE_Y };//設定矩形左、上、右、下的座標	
+	CRect rect = { left,top,right,bottom };//設定矩形左、上、右、下的座標	
 
 	if (alignVer == "TOP")//上
 	{
