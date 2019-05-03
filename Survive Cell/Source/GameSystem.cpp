@@ -315,7 +315,7 @@ void GameSystem::ChangeToNextStage()
 void GameSystem::CreatStage1Object()
 {
 	GameSystem::Init();
-	GameSystem::AddGameObject((new Player("Player", 0, 0, 50, 80)));
+	GameSystem::AddGameObject(new Player("Player", 0, 0, 50, 80));
 
 	GameSystem::AddGameObject(new Floor("Floor", 0, 1565, Map::WORLD_SIZE_X, 280, IDB_GROUND));
 
@@ -341,6 +341,25 @@ void GameSystem::CreatStage1Object()
 	GameSystem::CreateFloor(1315, 170, 170, 95);
 	GameSystem::CreateFloor(1425, 170, 275, 50);
 	GameSystem::CreateFloor(1700, 120, 80, 480);
+	GameSystem::CreateFloor(2160, 600, 1680, 120);
+	GameSystem::CreateFloor(1890, 445, 610, 35);
+	GameSystem::CreateFloor(2160, 720, 310, 650);
+	GameSystem::CreateFloor(2230, 1370, 140, 75);
+	GameSystem::AddGameObject(new Door("Door", 2330, 1445, 12, 120));//門
+	GameSystem::CreateFloor(2700, 720, 520, 110);
+	GameSystem::CreateFloor(3080, 830, 140, 130);
+	GameSystem::CreateFloor(2700, 960, 520, 320);
+	GameSystem::CreateFloor(3080, 830, 140, 130);
+	GameSystem::CreateFloor(2140, 0, 1700, 60);
+	GameSystem::CreateFloor(2140, 210, 930, 70);
+	GameSystem::CreateFloor(2630, 60, 80, 95); //這可能會卡住太高了
+	GameSystem::CreateFloor(3260, 60, 580, 360);
+	GameSystem::CreateFloor(3380, 420, 100, 60);
+	GameSystem::CreateFloor(2830, 410, 80, 190);
+	GameSystem::CreateFloor(2630, 460, 200, 50);
+	GameSystem::CreateFloor(2910, 410, 160, 40);
+	GameSystem::AddGameObject(new Door("Door", 3420, 480, 12, 120));//門
+	GameSystem::AddGameObject(new Goal("Goal", 3510, 1353, 143, 212));
 	//GameSystem::AddGameObject(new Floor("Floor", 0,600, 710, 120, IDB_GROUND));//地圖最下方的地板
 	//GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//地圖最下方的地板
 
