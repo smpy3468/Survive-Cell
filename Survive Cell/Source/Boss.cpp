@@ -69,9 +69,9 @@ void Boss::LoadAni()
 	char* aniIdle = ".\\res\\boss_idle.bmp";
 	AddAniBitMap(aniIdle, ANI::ANI_IDLE);
 
-	char* aniLeft[2] = { ".\\res\\boss_left_0.bmp", ".\\res\\boss_left_1.bmp" };
-	AddAniBitMaps(aniLeft, ANI::ANI_LEFT, 2, aniSpeed);
+	char* aniLeft[2] = {".\\res\\boss_left_0.bmp", ".\\res\\boss_left_1.bmp" };
+	AddAniBitMaps(aniLeft,ANI_LEFT,2,aniSpeed);
 
 	char* aniRight[2] = { ".\\res\\boss_right_0.bmp", ".\\res\\boss_right_1.bmp" };
-	AddAniBitMaps(aniRight, ANI::ANI_RIGHT, 2, aniSpeed);
+	AddAniBitMaps(aniRight, ANI_RIGHT, 2, aniSpeed);
 }
