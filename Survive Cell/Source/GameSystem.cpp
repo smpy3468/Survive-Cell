@@ -317,10 +317,30 @@ void GameSystem::CreatStage1Object()
 	GameSystem::Init();
 	GameSystem::AddGameObject((new Player("Player", 0, 0, 50, 80)));
 
+	GameSystem::AddGameObject(new Floor("Floor", 0, 1565, Map::WORLD_SIZE_X, 280, IDB_GROUND));
+
 	GameSystem::CreateFloor(0, 600, 710, 120);
+	GameSystem::CreateFloor(0, 720, 710, 640);
 	GameSystem::AddGameObject(new Door("Door", 530, 480, 12, 120));//門
 	GameSystem::CreateFloor(330, 400, 410, 80);
+	GameSystem::CreateFloor(890, 170, 200, 45);
 	GameSystem::CreateFloor(1090, 600, 850, 120);
+	GameSystem::CreateFloor(1090, 0,  65,490);
+	GameSystem::CreateFloor(0, 1360, 410, 205);
+	GameSystem::CreateFloor(650, 1360, 60, 150);
+	GameSystem::CreateFloor(710, 910, 220, 45);
+	GameSystem::CreateFloor(825, 1150, 180, 35);
+	GameSystem::CreateFloor(710,1325,120,35);
+	GameSystem::CreateFloor(920, 710, 170, 35);
+	GameSystem::CreateFloor(1090, 720, 850, 280);
+	GameSystem::CreateFloor(1090, 1110, 850, 260);
+	GameSystem::CreateFloor(1530, 1000, 410, 110);
+	GameSystem::CreateFloor(1570, 1370, 100, 195);
+	GameSystem::CreateFloor(1115, 380, 455, 35);
+	GameSystem::AddGameObject(new Door("Door", 1315, 260, 12, 120));//門
+	GameSystem::CreateFloor(1315, 170, 170, 95);
+	GameSystem::CreateFloor(1425, 170, 275, 50);
+	GameSystem::CreateFloor(1700, 120, 80, 480);
 	//GameSystem::AddGameObject(new Floor("Floor", 0,600, 710, 120, IDB_GROUND));//地圖最下方的地板
 	//GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//地圖最下方的地板
 
@@ -339,7 +359,7 @@ void GameSystem::CreatStage1Object()
 	GameSystem::CreateFloor(SIZE_X / 2 + 300, Map::WORLD_SIZE_Y / 2 + 200, 300, 80);*/
 
 	GameSystem::AddGameObject(new Demon("Monster", 100, 100, 110, 158));
-	GameSystem::AddGameObject(new Boss("Monster", SIZE_X / 2, SIZE_Y / 2, 180, 90));
+	GameSystem::AddGameObject(new Boss("Monster", SIZE_X / 2, SIZE_Y / 2, 151, 271));
 
 	GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10 - 100, SIZE_Y * 9 / 10, 64, 60));
 	GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10 - 10, SIZE_Y * 9 / 10, 64, 60));

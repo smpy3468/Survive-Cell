@@ -150,7 +150,7 @@ private:
 	static vector<GameObject*> gameObjectList;//存放所有遊戲物件的列表
 	static vector<UInterface*> gameUIList;//存放所有遊戲UI物件列表
 
-	const static int FLOOR_WIDTH = 80, FLOOR_HEIGHT = 50;
+	const static int FLOOR_WIDTH = 20, FLOOR_HEIGHT = 20;
 	static bool isGameOver;//遊戲是否結束
 	static bool isNextStage;
 	static int  nowStage;
