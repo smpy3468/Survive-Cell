@@ -4,7 +4,7 @@
 Boss::Boss(string tag, int x, int y, int width, int height) :Monster(tag, x, y, width, height)
 {
 	tag = "Monster";
-	HP = 1000;
+	HP = 10000;
 	LoadAni();
 }
 
@@ -21,7 +21,6 @@ void Boss::Act()
 
 	Attack();
 	Fall(fallDisplacement);
-	player->SetHP(1000);
 }
 
 void Boss::Attack()

@@ -32,7 +32,7 @@ void  Effect::EffectAttackMonster(int attackDamage)
 	vector<Monster*> allMonsters = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
 	for (auto& i : allMonsters) {
 		if (IsObjectInRange(i, 0, 0, 0, 0) == 1) {
-			i->DecreaseHP(5);
+			i->DecreaseHP(attackDamage);
 			isHit = true;
 		}
 	}
