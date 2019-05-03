@@ -69,6 +69,12 @@ void Player::AdjustPositionOnBegin()
 	}
 }
 
+void Player::DecreaseHP(int dhp)
+{
+	if (isUnconquered == false)
+		HP -= dhp;
+}
+
 void Player::Move(int dx, int dy)
 {
 	if ((dx > 0 && CanMoveRight(moveSpeed)) || (dx < 0 && CanMoveLeft(moveSpeed)))//x位移量往右而且右邊沒東西 或者 x位移量往左而且左邊沒東西
@@ -122,6 +128,11 @@ void Player::SetIsRoll(bool isRoll)
 void Player::SetIsSquat(bool isSquat)
 {
 	this->isSquatKeyDown = isSquat;
+}
+
+void Player::SetIsUnconquered(bool isUnconquered)
+{
+	this->isUnconquered = isUnconquered;
 }
 
 bool Player::HasWeapon()
@@ -203,6 +214,7 @@ void Player::Act()//行動
 
 			if (isGrounded && isRoll == false)//在地上才能開始翻，而且目前還沒翻滾(翻轉寬高只需翻轉一次)
 			{
+				isUnconquered = true;//翻滾時無敵
 				isRoll = true;
 				FlipWidthHeight();//翻轉寬高
 			}
@@ -555,7 +567,8 @@ void Player::ShowInformation()
 {
 	string information = "HP:" + to_string(GetHP()) + "\nAttack" + to_string(GetAttackDamage())
 		+ "\nAttackSpeed:" + to_string(GetAttackSpeed()) + "\nAttackRange:" + to_string(GetAttackRange())
-		+ "\nMoveSpeed:" + to_string(GetMoveSpeed()) + "\nDefense:" + to_string(GetDefense());
+		+ "\nMoveSpeed:" + to_string(GetMoveSpeed()) + "\nDefense:" + to_string(GetDefense())
+		+ "\nUnconquered:"+to_string(isUnconquered);
 
 	GameSystem::ShowText(information, 0, 30, SIZE_X, SIZE_Y, "LEFT", "TOP", 8, RGB(0, 0, 0));
 
@@ -643,7 +656,8 @@ void Player::Roll()
 
 	if (rollDisplacement-- <= 0)
 	{
-		isRoll = false;
+		isUnconquered = false;//無敵結束
+		isRoll = false;//翻滾結束
 		rollDisplacement = originRollDisplacement;
 
 		FlipWidthHeight();//還原寬高

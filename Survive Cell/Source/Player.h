@@ -17,6 +17,8 @@ public:
 
 	void AdjustPositionOnBegin();//載入遊戲時微調玩家位置，避免玩家跟地板重疊
 
+	void DecreaseHP(int dhp);
+
 	//----------------按鍵相關---------------------//
 	void SetIsMoveLeft(bool isMoveLeft);//設定是否向左移動
 	void SetIsMoveRight(bool isMoveRight);//設定是否向右移動
@@ -26,6 +28,8 @@ public:
 	void SetIsAttack(bool isAttack);//設定是否按下攻擊
 	void SetIsRoll(bool isRoll);//設定是否按下翻滾
 	void SetIsSquat(bool isSquat);//設定是否蹲下
+	
+	void SetIsUnconquered(bool isUnconquered);//設定是否無敵
 
 	bool HasWeapon();//是否有武器
 
@@ -73,6 +77,7 @@ private:
 	bool isRollKeyDown;//是否按下翻滾
 	bool isSquatKeyDown;//是否按下蹲下
 	bool isSquat;//是否蹲下
+	bool isUnconquered;//是否無敵
 
 	int currentState = 0, nextState = 0;//現態,次態
 	enum STATE//狀態機
