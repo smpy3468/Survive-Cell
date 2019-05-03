@@ -24,7 +24,7 @@ void UIMonsterBlood::OnShow(int x, int y, int hp)
 	CPen *pp, p(PS_NULL, 0, RGB(0, 0, 0));
 	pp = pDC->SelectObject(&p);
 
-	CBrush *pg, g(RGB(0, 255, 0));
+	CBrush *pg, g(RGB(255, 0, 0));
 	pg = pDC->SelectObject(&g);
 
 	pDC->Rectangle(x +10-Map::GetSX(), y-Map::GetSY()-10, x + bloodWidth - Map::GetSX(), y + bloodHeight - Map::GetSY());

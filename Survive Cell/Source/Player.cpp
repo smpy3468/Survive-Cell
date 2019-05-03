@@ -74,6 +74,13 @@ void Player::DecreaseHP(int dhp)
 {
 	if (isUnconquered == false)
 		HP -= dhp;
+	if (HP <= 0)
+	{
+		HP = 0;
+		isDead = true;
+
+		Dead();
+	}
 }
 
 void Player::Move(int dx, int dy)
@@ -566,12 +573,13 @@ void Player::ShowBitMap()
 
 void Player::ShowInformation()
 {
-	string information = "HP:" + to_string(GetHP()) + "\nAttack" + to_string(GetAttackDamage())
+	string information = "Attack" + to_string(GetAttackDamage())
 		+ "\nAttackSpeed:" + to_string(GetAttackSpeed()) + "\nAttackRange:" + to_string(GetAttackRange())
 		+ "\nMoveSpeed:" + to_string(GetMoveSpeed()) + "\nDefense:" + to_string(GetDefense())
-		+ "\nUnconquered:"+to_string(isUnconquered);
+		+ "\nUnconquered:"+to_string(isUnconquered)
+		+ "\nHP:" + to_string(GetHP());
 
-	GameSystem::ShowText(information, 0, 0, SIZE_X, SIZE_Y, "LEFT", "BOTTOM", 8, RGB(0, 0, 0));
+	GameSystem::ShowText(information, 0, 0, SIZE_X, SIZE_Y, "LEFT", "TOP", 8, RGB(0, 0, 0));
 
 	/*
 	CDC *pDC = CDDraw::GetBackCDC();			// ¨ú±o Back Plain ªº CDC
