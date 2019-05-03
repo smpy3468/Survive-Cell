@@ -49,6 +49,7 @@ Player::Player(string tag, int x, int y, int width, int height) :Character(tag, 
 	isRoll = false;
 	isSquatKeyDown = false;
 	isSquat = false;
+	isUnconquered = false;
 
 	isAttack = false;
 
@@ -570,7 +571,7 @@ void Player::ShowInformation()
 		+ "\nMoveSpeed:" + to_string(GetMoveSpeed()) + "\nDefense:" + to_string(GetDefense())
 		+ "\nUnconquered:"+to_string(isUnconquered);
 
-	GameSystem::ShowText(information, 0, 30, SIZE_X, SIZE_Y, "LEFT", "TOP", 8, RGB(0, 0, 0));
+	GameSystem::ShowText(information, 0, 0, SIZE_X, SIZE_Y, "LEFT", "BOTTOM", 8, RGB(0, 0, 0));
 
 	/*
 	CDC *pDC = CDDraw::GetBackCDC();			// ¨ú±o Back Plain ªº CDC
