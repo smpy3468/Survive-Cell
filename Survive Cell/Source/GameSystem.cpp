@@ -339,7 +339,7 @@ void GameSystem::CreatStage1Object()
 	GameSystem::CreateFloor(SIZE_X / 2 + 300, Map::WORLD_SIZE_Y / 2 + 200, 300, 80);*/
 
 	GameSystem::AddGameObject(new Demon("Monster", 100, 100, 110, 158));
-	GameSystem::AddGameObject(new Boss("Monster", SIZE_X / 2, SIZE_Y / 2, 180, 90));
+	GameSystem::AddGameObject(new Boss("Monster", 100, SIZE_Y / 2, 150, 270));
 
 	GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10 - 100, SIZE_Y * 9 / 10, 64, 60));
 	GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10 - 10, SIZE_Y * 9 / 10, 64, 60));
