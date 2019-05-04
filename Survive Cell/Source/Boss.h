@@ -6,16 +6,19 @@
 //Boss
 //王
 
-class Boss:public Monster
+class Boss :public Monster
 {
 public:
 	Boss(string tag, int x, int y, int width, int height);
 	void Act();//行動
-	
+
 	void Attack()override;
+	void Jump();
 	void Move(int dx, int dy)override;
-	
+
 private:
+
+	int originJumpDisplacement = 30, jumpDisplacement = originJumpDisplacement;//跳躍位移量
 
 	void ShowBitMap()override;
 
@@ -30,9 +33,11 @@ private:
 	{
 		STATE_IDLE = 0,
 		STATE_MOVE,
-		STATE_ATTACK
+		STATE_ATTACK,
+		STATE_JUMP,
+		STATE_LENGTH
 	};
-	int attackMode=0;//攻擊模式
+	int attackMode = 0;//攻擊模式
 
 	const bool FACE_LEFT = true;//面向左邊
 	const bool FACE_RIGHT = false;//面向右邊
@@ -46,8 +51,9 @@ private:
 		ANI_RIGHT,
 		ANI_ATTACK_LEFT,
 		ANI_ATTACK_RIGHT,
+		ANI_JUMP,
 		ANI_GET_HIT_LEFT,
-		ANI_GET_HIT_RIGHT,
+		ANI_GET_HIT_RIGHT
 	};
 
 	void LoadAni()override;

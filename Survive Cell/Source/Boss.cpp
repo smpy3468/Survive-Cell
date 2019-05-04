@@ -4,9 +4,14 @@
 Boss::Boss(string tag, int x, int y, int width, int height) :Monster(tag, x, y, width, height)
 {
 	tag = "Monster";
+
 	HP = 10000;
 	aniSpeed = 10;
 	moveSpeed = 3;
+
+	attackRange = 100;
+	attackDamage = 10;
+
 	LoadAni();
 }
 
@@ -14,7 +19,8 @@ void Boss::Act()
 {
 	unsigned seed = (unsigned)time(NULL);
 	srand(seed);
-	currentState = rand() % 3;//目前狀態
+
+	currentState = rand() % STATE_LENGTH;//目前狀態
 
 	switch (currentState)//根據狀態做不同動作
 	{
@@ -35,6 +41,9 @@ void Boss::Act()
 	case STATE_ATTACK://攻擊
 		Attack();
 		break;
+	case STATE_JUMP:
+		Jump();
+		break;
 	}
 
 	Fall(fallDisplacement);
@@ -42,7 +51,28 @@ void Boss::Act()
 
 void Boss::Attack()
 {
+	if (ani[currentAni]->IsEnd())//攻擊判定只會出現一次，因此攻擊動畫播完才攻擊
+	{
+		if (player->GetX() + player->GetWidth() > this->x - attackRange && player->GetX() < this->x + this->width + attackRange
+			&& player->GetY() + player->GetHeight() > this->y && player->GetY() < this->y + this->height)
+		{
+			player->DecreaseHP(attackDamage);//攻擊玩家
+		}
+	}
+}
 
+void Boss::Jump()
+{
+	if (jumpDisplacement-- > 0)//跳躍位移量隨時間遞減
+	{
+		Move(0, -jumpDisplacement);//向上位移
+	}
+	else
+	{
+		jumpDisplacement = originJumpDisplacement;//跳躍位移量還原
+	}
+
+	ani[currentAni]->OnMove();
 }
 
 void Boss::Move(int dx, int dy)
@@ -77,7 +107,9 @@ void Boss::ShowBitMap()
 	{
 	case STATE_IDLE://靜止
 		currentAni = ANI_IDLE;
+		ani[currentAni]->OnMove();
 		break;
+
 	case STATE_MOVE://移動
 		if (faceLR == FACE_LEFT)
 		{
@@ -87,7 +119,9 @@ void Boss::ShowBitMap()
 		{
 			currentAni = ANI_RIGHT;
 		}
+		ani[currentAni]->OnMove();
 		break;
+
 	case STATE_ATTACK://攻擊
 		if (faceLR == FACE_LEFT)
 		{
@@ -97,11 +131,16 @@ void Boss::ShowBitMap()
 		{
 			currentAni = ANI_ATTACK_RIGHT;
 		}
+		ani[currentAni]->OnMove();
+
+		break;
+
+	case STATE_JUMP://跳躍
+		currentAni = ANI_JUMP;
 		break;
 	}
 
 	GameSystem::ShowText(to_string(GetHP()), x - Map::GetSX(), y - Map::GetSY() - 30, x + width - Map::GetSX(), y + height - Map::GetSY(), GameSystem::ALIGN_CENTER, GameSystem::ALIGN_TOP, 16, RGB(0, 0, 0));
-	ani[currentAni]->OnMove();
 	ani[currentAni]->OnShow();
 }
 
@@ -121,4 +160,7 @@ void Boss::LoadAni()
 
 	char* aniAttackRight[3] = { ".\\res\\boss_attack_right_0.bmp", ".\\res\\boss_attack_right_1.bmp", ".\\res\\boss_attack_right_2.bmp" };
 	AddAniBitMaps(aniAttackRight, ANI_ATTACK_RIGHT, 3, aniSpeed);
+
+	char* aniJump[3] = { ".\\res\\boss_jump_0.bmp", ".\\res\\boss_jump_1.bmp", ".\\res\\boss_jump_2.bmp" };
+	AddAniBitMaps(aniJump, ANI_JUMP, 3, aniSpeed);
 }
