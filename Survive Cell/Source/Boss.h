@@ -25,16 +25,18 @@ private:
 	void FarSlash();//遠程劍波
 	void InstantDeath();//即死技能
 
-	enum ATTACK_MODE
+	int currentState = 0;//目前狀態
+	enum STATE
 	{
-		ATTACK_NEAR = 0,
-		ATTACK_FAR
+		STATE_IDLE = 0,
+		STATE_MOVE,
+		STATE_ATTACK
 	};
-	int attackMode=ATTACK_NEAR;//攻擊模式
+	int attackMode=0;//攻擊模式
 
 	const bool FACE_LEFT = true;//面向左邊
 	const bool FACE_RIGHT = false;//面向右邊
-	bool faceLR = FACE_RIGHT;//面向左邊或面向右邊
+	bool faceLR = FACE_LEFT;//面向左邊或面向右邊
 
 	int currentAni = 0;//目前動畫
 	enum ANI
