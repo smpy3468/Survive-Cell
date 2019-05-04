@@ -100,7 +100,7 @@ void Boss::ShowBitMap()
 		break;
 	}
 
-	GameSystem::ShowText(to_string(GetHP()), x - Map::GetSX(), y - Map::GetSY() - 30, x + width - Map::GetSX(), y + height - Map::GetSY(), "CENTER", "TOP", 16, RGB(0, 0, 0));
+	GameSystem::ShowText(to_string(GetHP()), x - Map::GetSX(), y - Map::GetSY() - 30, x + width - Map::GetSX(), y + height - Map::GetSY(), GameSystem::ALIGN_CENTER, GameSystem::ALIGN_TOP, 16, RGB(0, 0, 0));
 	ani[currentAni]->OnMove();
 	ani[currentAni]->OnShow();
 }

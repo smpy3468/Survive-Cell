@@ -42,5 +42,5 @@ void UIBlood::OnShow() {
 	pDC->SelectObject(pr);
 	CDDraw::ReleaseBackCDC();					// ©ñ±¼ Back Plain ªº CDC
 
-	GameSystem::ShowText(to_string(player->GetHP()), 0, 0, SIZE_X, SIZE_Y, "LEFT", "BOTTOM");
+	GameSystem::ShowText(to_string(player->GetHP()), 0, 0, SIZE_X, SIZE_Y, GameSystem::ALIGN_LEFT, GameSystem::ALIGN_BOTTOM);
 }

@@ -478,7 +478,7 @@ void Player::Attack()
 			&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height)//怪物在攻擊範圍內
 		{
 			i->PlayerAttack(attackDamage);
-			GameSystem::ShowText(to_string(GetAttackDamage()), i->GetX() - Map::GetSX() + 10, i->GetY() - Map::GetSY() - 30, i->GetX() + i->GetWidth() - Map::GetSX(), i->GetY() + i->GetHeight() - Map::GetSY(), "CENTER", "TOP", 20, RGB(255, 0, 0));
+			GameSystem::ShowText(to_string(GetAttackDamage()), i->GetX() - Map::GetSX() + 10, i->GetY() - Map::GetSY() - 30, i->GetX() + i->GetWidth() - Map::GetSX(), i->GetY() + i->GetHeight() - Map::GetSY(), GameSystem::ALIGN_CENTER, GameSystem::ALIGN_TOP, 20, RGB(255, 0, 0));
 		}
 	}
 
@@ -574,13 +574,13 @@ void Player::ShowBitMap()
 
 void Player::ShowInformation()
 {
-	string information = "Attack" + to_string(GetAttackDamage())
-		+ "\nAttackSpeed:" + to_string(GetAttackSpeed()) + "\nAttackRange:" + to_string(GetAttackRange())
-		+ "\nMoveSpeed:" + to_string(GetMoveSpeed()) + "\nDefense:" + to_string(GetDefense())
+	string information = "Attack" + to_string(attackDamage)
+		+ "\nAttackSpeed:" + to_string(attackSpeed) + "\nAttackRange:" + to_string(attackRange)
+		+ "\nMoveSpeed:" + to_string(moveSpeed) + "\nDefense:" + to_string(defense)
 		+ "\nUnconquered:"+to_string(isUnconquered)
-		+ "\nHP:" + to_string(GetHP());
+		+ "\nHP:" + to_string(HP);
 
-	GameSystem::ShowText(information, 0, 0, SIZE_X, SIZE_Y, "LEFT", "TOP", 8, RGB(0, 0, 0));
+	GameSystem::ShowText(information, 0, 0, SIZE_X, SIZE_Y, GameSystem::ALIGN_LEFT, GameSystem::ALIGN_TOP, 8, RGB(0, 0, 0));
 
 	/*
 	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC

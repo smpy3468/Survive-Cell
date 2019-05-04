@@ -105,10 +105,19 @@ public:
 	static void ShowAllObject();//顯示所有物件
 	static void ShowAllUI();//顯示所有UI物件
 
-	//顯示文字
+	//------------顯示文字-------------//
+	enum ALIGN
+	{
+		ALIGN_TOP = 0,
+		ALIGN_BOTTOM,
+		ALIGN_LEFT,
+		ALIGN_RIGHT,
+		ALIGN_CENTER
+	};
+
 	static void ShowText(string text
 		, int left = 0, int top = 0, int right = SIZE_X, int bottom = SIZE_Y//矩形的四個點座標
-		, string alignHor = "LEFT", string alignVer = "TOP"//顯示文字,對齊方式
+		, int alignHor = ALIGN_LEFT, int alignVer = ALIGN_TOP//顯示文字,對齊方式
 		, int fontSize = 16, COLORREF textColor = RGB(0, 0, 0)//字體大小,字體顏色
 		, int bkMode = 1, COLORREF bkColor = RGB(255, 255, 255));//背景模式(OPAQUE:不透明, TRANSPARENT:透明),背景顏色
 

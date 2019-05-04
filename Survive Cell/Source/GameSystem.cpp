@@ -170,7 +170,7 @@ void GameSystem::ShowAllUI()
 	}
 }
 
-void GameSystem::ShowText(string text, int left, int top, int right, int bottom, string alignHor, string alignVer, int fontSize, COLORREF textColor, int bkMode, COLORREF bkColor)
+void GameSystem::ShowText(string text, int left, int top, int right, int bottom, int alignHor, int alignVer, int fontSize, COLORREF textColor, int bkMode, COLORREF bkColor)
 {
 	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
 	CFont f, *fp;
@@ -180,28 +180,28 @@ void GameSystem::ShowText(string text, int left, int top, int right, int bottom,
 	pDC->SetBkColor(bkColor);
 	pDC->SetTextColor(textColor);
 
-	char str[80];								// Demo 數字對字串的轉換
+	char str[1000];								// Demo 數字對字串的轉換
 	sprintf(str, text.c_str());
 
 	CRect rect = { left,top,right,bottom };//設定矩形左、上、右、下的座標	
 
-	if (alignVer == "TOP")//上
+	if (alignVer == ALIGN_TOP)//上
 	{
-		if (alignHor == "LEFT")
+		if (alignHor == ALIGN_LEFT)
 		{
 			pDC->DrawText(str, rect, DT_LEFT | DT_WORDBREAK);//靠左對齊，可換行
 		}
-		else if (alignHor == "CENTER")
+		else if (alignHor == ALIGN_CENTER)
 		{
 			pDC->DrawText(str, rect, DT_CENTER | DT_WORDBREAK);//靠中對齊，可換行
 		}
-		else if (alignHor == "RIGHT")
+		else if (alignHor == ALIGN_RIGHT)
 		{
 			pDC->DrawText(str, rect, DT_RIGHT | DT_WORDBREAK);//靠右對齊，可換行
 		}
 	}
 
-	else if (alignVer == "CENTER")
+	else if (alignVer == ALIGN_CENTER)
 	{
 		//這裡在設定垂直置中
 		CRect temp = rect;
@@ -209,21 +209,21 @@ void GameSystem::ShowText(string text, int left, int top, int right, int bottom,
 		rect.top += (rect.Height() - height) / 2;
 		//rect.DeflateRect(0, (rect.Height() - height) / 2);
 
-		if (alignHor == "LEFT")
+		if (alignHor == ALIGN_LEFT)
 		{
 			pDC->DrawText(str, rect, DT_LEFT | DT_WORDBREAK);//靠左對齊，可換行
 		}
-		else if (alignHor == "CENTER")
+		else if (alignHor == ALIGN_CENTER)
 		{
 			pDC->DrawText(str, rect, DT_CENTER | DT_WORDBREAK);
 		}
-		else if (alignHor == "RIGHT")
+		else if (alignHor == ALIGN_RIGHT)
 		{
 			pDC->DrawText(str, rect, DT_RIGHT | DT_WORDBREAK);//靠右對齊，可換行
 		}
 	}
 
-	else if (alignVer == "BOTTOM")
+	else if (alignVer == ALIGN_BOTTOM)
 	{
 		//這裡在設定垂直置下
 		CRect temp = rect;
@@ -231,15 +231,15 @@ void GameSystem::ShowText(string text, int left, int top, int right, int bottom,
 		rect.top += rect.Height() - height;
 		//rect.DeflateRect(0, (rect.Height() - height));
 
-		if (alignHor == "LEFT")
+		if (alignHor == ALIGN_LEFT)
 		{
 			pDC->DrawText(str, rect, DT_LEFT | DT_WORDBREAK);//靠左對齊，可換行
 		}
-		else if (alignHor == "CENTER")
+		else if (alignHor == ALIGN_CENTER)
 		{
 			pDC->DrawText(str, rect, DT_CENTER | DT_WORDBREAK);
 		}
-		else if (alignHor == "RIGHT")
+		else if (alignHor == ALIGN_RIGHT)
 		{
 			pDC->DrawText(str, rect, DT_RIGHT | DT_WORDBREAK);//靠右對齊，可換行
 		}
