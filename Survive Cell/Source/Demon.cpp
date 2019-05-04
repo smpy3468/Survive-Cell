@@ -84,7 +84,7 @@ void Demon::Attack() {
 	else if (IsInAttackField(player->GetX(), player->GetY(), 100, -20, 0, 0)) {  //Player在怪物攻擊領域內 跟隨  #要增加跟隨感應距離改AttackField
 		status = ATTACK;
 		moveSpeed = ATTACK_SPEED;
-		if (IsPlayerInRange(player, 0, 0, 0, 0) == false) {	//如果怪物還沒撞到腳色
+		if (IsPlayerInRange(player, 0, 0, 25, 5) == false) {	//如果怪物還沒撞到腳色
 
 			if (placeRelativePlayer == RIGHT)		//如果怪物在人的右邊
 			{

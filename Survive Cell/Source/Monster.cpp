@@ -124,14 +124,10 @@ bool Monster::IsPlayerInRange(Player* player, int right_fix, int left_fix, int u
 	int OB_RIGHT_EDGE = OB_X + OB_WIDTH , OB_LEFT_EDGE = OB_X,
 		OB_UP_EDGE = OB_Y, OB_DOWN_EDGE = OB_Y + OB_HEIGHT;
 
-	if (OB_RIGHT_EDGE >= LEFT_EDGE - attackRange && PlaceRelativePlayer(player) == RIGHT)        //人在左, 怪物在右
+	if (OB_RIGHT_EDGE >= LEFT_EDGE - attackRange && PlaceRelativePlayer(player) == RIGHT && OB_UP_EDGE> UP_EDGE && OB_UP_EDGE<DOWN_EDGE)        //人在左, 怪物在右
 		return true;
-	else if (OB_LEFT_EDGE <= RIGHT_EDGE +attackRange && PlaceRelativePlayer(player) == LEFT)  //人在右, 怪物在左
+	else if (OB_LEFT_EDGE <= RIGHT_EDGE +attackRange && PlaceRelativePlayer(player) == LEFT && OB_UP_EDGE> UP_EDGE && OB_UP_EDGE<DOWN_EDGE)  //人在右, 怪物在左
 		return true;
-	/*else if (OB_DOWN_EDGE > UP_EDGE)       //人在下, 怪物在上
-			return true;
-	else if (OB_UP_EDGE < DOWN_EDGE)	   //人在上, 怪物在下
-			return true;*/
 	return false;
 }
 
