@@ -257,10 +257,10 @@ bool Character::IsInFloor()
 	{
 		for (int j = y; j < y + height; j++)
 		{
-			if (Map::HasObject(i, y + height))
+			if (Map::HasObject(i, j + 1))//+1是因為要判斷腳下
 				return true;
 		}
 	}
-
-	return false;
+	
+ 	return false;
 }

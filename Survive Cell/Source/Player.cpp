@@ -50,6 +50,7 @@ Player::Player(string tag, int x, int y, int width, int height) :Character(tag, 
 	isSquatKeyDown = false;
 	isSquat = false;
 	isUnconquered = false;
+	isDownJump = false;
 
 	isAttack = false;
 
@@ -378,8 +379,8 @@ void Player::DownJump()
 	fallDisplacement++;
 
 	if (IsInFloor() == false//不在地板中
-		|| y + height + 1 >= GameSystem::GetGameObjectWithTag<Floor>("Ground")->GetY()//已在最底層地板
-		|| IsFloorOnGround()//地板跟最底層地板剛好貼合，代表不能下跳
+		//|| y + height + 1 >= GameSystem::GetGameObjectWithTag<Floor>("Ground")->GetY()//已在最底層地板
+		//|| IsFloorOnGround()//地板跟最底層地板剛好貼合，代表不能下跳
 		|| !HasSpaceToDownJump())//下方沒有足夠的空間可以下跳
 	{
 		isDownJump = false;//沒有下跳

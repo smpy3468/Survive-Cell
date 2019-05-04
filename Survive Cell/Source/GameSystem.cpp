@@ -317,7 +317,9 @@ void GameSystem::CreatStage1Object()
 	GameSystem::Init();
 	GameSystem::AddGameObject(new Player("Player", 0, 0, 50, 80));
 
-	GameSystem::AddGameObject(new Floor("Floor", 0, 1565, Map::WORLD_SIZE_X, 280, IDB_GROUND));
+	//GameSystem::CreateFloor(0, Map::WORLD_SIZE_Y - 500, Map::WORLD_SIZE_X, 280);
+	GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 280, Map::WORLD_SIZE_X, 280, IDB_GROUND));
+	GameSystem::AddGameObject(new Floor("Ground", 0, Map::WORLD_SIZE_Y - 280, Map::WORLD_SIZE_X, 280, IDB_GROUND));
 
 	GameSystem::CreateFloor(0, 600, 710, 120);
 	GameSystem::CreateFloor(0, 720, 710, 640);
