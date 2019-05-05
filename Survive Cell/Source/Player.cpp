@@ -18,7 +18,7 @@ Player::Player(string tag, int x, int y, int width, int height) :Character(tag, 
 
 	maxHP = 100;
 	HP = maxHP;
-
+	
 	originWidth = width;
 	originHeight = height;
 
@@ -427,7 +427,7 @@ void Player::ChangeHeight(int height)
 	this->height = height;
 }
 
-bool Player::IsFloorOnGround()
+/*bool Player::IsFloorOnGround()
 {
 	int cy = y + height + 1;//ª±®a¸}©³ªº¦ì¸m
 
@@ -443,7 +443,7 @@ bool Player::IsFloorOnGround()
 		}
 	}
 	return false;
-}
+}*/
 
 void Player::Interact()
 {

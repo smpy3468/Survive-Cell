@@ -315,11 +315,12 @@ void GameSystem::ChangeToNextStage()
 void GameSystem::CreatStage1Object()
 {
 	GameSystem::Init();
-	GameSystem::AddGameObject(new Player("Player", 0, 0, 50, 80));
+	GameSystem::AddGameObject(new Player("Player", 80, 80, 50, 80));
+	Player* player = GetGameObjectWithTag<Player>("Player");
+	Map::SetSX(player->GetX() - SIZE_X / 2);
+	Map::SetSY(player->GetY() - SIZE_Y / 2);
 
-	//GameSystem::CreateFloor(0, Map::WORLD_SIZE_Y - 500, Map::WORLD_SIZE_X, 280);
 	GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 280, Map::WORLD_SIZE_X, 280, IDB_GROUND));
-	GameSystem::AddGameObject(new Floor("Ground", 0, Map::WORLD_SIZE_Y - 280, Map::WORLD_SIZE_X, 280, IDB_GROUND));
 
 	GameSystem::CreateFloor(0, 600, 710, 120);
 	GameSystem::CreateFloor(0, 720, 710, 640);
@@ -327,12 +328,12 @@ void GameSystem::CreatStage1Object()
 	GameSystem::CreateFloor(330, 400, 410, 80);
 	GameSystem::CreateFloor(890, 170, 200, 45);
 	GameSystem::CreateFloor(1090, 600, 850, 120);
-	GameSystem::CreateFloor(1090, 0,  65,490);
+	GameSystem::CreateFloor(1090, 0, 65, 490);
 	GameSystem::CreateFloor(0, 1360, 410, 205);
 	GameSystem::CreateFloor(650, 1360, 60, 150);
 	GameSystem::CreateFloor(710, 910, 220, 45);
 	GameSystem::CreateFloor(825, 1150, 180, 35);
-	GameSystem::CreateFloor(710,1325,120,35);
+	GameSystem::CreateFloor(710, 1325, 120, 35);
 	GameSystem::CreateFloor(920, 710, 170, 35);
 	GameSystem::CreateFloor(1090, 720, 850, 280);
 	GameSystem::CreateFloor(1090, 1110, 850, 260);
@@ -343,15 +344,20 @@ void GameSystem::CreatStage1Object()
 	GameSystem::CreateFloor(1315, 170, 170, 95);
 	GameSystem::CreateFloor(1425, 170, 275, 50);
 	GameSystem::CreateFloor(1700, 120, 80, 480);
-	GameSystem::CreateFloor(2160, 600, 1680, 120);
+
+	//-----------------BUG---------------------
+
+	/*GameSystem::CreateFloor(2160, 600, 1680, 120);
 	GameSystem::CreateFloor(1890, 445, 610, 35);
 	GameSystem::CreateFloor(2160, 720, 310, 650);
-	GameSystem::CreateFloor(2230, 1370, 140, 75);
+	GameSystem::CreateFloor(2230, 1370, 140, 75);*/
 	GameSystem::AddGameObject(new Door("Door", 2330, 1445, 12, 120));//門
-	GameSystem::CreateFloor(2700, 720, 520, 110);
+	/*GameSystem::CreateFloor(2700, 720, 520, 110);
 	GameSystem::CreateFloor(3080, 830, 140, 130);
-	GameSystem::CreateFloor(2700, 960, 520, 320);
-	GameSystem::CreateFloor(3080, 830, 140, 130);
+	GameSystem::CreateFloor(2700, 960, 520, 320);*/
+
+	//-----------------------------------------
+
 	GameSystem::CreateFloor(2140, 0, 1700, 60);
 	GameSystem::CreateFloor(2140, 210, 930, 70);
 	GameSystem::CreateFloor(2630, 60, 80, 95); //這可能會卡住太高了
@@ -362,28 +368,12 @@ void GameSystem::CreatStage1Object()
 	GameSystem::CreateFloor(2910, 410, 160, 40);
 	GameSystem::AddGameObject(new Door("Door", 3420, 480, 12, 120));//門
 	GameSystem::AddGameObject(new Goal("Goal", 3510, 1353, 143, 212));
-	//GameSystem::AddGameObject(new Floor("Floor", 0,600, 710, 120, IDB_GROUND));//地圖最下方的地板
-	//GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//地圖最下方的地板
-
-	/*GameSystem::AddGameObject(new Door("Door", 100, Map::WORLD_SIZE_Y - 200, 10, 100));//門
-	GameSystem::AddGameObject(new Goal("Goal", Map::WORLD_SIZE_X-500, Map::WORLD_SIZE_Y - 312, 143, 212));
-
-	GameSystem::CreateFloor(SIZE_X / 2, SIZE_Y / 2 + 400, 1000, 80);
-
-	GameSystem::CreateFloor(SIZE_X / 2, Map::WORLD_SIZE_Y / 2 + 400, 1000, 80);
-	GameSystem::CreateFloor(SIZE_X / 2 + 1000, Map::WORLD_SIZE_Y / 2 + 450, 300, 80);
-	GameSystem::CreateFloor(SIZE_X / 2 + 1000 + 300, Map::WORLD_SIZE_Y / 2 + 400, 1000, 80);
-	GameSystem::CreateFloor(SIZE_X / 2 - 400, Map::WORLD_SIZE_Y - 150, 300, 80);
-
-	GameSystem::CreateFloor(SIZE_X / 2 + 900, Map::WORLD_SIZE_Y / 2, 300, 80);
-	GameSystem::CreateFloor(SIZE_X / 2 + 600, Map::WORLD_SIZE_Y / 2 + 100, 300, 80);
-	GameSystem::CreateFloor(SIZE_X / 2 + 300, Map::WORLD_SIZE_Y / 2 + 200, 300, 80);*/
 
 	GameSystem::AddGameObject(new Demon("Monster", 100, 100, 110, 158));
 	GameSystem::AddGameObject(new Boss("Monster", SIZE_X / 2, SIZE_Y / 2, 180, 280));
 	GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10 - 100, SIZE_Y * 9 / 10, 64, 60));
 	GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10 - 10, SIZE_Y * 9 / 10, 64, 60));
-	GameSystem::AddUserInterface(new UIBlood("UIBlood", 0, SIZE_Y-30, 400, 30));
+	GameSystem::AddUserInterface(new UIBlood("UIBlood", 0, SIZE_Y - 30, 400, 30));
 	GameSystem::AddUserInterface(new UIMonsterBlood("UIMonster", 0, 0, 0, 0));
 	Map::SetStaticObject();
 }

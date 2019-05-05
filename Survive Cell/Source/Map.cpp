@@ -42,18 +42,22 @@ void Map::ShowBackgroundPic()
 
 void Map::SetSX(int x)
 {
-	if (x >= 0 && x + SIZE_X < WORLD_SIZE_X)//確保螢幕在遊戲畫面中
-		sx = x;
-	else
-	{
+	if (x < 0)//確保螢幕在遊戲畫面中
+		x = 0;
+	if (x + SIZE_X >= WORLD_SIZE_X)//確保螢幕在遊戲畫面中
+		x = WORLD_SIZE_X - SIZE_X - 1;
 
-	}
+	sx = x;
 }
 
 void Map::SetSY(int y)
 {
-	if (y >= 0 && y + SIZE_Y < WORLD_SIZE_Y)//確保螢幕在遊戲畫面中
-		sy = y;
+	if (y < 0)//確保螢幕在遊戲畫面中
+		y = 0;
+	if (y + SIZE_Y >= WORLD_SIZE_Y)//確保螢幕在遊戲畫面中
+		y = WORLD_SIZE_Y - SIZE_Y - 1;
+
+	sy = y;
 }
 
 int Map::GetSX()
@@ -82,7 +86,7 @@ void Map::SetStaticObject()//設定不會移動的物件座標，只會在遊戲一開始呼叫
 			{
 				for (int y = i->GetY(); y < i->GetY() + i->GetHeight(); y++)
 				{
-					if(x >= 0 && x < Map::WORLD_SIZE_X && y >= 0 && y < Map::WORLD_SIZE_Y)//在地圖範圍內才紀錄
+					if (x >= 0 && x < Map::WORLD_SIZE_X && y >= 0 && y < Map::WORLD_SIZE_Y)//在地圖範圍內才紀錄
 						coordinate[x][y] = true;//物件的長寬範圍以內的座標都設為true
 				}
 			}

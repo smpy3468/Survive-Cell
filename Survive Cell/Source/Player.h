@@ -103,7 +103,7 @@ private:
 	void ChangeHeight(int height);//讓寬高變一樣
 
 	//---------------下跳相關---------------//
-	bool IsFloorOnGround();//地板跟最底層地板剛好貼合，代表不能下跳
+	//bool IsFloorOnGround();//地板跟最底層地板剛好貼合，代表不能下跳
 	bool HasSpaceToDownJump();//下方有足夠的高度可以容納玩家
 
 	void CalculateAbility(PlayerEquipment* equipment);//計算能力值
