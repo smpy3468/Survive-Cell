@@ -181,7 +181,7 @@ namespace game_framework {
 
 	CGameStateRun::~CGameStateRun()
 	{
-
+		GameSystem::Exit();//Â÷¶}¹CÀ¸
 	}
 
 	void CGameStateRun::OnBeginState()

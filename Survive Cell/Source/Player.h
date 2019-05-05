@@ -13,6 +13,7 @@ class Player :public Character
 {
 public:
 	Player();
+	~Player();
 	Player(string tag, int x, int y, int width, int height);
 
 	void AdjustPositionOnBegin();//載入遊戲時微調玩家位置，避免玩家跟地板重疊

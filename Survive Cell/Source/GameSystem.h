@@ -21,6 +21,7 @@ public:
 	GameSystem();
 	static void Load();//載入
 	static void Init();//初始化
+	static void Exit();//離開遊戲
 
 	static bool IsGameOver();//是否遊戲結束
 	static void SetGameOver();//設定遊戲結束

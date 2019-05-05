@@ -12,6 +12,11 @@ Player::Player()
 	tag = "Player";
 }
 
+Player::~Player()
+{
+	equipments.clear();
+}
+
 Player::Player(string tag, int x, int y, int width, int height) :Character(tag, x, y, width, height)
 {
 	tag = "Player";

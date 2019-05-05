@@ -274,6 +274,13 @@ void GameSystem::Init()
 	DeleteAllUI();
 }
 
+void GameSystem::Exit()
+{
+	DeleteAllGameObject();
+	
+	gameObjectList.clear();
+}
+
 void GameSystem::PlayAudio(AUDIO id)
 {
 	CAudio::Instance()->Play(id, true);
@@ -347,9 +354,6 @@ void GameSystem::CreatStage1Object()
 	GameSystem::CreateFloor(1315, 170, 170, 95);
 	GameSystem::CreateFloor(1425, 170, 275, 50);
 	GameSystem::CreateFloor(1700, 120, 80, 480);
-
-	//-----------------BUG---------------------
-
 	GameSystem::CreateFloor(2160, 600, 1680, 120);
 	GameSystem::CreateFloor(1890, 445, 610, 35);
 	GameSystem::CreateFloor(2160, 720, 310, 650);
@@ -358,9 +362,6 @@ void GameSystem::CreatStage1Object()
 	GameSystem::CreateFloor(2700, 720, 520, 110);
 	GameSystem::CreateFloor(3080, 830, 140, 130);
 	GameSystem::CreateFloor(2700, 960, 520, 320);
-
-	//-----------------------------------------
-
 	GameSystem::CreateFloor(2140, 0, 1700, 60);
 	GameSystem::CreateFloor(2140, 210, 930, 70);
 	GameSystem::CreateFloor(2630, 60, 80, 95); //這可能會卡住太高了
