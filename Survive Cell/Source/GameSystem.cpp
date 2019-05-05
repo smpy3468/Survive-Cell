@@ -350,14 +350,14 @@ void GameSystem::CreatStage1Object()
 
 	//-----------------BUG---------------------
 
-	/*GameSystem::CreateFloor(2160, 600, 1680, 120);
+	GameSystem::CreateFloor(2160, 600, 1680, 120);
 	GameSystem::CreateFloor(1890, 445, 610, 35);
 	GameSystem::CreateFloor(2160, 720, 310, 650);
-	GameSystem::CreateFloor(2230, 1370, 140, 75);*/
+	GameSystem::CreateFloor(2230, 1370, 140, 75);
 	GameSystem::AddGameObject(new Door("Door", 2330, 1445, 12, 120));//ªù
-	/*GameSystem::CreateFloor(2700, 720, 520, 110);
+	GameSystem::CreateFloor(2700, 720, 520, 110);
 	GameSystem::CreateFloor(3080, 830, 140, 130);
-	GameSystem::CreateFloor(2700, 960, 520, 320);*/
+	GameSystem::CreateFloor(2700, 960, 520, 320);
 
 	//-----------------------------------------
 
