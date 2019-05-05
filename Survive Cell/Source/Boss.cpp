@@ -20,7 +20,8 @@ void Boss::Act()
 	unsigned seed = (unsigned)time(NULL);
 	srand(seed);
 
-	currentState = rand() % STATE_LENGTH;//目前狀態
+	if (currentState == STATE_IDLE)//靜止狀態時才換動作
+		currentState = rand() % STATE_LENGTH;//目前狀態隨機改變
 
 	switch (currentState)//根據狀態做不同動作
 	{
@@ -37,6 +38,10 @@ void Boss::Act()
 		{
 			Move(moveSpeed, 0);
 		}
+
+		if (ani[currentAni]->IsEnd())
+			currentState = STATE_IDLE;//移動動畫播完，就回到靜止狀態
+
 		break;
 	case STATE_ATTACK://攻擊
 		Attack();
@@ -49,15 +54,47 @@ void Boss::Act()
 	Fall(fallDisplacement);
 }
 
+void Boss::Fall(int perDisplacement)
+{
+	if (CanMoveDown(fallDisplacement))//如果腳下沒東西
+	{
+		fallDisplacement++;
+		Move(0, fallDisplacement);
+	}
+	else
+	{
+		while (CanMoveDown(1))//再繼續用下降位移量下降，將會卡進地板，所以一次向下位移1進行微調0
+			Move(0, 1);
+		fallDisplacement = 0;
+
+	}
+}
+
 void Boss::Attack()
 {
 	if (ani[currentAni]->IsEnd())//攻擊判定只會出現一次，因此攻擊動畫播完才攻擊
 	{
-		if (player->GetX() + player->GetWidth() > this->x - attackRange && player->GetX() < this->x + this->width + attackRange
-			&& player->GetY() + player->GetHeight() > this->y && player->GetY() < this->y + this->height)
+		int leftEdge = 0, rightEdge = 0;
+		if (faceLR == FACE_LEFT)//設定向左邊界
+		{
+			leftEdge = this->x - attackRange;
+			rightEdge = this->x + this->width / 2;
+		}
+		else//設定向右邊界
+		{
+			leftEdge = this->x + this->width / 2;
+			rightEdge = this->x + this->width + attackRange;
+		}
+
+		if (player->GetX() + player->GetWidth() / 2 > leftEdge
+			&& player->GetX() + player->GetWidth() / 2 < rightEdge
+			&& player->GetY() + player->GetHeight() > this->y
+			&& player->GetY() < this->y + this->height)//玩家在範圍內
 		{
 			player->DecreaseHP(attackDamage);//攻擊玩家
 		}
+
+		currentState = STATE_IDLE;//回到靜止狀態
 	}
 }
 
@@ -70,6 +107,16 @@ void Boss::Jump()
 	else
 	{
 		jumpDisplacement = originJumpDisplacement;//跳躍位移量還原
+
+		if (player->GetX() + player->GetWidth() > this->x - attackRange
+			&& player->GetX() < this->x + this->width + attackRange
+			&& player->GetY() + player->GetHeight() > this->y + this->height / 2
+			&& player->GetY() < this->y + this->height)//玩家在範圍內
+		{
+			player->DecreaseHP(attackDamage);//攻擊玩家
+		}
+
+		currentState = STATE_IDLE;//回到靜止狀態
 	}
 
 	ani[currentAni]->OnMove();

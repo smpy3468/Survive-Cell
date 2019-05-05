@@ -11,9 +11,10 @@ class Boss :public Monster
 public:
 	Boss(string tag, int x, int y, int width, int height);
 	void Act();//¶Ê∞ 
-
+	
 	void Attack()override;
-	void Jump();
+	void Jump();//∏ı≈D
+	void Fall(int perDisplacement);//±º∏®
 	void Move(int dx, int dy)override;
 
 private:
