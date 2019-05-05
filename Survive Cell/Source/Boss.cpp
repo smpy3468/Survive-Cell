@@ -10,7 +10,7 @@ Boss::Boss(string tag, int x, int y, int width, int height) :Monster(tag, x, y, 
 	moveSpeed = 3;
 
 	attackRange = 100;
-	attackDamage = 10;
+	attackDamage = 50;
 
 	LoadAni();
 }

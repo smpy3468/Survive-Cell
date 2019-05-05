@@ -157,8 +157,11 @@ void GameSystem::ShowAllObject()//顯示所有物件
 {
 	for (auto& i : gameObjectList)
 	{
-
-		i->ShowBitMap();
+		if (i->GetX() <= Map::GetSX() + SIZE_X
+			&& i->GetX() + i->GetWidth() >= Map::GetSX()
+			&& i->GetY() <= Map::GetSY() + SIZE_Y
+			&& i->GetY() + i->GetHeight() >= Map::GetSY())//只顯示在畫面中的物件
+			i->ShowBitMap();
 	}
 }
 
