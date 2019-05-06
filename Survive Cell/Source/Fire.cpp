@@ -10,6 +10,10 @@ Fire::Fire(string tag, int x, int y, int width, int height):Effect(tag, x, y, wi
 	LoadAni();
 }
 
+Fire::~Fire()
+{
+}
+
 
 void Fire::SetXY(int hostX, int hostY, int hostCurrentAni) {
 	if (hostCurrentAni == ANI_ATTACK_RIGHT) {       //3¬O¥ª§ðÀ»ª¬ºA

@@ -6,6 +6,7 @@
 class Demon:public Monster {
 	public:
 		Demon();																			//BaseConstructor
+		~Demon();
 		Demon::Demon(string tag, int x, int y, int width, int height);		//Constructor
 		void Attack()override;																//§ðÀ»
 		void IsAttack();

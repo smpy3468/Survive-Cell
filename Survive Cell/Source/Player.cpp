@@ -14,6 +14,10 @@ Player::Player()
 
 Player::~Player()
 {
+	for (unsigned int i = 0; i < equipments.size(); i++)
+	{
+		delete equipments[i];
+	}
 	equipments.clear();
 }
 

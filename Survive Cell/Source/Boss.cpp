@@ -1,6 +1,16 @@
 #include "StdAfx.h"
 #include "Boss.h"
 
+Boss::Boss()
+{
+
+}
+
+Boss::~Boss()
+{
+
+}
+
 Boss::Boss(string tag, int x, int y, int width, int height) :Monster(tag, x, y, width, height)
 {
 	tag = "Monster";

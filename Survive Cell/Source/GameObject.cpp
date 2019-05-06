@@ -14,6 +14,11 @@ GameObject::GameObject()
 	layer = 0;
 }
 
+GameObject::~GameObject()
+{
+	
+}
+
 GameObject::GameObject(string tag, int x, int y, int width, int height, int pictureID)
 {
 	this->tag = tag;

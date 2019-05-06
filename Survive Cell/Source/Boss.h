@@ -9,6 +9,8 @@
 class Boss :public Monster
 {
 public:
+	Boss();
+	~Boss();
 	Boss(string tag, int x, int y, int width, int height);
 	void Act();//¦æ°Ê
 	

@@ -12,6 +12,7 @@ class Character :public GameObject
 {
 public:
 	Character();
+	virtual~Character();
 	Character::Character(string tag, int x, int y, int width, int height, int pictureID);
 	Character::Character(string tag, int x, int y, int width, int height); //No PictureID ªº Contructor
 

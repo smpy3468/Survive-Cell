@@ -7,6 +7,10 @@ Goal::Goal(string tag, int x, int y, int width, int height):GameObject(tag, x, y
 	SetBitMapPosition();
 }
 
+Goal::~Goal()
+{
+}
+
 void Goal::Picked()
 {
 	GameSystem::SetIsNextStage(true);

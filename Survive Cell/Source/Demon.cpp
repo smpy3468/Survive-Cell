@@ -6,6 +6,11 @@ Demon::Demon() {
 	tag = "Monster";
 }
 
+Demon::~Demon()
+{
+	delete fire;
+}
+
 Demon::Demon(string tag, int x, int y, int width, int height) :Monster(tag, x, y, width, height) {
 	tag = "Monster";
 	SetDefenseRange(300);

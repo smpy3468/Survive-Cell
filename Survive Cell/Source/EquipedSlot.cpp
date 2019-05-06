@@ -9,6 +9,10 @@ EquipedSlot::EquipedSlot(string tag, int x, int y, int width, int height):UInter
 	isEquipmentPicSet = false;
 }
 
+EquipedSlot::~EquipedSlot()
+{
+}
+
 bool EquipedSlot::GetIsEquipmentPicSet()
 {
 	return this->isEquipmentPicSet;

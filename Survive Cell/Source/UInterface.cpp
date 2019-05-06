@@ -10,6 +10,15 @@ UInterface::UInterface() {
 	height = 32;
 }
 
+UInterface::~UInterface()
+{
+	for (unsigned int i = 0; i < ani.size(); i++)
+	{
+		delete ani[i];
+	}
+	ani.clear();
+}
+
 UInterface::UInterface(string tag, int x, int y, int width, int height){
 	this->tag = "UInterface";
 	this->x = x;

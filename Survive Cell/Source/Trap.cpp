@@ -5,3 +5,7 @@ Trap::Trap()
 {
 	tag = "Trap";
 }
+
+Trap::~Trap()
+{
+}

@@ -6,6 +6,15 @@ Item::Item()
 	tag = "Item";
 }
 
+Item::~Item()
+{
+	for (unsigned int i = 0; i < ani.size(); i++)
+	{
+		delete ani[i];
+	}
+	ani.clear();
+}
+
 Item::Item(string tag, int x, int y, int width, int height, int pictureID) :GameObject(tag, x, y, width, height, pictureID)
 {	
 	tag = "Item";

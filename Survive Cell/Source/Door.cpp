@@ -6,6 +6,11 @@ Door::Door() :GameObject()
 	tag = "Door";
 }
 
+Door::~Door()
+{
+	delete ani;
+}
+
 Door::Door(string tag, int x, int y, int width, int height) : GameObject(tag, x, y, width, height)
 {
 	isRuin = false;
@@ -29,7 +34,6 @@ void Door::Kicked()
 bool Door::GetRuin() 
 {
 	return this->isRuin;
-
 }
 
 void Door::SetBitMapPosition()
@@ -69,12 +73,10 @@ void Door::ShowBitMap()
 		ani->OnMove();//播放破壞動畫
 	}//被破壞的話
 	
-	if (ani->IsEnd())//播完破壞動畫後
-		Dead();//刪除物件
-	
 	ani->OnShow();
 
-
+	if (ani->IsEnd())//播完破壞動畫後
+		Dead();//刪除物件
 }
 
 void Door::LoadAni()

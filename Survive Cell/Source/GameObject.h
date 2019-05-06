@@ -15,6 +15,7 @@ class GameObject
 {
 public:
 	GameObject();
+	virtual ~GameObject();
 	GameObject(string tag, int x, int y, int width, int height, int pictureID);
 	GameObject(string tag, int x, int y, int width, int height);
 	void SetTag(string tag);

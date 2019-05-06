@@ -6,6 +6,7 @@ class UIBlood : public UInterface
 {
 	public:
 		UIBlood(string tag, int x, int y, int width, int height);
+		~UIBlood();
 		void ShowBitMap();
 	private:
 		void RefreshTargetWidth();

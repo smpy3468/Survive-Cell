@@ -5,6 +5,7 @@ class PlayerTraditionalSword:public PlayerWeapon
 {
 public:
 	PlayerTraditionalSword();
+	~PlayerTraditionalSword();
 	PlayerTraditionalSword(ItemWeapon* rhs);
 
 	void SetXY(int hostX, int hostY, int playerCurrentAni, int  playerAniNumber)override;

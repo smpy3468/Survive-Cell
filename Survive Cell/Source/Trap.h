@@ -10,5 +10,6 @@ class Trap :public GameObject
 {
 public:
 	Trap();
+	~Trap();
 private:
 };

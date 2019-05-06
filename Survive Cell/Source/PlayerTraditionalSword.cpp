@@ -6,6 +6,11 @@ PlayerTraditionalSword::PlayerTraditionalSword()
 	
 }
 
+PlayerTraditionalSword::~PlayerTraditionalSword()
+{
+	delete wave;
+}
+
 PlayerTraditionalSword::PlayerTraditionalSword(ItemWeapon* rhs):PlayerWeapon(rhs)
 {
 	SetX(player->GetX());

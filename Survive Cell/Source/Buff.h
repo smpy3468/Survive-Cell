@@ -7,5 +7,6 @@ class Buff
 {
 public:
 	Buff();
+	~Buff();
 private:
 };

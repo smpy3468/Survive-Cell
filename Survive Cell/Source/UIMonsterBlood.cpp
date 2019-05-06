@@ -5,6 +5,10 @@ UIMonsterBlood::UIMonsterBlood(string tag, int x, int y, int width, int height) 
 {
 }
 
+UIMonsterBlood::~UIMonsterBlood()
+{
+}
+
 
 void UIMonsterBlood::ShowBitMap() 
 {

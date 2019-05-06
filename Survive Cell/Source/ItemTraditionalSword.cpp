@@ -6,6 +6,10 @@ ItemTraditionalSword::ItemTraditionalSword() {
 	tag = "ItemWeapon";
 }
 
+ItemTraditionalSword::~ItemTraditionalSword()
+{
+}
+
 
 
 ItemTraditionalSword::ItemTraditionalSword(string tag, int x, int y, int width, int height) :ItemWeapon(tag, x, y, width, height) {

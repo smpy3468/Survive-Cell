@@ -11,7 +11,7 @@ class Map
 {
 public:
 	Map();
-
+	~Map();
 	static void Init();//初始化
 	static void Load();//載入地圖
 	static void ShowStartMenu();//顯示開始選單

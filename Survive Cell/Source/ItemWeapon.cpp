@@ -6,6 +6,10 @@ ItemWeapon::ItemWeapon()
 	tag = "ItemWeapon";
 }
 
+ItemWeapon::~ItemWeapon()
+{
+}
+
 ItemWeapon::ItemWeapon(string tag, int x, int y, int width, int height):Item(tag, x, y, width, height){
 	tag = "ItemWeapon";
 }

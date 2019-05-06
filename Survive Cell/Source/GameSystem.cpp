@@ -82,26 +82,54 @@ void GameSystem::AddUserInterface(UInterface* ui) {
 
 void GameSystem::DeleteGameObject(GameObject * obj)
 {
-	for (auto i = gameObjectList.begin(); i != gameObjectList.end(); i++)
+	for (unsigned int i = 0; i < gameObjectList.size();)
+	{
+		if (gameObjectList[i] == obj)
+		{
+			delete gameObjectList[i];
+			gameObjectList.erase(gameObjectList.begin() + i);
+			return;
+		}
+		else
+		{
+			i++;
+		}
+	}
+
+	/*for (auto i = gameObjectList.begin(); i != gameObjectList.end(); i++)
 	{
 		if (*i == obj)
 		{
 			gameObjectList.erase(i);
 			return;
 		}
-	}
+	}*/
 }
 
 void GameSystem::DeleteUInterface(UInterface* ui)
 {
-	for (auto i = gameUIList.begin(); i != gameUIList.end(); i++)
+	for (unsigned int i = 0; i < gameUIList.size(); )
+	{
+		if (gameUIList[i] == ui)
+		{
+			delete gameUIList[i];
+			gameUIList.erase(gameUIList.begin() + i);
+			return;
+		}
+		else
+		{
+			i++;
+		}
+	}
+
+	/*for (auto i = gameUIList.begin(); i != gameUIList.end(); i++)
 	{
 		if (*i == ui)
 		{
 			gameUIList.erase(i);
 			return;
 		}
-	}
+	}*/
 }
 
 void GameSystem::DeleteAllUI()
@@ -277,8 +305,9 @@ void GameSystem::Init()
 void GameSystem::Exit()
 {
 	DeleteAllGameObject();
-	
+	DeleteAllUI();
 	gameObjectList.clear();
+	gameUIList.clear();
 }
 
 void GameSystem::PlayAudio(AUDIO id)

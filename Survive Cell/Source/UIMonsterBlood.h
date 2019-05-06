@@ -6,6 +6,7 @@ class UIMonsterBlood :public UInterface
 {
 public:
 	UIMonsterBlood(string tag, int x, int y, int width, int height);
+	~UIMonsterBlood();
 	void ShowBitMap();
 private:
 	const int ISATTACK = 5;

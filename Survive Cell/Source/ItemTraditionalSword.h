@@ -8,6 +8,7 @@
 class ItemTraditionalSword:public ItemWeapon {
 	public:
 		ItemTraditionalSword();
+		~ItemTraditionalSword();
 		ItemTraditionalSword(string tag, int x, int y, int width, int height);
 	private:
 		void LoadAni()override;							//¸ü¤J°Êµe

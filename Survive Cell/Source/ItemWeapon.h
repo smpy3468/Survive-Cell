@@ -12,6 +12,7 @@ class ItemWeapon :public Item
 	friend class PlayerEquipment;
 	public:
 		ItemWeapon();
+		~ItemWeapon();
 		ItemWeapon(string tag, int x, int y, int width, int height);
 		int GetAttackDamage();
 		int GetAttackRange();

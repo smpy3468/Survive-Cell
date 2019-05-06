@@ -9,6 +9,10 @@ SwordWave::SwordWave(string tag, int x, int y, int width, int height) :Effect(ta
 	LoadBitMap(".\\res\\swordwave_left_0.bmp");
 }
 
+SwordWave::~SwordWave()
+{
+}
+
 void SwordWave::ShowBitMap(int hostX, int hostY, int hostCurrentAni, int attackAniNumber) {
 	if(attackAniNumber == 0&&(hostCurrentAni== ANI_ATTACK_LEFT || hostCurrentAni == ANI_ATTACK_RIGHT)){
 		SetXY(hostX, hostY, hostCurrentAni);

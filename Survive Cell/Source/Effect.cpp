@@ -9,6 +9,15 @@ Effect::Effect(string tag, int x, int y, int width, int height):GameObject(tag, 
 	currentAni = 0;
 }
 
+Effect::~Effect()
+{
+	for (unsigned int i = 0; i < ani.size(); i++)
+	{
+		delete ani[i];
+	}
+	ani.clear();
+}
+
 
 
 //-----------------------------------SetHit----------------------------------//

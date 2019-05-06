@@ -12,6 +12,10 @@ Monster::Monster()
 	tag = "Monster";
 }
 
+Monster::~Monster()
+{
+}
+
 
 Monster::Monster(string tag, int x, int y, int width, int height) :Character(tag, x, y, width, height)
 {

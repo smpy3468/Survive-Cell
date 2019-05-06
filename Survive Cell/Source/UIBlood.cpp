@@ -7,6 +7,10 @@ UIBlood::UIBlood(string tag, int x, int y, int width, int height) :UInterface(ta
 	this->targetWidth = this->width;
 }
 
+UIBlood::~UIBlood()
+{
+}
+
 void UIBlood::ShowBitMap()
 {
 	RefreshTargetWidth();

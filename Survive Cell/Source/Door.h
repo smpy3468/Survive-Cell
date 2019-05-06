@@ -12,6 +12,7 @@ class Door :public GameObject
 {
 public:
 	Door();
+	~Door();
 	Door(string tag, int x, int y, int width, int height);
 	void Kicked();//³Q½ð
 	bool GetRuin();

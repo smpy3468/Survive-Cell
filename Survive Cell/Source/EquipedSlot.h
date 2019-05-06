@@ -5,6 +5,7 @@
 class EquipedSlot :public UInterface {
 	public:
 		EquipedSlot(string tag, int x, int y, int width, int height);
+		~EquipedSlot();
 
 		bool GetIsEquipmentPicSet();
 

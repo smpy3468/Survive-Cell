@@ -7,6 +7,15 @@ PlayerEquipment::PlayerEquipment()
 	tag = "PlayerEquipment";
 }
 
+PlayerEquipment::~PlayerEquipment()
+{
+	for (unsigned int i = 0; i < ani.size(); i++)
+	{
+		delete ani[i];
+	}
+	ani.clear();
+}
+
 PlayerEquipment::PlayerEquipment(ItemWeapon* rhs):PlayerEquipment()
 {	
 	//player = GameSystem::GetGameObjectWithTag<Player>("Player");				//常用到就先記錄下來
