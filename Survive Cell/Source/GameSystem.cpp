@@ -19,7 +19,7 @@
 #include "Door.h"
 #include "Goal.h"
 #include "Boss.h"
-
+#include "Portal.h"
 vector<GameObject*> GameSystem::gameObjectList;//初始化物件列表
 vector<UInterface*> GameSystem::gameUIList;//初始化物件列表
 bool GameSystem::isGameOver = false;
@@ -418,6 +418,8 @@ void GameSystem::CreatStage1Object()
 	AddGameObject(new Door("Door", 2330, 1445, 12, 120));//門
 	AddGameObject(new Door("Door", 3420, 480, 12, 120));//門
 	AddGameObject(new Goal("Goal", 3510, 1353, 143, 212));
+	AddGameObject(new Portal("Portal", 100, 480, 110, 158,0));
+	AddGameObject(new Portal("Portal", 500, 480, 110, 158, 100));
 
 	AddGameObject(new Demon("Monster", 100, 100, 110, 158));
 	AddGameObject(new Boss("Monster", SIZE_X / 2, SIZE_Y / 2, 180, 280));

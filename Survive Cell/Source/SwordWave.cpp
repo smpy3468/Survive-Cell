@@ -29,7 +29,7 @@ void SwordWave::ShowBitMap(int hostX, int hostY, int hostCurrentAni, int attackA
 		SetBitMapPosition();
 		ani[currentAni]->OnMove();
 		ani[currentAni]->OnShow();
-			EffectAttackMonster(player->GetAttackDamage());
+		EffectAttackMonster(player->GetAttackDamage());
 
 	}
 	else {

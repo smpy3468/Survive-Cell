@@ -7,6 +7,7 @@
 #include "Floor.h"
 #include "Door.h"
 #include "Goal.h"
+#include "Portal.h"
 Player::Player()
 {
 	tag = "Player";
@@ -478,6 +479,14 @@ void Player::Interact()
 			if (i->GetX() + i->GetWidth() > this->x && i->GetX() < this->x + this->width
 				&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height) {
 				static_cast<Goal*>(i)->Picked();
+				break;
+			}
+		}
+		else if (i->GetTag() == "Portal")
+		{
+			if (i->GetX() + i->GetWidth() > this->x && i->GetX() < this->x + this->width
+				&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height) {
+				static_cast<Portal*>(i)->Used();
 				break;
 			}
 		}
