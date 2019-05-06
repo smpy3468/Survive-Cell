@@ -19,7 +19,8 @@ Demon::Demon(string tag, int x, int y, int width, int height) :Monster(tag, x, y
 	SetdY();	//•k√‰
 	SetOriginAttackRange(10);
 
-	HP = 50;
+	maxHP = 50;
+	HP = maxHP;
 	attackDamage = 1;
 	SetAttackRange(GetOriginAttackRange());
 	originMoveSpeed = 3;

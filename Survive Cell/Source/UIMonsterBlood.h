@@ -11,12 +11,12 @@ public:
 	{
 		for (auto& i : allMonster)
 		{
-			if (i->GetStatus() == ISATTACK && i->GetHP()>0)
-				OnShow(i->GetX(), i->GetY(), i->GetHP());
+			if (i->GetStatus() == ISATTACK && i->GetHP() > 0)
+				OnShow(i->GetX(), i->GetY(),i->GetWidth(),i->GetHeight(), i->GetHP(), i->GetMaxHP());
 		}
 	}
 private:
 	const int ISATTACK = 5;
-	void OnShow(int x, int y, int hp);
+	void OnShow(int x, int y, int width, int height, int hp, int maxHP);
 	vector<Monster*> allMonster = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
 };

@@ -24,9 +24,9 @@ Floor::Floor(string tag, int x, int y, int width, int height) : GameObject(tag, 
 
 void Floor::ShowBitMap()
 {
-	//objectPic.ShowBitmap();
+	objectPic.ShowBitmap();
 
-	CDC *pDC = CDDraw::GetBackCDC();
+	/*CDC *pDC = CDDraw::GetBackCDC();
 	CPen *pp, p(PS_SOLID, 1, RGB(128, 128, 128));
 	pp = pDC->SelectObject(&p);
 
@@ -37,5 +37,5 @@ void Floor::ShowBitMap()
 
 	pDC->SelectObject(pp);
 	pDC->SelectObject(pg);
-	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC*/
 }

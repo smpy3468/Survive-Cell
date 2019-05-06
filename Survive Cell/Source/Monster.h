@@ -13,7 +13,7 @@ class Monster :public Character
 public:
 	Monster();
 	~Monster();
-	Monster::Monster(string tag, int x, int y, int width, int height);
+	Monster(string tag, int x, int y, int width, int height);
 	void SetDefenseRange(int defenseRange);		//設定來回走動距離
 	void SetRL(int rl);							//設定往左往右
 	void SetdX();								//設定水平防守邊界
