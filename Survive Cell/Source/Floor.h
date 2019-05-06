@@ -13,5 +13,7 @@ public:
 	~Floor();
 	Floor(string tag, int x, int y, int width, int height, int pictureID);
 	Floor(string tag, int x, int y, int width, int height);
+
+	void ShowBitMap()override;
 private:
 };
