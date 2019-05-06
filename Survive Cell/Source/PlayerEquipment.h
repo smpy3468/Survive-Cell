@@ -10,7 +10,7 @@ class PlayerEquipment
 {
 public:
 	PlayerEquipment();
-	~PlayerEquipment();
+	virtual ~PlayerEquipment();
 	PlayerEquipment(ItemWeapon* rhs);
 	PlayerEquipment* operator=(ItemWeapon* rhs);//增加裝備時可直接轉換
 

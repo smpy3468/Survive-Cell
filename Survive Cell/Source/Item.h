@@ -11,7 +11,7 @@ class Item :public GameObject
 {
 public:
 	Item();
-	~Item();
+	virtual ~Item();
 	Item(string tag, int x, int y, int width, int height, int pictureID);
 	Item(string tag, int x, int y, int width, int height);		//沒有pictureID 的 Constructor
 	virtual void Picked();														//被撿起

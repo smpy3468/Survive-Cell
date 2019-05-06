@@ -7,6 +7,7 @@ UIMonsterBlood::UIMonsterBlood(string tag, int x, int y, int width, int height) 
 
 UIMonsterBlood::~UIMonsterBlood()
 {
+
 }
 
 
@@ -32,7 +33,7 @@ void UIMonsterBlood::OnShow(int x, int y, int hp)
 	pg = pDC->SelectObject(&g);
 
 	pDC->Rectangle(x +10-Map::GetSX(), y-Map::GetSY()-10, x + bloodWidth - Map::GetSX(), y + bloodHeight - Map::GetSY());
-
+	
 
 
 	/*ÄÀ©ñpen*/

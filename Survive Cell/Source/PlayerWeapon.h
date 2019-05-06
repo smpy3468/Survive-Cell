@@ -6,7 +6,7 @@ class PlayerWeapon :public PlayerEquipment
 {
 public:
 	PlayerWeapon();
-	~PlayerWeapon();
+	virtual ~PlayerWeapon();
 	PlayerWeapon(ItemWeapon* rhs);
 protected:
 	bool haveEffect = false;         //使否 有特效;

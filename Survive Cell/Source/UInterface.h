@@ -10,7 +10,7 @@ using namespace game_framework;
 class UInterface{
 	public:
 		UInterface();
-		~UInterface();
+		virtual ~UInterface();
 		UInterface(string tag, int x, int y, int width, int height);
 
 		void SetX(int x);													//設定UI的X座標

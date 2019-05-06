@@ -92,6 +92,7 @@ namespace game_framework {
 	void CGameStateInit::OnBeginState()
 	{
 		GameSystem::CreatStage1Object();
+
 		//GameSystem::StopAudio(GameSystem::AUDIO::AUDIO_GAME_OVER);//停止遊戲中的音樂
 		//GameSystem::PlayAudio(GameSystem::AUDIO::AUDIO_GAME_INIT);//播放遊戲結束的音樂
 	}
@@ -148,28 +149,6 @@ namespace game_framework {
 	void CGameStateOver::OnShow()
 	{
 		GameSystem::ShowText("你已經死了 ! \n畫面有夠藍黑", 0, 0, SIZE_X, SIZE_Y, GameSystem::ALIGN_CENTER, GameSystem::ALIGN_CENTER, 16, RGB(100, 100, 255), OPAQUE, RGB(0, 0, 0));
-		/*CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC
-		CFont f, *fp;
-		f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
-		fp = pDC->SelectObject(&f);					// 選用 font f
-		pDC->SetBkMode(TRANSPARENT);
-		pDC->SetTextColor(RGB(0, 0, 255));
-
-		char str[80];								// Demo 數字對字串的轉換
-		sprintf(str, "你已經死了 ! \n畫面有夠藍黑");
-
-		CRect rect = { 0,0,SIZE_X,SIZE_Y };//設定矩形左、上、右、下的座標
-
-		//這裡在設定垂直置中
-		CRect temp = rect;
-		int height = pDC->DrawText(str, temp, DT_CENTER | DT_WORDBREAK | DT_CALCRECT);
-		rect.DeflateRect(0, (rect.Height() - height) / 2);
-
-		pDC->DrawText(str, rect, DT_CENTER | DT_WORDBREAK);//水平置中
-
-		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
-		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
-		*/
 	}
 
 
