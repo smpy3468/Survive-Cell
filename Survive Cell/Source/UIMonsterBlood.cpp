@@ -11,16 +11,6 @@ UIMonsterBlood::~UIMonsterBlood()
 }
 
 
-void UIMonsterBlood::ShowBitMap() 
-{
-	for(auto& i:allMonster)
-	{
-		if (i->GetStatus() == ISATTACK && i->GetHP()>0)
-			OnShow(i -> GetX(), i->GetY(), i->GetHP());
-	}
-}
-
-
 void UIMonsterBlood::OnShow(int x, int y, int hp)
 {	
 	int bloodHeight = 5;

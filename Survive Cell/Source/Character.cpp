@@ -177,6 +177,12 @@ void Character::IncreaseHP(int ihp)
 		this->HP = this->maxHP;
 }
 
+void Character::MoveTo(int x, int y)
+{
+	this->x = x;
+	this->y = y;
+}
+
 void Character::Dead()
 {
 	GameSystem::DeleteGameObject(this);//刪除此物件

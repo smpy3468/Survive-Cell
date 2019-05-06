@@ -100,5 +100,5 @@ void Map::SetStaticObject()//設定不會移動的物件座標，只會在遊戲一開始呼叫
 
 bool Map::HasObject(int x, int y)//該座標是否有物件
 {
-	return coordinate[x][y];//回傳該座標是否有物件
+ 	return coordinate[x][y];//回傳該座標是否有物件
 }

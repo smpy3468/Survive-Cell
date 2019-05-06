@@ -27,7 +27,7 @@ Player::Player(string tag, int x, int y, int width, int height) :Character(tag, 
 
 	maxHP = 100;
 	HP = maxHP;
-	
+
 	originWidth = width;
 	originHeight = height;
 
@@ -111,6 +111,13 @@ void Player::Move(int dx, int dy)
 		Map::MoveScreenTopLeft(0, dy);//¿Ã¹õ²¾°Ê
 	else if (dy < 0 && this->y + this->height / 2 < Map::GetSY() + SIZE_Y / 4)
 		Map::MoveScreenTopLeft(0, dy);//¿Ã¹õ²¾°Ê
+}
+
+void Player::MoveTo(int x, int y)
+{
+	Character::MoveTo(x,y);
+	Map::SetSX(x - SIZE_X / 2);
+	Map::SetSY(y - SIZE_Y / 2);
 }
 
 void Player::SetIsMoveLeft(bool isMoveLeft)
@@ -586,7 +593,7 @@ void Player::ShowInformation()
 	string information = "Attack" + to_string(attackDamage)
 		+ "\nAttackSpeed:" + to_string(attackSpeed) + "\nAttackRange:" + to_string(attackRange)
 		+ "\nMoveSpeed:" + to_string(moveSpeed) + "\nDefense:" + to_string(defense)
-		+ "\nUnconquered:"+to_string(isUnconquered)
+		+ "\nUnconquered:" + to_string(isUnconquered)
 		+ "\nHP:" + to_string(HP);
 
 	GameSystem::ShowText(information, 0, 0, SIZE_X, SIZE_Y, GameSystem::ALIGN_LEFT, GameSystem::ALIGN_TOP, 8, RGB(0, 0, 0));

@@ -174,6 +174,9 @@ namespace game_framework {
 			GameSystem::ChangeToNextStage();
 			ShowInitProgress(50);
 			Sleep(300);
+
+			player.MoveTo(GameSystem::GetGameObjectWithTag<Goal>("Goal")->GetX()
+				, GameSystem::GetGameObjectWithTag<Goal>("Goal")->GetY());//移動至傳送門的位置
 		}
 		GameSystem::StopAudio(GameSystem::AUDIO::AUDIO_GAME_OVER);//停止結束的音樂
 		GameSystem::PlayAudio(GameSystem::AUDIO::AUDIO_GAME_RUN);//播放遊戲的音樂

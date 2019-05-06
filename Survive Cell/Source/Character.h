@@ -48,6 +48,7 @@ public:
 	void IncreaseHP(int ihp);//加血
 	virtual void Attack() = 0;//攻擊
 	virtual void Move(int dx, int dy) = 0;//移動
+	virtual void MoveTo(int x, int y);//移動至
 
 protected:
 	int maxHP, HP;//最大血量、目前血量
@@ -66,8 +67,8 @@ protected:
 	vector<CAnimation*> ani;//動畫
 	virtual void LoadAni(); //載入動畫
 	int aniSpeed = 10;//動畫播放速度
-	void AddAniBitMaps(char* pic[], int aniType, int picCount, int aniSpeed=10);//增加多張動畫圖片
-	void AddAniBitMap(char* pic, int aniType, int aniSpeed=10);//增加動畫圖片
+	void AddAniBitMaps(char* pic[], int aniType, int picCount, int aniSpeed = 10);//增加多張動畫圖片
+	void AddAniBitMap(char* pic, int aniType, int aniSpeed = 10);//增加動畫圖片
 
 	bool CanMoveLeft(int perDisplacement);//可以向左移動，perDisplacement:每次的位移量是多少
 	bool CanMoveRight(int perDisplacement);//可以向右移動

@@ -25,6 +25,16 @@ vector<UInterface*> GameSystem::gameUIList;//初始化物件列表
 bool GameSystem::isGameOver = false;
 bool GameSystem::isNextStage = false;
 int  GameSystem::nowStage = 0;
+int GameSystem::stage1Floor[stage1FloorCount][4] =
+{ 
+	{0,600,710,120},{ 0, 720, 710, 640 },{ 330, 400, 410, 80 },{ 890, 170, 200, 45 },{ 1090, 600, 850, 120 }
+,{ 1090, 0, 65, 490 },{ 0, 1360, 410, 205 },{ 650, 1360, 60, 150 },{ 710, 910, 220, 45 },{ 825, 1150, 180, 35 }
+,{ 710, 1325, 120, 35 },{ 920, 710, 170, 35 },{ 1090, 720, 850, 280 },{ 1090, 1110, 850, 260 },{ 1530, 1000, 410, 110 }
+,{ 1570, 1370, 100, 195 },{ 1115, 380, 455, 35 },{ 1315, 170, 170, 95 },{ 1425, 170, 275, 50 },{ 1700, 120, 80, 480 }
+,{ 2160, 600, 1680, 120 },{ 1890, 445, 610, 35 },{ 2160, 720, 310, 650 },{ 2230, 1370, 140, 75 },{ 2700, 720, 520, 110 }
+,{ 3080, 830, 140, 130 },{ 2700, 960, 520, 320 },{ 2140, 0, 1700, 60 },{ 2140, 210, 930, 70 },{ 2630, 60, 80, 95 }
+,{ 3260, 60, 580, 360 },{ 3380, 420, 100, 60 },{ 2830, 410, 80, 190 },{ 2630, 460, 200, 50 },{ 2910, 410, 160, 40 }
+};
 
 GameSystem::GameSystem()
 {
@@ -353,78 +363,84 @@ void GameSystem::ChangeToNextStage()
 
 void GameSystem::CreatStage1Object()
 {
-	GameSystem::Init();
-	GameSystem::AddGameObject(new Player("Player", 80, 80, 50, 80));
+	Init();
+	AddGameObject(new Player("Player", 80, 80, 50, 80));
 	Player* player = GetGameObjectWithTag<Player>("Player");
 	Map::SetSX(player->GetX() - SIZE_X / 2);
 	Map::SetSY(player->GetY() - SIZE_Y / 2);
 
-	GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 280, Map::WORLD_SIZE_X, 280, IDB_GROUND));
+	AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 280, Map::WORLD_SIZE_X, 280, IDB_GROUND));
 
-	GameSystem::CreateFloor(0, 600, 710, 120);
-	GameSystem::CreateFloor(0, 720, 710, 640);
-	GameSystem::AddGameObject(new Door("Door", 530, 480, 12, 120));//門
-	GameSystem::CreateFloor(330, 400, 410, 80);
-	GameSystem::CreateFloor(890, 170, 200, 45);
-	GameSystem::CreateFloor(1090, 600, 850, 120);
-	GameSystem::CreateFloor(1090, 0, 65, 490);
-	GameSystem::CreateFloor(0, 1360, 410, 205);
-	GameSystem::CreateFloor(650, 1360, 60, 150);
-	GameSystem::CreateFloor(710, 910, 220, 45);
-	GameSystem::CreateFloor(825, 1150, 180, 35);
-	GameSystem::CreateFloor(710, 1325, 120, 35);
-	GameSystem::CreateFloor(920, 710, 170, 35);
-	GameSystem::CreateFloor(1090, 720, 850, 280);
-	GameSystem::CreateFloor(1090, 1110, 850, 260);
-	GameSystem::CreateFloor(1530, 1000, 410, 110);
-	GameSystem::CreateFloor(1570, 1370, 100, 195);
-	GameSystem::CreateFloor(1115, 380, 455, 35);
-	GameSystem::AddGameObject(new Door("Door", 1315, 260, 12, 120));//門
-	GameSystem::CreateFloor(1315, 170, 170, 95);
-	GameSystem::CreateFloor(1425, 170, 275, 50);
-	GameSystem::CreateFloor(1700, 120, 80, 480);
-	GameSystem::CreateFloor(2160, 600, 1680, 120);
-	GameSystem::CreateFloor(1890, 445, 610, 35);
-	GameSystem::CreateFloor(2160, 720, 310, 650);
-	GameSystem::CreateFloor(2230, 1370, 140, 75);
-	GameSystem::AddGameObject(new Door("Door", 2330, 1445, 12, 120));//門
-	GameSystem::CreateFloor(2700, 720, 520, 110);
-	GameSystem::CreateFloor(3080, 830, 140, 130);
-	GameSystem::CreateFloor(2700, 960, 520, 320);
-	GameSystem::CreateFloor(2140, 0, 1700, 60);
-	GameSystem::CreateFloor(2140, 210, 930, 70);
-	GameSystem::CreateFloor(2630, 60, 80, 95); //這可能會卡住太高了
-	GameSystem::CreateFloor(3260, 60, 580, 360);
-	GameSystem::CreateFloor(3380, 420, 100, 60);
-	GameSystem::CreateFloor(2830, 410, 80, 190);
-	GameSystem::CreateFloor(2630, 460, 200, 50);
-	GameSystem::CreateFloor(2910, 410, 160, 40);
-	GameSystem::AddGameObject(new Door("Door", 3420, 480, 12, 120));//門
-	GameSystem::AddGameObject(new Goal("Goal", 3510, 1353, 143, 212));
+	for (int i = 0; i < stage1FloorCount; i++)
+	{
+		CreateFloor(stage1Floor[i][0], stage1Floor[i][1], stage1Floor[i][2], stage1Floor[i][3]);
+	}
 
-	GameSystem::AddGameObject(new Demon("Monster", 100, 100, 110, 158));
-	GameSystem::AddGameObject(new Boss("Monster", SIZE_X / 2, SIZE_Y / 2, 180, 280));
-	
-	GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10 - 100, SIZE_Y * 9 / 10, 64, 60));
-	GameSystem::AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10 - 10, SIZE_Y * 9 / 10, 64, 60));
-	GameSystem::AddUserInterface(new UIBlood("UIBlood", 0, SIZE_Y - 30, 400, 30));
-	GameSystem::AddUserInterface(new UIMonsterBlood("UIMonster", 0, 0, 0, 0));
+	/*CreateFloor(0, 600, 710, 120);
+	CreateFloor(0, 720, 710, 640);
+	CreateFloor(330, 400, 410, 80);
+	CreateFloor(890, 170, 200, 45);
+	CreateFloor(1090, 600, 850, 120);
+	CreateFloor(1090, 0, 65, 490);
+	CreateFloor(0, 1360, 410, 205);
+	CreateFloor(650, 1360, 60, 150);
+	CreateFloor(710, 910, 220, 45);
+	CreateFloor(825, 1150, 180, 35);
+	CreateFloor(710, 1325, 120, 35);
+	CreateFloor(920, 710, 170, 35);
+	CreateFloor(1090, 720, 850, 280);
+	CreateFloor(1090, 1110, 850, 260);
+	CreateFloor(1530, 1000, 410, 110);
+	CreateFloor(1570, 1370, 100, 195);
+	CreateFloor(1115, 380, 455, 35);
+	CreateFloor(1315, 170, 170, 95);
+	CreateFloor(1425, 170, 275, 50);
+	CreateFloor(1700, 120, 80, 480);
+	CreateFloor(2160, 600, 1680, 120);
+	CreateFloor(1890, 445, 610, 35);
+	CreateFloor(2160, 720, 310, 650);
+	CreateFloor(2230, 1370, 140, 75);	
+	CreateFloor(2700, 720, 520, 110);
+	CreateFloor(3080, 830, 140, 130);
+	CreateFloor(2700, 960, 520, 320);
+	CreateFloor(2140, 0, 1700, 60);
+	CreateFloor(2140, 210, 930, 70);
+	CreateFloor(2630, 60, 80, 95); //這可能會卡住太高了
+	CreateFloor(3260, 60, 580, 360);
+	CreateFloor(3380, 420, 100, 60);
+	CreateFloor(2830, 410, 80, 190);
+	CreateFloor(2630, 460, 200, 50);
+	CreateFloor(2910, 410, 160, 40);*/
+
+	AddGameObject(new Door("Door", 530, 480, 12, 120));//門
+	AddGameObject(new Door("Door", 1315, 260, 12, 120));//門
+	AddGameObject(new Door("Door", 2330, 1445, 12, 120));//門
+	AddGameObject(new Door("Door", 3420, 480, 12, 120));//門
+	AddGameObject(new Goal("Goal", 3510, 1353, 143, 212));
+
+	AddGameObject(new Demon("Monster", 100, 100, 110, 158));
+	AddGameObject(new Boss("Monster", SIZE_X / 2, SIZE_Y / 2, 180, 280));
+
+	AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10 - 100, SIZE_Y * 9 / 10, 64, 60));
+	AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10 - 10, SIZE_Y * 9 / 10, 64, 60));
+	AddUserInterface(new UIBlood("UIBlood", 0, SIZE_Y - 30, 400, 30));
+	AddUserInterface(new UIMonsterBlood("UIMonster", 0, 0, 0, 0));
 
 	Map::SetStaticObject();
 }
 
 void GameSystem::CreatStage2Object()
 {
-	//GameSystem::AddGameObject(new Boss("Monster", SIZE_X / 2, SIZE_Y / 2, 180, 90));
-	GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 + 100, SIZE_Y / 2 - 133, 131, 141)));
-	GameSystem::AddGameObject((new Demon("Monster", SIZE_X / 2 - 150, SIZE_Y / 2 - 133, 131, 141)));
+	//AddGameObject(new Boss("Monster", SIZE_X / 2, SIZE_Y / 2, 180, 90));
+	AddGameObject((new Demon("Monster", SIZE_X / 2 + 100, SIZE_Y / 2 - 133, 131, 141)));
+	AddGameObject((new Demon("Monster", SIZE_X / 2 - 150, SIZE_Y / 2 - 133, 131, 141)));
 
-	GameSystem::AddGameObject(new Floor("Ground", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//地圖最下方的地板
-	GameSystem::AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//地圖最下方的地板
+	AddGameObject(new Floor("Ground", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//地圖最下方的地板
+	AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//地圖最下方的地板
 
-	GameSystem::AddGameObject(new Door("Door", 100, Map::WORLD_SIZE_Y - 220, 12, 120));//門
-	GameSystem::AddGameObject(new Goal("Goal", 150, Map::WORLD_SIZE_Y - 312, 143, 212));
-	GameSystem::CreateFloor(SIZE_X / 2, SIZE_Y / 2 + 400, 1000, 80);
+	AddGameObject(new Door("Door", 100, Map::WORLD_SIZE_Y - 220, 12, 120));//門
+	AddGameObject(new Goal("Goal", 150, Map::WORLD_SIZE_Y - 312, 143, 212));
+	CreateFloor(SIZE_X / 2, SIZE_Y / 2 + 400, 1000, 80);
 	Map::Init();
 	Map::SetStaticObject();
 }

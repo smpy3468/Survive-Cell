@@ -41,6 +41,7 @@ public:
 	void DownJump();//下跳
 	void Interact();//互動
 	void Move(int dx, int dy)override;//移動特定距離
+	void MoveTo(int x, int y)override;//移動到特定座標
 	void Attack()override;//攻擊
 
 	//----------------動畫相關---------------------//
