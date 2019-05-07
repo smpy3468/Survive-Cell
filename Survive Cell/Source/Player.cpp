@@ -534,7 +534,8 @@ void Player::Interact()
 
 void Player::Attack()
 {
-	vector<Monster*> monsters = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
+	vector<Monster*>monsters = GameSystem::GetGameObjectsWithType<Monster>();
+	//vector<Monster*> monsters = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
 
 	for (auto& i : monsters)//¹ï©Çª«§ðÀ»
 	{
