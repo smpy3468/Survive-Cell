@@ -192,20 +192,20 @@ void Character::LoadAni()
 {
 }
 
-void Character::AddAniBitMaps(char * pic[], int aniType, int picCount, int aniSpeed)
+void Character::AddAniBitMaps(char * pic[], int aniType, int picCount, int aniDelay)
 {
 	for (int i = 0; i < picCount; i++)
 	{
-		AddAniBitMap(pic[i], aniType, aniSpeed);
+		AddAniBitMap(pic[i], aniType, aniDelay);
 	}
 }
 
-void Character::AddAniBitMap(char* pic, int aniType, int aniSpeed)
+void Character::AddAniBitMap(char* pic, int aniType, int aniDelay)
 {
 	while ((int)ani.size() <= aniType)//vector的大小不夠大
-		ani.push_back(new CAnimation(aniSpeed));//增加大小
+		ani.push_back(new CAnimation(aniDelay));//增加大小
 
-	ani[aniType]->SetDelayCount(aniSpeed);//設定動畫速度
+	ani[aniType]->SetDelayCount(aniDelay);//設定動畫速度
 
 	ani[aniType]->AddBitmap(pic, RGB(255, 255, 255));
 }

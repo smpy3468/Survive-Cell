@@ -464,14 +464,53 @@ void Player::ChangeHeight(int height)
 
 void Player::Interact()
 {
-	for (auto& i : GameSystem::GetAllGameObject())//對物件互動
+	//若有多個能夠互動的物件重疊，則先對道具互動，再對門互動
+	vector<Item*> itemList;//道具
+	vector<Goal*> goalList;//終點的門
+	vector<Portal*> portalList;//傳送門
+
+	for (auto&i : GameSystem::GetAllGameObject())//將對應的物件加入對應的列表中
+	{
+		if (dynamic_cast<Item*>(i) != NULL)
+			itemList.push_back(dynamic_cast<Item*>(i));
+		else if (dynamic_cast<Goal*>(i) != NULL)
+			goalList.push_back(dynamic_cast<Goal*>(i));
+		else if (dynamic_cast<Portal*>(i) != NULL)
+			portalList.push_back(dynamic_cast<Portal*>(i));
+	}
+
+	for (auto& i : itemList)//對道具互動
+	{
+		if (i->GetX() + i->GetWidth() > this->x && i->GetX() < this->x + this->width
+			&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height) {
+			static_cast<Item*>(i)->Picked();
+		}
+	}
+
+	for (auto& i : goalList)//對終點互動
+	{
+		if (i->GetX() + i->GetWidth() > this->x && i->GetX() < this->x + this->width
+			&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height) {
+			static_cast<Goal*>(i)->Picked();
+		}
+	}
+
+	for (auto& i : portalList)//對傳送門互動
+	{
+		if (i->GetX() + i->GetWidth() > this->x && i->GetX() < this->x + this->width
+			&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height) {
+			static_cast<Portal*>(i)->Used();
+		}
+	}
+
+	/*for (auto& i : GameSystem::GetAllGameObject())//對物件互動
 	{
 		if (i->GetTag() == "Item" || i->GetTag() == "Potion" || i->GetTag() == "ItemWeapon")//是物品
 		{
 			if (i->GetX() + i->GetWidth() > this->x && i->GetX() < this->x + this->width
 				&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height) {
 				static_cast<Item*>(i)->Picked();
-				break;
+				//return;
 			}
 		}
 		else if (i->GetTag() == "Goal")
@@ -479,7 +518,7 @@ void Player::Interact()
 			if (i->GetX() + i->GetWidth() > this->x && i->GetX() < this->x + this->width
 				&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height) {
 				static_cast<Goal*>(i)->Picked();
-				break;
+				//return;
 			}
 		}
 		else if (i->GetTag() == "Portal")
@@ -487,10 +526,10 @@ void Player::Interact()
 			if (i->GetX() + i->GetWidth() > this->x && i->GetX() < this->x + this->width
 				&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height) {
 				static_cast<Portal*>(i)->Used();
-				break;
+				//return;
 			}
 		}
-	}
+	}*/
 }
 
 void Player::Attack()

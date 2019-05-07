@@ -373,8 +373,8 @@ void GameSystem::CreatStage1Object()
 
 	for (int i = 0; i < stage1FloorCount; i++)
 	{
-		CreateFloor(stage1Floor[i][0], stage1Floor[i][1], stage1Floor[i][2], stage1Floor[i][3]);
-		//GameSystem::AddGameObject(new Floor("Floor",stage1Floor[i][0], stage1Floor[i][1], stage1Floor[i][2], stage1Floor[i][3]));
+		//CreateFloor(stage1Floor[i][0], stage1Floor[i][1], stage1Floor[i][2], stage1Floor[i][3]);
+		GameSystem::AddGameObject(new Floor("Floor",stage1Floor[i][0], stage1Floor[i][1], stage1Floor[i][2], stage1Floor[i][3]));
 	}
 
 	/*CreateFloor(0, 600, 710, 120);

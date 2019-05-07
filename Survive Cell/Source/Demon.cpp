@@ -28,7 +28,7 @@ Demon::Demon(string tag, int x, int y, int width, int height) :Monster(tag, x, y
 	SetDefense(0);
 
 	status = STANDBY;
-	aniSpeed = 5;
+	aniDelay = 5;
 	LoadAni();
 	LoadBitMap(".\\res\\demon_idle.bmp");
 	fire = new Fire("Fire", x, y, 154, 105);
@@ -203,33 +203,33 @@ void Demon::ShowBitMap() {
 void Demon::LoadAni()
 {
 	char* aniIdle[1] = { ".\\res\\demon_idle.bmp" };
-	AddAniBitMaps(aniIdle, ANI_IDLE, 1, aniSpeed);
+	AddAniBitMaps(aniIdle, ANI_IDLE, 1, aniDelay);
 
 	char* aniLeft[6] = { ".\\res\\demon_left_0.bmp",".\\res\\demon_left_1.bmp" ,".\\res\\demon_left_2.bmp"
 									,".\\res\\demon_left_3.bmp" ,".\\res\\demon_left_4.bmp" ,".\\res\\demon_left_5.bmp" };
-	AddAniBitMaps(aniLeft, ANI_LEFT, 6, aniSpeed);
+	AddAniBitMaps(aniLeft, ANI_LEFT, 6, aniDelay);
 
 	char* aniRight[6] = { ".\\res\\demon_right_0.bmp", ".\\res\\demon_right_1.bmp" ,".\\res\\demon_right_2.bmp" ,
 									".\\res\\demon_right_3.bmp" ,".\\res\\demon_right_4.bmp" ,".\\res\\demon_right_5.bmp" };
-	AddAniBitMaps(aniRight, ANI_RIGHT, 6, aniSpeed);
+	AddAniBitMaps(aniRight, ANI_RIGHT, 6, aniDelay);
 
 	char* aniAttack_left[11] = { ".\\res\\demon_attackleft_0.bmp", ".\\res\\demon_attackleft_1.bmp", ".\\res\\demon_attackleft_2.bmp",
 								".\\res\\demon_attackleft_3.bmp", ".\\res\\demon_attackleft_4.bmp", ".\\res\\demon_attackleft_5.bmp",
 								".\\res\\demon_attackleft_6.bmp", ".\\res\\demon_attackleft_7.bmp", ".\\res\\demon_attackleft_7.bmp",
 								".\\res\\demon_attackleft_7.bmp", ".\\res\\demon_attackleft_7.bmp" };
-	AddAniBitMaps(aniAttack_left, ANI_ATTACK_LEFT, 11, aniSpeed);
+	AddAniBitMaps(aniAttack_left, ANI_ATTACK_LEFT, 11, aniDelay);
 
 	char* aniAttack_right[11] = { ".\\res\\demon_attackright_0.bmp", ".\\res\\demon_attackright_1.bmp", ".\\res\\demon_attackright_2.bmp",
 							".\\res\\demon_attackright_3.bmp", ".\\res\\demon_attackright_4.bmp", ".\\res\\demon_attackright_5.bmp",
 							".\\res\\demon_attackright_6.bmp", ".\\res\\demon_attackright_7.bmp", ".\\res\\demon_attackright_7.bmp",
 							".\\res\\demon_attackright_7.bmp", ".\\res\\demon_attackright_7.bmp" };
-	AddAniBitMaps(aniAttack_right, ANI_ATTACK_RIGHT, 11, aniSpeed);
+	AddAniBitMaps(aniAttack_right, ANI_ATTACK_RIGHT, 11, aniDelay);
 
 	char* aniIsAttack_right[7] = { ".\\res\\isattack_right_0.bmp", ".\\res\\isattack_right_1.bmp", ".\\res\\isattack_right_2.bmp",".\\res\\isattack_right_2.bmp",
 									".\\res\\isattack_right_2.bmp",".\\res\\isattack_right_2.bmp",".\\res\\isattack_right_2.bmp" };
-	AddAniBitMaps(aniIsAttack_right, ANI_ISATTACK_RIGHT, 7, aniSpeed);
+	AddAniBitMaps(aniIsAttack_right, ANI_ISATTACK_RIGHT, 7, aniDelay);
 
 	char* aniIsAttack_left[7] = { ".\\res\\isattack_left_0.bmp", ".\\res\\isattack_left_1.bmp", ".\\res\\isattack_left_2.bmp",
 								".\\res\\isattack_left_2.bmp", ".\\res\\isattack_left_2.bmp",".\\res\\isattack_left_2.bmp",".\\res\\isattack_left_2.bmp "};
-	AddAniBitMaps(aniIsAttack_left, ANI_ISATTACK_LEFT, 7, aniSpeed);
+	AddAniBitMaps(aniIsAttack_left, ANI_ISATTACK_LEFT, 7, aniDelay);
 }
