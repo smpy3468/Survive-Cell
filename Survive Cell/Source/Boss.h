@@ -28,7 +28,7 @@ private:
 	void NearSlash();//砍
 	void JumpBack();//往後跳
 	void JumpFront();//往前跳
-	void FarSlash();//遠程劍波
+	void FarShoot();//遠程攻擊
 	void InstantDeath();//即死技能
 
 	int currentState = 0;//目前狀態
@@ -36,7 +36,8 @@ private:
 	{
 		STATE_IDLE = 0,
 		STATE_MOVE,
-		STATE_ATTACK,
+		STATE_NEAR_SLASH,
+		STATE_FAR_SHOOT,
 		STATE_JUMP,
 		STATE_LENGTH
 	};
@@ -52,9 +53,11 @@ private:
 		ANI_IDLE = 0,
 		ANI_LEFT,
 		ANI_RIGHT,
-		ANI_ATTACK_LEFT,
-		ANI_ATTACK_RIGHT,
+		ANI_NEAR_SLASH_LEFT,
+		ANI_NEAR_SLASH_RIGHT,
 		ANI_JUMP,
+		ANI_FAR_SHOOT_LEFT,
+		ANI_FAR_SHOOT_RIGHT,
 		ANI_GET_HIT_LEFT,
 		ANI_GET_HIT_RIGHT
 	};

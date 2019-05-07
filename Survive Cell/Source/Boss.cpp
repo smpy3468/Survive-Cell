@@ -54,8 +54,11 @@ void Boss::Act()
 			currentState = STATE_IDLE;//移動動畫播完，就回到靜止狀態
 
 		break;
-	case STATE_ATTACK://攻擊
+	case STATE_NEAR_SLASH://攻擊
 		Attack();
+		break;
+	case STATE_FAR_SHOOT://射擊
+		FarShoot();
 		break;
 	case STATE_JUMP:
 		Jump();
@@ -83,6 +86,11 @@ void Boss::Fall(int perDisplacement)
 
 void Boss::Attack()
 {
+	NearSlash();
+}
+
+void Boss::NearSlash()
+{
 	if (ani[currentAni]->IsEnd())//攻擊判定只會出現一次，因此攻擊動畫播完才攻擊
 	{
 		int leftEdge = 0, rightEdge = 0;
@@ -107,6 +115,12 @@ void Boss::Attack()
 
 		currentState = STATE_IDLE;//回到靜止狀態
 	}
+}
+
+void Boss::FarShoot()
+{
+	if (ani[currentAni]->IsEnd())
+		currentState = STATE_IDLE;
 }
 
 void Boss::Jump()
@@ -139,19 +153,11 @@ void Boss::Move(int dx, int dy)
 	this->y += dy;
 }
 
-void Boss::NearSlash()
-{
-}
-
 void Boss::JumpBack()
 {
 }
 
 void Boss::JumpFront()
-{
-}
-
-void Boss::FarSlash()
 {
 }
 
@@ -180,7 +186,7 @@ void Boss::ShowBitMap()
 		ani[currentAni]->OnMove();
 		break;
 
-	case STATE_ATTACK://攻擊
+	case STATE_NEAR_SLASH://攻擊
 		if (faceLR == FACE_LEFT)
 		{
 			currentAni = ANI_ATTACK_LEFT;
@@ -192,7 +198,17 @@ void Boss::ShowBitMap()
 		ani[currentAni]->OnMove();
 
 		break;
-
+	case STATE_FAR_SHOOT:
+		if (faceLR == FACE_LEFT)
+		{
+			currentAni = ANI_FAR_SHOOT_LEFT;
+		}
+		else
+		{
+			currentAni = ANI_FAR_SHOOT_RIGHT;
+		}
+		ani[currentAni]->OnMove();
+		break;
 	case STATE_JUMP://跳躍
 		currentAni = ANI_JUMP;
 		break;
@@ -213,12 +229,18 @@ void Boss::LoadAni()
 	char* aniRight[4] = { ".\\res\\boss_right_0.bmp", ".\\res\\boss_right_1.bmp", ".\\res\\boss_right_2.bmp", ".\\res\\boss_right_3.bmp" };
 	AddAniBitMaps(aniRight, ANI_RIGHT, 4, aniSpeed);
 
-	char* aniAttackLeft[3] = { ".\\res\\boss_attack_left_0.bmp", ".\\res\\boss_attack_left_1.bmp", ".\\res\\boss_attack_left_2.bmp" };
-	AddAniBitMaps(aniAttackLeft, ANI_ATTACK_LEFT, 3, aniSpeed);
+	char* aniNearSlashLeft[3] = { ".\\res\\boss_near_slash_left_0.bmp", ".\\res\\boss_near_slash_left_1.bmp", ".\\res\\boss_near_slash_left_2.bmp" };
+	AddAniBitMaps(aniNearSlashLeft, ANI_NEAR_SLASH_LEFT, 3, aniSpeed);
 
-	char* aniAttackRight[3] = { ".\\res\\boss_attack_right_0.bmp", ".\\res\\boss_attack_right_1.bmp", ".\\res\\boss_attack_right_2.bmp" };
-	AddAniBitMaps(aniAttackRight, ANI_ATTACK_RIGHT, 3, aniSpeed);
+	char* aniNearSlashRight[3] = { ".\\res\\boss_near_slash_right_0.bmp", ".\\res\\boss_near_slash_right_1.bmp", ".\\res\\boss_near_slash_right_2.bmp" };
+	AddAniBitMaps(aniNearSlashRight, ANI_NEAR_SLASH_RIGHT, 3, aniSpeed);
 
 	char* aniJump[3] = { ".\\res\\boss_jump_0.bmp", ".\\res\\boss_jump_1.bmp", ".\\res\\boss_jump_2.bmp" };
 	AddAniBitMaps(aniJump, ANI_JUMP, 3, aniSpeed);
+
+	char* aniFarShootLeft[4] = { ".\\res\\boss_far_shoot_left_0.bmp",".\\res\\boss_far_shoot_left_1.bmp",".\\res\\boss_far_shoot_left_2.bmp",".\\res\\boss_far_shoot_left_3.bmp" };
+	AddAniBitMaps(aniFarShootLeft, ANI_FAR_SHOOT_LEFT, 4, aniSpeed * 2);
+
+	char* aniFarShootRight[4] = { ".\\res\\boss_far_shoot_right_0.bmp",".\\res\\boss_far_shoot_right_1.bmp",".\\res\\boss_far_shoot_right_2.bmp",".\\res\\boss_far_shoot_right_3.bmp" };
+	AddAniBitMaps(aniFarShootRight, ANI_FAR_SHOOT_RIGHT, 4, aniSpeed * 2);
 }
