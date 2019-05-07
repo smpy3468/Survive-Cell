@@ -47,6 +47,8 @@ Player::Player(string tag, int x, int y, int width, int height) :Character(tag, 
 	attackDamage = 10;
 	attackSpeed = 5;
 	defense = 0;
+	destinationX = 0;
+	destinationY = 0;
 
 	isMoveLeft = false;
 	isMoveRight = false;
@@ -61,7 +63,7 @@ Player::Player(string tag, int x, int y, int width, int height) :Character(tag, 
 	isSquat = false;
 	isUnconquered = false;
 	isDownJump = false;
-
+	isPortaling = false;
 	isAttack = false;
 
 	faceLR = FACE_RIGHT;
@@ -94,6 +96,7 @@ void Player::DecreaseHP(int dhp)
 	}
 }
 
+
 void Player::Move(int dx, int dy)
 {
 	if ((dx > 0 && CanMoveRight(moveSpeed)) || (dx < 0 && CanMoveLeft(moveSpeed)))//x位移量往右而且右邊沒東西 或者 x位移量往左而且左邊沒東西
@@ -116,7 +119,7 @@ void Player::Move(int dx, int dy)
 
 void Player::MoveTo(int x, int y)
 {
-	Character::MoveTo(x,y);
+	Character::MoveTo(x, y);
 	Map::SetSX(x - SIZE_X / 2);
 	Map::SetSY(y - SIZE_Y / 2);
 }
@@ -159,6 +162,13 @@ void Player::SetIsSquat(bool isSquat)
 void Player::SetIsUnconquered(bool isUnconquered)
 {
 	this->isUnconquered = isUnconquered;
+}
+
+void Player::SetIsPortaling(bool isPortaling, int destX, int destY)
+{
+	this->isPortaling = isPortaling;
+	this->destinationX = destX;
+	this->destinationY = destY;
 }
 
 bool Player::HasWeapon()
@@ -231,6 +241,7 @@ void Player::Act()//行動
 
 	if (isRoll == true || isSquat)//翻滾中或蹲下中不能攻擊
 		isAttack = false;
+
 
 	if (isAttack == false)//沒在攻擊
 	{
@@ -329,7 +340,10 @@ void Player::Act()//行動
 	if (isRoll)
 		Roll();
 
-	if (isDownJump)
+	if (isPortaling)
+		Portaling();
+
+	else if (isDownJump)
 	{
 		DownJump();
 	}
@@ -550,6 +564,26 @@ void Player::Attack()
 	isAttack = false;//攻擊結束
 }
 
+void Player::Portaling()		//傳送
+{
+	int dX = (destinationX - x)/4;//四張動畫 每張動畫得位移量
+	int dY = (destinationY - y)/4;
+
+
+	if (x != destinationX && dX > 0)
+		x+= dX;
+	else if (x != destinationX && dX < 0)
+		x+= dX;
+
+	if (y != destinationY && dY < 0)
+		y+= dY;
+	else if (y != destinationY && dY > 0)
+		y-= dY;
+
+	if (abs(x - destinationX) <= 30 && abs(y - destinationY) <= 30)
+		isPortaling = false;
+}
+
 void Player::ShowBitMap()
 {
 	if (isAttack)
@@ -604,12 +638,15 @@ void Player::ShowBitMap()
 			currentAni = ANI::ANI_JUMP_RIGHT;
 		}
 	}
-
+	else if (isPortaling)
+	{
+		currentAni = ANI::ANI_PORTALING;
+		ani[ANI::ANI_PORTALING]->OnMove();
+	}
 	else if (isMoveLeft)//左移動畫
 	{
 		currentAni = ANI::ANI_LEFT;
 		ani[ANI::ANI_LEFT]->OnMove();
-
 	}
 	else if (isMoveRight)//右移動畫
 	{
@@ -628,7 +665,6 @@ void Player::ShowBitMap()
 		else
 			currentAni = ANI::ANI_RIGHT;
 	}
-
 	ani[currentAni]->OnShow();
 
 	if (hasWeapon)//有武器就顯示武器
@@ -827,4 +863,8 @@ void Player::LoadAni()
 	//右蹲下
 	char* aniSquatRight = ".\\res\\player_squat_right.bmp";
 	AddAniBitMap(aniSquatRight, ANI::ANI_SQUAT_RIGHT);
+
+	//傳送
+	char* aniPortaling[4] = { ".\\res\\portaling0.bmp",  ".\\res\\portaling1.bmp" , ".\\res\\portaling2.bmp" ,".\\res\\portaling0.bmp" };
+	AddAniBitMaps(aniPortaling, ANI::ANI_PORTALING, 4, 2);
 }

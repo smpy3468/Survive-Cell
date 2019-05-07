@@ -19,7 +19,6 @@ public:
 	void AdjustPositionOnBegin();//載入遊戲時微調玩家位置，避免玩家跟地板重疊
 
 	void DecreaseHP(int dhp);
-
 	//----------------按鍵相關---------------------//
 	void SetIsMoveLeft(bool isMoveLeft);//設定是否向左移動
 	void SetIsMoveRight(bool isMoveRight);//設定是否向右移動
@@ -29,6 +28,7 @@ public:
 	void SetIsAttack(bool isAttack);//設定是否按下攻擊
 	void SetIsRoll(bool isRoll);//設定是否按下翻滾
 	void SetIsSquat(bool isSquat);//設定是否蹲下
+	void SetIsPortaling(bool isPortaling, int destX, int destY); //設定是否在傳送 和 傳送位置
 	
 	void SetIsUnconquered(bool isUnconquered);//設定是否無敵
 
@@ -43,6 +43,8 @@ public:
 	void Move(int dx, int dy)override;//移動特定距離
 	void MoveTo(int x, int y)override;//移動到特定座標
 	void Attack()override;//攻擊
+	void Portaling();//傳送
+
 
 	//----------------動畫相關---------------------//
 	void ShowBitMap()override;//顯示動畫
@@ -80,6 +82,7 @@ private:
 	bool isSquatKeyDown;//是否按下蹲下
 	bool isSquat;//是否蹲下
 	bool isUnconquered;//是否無敵
+	bool isPortaling;//是否正在傳送途中
 
 	int currentState = 0, nextState = 0;//現態,次態
 	enum STATE//狀態機
@@ -119,6 +122,9 @@ private:
 	void FlipWidthHeight();//對調寬高
 	void AdjustY(int dy);//調整y座標
 
+
+	//---------------傳送相關---------------//
+	int destinationX, destinationY;
 	//---------------動畫相關---------------//
 	void ShowWeapon();//顯示武器
 
@@ -142,7 +148,8 @@ private:
 		ANI_ROLL_LEFT,
 		ANI_ROLL_RIGHT,
 		ANI_SQUAT_LEFT,
-		ANI_SQUAT_RIGHT
+		ANI_SQUAT_RIGHT,
+		ANI_PORTALING
 	};
 
 	vector<PlayerEquipment*> equipments;//裝備

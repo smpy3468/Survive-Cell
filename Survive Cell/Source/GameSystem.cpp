@@ -418,8 +418,8 @@ void GameSystem::CreatStage1Object()
 	AddGameObject(new Door("Door", 2330, 1445, 12, 120));//ªù
 	AddGameObject(new Door("Door", 3420, 480, 12, 120));//ªù
 	AddGameObject(new Goal("Goal", 3510, 1353, 143, 212));
-	AddGameObject(new Portal("Portal", 100, 480, 110, 158,0));
-	AddGameObject(new Portal("Portal", 500, 480, 110, 158, 100));
+	AddGameObject(new Portal("Portal", 100, 480, 80, 120, 100));
+	AddGameObject(new Portal("Portal", 500, 480, 80, 120, 0));
 
 	AddGameObject(new Demon("Monster", 100, 100, 110, 158));
 	AddGameObject(new Boss("Monster", SIZE_X / 2, SIZE_Y / 2, 180, 280));

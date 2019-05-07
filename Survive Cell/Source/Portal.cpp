@@ -25,7 +25,7 @@ int Portal::GetConnectedNumber()
 void Portal::Used() 
 {	
 	Portal* anotherPortal = Connected();
-	player->MoveTo(Connected()->GetX(), Connected()->GetY());
+	player->SetIsPortaling(true, Connected()->GetX(), Connected()->GetY());	//讓玩家進入傳送模式
 }
 void Portal::SetBitMapPosition()
 {
@@ -38,7 +38,7 @@ void Portal::ShowBitMap()
 
 void Portal::LoadAni()
 {
-	char* picture0 = ".\\res\\door0.bmp";
+	char* picture0 = ".\\res\\portal.bmp";
 	ani->AddBitmap(picture0);
 };
 
@@ -47,7 +47,7 @@ Portal* Portal::Connected()
 	vector<Portal*> portals = GameSystem::GetGameObjectsWithTag<Portal>("Portal");
 	for (auto& i : portals)
 	{
-		if (i->GetConnectedNumber() + this->connectedNumber == 100)
+		if (i->GetConnectedNumber() + this->connectedNumber == 100 && i)
 		{
 			return i;
 		}
