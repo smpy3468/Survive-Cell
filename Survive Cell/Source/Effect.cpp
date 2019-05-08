@@ -84,10 +84,10 @@ bool Effect::IsObjectInRange(GameObject* obj, int right_fix, int left_fix, int u
 	int OB_RIGHT_EDGE = OB_X + OB_WIDTH, OB_LEFT_EDGE = OB_X,
 		OB_UP_EDGE = OB_Y, OB_DOWN_EDGE = OB_Y + OB_HEIGHT;
 
-	if (OB_RIGHT_EDGE >= LEFT_EDGE && OB_RIGHT_EDGE <= RIGHT_EDGE && OB_UP_EDGE > UP_EDGE && OB_UP_EDGE < DOWN_EDGE)        //짩쫇ⅹ, ㆅ킟쫇쩵
+	if (OB_RIGHT_EDGE >= LEFT_EDGE && OB_RIGHT_EDGE <= RIGHT_EDGE && OB_UP_EDGE < UP_EDGE && OB_UP_EDGE < DOWN_EDGE)        //짩쫇ⅹ, ㆅ킟쫇쩵
 		return true;
-	else if (OB_LEFT_EDGE <= RIGHT_EDGE && OB_LEFT_EDGE >= LEFT_EDGE && OB_UP_EDGE > UP_EDGE && OB_UP_EDGE < DOWN_EDGE)  //짩쫇쩵, ㆅ킟쫇ⅹ
-		return true;
+	else if (OB_LEFT_EDGE <= RIGHT_EDGE && OB_LEFT_EDGE >= LEFT_EDGE && OB_UP_EDGE < UP_EDGE && OB_UP_EDGE > DOWN_EDGE)  //짩쫇쩵, ㆅ킟쫇ⅹ
+ 		return true;
 
 	return false;
 }
