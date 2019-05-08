@@ -81,6 +81,16 @@ public:
 		return targetObjects;
 	}
 
+	template <class T> static T* GetGameObjectWithType()//取得特定標籤的遊戲物件(多個)
+	{
+		for (auto& i : gameObjectList)
+		{
+			if (dynamic_cast<T*>(i) != NULL)
+				return dynamic_cast<T*>(i);
+		}
+		return NULL;
+	}
+
 	template <class T>static T* GetUInterfaceWithTag(string tag) //取得特定標籤的遊戲物件(單一個)
 	{
 		for (auto& i : gameUIList) {

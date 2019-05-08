@@ -148,7 +148,14 @@ namespace game_framework {
 
 	void CGameStateOver::OnShow()
 	{
-		GameSystem::ShowText("你已經死了 ! \n畫面有夠藍黑", 0, 0, SIZE_X, SIZE_Y, GameSystem::ALIGN_CENTER, GameSystem::ALIGN_CENTER, 16, RGB(100, 100, 255), OPAQUE, RGB(0, 0, 0));
+		string text;
+		for (int i = 0; i < countDown; i += 3)
+			text += "G";
+		GameSystem::ShowText(text, 0, 0, SIZE_X, SIZE_Y, GameSystem::ALIGN_CENTER, GameSystem::ALIGN_CENTER, 16
+			, RGB(255 * (originCountDown - countDown) / originCountDown, 255 * (originCountDown - countDown) / originCountDown, 255 * (originCountDown - countDown) / originCountDown));
+
+		if(countDown <= 0)
+			countDown = originCountDown;
 	}
 
 
@@ -167,8 +174,8 @@ namespace game_framework {
 	{
 		Player& player = *(GameSystem::GetGameObjectWithTag<Player>("Player"));
 		player.AdjustPositionOnBegin();
-		
-		if (GameSystem::IsNextStage()){
+
+		if (GameSystem::IsNextStage()) {
 			ShowInitProgress(30);				//換關卡的Loading
 			Sleep(300);							//Delay
 			GameSystem::ChangeToNextStage();

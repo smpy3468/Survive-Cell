@@ -155,7 +155,5 @@ private:
 	vector<PlayerEquipment*> equipments;//裝備
 	PlayerEquipment* weapon;//武器
 
-	//彥澤加的
-	//Item* equipment;
 	bool hasWeapon = false;
 };

@@ -26,7 +26,7 @@ bool GameSystem::isGameOver = false;
 bool GameSystem::isNextStage = false;
 int  GameSystem::nowStage = 0;
 int GameSystem::stage1Floor[stage1FloorCount][4] =
-{ 
+{
 	{0,600,710,120},{ 0, 720, 710, 640 },{ 330, 400, 410, 80 },{ 890, 170, 200, 45 },{ 1090, 600, 850, 120 }
 ,{ 1090, 0, 65, 490 },{ 0, 1360, 410, 205 },{ 650, 1360, 60, 150 },{ 710, 910, 220, 45 },{ 825, 1150, 180, 35 }
 ,{ 710, 1325, 120, 35 },{ 920, 710, 170, 35 },{ 1090, 720, 850, 280 },{ 1090, 1110, 850, 260 },{ 1530, 1000, 410, 110 }
@@ -374,7 +374,7 @@ void GameSystem::CreatStage1Object()
 	for (int i = 0; i < stage1FloorCount; i++)
 	{
 		//CreateFloor(stage1Floor[i][0], stage1Floor[i][1], stage1Floor[i][2], stage1Floor[i][3]);
-		GameSystem::AddGameObject(new Floor("Floor",stage1Floor[i][0], stage1Floor[i][1], stage1Floor[i][2], stage1Floor[i][3]));
+		GameSystem::AddGameObject(new Floor("Floor", stage1Floor[i][0], stage1Floor[i][1], stage1Floor[i][2], stage1Floor[i][3]));
 	}
 
 	/*CreateFloor(0, 600, 710, 120);
@@ -400,7 +400,7 @@ void GameSystem::CreatStage1Object()
 	CreateFloor(2160, 600, 1680, 120);
 	CreateFloor(1890, 445, 610, 35);
 	CreateFloor(2160, 720, 310, 650);
-	CreateFloor(2230, 1370, 140, 75);	
+	CreateFloor(2230, 1370, 140, 75);
 	CreateFloor(2700, 720, 520, 110);
 	CreateFloor(3080, 830, 140, 130);
 	CreateFloor(2700, 960, 520, 320);
@@ -419,10 +419,11 @@ void GameSystem::CreatStage1Object()
 	AddGameObject(new Door("Door", 3420, 480, 12, 120));//門
 	AddGameObject(new Goal("Goal", 3510, 1353, 143, 212));
 	AddGameObject(new Portal("Portal", 100, 480, 80, 120, 100));
-	AddGameObject(new Portal("Portal", 500, 480, 80, 120, 0));
+	//AddGameObject(new Portal("Portal", 500, 480, 80, 120, 0));
+	AddGameObject(new Portal("Portal", GetGameObjectWithType<Goal>()->GetX() - 300, GetGameObjectWithType<Goal>()->GetY(), 80, 120, 0));
 
 	AddGameObject(new Demon("Monster", 100, 100, 110, 158));
-	AddGameObject(new Boss("Monster", SIZE_X / 2, SIZE_Y / 2, 180, 280));
+	//AddGameObject(new Boss("Monster", SIZE_X / 2, SIZE_Y / 2, 180, 280));
 
 	AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10 - 100, SIZE_Y * 9 / 10, 64, 60));
 	AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10 - 10, SIZE_Y * 9 / 10, 64, 60));
@@ -434,16 +435,15 @@ void GameSystem::CreatStage1Object()
 
 void GameSystem::CreatStage2Object()
 {
-	//AddGameObject(new Boss("Monster", SIZE_X / 2, SIZE_Y / 2, 180, 90));
+	AddGameObject(new Boss("Monster", SIZE_X - 200, Map::WORLD_SIZE_Y - 100 - 280, 180, 280));
 	AddGameObject((new Demon("Monster", SIZE_X / 2 + 100, SIZE_Y / 2 - 133, 131, 141)));
 	AddGameObject((new Demon("Monster", SIZE_X / 2 - 150, SIZE_Y / 2 - 133, 131, 141)));
 
-	AddGameObject(new Floor("Ground", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//地圖最下方的地板
 	AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//地圖最下方的地板
 
 	AddGameObject(new Door("Door", 100, Map::WORLD_SIZE_Y - 220, 12, 120));//門
 	AddGameObject(new Goal("Goal", 150, Map::WORLD_SIZE_Y - 312, 143, 212));
-	CreateFloor(SIZE_X / 2, SIZE_Y / 2 + 400, 1000, 80);
+
 	Map::Init();
 	Map::SetStaticObject();
 }

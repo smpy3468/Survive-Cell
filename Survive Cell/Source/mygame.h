@@ -104,6 +104,7 @@ namespace game_framework {
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
+		int originCountDown = 3 * 30;
 		int countDown = 3*30;
 	};
 }

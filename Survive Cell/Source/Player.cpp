@@ -485,11 +485,13 @@ void Player::Interact()
 
 	for (auto&i : GameSystem::GetAllGameObject())//將對應的物件加入對應的列表中
 	{
-		if (dynamic_cast<Item*>(i) != NULL)
+		if (dynamic_cast<Item*>(i) != NULL)//道具
 			itemList.push_back(dynamic_cast<Item*>(i));
-		else if (dynamic_cast<Goal*>(i) != NULL)
+
+		else if (dynamic_cast<Goal*>(i) != NULL)//終點
 			goalList.push_back(dynamic_cast<Goal*>(i));
-		else if (dynamic_cast<Portal*>(i) != NULL)
+
+		else if (dynamic_cast<Portal*>(i) != NULL)//傳送門
 			portalList.push_back(dynamic_cast<Portal*>(i));
 	}
 
@@ -566,19 +568,31 @@ void Player::Attack()
 
 void Player::Portaling()		//傳送
 {
-	int dX = (destinationX - x)/4;//四張動畫 每張動畫得位移量
-	int dY = (destinationY - y)/4;
+	int dX = (destinationX - x) / 4;//四張動畫 每張動畫得位移量
+	int dY = (destinationY - y) / 4;
 
 
 	if (x != destinationX && dX > 0)
-		x+= dX;
+	{
+		x += dX;
+		Map::MoveScreenTopLeft(dX,0);
+	}
 	else if (x != destinationX && dX < 0)
-		x+= dX;
+	{
+		x += dX;
+		Map::MoveScreenTopLeft(dX, 0);
+	}
 
 	if (y != destinationY && dY < 0)
-		y+= dY;
+	{
+		y += dY;
+		Map::MoveScreenTopLeft(0, dY);
+	}
 	else if (y != destinationY && dY > 0)
-		y-= dY;
+	{
+		y += dY;
+		Map::MoveScreenTopLeft(0, dY);
+	}
 
 	if (abs(x - destinationX) <= 30 && abs(y - destinationY) <= 30)
 		isPortaling = false;
