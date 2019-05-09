@@ -124,6 +124,7 @@ public:
 		return targetUIs;
 	}
 
+	static void AllObjectAct();//所有物件動作
 	static void SetAllObjectBitMapPosition();//設定所有物件的圖片位置
 	static void ShowAllObject();//顯示所有物件
 	static void ShowAllUI();//顯示所有UI物件
@@ -154,9 +155,10 @@ public:
 	static void PlayAudio(AUDIO id);//播放音樂
 	static void StopAudio(AUDIO id);//停止音樂
 
-	static void MonstersAutoMove();    //全部怪物在defenseRange內移動
+	/*static void MonstersAutoMove();    //全部怪物在defenseRange內移動
 	static void MonstersAttackPlayer();//全部怪物在Player進入attackField時會追Player
-	static void MonstersAct();
+	static void MonstersAct();*/
+
 	static void CreatStage1Object();
 	//------------圖層相關------------//
 	enum LAYER//圖層編號

@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "Boss.h"
+#include "BossBullet.h"
 
 Boss::Boss()
 {
@@ -23,18 +24,20 @@ Boss::Boss(string tag, int x, int y, int width, int height) :Monster(tag, x, y, 
 	attackRange = 100;
 	attackDamage = 50;
 
+	isShoot = false;
+
 	LoadAni();
 }
 
 void Boss::Act()
 {
 	unsigned seed = (unsigned)time(NULL);
-	srand(seed);		
-	
+	srand(seed);
+	currentState = STATE_FAR_SHOOT;
 	switch (currentState)//根據狀態做不同動作
 	{
 	case STATE_IDLE://靜止
-		if(ani[currentAni]->IsEnd())//播完動畫後
+		if (ani[currentAni]->IsEnd())//播完動畫後
 			currentState = rand() % STATE_LENGTH;//隨機改變目前狀態
 		break;
 	case STATE_MOVE://移動
@@ -119,7 +122,18 @@ void Boss::NearSlash()
 void Boss::FarShoot()
 {
 	if (ani[currentAni]->IsEnd())
+	{
+		isShoot = false;
 		currentState = STATE_IDLE;
+	}
+	else if (ani[currentAni]->GetCurrentBitmapNumber() == 3)//第三張圖片時發射子彈
+	{
+		if (isShoot == false)
+		{
+			isShoot = true;
+			GameSystem::AddGameObject(new BossBullet("BossBullet", x, y, 50, 50));
+		}
+	}
 }
 
 void Boss::Jump()

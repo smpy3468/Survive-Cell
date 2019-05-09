@@ -45,7 +45,7 @@ public:
 	void ShowBitMap()override;
 	int GetAttackAniNumber();
 
-	virtual void Act();   //組合各種動作(ISATTACK, AUTOMOVE, ATTACK)
+	void Act()override;   //組合各種動作(ISATTACK, AUTOMOVE, ATTACK)
 
 protected:
 	static const int LEFT = 1, RIGHT = 2, STANDBY = 0, ATTACK = 3, FALL = 4, ISATTACK=5; //怪物的狀態

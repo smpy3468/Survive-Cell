@@ -174,7 +174,7 @@ namespace game_framework {
 	{
 		Player& player = *(GameSystem::GetGameObjectWithTag<Player>("Player"));
 		player.AdjustPositionOnBegin();
-
+		GameSystem::SetIsNextStage(true);
 		if (GameSystem::IsNextStage()) {
 			ShowInitProgress(30);				//換關卡的Loading
 			Sleep(300);							//Delay
@@ -197,12 +197,14 @@ namespace game_framework {
 		if (GameSystem::IsNextStage())
 			GotoGameState(GAME_STATE_RUN);
 
-		Player& player = *(GameSystem::GetGameObjectWithTag<Player>("Player"));//宣告一個玩家，避免每次都要打一長串GetGameObject...
+		//Player& player = *(GameSystem::GetGameObjectWithTag<Player>("Player"));//宣告一個玩家，避免每次都要打一長串GetGameObject...
 
-		player.Act();
+		//player.Act();
 		/*GameSystem::MonstersAttackPlayer(); //攻擊Player
 		GameSystem::MonstersAutoMove();//怪物來回移動*/
-		GameSystem::MonstersAct();
+		//GameSystem::MonstersAct();
+		GameSystem::AllObjectAct();
+
 		GameSystem::SetAllObjectBitMapPosition();//設定所有物件圖片位置
 	}
 

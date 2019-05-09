@@ -30,6 +30,8 @@ public:
 	int GetWidth();
 	int GetHeight();
 	int GetLayer();//取得圖層
+	
+	virtual void Act();
 
 	void LoadBitMap(char* pictureAddress);//用路徑載入圖片
 	void LoadBitMap(int pictureID);//用編號載入圖片

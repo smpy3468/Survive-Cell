@@ -184,6 +184,17 @@ void GameSystem::CreateFloor(int x, int y, int width, int height)
 }
 
 
+void GameSystem::AllObjectAct()
+{
+	for (auto& i : gameObjectList)
+	{
+		i->Act();
+	}
+	//GetGameObjectWithType<Player>()->Act();
+	//MonstersAct();
+
+}
+
 void GameSystem::SetAllObjectBitMapPosition()//設定所有物件圖片位置
 {
 	for (auto& i : gameObjectList)
@@ -331,7 +342,7 @@ void GameSystem::StopAudio(AUDIO id)
 	CAudio::Instance()->Stop(id);
 }
 
-void GameSystem::MonstersAutoMove() {
+/*void GameSystem::MonstersAutoMove() {
 	vector<Monster*> allMonster = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
 	for (auto& i : allMonster) {
 		i->AutoMove();
@@ -350,7 +361,7 @@ void GameSystem::MonstersAct() {
 	for (auto& i : allMonster) {
 		i->Act();
 	}
-}
+}*/
 
 void GameSystem::ChangeToNextStage()
 {

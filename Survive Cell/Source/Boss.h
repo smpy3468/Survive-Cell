@@ -21,6 +21,8 @@ public:
 
 private:
 
+	bool isShoot = false;//是否發射了子彈
+
 	int originJumpDisplacement = 30, jumpDisplacement = originJumpDisplacement;//跳躍位移量
 
 	void ShowBitMap()override;
