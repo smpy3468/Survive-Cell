@@ -40,8 +40,8 @@ void  Effect::EffectAttackMonster(int attackDamage)
 {
 	vector<Monster*> allMonsters = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
 	for (auto& i : allMonsters) {
-		if (IsObjectInRange(i, 0, 0, 15, 5) == 1) {
-			i->DecreaseHP(attackDamage);
+		if (IsObjectInRange(i, 0, 0, 15, 0) == 1) {
+			i->PlayerAttack(attackDamage);
 			isHit = true;
 		}
 	}
@@ -84,10 +84,19 @@ bool Effect::IsObjectInRange(GameObject* obj, int right_fix, int left_fix, int u
 	int OB_RIGHT_EDGE = OB_X + OB_WIDTH, OB_LEFT_EDGE = OB_X,
 		OB_UP_EDGE = OB_Y, OB_DOWN_EDGE = OB_Y + OB_HEIGHT;
 
-	if (OB_RIGHT_EDGE >= LEFT_EDGE && OB_RIGHT_EDGE <= RIGHT_EDGE && OB_UP_EDGE < UP_EDGE && OB_UP_EDGE < DOWN_EDGE)        //人在左, 火焰在右
+	/*if (OB_RIGHT_EDGE >= LEFT_EDGE && OB_RIGHT_EDGE <= RIGHT_EDGE && OB_UP_EDGE > UP_EDGE && OB_DOWN_EDGE < DOWN_EDGE)        //人在左, 火焰在右
 		return true;
-	else if (OB_LEFT_EDGE <= RIGHT_EDGE && OB_LEFT_EDGE >= LEFT_EDGE && OB_UP_EDGE < UP_EDGE && OB_UP_EDGE > DOWN_EDGE)  //人在右, 火焰在左
- 		return true;
+	else if (OB_LEFT_EDGE <= RIGHT_EDGE && OB_LEFT_EDGE >= LEFT_EDGE && OB_UP_EDGE > UP_EDGE && OB_DOWN_EDGE < DOWN_EDGE)  //人在右, 火焰在左
+ 		return true;*/
+
+	if (OB_DOWN_EDGE < UP_EDGE)//物件整個再特效上面
+		return false;
+	else if (OB_UP_EDGE > DOWN_EDGE)//物件整個再特效下面
+		return false;
+	else if (OB_RIGHT_EDGE >= LEFT_EDGE && OB_RIGHT_EDGE <= RIGHT_EDGE)        //人在左, 火焰在右
+		return true;
+	else if (OB_LEFT_EDGE <= RIGHT_EDGE && OB_LEFT_EDGE >= LEFT_EDGE)  //人在右, 火焰在左
+		return true;
 
 	return false;
 }

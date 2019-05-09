@@ -366,7 +366,6 @@ void GameSystem::MonstersAct() {
 void GameSystem::ChangeToNextStage()
 {
 	DeleteAllGameObjectExceptPlayer();
-
 	CreatStage2Object();
 
 
@@ -455,7 +454,7 @@ void GameSystem::CreatStage2Object()
 
 	AddGameObject(new Door("Door", 100, Map::WORLD_SIZE_Y - 220, 12, 120));//ªù
 	AddGameObject(new Goal("Goal", 150, Map::WORLD_SIZE_Y - 312, 143, 212));
-	AddUserInterface(new UIBlood("UIBlood", 0, SIZE_Y - 30, 400, 30));
+	//AddUserInterface(new UIBlood("UIBlood", 0, SIZE_Y - 30, 400, 30));
 
 	Map::Init();
 	Map::SetStaticObject();

@@ -9,6 +9,7 @@ public:
 	~UIMonsterBlood();
 	void ShowBitMap()
 	{
+		vector<Monster*> allMonster = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
 		for (auto& i : allMonster)
 		{
 			if (i->GetStatus() == ISATTACK && i->GetHP() > 0)
@@ -18,5 +19,4 @@ public:
 private:
 	const int ISATTACK = 5;
 	void OnShow(int x, int y, int width, int height, int hp, int maxHP);
-	vector<Monster*> allMonster = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
 };

@@ -18,14 +18,14 @@ void SwordWave::ShowBitMap(int hostX, int hostY, int hostCurrentAni, int attackA
 		SetXY(hostX, hostY, hostCurrentAni);
 	}
 	else if (attackAniNumber >= 1 && currentAni == ANI_SWORDWAVE_LEFT && CanMoveLeft(5) && isHit == 0) { //3是左攻擊狀態
-		x -= 10;																//讓Wave往左飛
+		x -= 25;																//讓Wave往左飛
 		SetBitMapPosition();
 		ani[currentAni]->OnMove();
 		ani[currentAni]->OnShow();
 		EffectAttackMonster(player->GetAttackDamage());
 	} 
 	else if (attackAniNumber >= 1 && currentAni == ANI_SWORDWAVE_RIGHT && CanMoveRight(5) && isHit == 0) {       //4是右攻擊狀態
-		x += 10;																//讓Wave往右飛
+		x += 25;																//讓Wave往右飛
 		SetBitMapPosition();
 		ani[currentAni]->OnMove();
 		ani[currentAni]->OnShow();
