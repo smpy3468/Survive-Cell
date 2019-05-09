@@ -67,6 +67,7 @@ protected:
 	vector<CAnimation*> ani;//動畫
 	virtual void LoadAni(); //載入動畫
 	int aniDelay = 10;//動畫播放延遲
+	void AddAniBitMaps(string pic, int aniType, int picCount, int aniDelay = 10);//增加多張動畫圖片，傳入的pic為檔名，這個副程式會自動為每張圖加上編號
 	void AddAniBitMaps(char* pic[], int aniType, int picCount, int aniDelay = 10);//增加多張動畫圖片
 	void AddAniBitMap(char* pic, int aniType, int aniDelay = 10);//增加動畫圖片
 

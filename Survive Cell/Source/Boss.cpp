@@ -30,7 +30,7 @@ void Boss::Act()
 {
 	unsigned seed = (unsigned)time(NULL);
 	srand(seed);		
-
+	
 	switch (currentState)//根據狀態做不同動作
 	{
 	case STATE_IDLE://靜止
@@ -237,9 +237,9 @@ void Boss::LoadAni()
 	char* aniJump[3] = { ".\\res\\boss_jump_0.bmp", ".\\res\\boss_jump_1.bmp", ".\\res\\boss_jump_2.bmp" };
 	AddAniBitMaps(aniJump, ANI_JUMP, 3, aniDelay);
 
-	char* aniFarShootLeft[4] = { ".\\res\\boss_far_shoot_left_0.bmp",".\\res\\boss_far_shoot_left_1.bmp",".\\res\\boss_far_shoot_left_2.bmp",".\\res\\boss_far_shoot_left_3.bmp" };
-	AddAniBitMaps(aniFarShootLeft, ANI_FAR_SHOOT_LEFT, 4, aniDelay * 2);
+	char* aniFarShootLeft = ".\\res\\boss_far_shoot_left";
+	AddAniBitMaps(aniFarShootLeft, ANI_FAR_SHOOT_LEFT, 7, aniDelay);
 
-	char* aniFarShootRight[4] = { ".\\res\\boss_far_shoot_right_0.bmp",".\\res\\boss_far_shoot_right_1.bmp",".\\res\\boss_far_shoot_right_2.bmp",".\\res\\boss_far_shoot_right_3.bmp" };
-	AddAniBitMaps(aniFarShootRight, ANI_FAR_SHOOT_RIGHT, 4, aniDelay * 2);
+	char* aniFarShootRight = ".\\res\\boss_far_shoot_right";
+	AddAniBitMaps(aniFarShootRight, ANI_FAR_SHOOT_RIGHT, 7, aniDelay);
 }

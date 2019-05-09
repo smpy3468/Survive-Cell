@@ -192,6 +192,23 @@ void Character::LoadAni()
 {
 }
 
+void Character::AddAniBitMaps(string pic, int aniType, int picCount, int aniDelay)
+{
+	for (int i = 0; i < picCount; i++)
+	{
+		//將檔名串接底線+編號+副檔名
+		string sPic;
+		sPic += pic + "_" + to_string(i) + ".bmp";
+
+		//轉成c-string
+		char* cPic = new char[sPic.length() + 1];
+		strcpy(cPic, sPic.c_str());
+
+		AddAniBitMap(cPic, aniType, aniDelay);//加入圖片
+		delete cPic;//delete new
+	}
+}
+
 void Character::AddAniBitMaps(char * pic[], int aniType, int picCount, int aniDelay)
 {
 	for (int i = 0; i < picCount; i++)
@@ -276,6 +293,6 @@ bool Character::IsInFloor()
 				return true;
 		}
 	}
-	
- 	return false;
+
+	return false;
 }
