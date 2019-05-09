@@ -15,4 +15,5 @@ class UIBlood : public UInterface
 
 		Player* player = GameSystem::GetGameObjectWithTag<Player>("Player");
 		int targetWidth;
+		int maxWidth;//³Ì¤j¼e«×
 };

@@ -26,7 +26,7 @@ Player::Player(string tag, int x, int y, int width, int height) :Character(tag, 
 {
 	tag = "Player";
 
-	maxHP = 100;
+	maxHP = 1000;
 	HP = maxHP;
 
 	originWidth = width;
@@ -65,6 +65,7 @@ Player::Player(string tag, int x, int y, int width, int height) :Character(tag, 
 	isDownJump = false;
 	isPortaling = false;
 	isAttack = false;
+	isGetHit = false;
 
 	faceLR = FACE_RIGHT;
 
@@ -86,7 +87,10 @@ void Player::AdjustPositionOnBegin()
 void Player::DecreaseHP(int dhp)
 {
 	if (isUnconquered == false)
+	{
+		isGetHit = true;
 		HP -= dhp;
+	}
 	if (HP <= 0)
 	{
 		HP = 0;
@@ -600,7 +604,23 @@ void Player::Portaling()		//傳送
 
 void Player::ShowBitMap()
 {
-	if (isAttack)
+	if(isGetHit)//被攻擊
+	{ 
+		if (faceLR == FACE_LEFT)
+		{
+			currentAni = ANI_GET_HIT_LEFT;
+		}
+		else
+		{
+			currentAni = ANI_GET_HIT_RIGHT;
+		}
+
+		ani[currentAni]->OnMove();
+
+		if (ani[currentAni]->IsEnd())
+			isGetHit = false;
+	}
+	else if (isAttack)
 	{
 		if (faceLR == FACE_LEFT)
 		{
@@ -689,33 +709,13 @@ void Player::ShowBitMap()
 
 void Player::ShowInformation()
 {
-	string information = "Attack" + to_string(attackDamage)
+	/*string information = "Attack" + to_string(attackDamage)
 		+ "\nAttackSpeed:" + to_string(attackSpeed) + "\nAttackRange:" + to_string(attackRange)
 		+ "\nMoveSpeed:" + to_string(moveSpeed) + "\nDefense:" + to_string(defense)
 		+ "\nUnconquered:" + to_string(isUnconquered)
-		+ "\nHP:" + to_string(HP);
+		+ "\nHP:" + to_string(HP);*/
 
-	GameSystem::ShowText(information, 0, 0, SIZE_X, SIZE_Y, GameSystem::ALIGN_LEFT, GameSystem::ALIGN_TOP, 8, RGB(0, 0, 0));
-
-	/*
-	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC
-	CFont f, *fp;
-	f.CreatePointFont(80, "Times New Roman");	// 產生 font f; 160表示16 point的字
-	fp = pDC->SelectObject(&f);					// 選用 font f
-	pDC->SetBkMode(TRANSPARENT);				//透明背景
-	pDC->SetTextColor(RGB(0, 0, 255));
-
-	char str[800];								// Demo 數字對字串的轉換
-
-	sprintf(str, "HP:%d\nAttack:%d\nAttack Speed:%d\nAttackRange:%d\nMoveSpeed:%d\nDefense:%d\n"
-		, GetHP(), GetAttackDamage(), GetAttackSpeed(), GetAttackRange(), GetMoveSpeed(), GetDefense());
-
-	CRect rect = { 0,30,SIZE_X,SIZE_Y };//設定矩形左、上、右、下的座標
-	pDC->DrawText(str, rect, DT_LEFT | DT_WORDBREAK);//靠左對齊，可換行
-
-	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
-	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
-	*/
+	//GameSystem::ShowText(information, 0, 0, SIZE_X, SIZE_Y, GameSystem::ALIGN_LEFT, GameSystem::ALIGN_TOP, 8, RGB(0, 0, 0));
 }
 
 /*void Player::AddEquipment(int equipmentID, ItemWeapon* equipment)

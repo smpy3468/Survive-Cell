@@ -3,8 +3,15 @@
 
 UIBlood::UIBlood(string tag, int x, int y, int width, int height) :UInterface(tag, x, y, width, height)
 {
-	this->width = player->GetMaxHP() * 2;
-	this->targetWidth = this->width;
+	this->x = 110;
+	this->y = 10;
+	
+	this->width = maxWidth * player->GetHP() / player->GetMaxHP();
+	
+	this->maxWidth = 100;//最大寬度
+	this->width = maxWidth;//最開始的寬度設為最大寬度
+	
+	targetWidth = this->width;//最開始的寬度設為最大寬度
 }
 
 UIBlood::~UIBlood()
@@ -19,32 +26,27 @@ void UIBlood::ShowBitMap()
 
 void UIBlood::RefreshTargetWidth()
 {
-	this->targetWidth = player->GetHP() * 2;
+	this->targetWidth = maxWidth * player->GetHP() / player->GetMaxHP();
+	//this->targetWidth = player->GetHP() * 2;
 }
 
 
 void UIBlood::OnShow() {
+	GameSystem::DrawRectangle(0,0,300,100,RGB(210,210,210));
 
-	CDC *pDC = CDDraw::GetBackCDC();
-	CPen *pp, p(PS_NULL, 0, RGB(0, 0, 0));
-	pp = pDC->SelectObject(&p);
-
-	CBrush *pr, r(RGB(0, 255, 0));
-	pr = pDC->SelectObject(&r);
-
-	if (targetWidth < width) {
+	if (targetWidth < width)
 		width -= 1;
-		pDC->Rectangle(x, y, x + width, y + height);
-	}
-	else {
-		pDC->Rectangle(x, y, x + width, y + height);
-	}
 
+	GameSystem::DrawRectangle(x,y,width,height,RGB(0,255,0));//畫血條
 
-	/*釋放pen*/
-	pDC->SelectObject(pp);
-	pDC->SelectObject(pr);
-	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+	//顯示UI文字
+	string text = "HP:" + to_string(player->GetHP()) + "\n攻擊力:" + to_string(player->GetAttackDamage());
 
-	GameSystem::ShowText(to_string(player->GetHP()), 0, 0, SIZE_X, SIZE_Y, GameSystem::ALIGN_LEFT, GameSystem::ALIGN_BOTTOM);
+	GameSystem::ShowText(text, x + maxWidth + 10, 10, SIZE_X, SIZE_Y, GameSystem::ALIGN_LEFT, GameSystem::ALIGN_TOP,8);
+
+	//顯示UI圖片
+	CMovingBitmap uiPlayer;
+	uiPlayer.LoadBitmap(".\\res\\UIPlayer.bmp",RGB(255,255,255));
+	uiPlayer.SetTopLeft(0, 0);
+	uiPlayer.ShowBitmap();
 }

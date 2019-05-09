@@ -304,6 +304,23 @@ void GameSystem::ShowText(string text, int left, int top, int right, int bottom,
 	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 }
 
+void GameSystem::DrawRectangle(int x, int y, int width, int height, COLORREF color)
+{
+	CDC *pDC = CDDraw::GetBackCDC();
+	CPen *pp, p(PS_NULL, 0, RGB(0, 0, 0));
+	pp = pDC->SelectObject(&p);
+
+	CBrush *pr, r(color);
+	pr = pDC->SelectObject(&r);
+
+	pDC->Rectangle(x, y, x + width, y + height);
+
+	/*釋放pen*/
+	pDC->SelectObject(pp);
+	pDC->SelectObject(pr);
+	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+}
+
 void GameSystem::Load()
 {
 	CAudio::Instance()->Load(AUDIO::AUDIO_GAME_INIT, ".\\res\\game_init.mp3");
