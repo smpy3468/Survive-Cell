@@ -13,7 +13,7 @@ public:
 	~Boss();
 	Boss(string tag, int x, int y, int width, int height);
 	void Act();//行動
-	
+
 	void Attack()override;
 	void Jump();//跳躍
 	void Fall(int perDisplacement);//掉落
@@ -33,6 +33,7 @@ private:
 	void FarShoot();//遠程攻擊
 	void InstantDeath();//即死技能
 
+	int RandomState();//決定隨機狀態
 	int currentState = 0;//目前狀態
 	enum STATE
 	{
@@ -43,7 +44,9 @@ private:
 		STATE_JUMP,
 		STATE_LENGTH
 	};
-	int attackMode = 0;//攻擊模式
+
+	double stateProb[STATE_LENGTH] = { 0.1,0.2,0.2,0.4,0.1 };//各種狀態的機率
+	double cumProb[STATE_LENGTH] = {0};//累計機率
 
 	const bool FACE_LEFT = true;//面向左邊
 	const bool FACE_RIGHT = false;//面向右邊

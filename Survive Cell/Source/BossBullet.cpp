@@ -13,7 +13,7 @@ BossBullet::BossBullet(string tag, int x, int y, int width, int height) :GameObj
 	LoadAni();
 
 	moveSpeed = 10;
-	attackDamage = 10;
+	attackDamage = 50;
 
 	Player* player = GameSystem::GetGameObjectWithType<Player>();
 	targetX = player->GetX() + player->GetWidth() / 2;

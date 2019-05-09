@@ -1,6 +1,8 @@
 #include "StdAfx.h"
 #include "Boss.h"
 #include "BossBullet.h"
+#include <functional>
+#include <random>
 
 Boss::Boss()
 {
@@ -27,22 +29,27 @@ Boss::Boss(string tag, int x, int y, int width, int height) :Monster(tag, x, y, 
 	isShoot = false;
 
 	LoadAni();
+
+	for (int i = 0; i < STATE_LENGTH; i++)//建立各項機率表
+	{
+		for (int j = 0; j <= i; j++)
+			cumProb[i] += stateProb[j];
+	}
 }
 
 void Boss::Act()
 {
-	unsigned seed = (unsigned)time(NULL);
-	srand(seed);
 	//currentState = STATE_FAR_SHOOT;
 	switch (currentState)//根據狀態做不同動作
 	{
 	case STATE_IDLE://靜止
 		if (ani[currentAni]->IsEnd())//播完動畫後
-			currentState = rand() % STATE_LENGTH;//隨機改變目前狀態
+		{
+			currentState = RandomState();
+			//currentState =
+		}
 		break;
 	case STATE_MOVE://移動
-		faceLR = rand() % 2;
-
 		if (faceLR == FACE_LEFT)
 		{
 			Move(-moveSpeed, 0);
@@ -52,8 +59,11 @@ void Boss::Act()
 			Move(moveSpeed, 0);
 		}
 
-		if (ani[currentAni]->IsEnd())
-			currentState = STATE_IDLE;//移動動畫播完，就回到靜止狀態
+		if (ani[currentAni]->IsEnd())//移動動畫播完
+		{
+			faceLR = rand() % 2;//隨機改變方向
+			currentState = STATE_IDLE;//就回到靜止狀態
+		}
 
 		break;
 	case STATE_NEAR_SLASH://攻擊
@@ -176,6 +186,23 @@ void Boss::JumpFront()
 
 void Boss::InstantDeath()
 {
+}
+
+int Boss::RandomState()
+{	
+	//亂數設定
+	std::random_device rd;
+	std::default_random_engine gen = std::default_random_engine(rd());
+	std::uniform_real_distribution<float> dis(0,1);
+	auto randFun = std::bind(dis,gen);
+
+	double r = randFun();//產生隨機亂數
+
+	for (int i = 0; i < STATE_LENGTH; i++) // 查詢所在區間
+		if (r <= cumProb[i]) 
+			return i;
+
+	return 0;
 }
 
 void Boss::ShowBitMap()
