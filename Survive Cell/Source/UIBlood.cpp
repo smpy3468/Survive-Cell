@@ -37,11 +37,11 @@ void UIBlood::OnShow() {
 	if (targetWidth < width)
 		width -= 1;
 
-	GameSystem::DrawRectangle(x,y,width,height,RGB(0,255,0));//畫血條
+	GameSystem::DrawRectangle(x, y, maxWidth, height, RGB(0, 0, 0));//畫血條底部
+	GameSystem::DrawRectangle(x,y,width,height,RGB(0,255,0));//畫血條長度
 
 	//顯示UI文字
 	string text = "HP:" + to_string(player->GetHP()) + "\n攻擊力:" + to_string(player->GetAttackDamage());
-
 	GameSystem::ShowText(text, x + maxWidth + 10, 10, SIZE_X, SIZE_Y, GameSystem::ALIGN_LEFT, GameSystem::ALIGN_TOP,8);
 
 	//顯示UI圖片
