@@ -543,11 +543,35 @@ void CGame::OnDraw()
 		//
 		// 如果在暫停狀態，則顯示Ctrl-Q...
 		//
-		CMovingBitmap bmp;
+		/*CMovingBitmap bmp;
 		bmp.LoadBitmap(IDB_CONTINUE);
 		bmp.SetTopLeft(0,0);
-		bmp.ShowBitmap();
+		bmp.ShowBitmap();*/
+
+		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+		CFont f, *fp;
+		f.CreatePointFont(16 * 10, "Arial");	// 產生 font f; 160表示16 point的字
+		fp = pDC->SelectObject(&f);					// 選用 font f
+		pDC->SetBkMode(OPAQUE);
+		pDC->SetBkColor(RGB(0,0,255));
+		pDC->SetTextColor(RGB(255,255,255));
+		
+		char str[1000];								// Demo 數字對字串的轉換
+		sprintf(str, "Game Framework was broken.\n\nPress ctrl + Q to continue your game."/*"遊戲暫停,按下 ctrl + Q 繼續遊戲"*/);
+
+		CRect rect = { 0, 0, SIZE_X, SIZE_Y };//設定矩形左、上、右、下的座標	
+		pDC->FillSolidRect(rect,RGB(0,0,255));//設定矩形背景顏色
+
+		CRect temp = rect;
+		int height = pDC->DrawText(str, temp, DT_CENTER | DT_WORDBREAK | DT_CALCRECT);
+		rect.top += (rect.Height() - height) / 2;
+
+		pDC->DrawText(str, rect, DT_CENTER | DT_WORDBREAK);//靠中對齊，可換行
+
+		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 	}
+	
 	CDDraw::BltBackToPrimary();				// 將 Back Plain 貼到螢幕
 }
 

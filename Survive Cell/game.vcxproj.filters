@@ -16,9 +16,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Res\ball.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="RES\bmp0.bmp">
       <Filter>Resource Files</Filter>
     </None>
@@ -52,22 +49,7 @@
     <None Include="RES\bmp9.bmp">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="RES\center.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="RES\continue.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Res\corner.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="RES\eraser1.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="RES\eraser2.bmp">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="RES\eraser3.bmp">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\game.ico">
@@ -324,37 +306,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\bitmap3.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\duckduck.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\bitmap4.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Bitmaps\White.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Bitmaps\Blue.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Bitmaps\Green.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\background.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\player.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\ground.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="RES\cell_green.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="RES\menu.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
