@@ -62,11 +62,7 @@ END
 // Bitmap
 //
 
-IDB_BALL                BITMAP                  "..\\res\\ball.bmp"
-
-IDB_FLOOR             BITMAP                  "..\\res\\floor.bmp"
-
-IDB_CORNER              BITMAP                  "..\\res\\corner.bmp"
+IDB_FLOOR               BITMAP                  "..\\res\\floor.bmp"
 
 IDB_0                   BITMAP                  "..\\res\\bmp0.bmp"
 
@@ -90,12 +86,6 @@ IDB_9                   BITMAP                  "..\\res\\bmp9.bmp"
 
 IDB_MINUS               BITMAP                  "..\\res\\bmp10.bmp"
 
-IDB_CENTER              BITMAP                  "..\\res\\center.bmp"
-
-IDB_ERASER2             BITMAP                  "..\\res\\eraser2.bmp"
-
-IDB_ERASER3             BITMAP                  "..\\res\\eraser3.bmp"
-
 IDB_CONTINUE            BITMAP                  "..\\res\\continue.bmp"
 
 IDB_HELP                BITMAP                  "..\\res\\help.bmp"
@@ -108,9 +98,9 @@ IDB_PLAYER              BITMAP                  "..\\res\\player.bmp"
 
 IDB_GROUND              BITMAP                  "..\\res\\ground.bmp"
 
-IDB_CELL_GREEN          BITMAP                  ".\\res\\cell_green.bmp"
+IDB_CELL_GREEN          BITMAP                  "..\\res\\cell_green.bmp"
 
-IDB_START_MENU          BITMAP                  ".\\res\\start_menu.bmp"
+IDB_START_MENU          BITMAP                  "..\\res\\start_menu.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -146,7 +136,7 @@ IDR_MAINFRAME           BITMAP                  "..\\res\\Toolbar.bmp"
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDR_GAMETYPE            ICON                    "..\\res\\gameDoc.ico"
+IDR_MAINFRAME           ICON                    "..\\res\\gameDoc.ico"
 
 
 /////////////////////////////////////////////////////////////////////////////

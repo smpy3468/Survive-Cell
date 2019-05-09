@@ -368,7 +368,12 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\background.bmp" />
     <Image Include="RES\cell_green.bmp" />
+    <Image Include="res\floor.bmp" />
+    <Image Include="res\ground.bmp" />
+    <Image Include="res\player.bmp" />
+    <Image Include="res\start_menu.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
