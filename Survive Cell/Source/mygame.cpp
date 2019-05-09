@@ -223,8 +223,14 @@ namespace game_framework {
 		const char KEY_ATTACK = 0x58;//攻擊鍵X鍵
 		const char KEY_INTERACT = 0x43;//互動鍵c鍵
 		const char KEY_ROLL = 0x5a;//翻滾鍵Z鍵
+		const char KEY_F = 0x46;//F鍵
 
 		Player& player = *(GameSystem::GetGameObjectWithTag<Player>("Player"));//宣告一個玩家，避免每次都要打一長串GetGameObject...
+
+		if (nChar == KEY_F)//測試用，按下時扣血
+		{
+			player.DecreaseHP(100);
+		}
 
 		if (nChar == KEY_LEFT)
 		{

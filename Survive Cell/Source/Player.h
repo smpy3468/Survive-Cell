@@ -82,6 +82,7 @@ private:
 	bool isSquatKeyDown;//是否按下蹲下
 	bool isSquat;//是否蹲下
 	bool isUnconquered;//是否無敵
+	bool isGetHit;//是否被打
 	bool isPortaling;//是否正在傳送途中
 
 	int currentState = 0, nextState = 0;//現態,次態

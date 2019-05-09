@@ -145,6 +145,8 @@ public:
 		, int fontSize = 16, COLORREF textColor = RGB(0, 0, 0)//字體大小,字體顏色
 		, int bkMode = 1, COLORREF bkColor = RGB(255, 255, 255));//背景模式(OPAQUE:不透明, TRANSPARENT:透明),背景顏色
 
+	static void DrawRectangle(int x,int y,int width,int height,COLORREF color);//畫矩形
+
 	//------------音訊相關-------------//
 	enum AUDIO
 	{

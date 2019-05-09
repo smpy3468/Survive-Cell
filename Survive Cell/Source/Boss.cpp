@@ -33,7 +33,7 @@ void Boss::Act()
 {
 	unsigned seed = (unsigned)time(NULL);
 	srand(seed);
-	currentState = STATE_FAR_SHOOT;
+	//currentState = STATE_FAR_SHOOT;
 	switch (currentState)//根據狀態做不同動作
 	{
 	case STATE_IDLE://靜止
