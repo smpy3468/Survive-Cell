@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27428.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game", "game.vcxproj", "{DDD280D7-4B85-4B03-BBC4-C46CA9BECCCB}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Survive Cell", "Survive Cell\Survive Cell.vdproj", "{3B9B0871-271E-455A-8AC9-3592A0669F5D}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Survive Cell", "Survive Cell\Survive Cell.vdproj", "{0180890B-BC80-473B-AB0E-EB01E6669BB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,8 +17,8 @@ Global
 		{DDD280D7-4B85-4B03-BBC4-C46CA9BECCCB}.Debug|Win32.Build.0 = Debug|Win32
 		{DDD280D7-4B85-4B03-BBC4-C46CA9BECCCB}.Release|Win32.ActiveCfg = Release|Win32
 		{DDD280D7-4B85-4B03-BBC4-C46CA9BECCCB}.Release|Win32.Build.0 = Release|Win32
-		{3B9B0871-271E-455A-8AC9-3592A0669F5D}.Debug|Win32.ActiveCfg = Debug
-		{3B9B0871-271E-455A-8AC9-3592A0669F5D}.Release|Win32.ActiveCfg = Release
+		{0180890B-BC80-473B-AB0E-EB01E6669BB1}.Debug|Win32.ActiveCfg = Debug
+		{0180890B-BC80-473B-AB0E-EB01E6669BB1}.Release|Win32.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
