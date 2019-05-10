@@ -1,4 +1,6 @@
 #include"Stdafx.h"
+#include <functional>
+#include <random>
 #include "GameSystem.h"
 #include "Monster.h"
 #include "Player.h"
@@ -393,6 +395,16 @@ void GameSystem::ChangeToNextStage()
 
 
 	SetIsNextStage(false);
+}
+
+double GameSystem::Rand(double maxValue)
+{
+	std::random_device rd;
+	std::default_random_engine gen = std::default_random_engine(rd());
+	std::uniform_real_distribution<double> dis(0, maxValue);
+	auto randFun = std::bind(dis, gen);
+
+	return randFun();
 }
 
 void GameSystem::CreatStage1Object()

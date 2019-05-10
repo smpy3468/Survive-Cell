@@ -1,8 +1,6 @@
 #include "StdAfx.h"
 #include "Boss.h"
 #include "BossBullet.h"
-#include <functional>
-#include <random>
 
 Boss::Boss()
 {
@@ -48,6 +46,12 @@ void Boss::Act()
 			currentState = RandomState();
 			//currentState =
 		}
+
+		if (player->GetX() - x < 0)
+			faceLR = FACE_LEFT;//面向左邊
+		else
+			faceLR = FACE_RIGHT;//面相右邊
+
 		break;
 	case STATE_MOVE://移動
 		if (faceLR == FACE_LEFT)
@@ -61,7 +65,6 @@ void Boss::Act()
 
 		if (ani[currentAni]->IsEnd())//移動動畫播完
 		{
-			faceLR = rand() % 2;//隨機改變方向
 			currentState = STATE_IDLE;//就回到靜止狀態
 		}
 
@@ -190,14 +193,8 @@ void Boss::InstantDeath()
 }
 
 int Boss::RandomState()
-{	
-	//亂數設定
-	std::random_device rd;
-	std::default_random_engine gen = std::default_random_engine(rd());
-	std::uniform_real_distribution<double> dis(0,cumProb[STATE_LENGTH-1]);
-	auto randFun = std::bind(dis,gen);
-
-	unsigned int r = static_cast<int>(randFun());//產生隨機亂數
+{		
+	unsigned int r = static_cast<int>(GameSystem::Rand(cumProb[STATE_LENGTH - 1]));//產生隨機亂數
 
 	for (int i = 0; i < STATE_LENGTH; i++) // 查詢所在區間
 		if (r <= cumProb[i])

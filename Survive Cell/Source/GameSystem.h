@@ -39,6 +39,9 @@ public:
 	static void DeleteAllUI();//刪除所有UI物件
 	static void CreateFloor(int x, int y, int width, int height);//拼地板，傳入座標與寬高
 	static void ChangeToNextStage();
+
+	static double Rand(double maxValue);//亂數
+
 	template <class T> static T* GetGameObjectWithTag(string tag)//取得特定標籤的遊戲物件(單一個)
 	{
 		for (auto& i : gameObjectList)
