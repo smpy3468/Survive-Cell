@@ -161,7 +161,8 @@ void Boss::Jump()
 			&& player->GetY() + player->GetHeight() > this->y + this->height / 2
 			&& player->GetY() < this->y + this->height)//玩家在範圍內
 		{
-			player->DecreaseHP(attackDamage);//攻擊玩家
+			if(player->GetIsJump() == false)//玩家沒有在跳躍
+				player->DecreaseHP(attackDamage);//攻擊玩家
 		}
 
 		currentState = STATE_IDLE;//回到靜止狀態
@@ -193,13 +194,13 @@ int Boss::RandomState()
 	//亂數設定
 	std::random_device rd;
 	std::default_random_engine gen = std::default_random_engine(rd());
-	std::uniform_real_distribution<float> dis(0,1);
+	std::uniform_real_distribution<double> dis(0,cumProb[STATE_LENGTH-1]);
 	auto randFun = std::bind(dis,gen);
 
-	double r = randFun();//產生隨機亂數
+	unsigned int r = static_cast<int>(randFun());//產生隨機亂數
 
 	for (int i = 0; i < STATE_LENGTH; i++) // 查詢所在區間
-		if (r <= cumProb[i]) 
+		if (r <= cumProb[i])
 			return i;
 
 	return 0;

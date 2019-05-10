@@ -29,8 +29,9 @@ public:
 	void SetIsRoll(bool isRoll);//設定是否按下翻滾
 	void SetIsSquat(bool isSquat);//設定是否蹲下
 	void SetIsPortaling(bool isPortaling, int destX, int destY); //設定是否在傳送 和 傳送位置
-	
 	void SetIsUnconquered(bool isUnconquered);//設定是否無敵
+
+	bool GetIsJump();//是否在跳躍
 
 	bool HasWeapon();//是否有武器
 

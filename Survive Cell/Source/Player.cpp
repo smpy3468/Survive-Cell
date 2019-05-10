@@ -168,6 +168,11 @@ void Player::SetIsUnconquered(bool isUnconquered)
 	this->isUnconquered = isUnconquered;
 }
 
+bool Player::GetIsJump()
+{
+	return isJump;
+}
+
 void Player::SetIsPortaling(bool isPortaling, int destX, int destY)
 {
 	this->isPortaling = isPortaling;

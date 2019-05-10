@@ -45,8 +45,8 @@ private:
 		STATE_LENGTH
 	};
 
-	double stateProb[STATE_LENGTH] = { 0.1,0.2,0.2,0.4,0.1 };//各種狀態的機率
-	double cumProb[STATE_LENGTH] = {0};//累計機率
+	unsigned int stateProb[STATE_LENGTH] = { 10,20,15,15,30 };//各種狀態的機率，數字越大機率越高
+	unsigned int cumProb[STATE_LENGTH] = {0};//累計機率
 
 	const bool FACE_LEFT = true;//面向左邊
 	const bool FACE_RIGHT = false;//面向右邊

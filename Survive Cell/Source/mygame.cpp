@@ -108,13 +108,12 @@ namespace game_framework {
 
 	void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point)
 	{
-
+		
 	}
 
 	void CGameStateInit::OnShow()
 	{
-		// ©ñ±¼ Back Plain ªº CDC
-		Map::ShowStartMenu();
+		Map::ShowStartMenu();		
 	}
 
 	/////////////////////////////////////////////////////////////////////////////
