@@ -26,6 +26,7 @@ vector<UInterface*> GameSystem::gameUIList;//初始化物件列表
 bool GameSystem::isGameOver = false;
 bool GameSystem::isNextStage = false;
 int  GameSystem::nowStage = 0;
+bool GameSystem::isLoaded = false;
 int GameSystem::stage1Floor[stage1FloorCount][4] =
 {
 	{0,600,710,120},{ 0, 720, 710, 640 },{ 330, 400, 410, 80 },{ 890, 170, 200, 45 },{ 1090, 600, 850, 120 }
@@ -323,9 +324,14 @@ void GameSystem::DrawRectangle(int x, int y, int width, int height, COLORREF col
 
 void GameSystem::Load()
 {
-	CAudio::Instance()->Load(AUDIO::AUDIO_GAME_INIT, ".\\res\\game_init.mp3");
-	CAudio::Instance()->Load(AUDIO::AUDIO_GAME_RUN, ".\\res\\game_run.mp3");
-	CAudio::Instance()->Load(AUDIO::AUDIO_GAME_OVER, ".\\res\\game_over.mp3");
+	if (isLoaded == false)//還沒載入
+	{
+		CAudio::Instance()->Load(AUDIO::AUDIO_GAME_INIT, ".\\res\\game_init.mp3");
+		CAudio::Instance()->Load(AUDIO::AUDIO_GAME_RUN, ".\\res\\game_run.mp3");
+		CAudio::Instance()->Load(AUDIO::AUDIO_GAME_OVER, ".\\res\\game_over.mp3");
+
+		isLoaded = true;
+	}
 }
 
 void GameSystem::Init()

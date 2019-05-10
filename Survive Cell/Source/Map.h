@@ -34,4 +34,6 @@ private:
 	static int sx, sy;//螢幕左上角的座標在地圖座標的哪裡
 	static CMovingBitmap startMenu;//開始選單
 	static CMovingBitmap backgroundPic;//背景圖片
+
+	static bool isLoaded;//是否已載入
 };

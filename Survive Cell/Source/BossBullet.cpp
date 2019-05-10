@@ -9,7 +9,7 @@ BossBullet::BossBullet()
 BossBullet::BossBullet(string tag, int x, int y, int width, int height) :GameObject(tag, x, y, width, height)
 {
 	layer = GameSystem::LAYER_MONSTER;
-	ani = new CAnimation();
+	ani = new CAnimation(5);
 	LoadAni();
 
 	moveSpeed = 10;

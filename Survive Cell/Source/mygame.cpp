@@ -81,20 +81,24 @@ namespace game_framework {
 	CGameStateInit::CGameStateInit(CGame *g)
 		: CGameState(g)
 	{
+		
 	}
 
 	void CGameStateInit::OnInit()
 	{
-		GameSystem::Load();
-		Map::Load();
+		//不要在這用
 	}
 
 	void CGameStateInit::OnBeginState()
 	{
-		GameSystem::CreatStage1Object();
+		//OnInit
+		GameSystem::Load();
+		Map::Load();
+		//
 
-		//GameSystem::StopAudio(GameSystem::AUDIO::AUDIO_GAME_OVER);//停止遊戲中的音樂
-		//GameSystem::PlayAudio(GameSystem::AUDIO::AUDIO_GAME_INIT);//播放遊戲結束的音樂
+		GameSystem::CreatStage1Object();
+		GameSystem::StopAudio(GameSystem::AUDIO_GAME_OVER);//停止遊戲中的音樂
+		GameSystem::PlayAudio(GameSystem::AUDIO_GAME_INIT);//播放遊戲結束的音樂
 	}
 
 	void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -185,7 +189,7 @@ namespace game_framework {
 			player.MoveTo(GameSystem::GetGameObjectWithTag<Goal>("Goal")->GetX()
 				, GameSystem::GetGameObjectWithTag<Goal>("Goal")->GetY());//移動至傳送門的位置
 		}
-		GameSystem::StopAudio(GameSystem::AUDIO::AUDIO_GAME_OVER);//停止結束的音樂
+		GameSystem::StopAudio(GameSystem::AUDIO::AUDIO_GAME_INIT);//停止結束的音樂
 		GameSystem::PlayAudio(GameSystem::AUDIO::AUDIO_GAME_RUN);//播放遊戲的音樂
 		ShowInitProgress(100);
 	}

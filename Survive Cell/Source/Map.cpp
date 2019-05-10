@@ -10,6 +10,7 @@ CMovingBitmap Map::backgroundPic;//背景圖片
 bool Map::coordinate[WORLD_SIZE_X][WORLD_SIZE_Y] = { false };//紀錄哪個座標有物件
 int Map::sx = 0;//預設螢幕左上角在地圖座標的0,0 
 int Map::sy = 0;//預設螢幕左上角在地圖座標的0,0 
+bool Map::isLoaded = false;//是否已載入
 
 Map::~Map()
 {
@@ -28,8 +29,13 @@ void Map::Init()
 
 void Map::Load()
 {
-	startMenu.LoadBitmap(".\\res\\start_menu.bmp");
-	backgroundPic.LoadBitmap(IDB_BACKGROUND);
+	if (isLoaded == false)
+	{
+		startMenu.LoadBitmap(".\\res\\start_menu.bmp");
+		backgroundPic.LoadBitmap(IDB_BACKGROUND);
+
+		isLoaded = true;
+	}
 }
 
 void Map::ShowStartMenu()

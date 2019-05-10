@@ -641,6 +641,7 @@ void CGame::OnInit()	// OnInit() 只在程式一開始時執行一次
 	//
 	// Switch to the first state
 	//
+
 	gameState = gameStateTable[GAME_STATE_INIT];
 	gameState->OnBeginState();
 	CSpecialEffect::SetCurrentTime();
