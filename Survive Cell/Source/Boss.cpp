@@ -31,23 +31,21 @@ Boss::Boss(string tag, int x, int y, int width, int height) :Monster(tag, x, y, 
 	for (int i = 0; i < STATE_LENGTH; i++)//建立各項機率表
 	{
 		for (int j = 0; j <= i; j++)
-			cumProb[i] += stateProb[j];
+			cumStateProb[i] += originStateProb[j];
 	}
 }
 
 void Boss::Act()
 {
-	//currentState = STATE_FAR_SHOOT;
 	switch (currentState)//根據狀態做不同動作
 	{
 	case STATE_IDLE://靜止
 		if (ani[currentAni]->IsEnd())//播完動畫後
 		{
-			currentState = RandomState();
-			//currentState =
+			currentState = RandomState();//隨機改變狀態
 		}
 
-		if (player->GetX() - x < 0)
+		if (player->GetX() - x < 0)//玩家在左邊
 			faceLR = FACE_LEFT;//面向左邊
 		else
 			faceLR = FACE_RIGHT;//面相右邊
@@ -194,13 +192,41 @@ void Boss::InstantDeath()
 
 int Boss::RandomState()
 {		
-	unsigned int r = static_cast<int>(GameSystem::Rand(cumProb[STATE_LENGTH - 1]));//產生隨機亂數
+	if (player->GetX() + player->GetWidth() > this->x - nearAttackRange
+		&& player->GetX() < this->x + this->width + nearAttackRange
+		&& player->GetY() + player->GetHeight() > this->y + this->height / 2
+		&& player->GetY() < this->y + this->height)//近距離
+		ChangeStateProb(nearStateProb);
+
+	else if (player->GetX() + player->GetWidth() > this->x - farAttackRange
+		&& player->GetX() < this->x + this->width + farAttackRange
+		&& player->GetY() + player->GetHeight() > this->y + this->height / 2
+		&& player->GetY() < this->y + this->height)//遠距離
+		ChangeStateProb(farStateProb);
+
+	else
+		ChangeStateProb(originStateProb);//原始機率
+
+	unsigned int r = static_cast<int>(GameSystem::Rand(cumStateProb[STATE_LENGTH - 1]));//產生隨機亂數
 
 	for (int i = 0; i < STATE_LENGTH; i++) // 查詢所在區間
-		if (r <= cumProb[i])
+		if (r <= cumStateProb[i])
 			return i;
 
 	return 0;
+}
+
+void Boss::ChangeStateProb(unsigned int newStateProb[])//改變各項狀態機率
+{
+	memset(cumStateProb,0,sizeof(cumStateProb[0]));//重置累計機率為0
+
+	for (int i = 0; i < STATE_LENGTH; i++)
+	{
+		currentStateProb[i] = newStateProb[i];
+
+		for (int j = 0; j <= i; j++)
+			cumStateProb[i] += currentStateProb[j];
+	}
 }
 
 void Boss::ShowBitMap()
