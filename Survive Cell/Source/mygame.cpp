@@ -230,9 +230,9 @@ namespace game_framework {
 
 		Player& player = *(GameSystem::GetGameObjectWithTag<Player>("Player"));//宣告一個玩家，避免每次都要打一長串GetGameObject...
 
-		if (nChar == KEY_F)//測試用，按下時扣血
+		if (nChar == KEY_F)//測試用，按下時加血
 		{
-			player.DecreaseHP(100);
+			player.DecreaseHP(-100);
 		}
 
 		if (nChar == KEY_LEFT)

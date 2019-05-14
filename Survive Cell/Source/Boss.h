@@ -37,6 +37,8 @@ private:
 	int currentState = 0;//目前狀態
 	int nearAttackRange = 50;//近攻擊距離
 	int farAttackRange = SIZE_X / 2;//遠攻擊距離
+	int playerDistanceX, playerDistanceY;//玩家跟BOSS的距離
+
 	enum STATE
 	{
 		STATE_IDLE = 0,
@@ -51,9 +53,12 @@ private:
 	unsigned int cumStateProb[STATE_LENGTH] = { 0 };//各項狀態的累計機率，用來判別亂數用的
 	void ChangeStateProb(unsigned int newStateProb[]);//改變各項狀態機率
 	//各種狀態的機率，數字越大機率越高
-	unsigned int originStateProb[STATE_LENGTH] = { 10,10,0,15,30 };//原始機率，玩家不在攻擊範圍內時套用
+
+	unsigned int originStateProb[STATE_LENGTH] = { 10,30,0,0,10 };//原始機率，玩家不在攻擊範圍內時套用
 	unsigned int farStateProb[STATE_LENGTH] = { 5,10,0,30,10 };//遠距離時的機率
 	unsigned int nearStateProb[STATE_LENGTH] = { 5,10,30,5,10 };//近距離時的機率
+	bool InNear();//在近距攻擊範圍內
+	bool InFar();//在遠距攻擊範圍內
 
 	const bool FACE_LEFT = true;//面向左邊
 	const bool FACE_RIGHT = false;//面向右邊

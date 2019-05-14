@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "Boss.h"
 #include "BossBullet.h"
+#include <math.h>
 
 Boss::Boss()
 {
@@ -40,6 +41,9 @@ void Boss::Act()
 	switch (currentState)//根據狀態做不同動作
 	{
 	case STATE_IDLE://靜止
+
+		faceLR = static_cast<int>(GameSystem::Rand(2));
+
 		if (ani[currentAni]->IsEnd())//播完動畫後
 		{
 			currentState = RandomState();//隨機改變狀態
@@ -76,6 +80,12 @@ void Boss::Act()
 	case STATE_JUMP:
 		Jump();
 		break;
+	}
+
+	if (currentState != STATE_JUMP)
+	{
+		playerDistanceX = player->GetX() - x;
+		playerDistanceY = player->GetY() - y;
 	}
 
 	Fall(fallDisplacement);
@@ -151,7 +161,7 @@ void Boss::Jump()
 {
 	if (jumpDisplacement-- > 0)//跳躍位移量隨時間遞減
 	{
-		Move(0, -jumpDisplacement);//向上位移
+		Move(static_cast<int>(5 * moveSpeed * playerDistanceX / sqrt(pow(playerDistanceX, 2) + pow(playerDistanceY, 2))), -jumpDisplacement);//向上位移，並向玩家方向跳躍
 	}
 	else
 	{
@@ -162,7 +172,7 @@ void Boss::Jump()
 			&& player->GetY() + player->GetHeight() > this->y + this->height / 2
 			&& player->GetY() < this->y + this->height)//玩家在範圍內
 		{
-			if(player->GetIsJump() == false)//玩家沒有在跳躍
+			if (player->GetIsJump() == false)//玩家沒有在跳躍
 				player->DecreaseHP(attackDamage);//攻擊玩家
 		}
 
@@ -191,21 +201,15 @@ void Boss::InstantDeath()
 }
 
 int Boss::RandomState()
-{		
-	if (player->GetX() + player->GetWidth() > this->x - nearAttackRange
-		&& player->GetX() < this->x + this->width + nearAttackRange
-		&& player->GetY() + player->GetHeight() > this->y + this->height / 2
-		&& player->GetY() < this->y + this->height)//近距離
-		ChangeStateProb(nearStateProb);
+{
+	if (InNear())//近距離
+		ChangeStateProb(nearStateProb);//變為近距攻擊狀態
 
-	else if (player->GetX() + player->GetWidth() > this->x - farAttackRange
-		&& player->GetX() < this->x + this->width + farAttackRange
-		&& player->GetY() + player->GetHeight() > this->y + this->height / 2
-		&& player->GetY() < this->y + this->height)//遠距離
-		ChangeStateProb(farStateProb);
+	else if (InFar())//遠距離
+		ChangeStateProb(farStateProb);//變為遠距攻擊狀態
 
-	else
-		ChangeStateProb(originStateProb);//原始機率
+	else//超過遠距離攻擊範圍，BOSS不再攻擊玩家
+		ChangeStateProb(originStateProb);//原始狀態
 
 	unsigned int r = static_cast<int>(GameSystem::Rand(cumStateProb[STATE_LENGTH - 1]));//產生隨機亂數
 
@@ -218,7 +222,7 @@ int Boss::RandomState()
 
 void Boss::ChangeStateProb(unsigned int newStateProb[])//改變各項狀態機率
 {
-	memset(cumStateProb,0,sizeof(cumStateProb[0]));//重置累計機率為0
+	memset(cumStateProb, 0, sizeof(cumStateProb[0]));//重置累計機率為0
 
 	for (int i = 0; i < STATE_LENGTH; i++)
 	{
@@ -227,6 +231,28 @@ void Boss::ChangeStateProb(unsigned int newStateProb[])//改變各項狀態機率
 		for (int j = 0; j <= i; j++)
 			cumStateProb[i] += currentStateProb[j];
 	}
+}
+
+bool Boss::InNear()
+{
+	if (player->GetX() + player->GetWidth() > this->x - nearAttackRange
+		&& player->GetX() < this->x + this->width + nearAttackRange
+		&& player->GetY() + player->GetHeight() > this->y + this->height / 2
+		&& player->GetY() < this->y + this->height)//近距離
+		return true;
+	else
+		return false;
+}
+
+bool Boss::InFar()
+{
+	if (player->GetX() + player->GetWidth() > this->x - farAttackRange
+		&& player->GetX() < this->x + this->width + farAttackRange
+		&& player->GetY() + player->GetHeight() > this->y + this->height / 2
+		&& player->GetY() < this->y + this->height)//遠距離
+		return true;
+	else
+		return false;
 }
 
 void Boss::ShowBitMap()
