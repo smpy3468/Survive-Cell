@@ -284,6 +284,7 @@
     <ClCompile Include="Source\PlayerTraditionalSword.cpp" />
     <ClCompile Include="Source\PlayerWeapon.cpp" />
     <ClCompile Include="Source\Portal.cpp" />
+    <ClCompile Include="Source\Treasure.cpp" />
     <ClCompile Include="Source\UIBlood.cpp" />
     <ClCompile Include="Source\UIMonsterBlood.cpp" />
     <ClCompile Include="Source\UInterface.cpp" />
@@ -344,6 +345,7 @@
     <ClInclude Include="Source\PlayerEquipment.h" />
     <ClInclude Include="Source\PlayerWeapon.h" />
     <ClInclude Include="Source\Portal.h" />
+    <ClInclude Include="Source\Treasure.h" />
     <ClInclude Include="Source\UIBlood.h" />
     <ClInclude Include="Source\UIMonsterBlood.h" />
     <ClInclude Include="Source\UInterface.h" />

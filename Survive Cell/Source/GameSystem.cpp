@@ -22,7 +22,7 @@
 #include "Goal.h"
 #include "Boss.h"
 #include "Portal.h"
-
+#include "Treasure.h"
 vector<GameObject*> GameSystem::gameObjectList;//初始化物件列表
 vector<UInterface*> GameSystem::gameUIList;//初始化物件列表
 bool GameSystem::isGameOver = false;
@@ -210,6 +210,7 @@ void GameSystem::ShowAllObject()//顯示所有物件
 {
 	for (auto& i : gameObjectList)
 	{
+		int k = i->GetY();
 		if (i->GetX() <= Map::GetSX() + SIZE_X
 			&& i->GetX() + i->GetWidth() >= Map::GetSX()
 			&& i->GetY() <= Map::GetSY() + SIZE_Y
@@ -409,13 +410,14 @@ double GameSystem::Rand(double maxValue)
 
 void GameSystem::CreatStage1Object()
 {
-	Init();
+	Init(); 
+
 	AddGameObject(new Player("Player", 80, 80, 50, 80));
 	Player* player = GetGameObjectWithTag<Player>("Player");
 	Map::SetSX(player->GetX() - SIZE_X / 2);
 	Map::SetSY(player->GetY() - SIZE_Y / 2);
 
-	AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 280, Map::WORLD_SIZE_X, 280, IDB_GROUND));
+	AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 355, Map::WORLD_SIZE_X, 280, IDB_GROUND));
 
 	for (int i = 0; i < stage1FloorCount; i++)
 	{
@@ -423,42 +425,7 @@ void GameSystem::CreatStage1Object()
 		GameSystem::AddGameObject(new Floor("Floor", stage1Floor[i][0], stage1Floor[i][1], stage1Floor[i][2], stage1Floor[i][3]));
 	}
 
-	/*CreateFloor(0, 600, 710, 120);
-	CreateFloor(0, 720, 710, 640);
-	CreateFloor(330, 400, 410, 80);
-	CreateFloor(890, 170, 200, 45);
-	CreateFloor(1090, 600, 850, 120);
-	CreateFloor(1090, 0, 65, 490);
-	CreateFloor(0, 1360, 410, 205);
-	CreateFloor(650, 1360, 60, 150);
-	CreateFloor(710, 910, 220, 45);
-	CreateFloor(825, 1150, 180, 35);
-	CreateFloor(710, 1325, 120, 35);
-	CreateFloor(920, 710, 170, 35);
-	CreateFloor(1090, 720, 850, 280);
-	CreateFloor(1090, 1110, 850, 260);
-	CreateFloor(1530, 1000, 410, 110);
-	CreateFloor(1570, 1370, 100, 195);
-	CreateFloor(1115, 380, 455, 35);
-	CreateFloor(1315, 170, 170, 95);
-	CreateFloor(1425, 170, 275, 50);
-	CreateFloor(1700, 120, 80, 480);
-	CreateFloor(2160, 600, 1680, 120);
-	CreateFloor(1890, 445, 610, 35);
-	CreateFloor(2160, 720, 310, 650);
-	CreateFloor(2230, 1370, 140, 75);
-	CreateFloor(2700, 720, 520, 110);
-	CreateFloor(3080, 830, 140, 130);
-	CreateFloor(2700, 960, 520, 320);
-	CreateFloor(2140, 0, 1700, 60);
-	CreateFloor(2140, 210, 930, 70);
-	CreateFloor(2630, 60, 80, 95); //這可能會卡住太高了
-	CreateFloor(3260, 60, 580, 360);
-	CreateFloor(3380, 420, 100, 60);
-	CreateFloor(2830, 410, 80, 190);
-	CreateFloor(2630, 460, 200, 50);
-	CreateFloor(2910, 410, 160, 40);*/
-
+	AddGameObject(new Treasure("Item", 400, 1388, 250, 187));
 	AddGameObject(new Door("Door", 530, 480, 12, 120));//門
 	AddGameObject(new Door("Door", 1315, 260, 12, 120));//門
 	AddGameObject(new Door("Door", 2330, 1445, 12, 120));//門
