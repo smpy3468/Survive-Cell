@@ -21,10 +21,18 @@ ItemTraditionalSword::ItemTraditionalSword(string tag, int x, int y, int width, 
 	LoadBitMap(".\\res\\sword_01d.bmp");
 }
 
+ItemTraditionalSword::ItemTraditionalSword(string tag, int x, int y, int width, int height,int damage, int defense) :ItemWeapon(tag, x, y, width, height) {
+	tag = "ItemWeapon";
+	attackDamage = damage;
+	attackRange = 100;
+	defense = defense;
+	LoadAni();
+	LoadBitMap(".\\res\\sword_01d.bmp");
+}
 
 
 void ItemTraditionalSword::LoadAni() {
-	char* aniIdle[1] = { ".\\res\\Treasure_Idle.bmp" };
+	char* aniIdle[1] = { ".\\res\\sword_01d.bmp" };
 	AddAniBitMaps(aniIdle, ANI_IDLE, 1);
 }
 

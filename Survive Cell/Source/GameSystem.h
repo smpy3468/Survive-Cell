@@ -41,7 +41,7 @@ public:
 	static void ChangeToNextStage();
 
 	static double Rand(double maxValue);//亂數
-
+	static double Rand(double minValue, double maxValue);//亂數
 	template <class T> static T* GetGameObjectWithTag(string tag)//取得特定標籤的遊戲物件(單一個)
 	{
 		for (auto& i : gameObjectList)

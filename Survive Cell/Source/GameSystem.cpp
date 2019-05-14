@@ -408,6 +408,16 @@ double GameSystem::Rand(double maxValue)
 	return randFun();
 }
 
+double GameSystem::Rand(double minValue, double maxValue)
+{
+	std::random_device rd;
+	std::default_random_engine gen = std::default_random_engine(rd());
+	std::uniform_real_distribution<double> dis(minValue, maxValue);
+	auto randFun = std::bind(dis, gen);
+
+	return randFun();
+}
+
 void GameSystem::CreatStage1Object()
 {
 	Init(); 
@@ -425,7 +435,7 @@ void GameSystem::CreatStage1Object()
 		GameSystem::AddGameObject(new Floor("Floor", stage1Floor[i][0], stage1Floor[i][1], stage1Floor[i][2], stage1Floor[i][3]));
 	}
 
-	AddGameObject(new Treasure("Item", 400, 1388, 250, 187));
+	AddGameObject(new Treasure("Item", 400, 1388, 250, 187, 0,2, 0, 10));
 	AddGameObject(new Door("Door", 530, 480, 12, 120));//ªù
 	AddGameObject(new Door("Door", 1315, 260, 12, 120));//ªù
 	AddGameObject(new Door("Door", 2330, 1445, 12, 120));//ªù
