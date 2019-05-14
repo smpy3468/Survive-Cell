@@ -13,7 +13,7 @@ class Potion :public Item
 public:
 	Potion();
 	~Potion();
-	Potion(string tag, int x, int y, int width, int height, int pictureID);
+	Potion(string tag, int x, int y, int width, int height);
 
 	void Picked()override;//³Q¾ß¨ú
 
