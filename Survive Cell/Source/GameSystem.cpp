@@ -1,6 +1,7 @@
 #include"Stdafx.h"
 #include <functional>
 #include <random>
+#include <gdiplus.h>
 #include "GameSystem.h"
 #include "Monster.h"
 #include "Player.h"
@@ -23,6 +24,7 @@
 #include "Boss.h"
 #include "Portal.h"
 #include "Treasure.h"
+
 vector<GameObject*> GameSystem::gameObjectList;//初始化物件列表
 vector<UInterface*> GameSystem::gameUIList;//初始化物件列表
 bool GameSystem::isGameOver = false;

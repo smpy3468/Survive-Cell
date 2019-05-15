@@ -14,7 +14,6 @@ public:
 	Boss(string tag, int x, int y, int width, int height);
 	void Act();//行動
 
-	void Attack()override;
 	void Jump();//跳躍
 	void Fall(int perDisplacement);//掉落
 	void Move(int dx, int dy)override;
@@ -54,9 +53,9 @@ private:
 	void ChangeStateProb(unsigned int newStateProb[]);//改變各項狀態機率
 	//各種狀態的機率，數字越大機率越高
 
-	unsigned int originStateProb[STATE_LENGTH] = { 10,30,0,0,10 };//原始機率，玩家不在攻擊範圍內時套用
-	unsigned int farStateProb[STATE_LENGTH] = { 5,10,0,30,10 };//遠距離時的機率
-	unsigned int nearStateProb[STATE_LENGTH] = { 5,10,30,5,10 };//近距離時的機率
+	unsigned int originStateProb[STATE_LENGTH] = { 1,30,0,0,10 };//原始機率，玩家不在攻擊範圍內時套用
+	unsigned int farStateProb[STATE_LENGTH] = { 1,10,0,30,10 };//遠距離時的機率
+	unsigned int nearStateProb[STATE_LENGTH] = { 1,10,30,5,10 };//近距離時的機率
 	bool InNear();//在近距攻擊範圍內
 	bool InFar();//在遠距攻擊範圍內
 

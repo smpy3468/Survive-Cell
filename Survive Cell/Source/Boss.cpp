@@ -44,7 +44,7 @@ void Boss::Act()
 
 		faceLR = static_cast<int>(GameSystem::Rand(2));
 
-		if (ani[currentAni]->IsEnd())//播完動畫後
+		//if (ani[currentAni]->IsEnd())//播完動畫後
 		{
 			currentState = RandomState();//隨機改變狀態
 		}
@@ -72,7 +72,7 @@ void Boss::Act()
 
 		break;
 	case STATE_NEAR_SLASH://攻擊
-		Attack();
+		NearSlash();
 		break;
 	case STATE_FAR_SHOOT://射擊
 		FarShoot();
@@ -105,11 +105,6 @@ void Boss::Fall(int perDisplacement)
 		fallDisplacement = 0;
 
 	}
-}
-
-void Boss::Attack()
-{
-	NearSlash();
 }
 
 void Boss::NearSlash()
@@ -161,7 +156,8 @@ void Boss::Jump()
 {
 	if (jumpDisplacement-- > 0)//跳躍位移量隨時間遞減
 	{
-		Move(static_cast<int>(5 * moveSpeed * playerDistanceX / sqrt(pow(playerDistanceX, 2) + pow(playerDistanceY, 2))), -jumpDisplacement);//向上位移，並向玩家方向跳躍
+		int dx = static_cast<int>(5 * moveSpeed * playerDistanceX / sqrt(pow(playerDistanceX, 2) + pow(playerDistanceY, 2)));//向玩家跳躍
+		Move(dx, -jumpDisplacement);//向上位移，並向玩家方向跳躍
 	}
 	else
 	{

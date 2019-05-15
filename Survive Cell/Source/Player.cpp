@@ -8,6 +8,7 @@
 #include "Door.h"
 #include "Goal.h"
 #include "Portal.h"
+
 Player::Player()
 {
 	tag = "Player";
@@ -550,34 +551,6 @@ void Player::Interact()
 			static_cast<Portal*>(i)->Used();
 		}
 	}
-
-	/*for (auto& i : GameSystem::GetAllGameObject())//對物件互動
-	{
-		if (i->GetTag() == "Item" || i->GetTag() == "Potion" || i->GetTag() == "ItemWeapon")//是物品
-		{
-			if (i->GetX() + i->GetWidth() > this->x && i->GetX() < this->x + this->width
-				&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height) {
-				static_cast<Item*>(i)->Picked();
-				//return;
-			}
-		}
-		else if (i->GetTag() == "Goal")
-		{
-			if (i->GetX() + i->GetWidth() > this->x && i->GetX() < this->x + this->width
-				&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height) {
-				static_cast<Goal*>(i)->Picked();
-				//return;
-			}
-		}
-		else if (i->GetTag() == "Portal")
-		{
-			if (i->GetX() + i->GetWidth() > this->x && i->GetX() < this->x + this->width
-				&& i->GetY() + i->GetHeight() > this->y && i->GetY() < this->y + this->height) {
-				static_cast<Portal*>(i)->Used();
-				//return;
-			}
-		}
-	}*/
 }
 
 void Player::Attack()
@@ -746,28 +719,6 @@ void Player::ShowInformation()
 		//GameSystem::ShowText(information, 0, 0, SIZE_X, SIZE_Y, GameSystem::ALIGN_LEFT, GameSystem::ALIGN_TOP, 8, RGB(0, 0, 0));
 }
 
-/*void Player::AddEquipment(int equipmentID, ItemWeapon* equipment)
-{
-	switch (equipmentID)
-	{
-		case GameSystem::EQUIPMENT_ID::EQUIPMENT_TRADITIONAL_SWORD:
-			this->equipments.push_back(new PlayerTraditionalSword(equipment));
-		break;
-
-		default:
-		break;
-	}
-
-	if (!hasWeapon)//還沒有武器
-	{
-		if (equipment->GetTag() == "ItemWeapon")//是武器
-		{
-			this->weapon = new PlayerEquipment(equipment);//此處有問題
-		}
-	}
-
-}*/
-
 void Player::CalculateAbility(PlayerEquipment* equipment)
 {
 	//攻擊力與防禦累加上去
@@ -821,11 +772,6 @@ void Player::Roll()
 			ChangeHeight(originHeight / 2);//將高度變為一半
 			SetMoveSpeed(originMoveSpeed / 2);//速度變為一半
 		}
-
-		/*if (!CanMoveUp(0))//如果無法站起來
-		{
-			FlipWidthHeight();
-		}*/
 	}
 }
 
