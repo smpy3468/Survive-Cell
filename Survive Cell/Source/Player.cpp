@@ -815,6 +815,13 @@ void Player::Roll()
 
 		FlipWidthHeight();//還原寬高
 
+		if (CanStand() == false)//翻滾完之後的位置無法站起
+		{
+			isSquat = true;//變為蹲下狀態
+			ChangeHeight(originHeight / 2);//將高度變為一半
+			SetMoveSpeed(originMoveSpeed / 2);//速度變為一半
+		}
+
 		/*if (!CanMoveUp(0))//如果無法站起來
 		{
 			FlipWidthHeight();
