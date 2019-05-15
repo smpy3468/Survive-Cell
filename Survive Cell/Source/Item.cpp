@@ -23,6 +23,7 @@ Item::Item(string tag, int x, int y, int width, int height, int pictureID) :Game
 		this->y--;//將道具往上移至地板外
 	while (!Map::HasObject(this->x, this->y + height + 1))//若道具在空中
 		this->y++;//將道具往下移至地板外
+	perDisplacement =1;
 }
 
 Item::Item(string tag, int x, int y, int width, int height) :GameObject(tag, x, y, width, height)
@@ -35,6 +36,7 @@ Item::Item(string tag, int x, int y, int width, int height) :GameObject(tag, x, 
 		this->y++;//將道具往下移至地板外
 
 	ani.push_back(new CAnimation());//加入一個動畫
+	perDisplacement = -4;
 }
 
 /*void Item::SetXY(int hostX, int hostY, int playerCurrentAni, int  playerAniNumber) {}
@@ -80,6 +82,34 @@ void Item::LoadAni(){}
 void Item::ShowBitMap() {
 	ani[currentAni]->OnShow();
 }
+void Item::Fall(int perDisplacement)
+{	
+	int k = GetY();
+	if (CanMoveDown(perDisplacement))//如果腳下沒東西
+	{
+		SetY(GetY() +perDisplacement);
+		this->perDisplacement++;
+	}
+	else
+	{
+		while (CanMoveDown(1))//再繼續用下降位移量下降，將會卡進地板，所以一次向下位移1進行微調0
+			SetY(GetY()+1);
+	}
+}
+
+bool Item::CanMoveDown(int perDisplacement)
+{
+	bool canMoveDown = true;
+	for (int i = x; i < x + width; i++)
+	{
+		if (Map::HasObject(i, y + height + perDisplacement))//下面有東西
+		{
+			canMoveDown = false;
+			return canMoveDown;
+		}
+	}
+	return canMoveDown;
+}
 
 void Item::SetBitMapPosition()
 {
@@ -87,6 +117,11 @@ void Item::SetBitMapPosition()
 	{
 		i->SetTopLeft(this->x - Map::GetSX(), this->y - Map::GetSY());
 	}
+}
+
+void Item::Act() 
+{
+	Fall(this->perDisplacement);
 }
 
 void Item::Picked()
