@@ -283,9 +283,12 @@ void Player::Act()//行動
 			}
 			else
 			{
-				isSquat = false;
-				ChangeHeight(originHeight);//將高度還原
-				SetMoveSpeed(originMoveSpeed);//將速度還原
+				if (CanStand())
+				{
+					isSquat = false;
+					ChangeHeight(originHeight);//將高度還原
+					SetMoveSpeed(originMoveSpeed);//將速度還原
+				}
 			}
 
 			if (this->isMoveLeft)
@@ -467,6 +470,26 @@ void Player::ChangeHeight(int height)
 	this->height = height;
 }
 
+bool Player::CanStand()
+{
+	for (int i = x; i < x + width; i++)
+	{
+		int h = 0;//計算高度
+		int cy = y + h;//從玩家腳底開始
+
+		while (!Map::HasObject(i, cy) && h < height)//往上計算高度有多少
+		{
+			cy--;
+			h++;
+		}
+
+		if (h < height)//高度不夠
+			return false;
+	}
+
+	return true;//每個x座標上方的高度都夠
+}
+
 /*bool Player::IsFloorOnGround()
 {
 	int cy = y + height + 1;//玩家腳底的位置
@@ -584,7 +607,7 @@ void Player::Portaling()		//傳送
 	if (x != destinationX && dX > 0)
 	{
 		x += dX;
-		Map::MoveScreenTopLeft(dX,0);
+		Map::MoveScreenTopLeft(dX, 0);
 	}
 	else if (x != destinationX && dX < 0)
 	{
@@ -609,8 +632,8 @@ void Player::Portaling()		//傳送
 
 void Player::ShowBitMap()
 {
-	if(isGetHit)//被攻擊
-	{ 
+	if (isGetHit)//被攻擊
+	{
 		if (faceLR == FACE_LEFT)
 		{
 			currentAni = ANI_GET_HIT_LEFT;
@@ -720,7 +743,7 @@ void Player::ShowInformation()
 		+ "\nUnconquered:" + to_string(isUnconquered)
 		+ "\nHP:" + to_string(HP);*/
 
-	//GameSystem::ShowText(information, 0, 0, SIZE_X, SIZE_Y, GameSystem::ALIGN_LEFT, GameSystem::ALIGN_TOP, 8, RGB(0, 0, 0));
+		//GameSystem::ShowText(information, 0, 0, SIZE_X, SIZE_Y, GameSystem::ALIGN_LEFT, GameSystem::ALIGN_TOP, 8, RGB(0, 0, 0));
 }
 
 /*void Player::AddEquipment(int equipmentID, ItemWeapon* equipment)
