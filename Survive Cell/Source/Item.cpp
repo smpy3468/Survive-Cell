@@ -33,6 +33,8 @@ Item::Item(string tag, int x, int y, int width, int height) :GameObject(tag, x, 
 		this->y--;//將道具往上移至地板外
 	while (!Map::HasObject(this->x, this->y + height + 1))//若道具在空中
 		this->y++;//將道具往下移至地板外
+
+	ani.push_back(new CAnimation());//加入一個動畫
 }
 
 /*void Item::SetXY(int hostX, int hostY, int playerCurrentAni, int  playerAniNumber) {}
