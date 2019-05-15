@@ -427,7 +427,7 @@ void GameSystem::CreatStage1Object()
 	Map::SetSX(player->GetX() - SIZE_X / 2);
 	Map::SetSY(player->GetY() - SIZE_Y / 2);
 
-	AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 355, Map::WORLD_SIZE_X, 280, IDB_GROUND));
+	AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 355, Map::WORLD_SIZE_X, 355, IDB_GROUND));
 
 	for (int i = 0; i < stage1FloorCount; i++)
 	{
