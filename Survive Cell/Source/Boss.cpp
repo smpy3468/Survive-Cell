@@ -34,6 +34,8 @@ Boss::Boss(string tag, int x, int y, int width, int height) :Monster(tag, x, y, 
 		for (int j = 0; j <= i; j++)
 			cumStateProb[i] += originStateProb[j];
 	}
+
+	currentState = STATE_IDLE;//預設動作
 }
 
 void Boss::Act()

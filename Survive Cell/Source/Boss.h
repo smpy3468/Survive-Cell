@@ -54,8 +54,8 @@ private:
 	//各種狀態的機率，數字越大機率越高
 
 	unsigned int originStateProb[STATE_LENGTH] = { 1,30,0,0,10 };//原始機率，玩家不在攻擊範圍內時套用
-	unsigned int farStateProb[STATE_LENGTH] = { 1,10,0,30,10 };//遠距離時的機率
-	unsigned int nearStateProb[STATE_LENGTH] = { 1,10,30,5,10 };//近距離時的機率
+	unsigned int farStateProb[STATE_LENGTH] = { 1,5,0,30,10 };//遠距離時的機率
+	unsigned int nearStateProb[STATE_LENGTH] = { 1,5,30,5,10 };//近距離時的機率
 	bool InNear();//在近距攻擊範圍內
 	bool InFar();//在遠距攻擊範圍內
 

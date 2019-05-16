@@ -160,9 +160,9 @@ void Monster::Dead()
 {	
 	int i = static_cast<int>(GameSystem::Rand(4));
 	if(i>2)
-		GameSystem::AddGameObject(new Potion("Potion", x  , y , 20, 10));//產生一個細胞道具
+		GameSystem::AddGameObject(new Potion("Potion", x  , y, 20, 10));//產生一個細胞道具
 	else
-		GameSystem::AddGameObject(new ItemTraditionalSword("ItemWeapon", x + width / 2, y + height, 32, 32,0,100));
+		GameSystem::AddGameObject(new ItemTraditionalSword("ItemWeapon", x + width / 2, y, 32, 32,100,0));
 
 	GameSystem::DeleteGameObject(this);
 }

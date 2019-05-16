@@ -32,8 +32,8 @@ Item::Item(string tag, int x, int y, int width, int height) :GameObject(tag, x, 
 	layer = GameSystem::LAYER::LAYER_ITEM;
 	while (Map::HasObject(this->x, this->y + height))//若道具位在地板中
 		this->y--;//將道具往上移至地板外
-	while (!Map::HasObject(this->x, this->y + height + 1))//若道具在空中
-		this->y++;//將道具往下移至地板外
+	//while (!Map::HasObject(this->x, this->y + height + 1))//若道具在空中
+		//this->y++;//將道具往下移至地板外
 
 	ani.push_back(new CAnimation());//加入一個動畫
 	perDisplacement = -4;
