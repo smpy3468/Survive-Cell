@@ -45,25 +45,7 @@ void BossBullet::Act()
 	x += dx;//移動
 	y += dy;//移動
 
-	if (boss->GetPhase() == 2)//Boss目前在第二階段
-	{
-		if ((x + width > targetX && x < targetX
-			&& y + height > targetY && y < targetY)	//到達玩家原始位置
-			&& sqrt(pow(x - originX, 2) + pow(y - originY, 2)) >= sqrt(pow(SIZE_X, 2) + pow(SIZE_Y, 2)) / 5)//而且移動的距離要超過螢幕斜邊的1/5
-		{
-			{
-				//製造八顆子彈
-				for (int i = 0; i < 8; i++)
-				{
-					GameSystem::AddGameObject(new BossBullet2("BossBullet", x, y, width, height, 30 + 45 * i));
-				}
-
-				GameObject::Dead();
-			}
-		}
-	}
-
-	else if (x + width < 0 || x >= Map::WORLD_SIZE_X || y + height < 0 || y >= Map::WORLD_SIZE_Y)//飛出邊界
+	if (x + width < 0 || x >= Map::WORLD_SIZE_X || y + height < 0 || y >= Map::WORLD_SIZE_Y)//飛出邊界
 		GameObject::Dead();//直接刪除
 
 	else if (x + width > player->GetX() && x < player->GetX() + player->GetWidth()
@@ -71,8 +53,25 @@ void BossBullet::Act()
 	{
 		Dead();//先攻擊玩家再刪除
 	}
+	else if (boss->GetPhase() == 2)//Boss目前在第二階段，有散射功能
+	{
+		if ((x + width > targetX && x < targetX
+			&& y + height > targetY && y < targetY
+			&& sqrt(pow(x - originX, 2) + pow(y - originY, 2)) >= sqrt(pow(SIZE_X, 2) + pow(SIZE_Y, 2)) / 4)
+			//到達玩家原始位置，且移動的距離要超過螢幕斜邊的1/4
+			|| 
+			sqrt(pow(x - originX, 2) + pow(y - originY, 2)) >= sqrt(pow(SIZE_X, 2) + pow(SIZE_Y, 2)) / 2)
+			//或者移動的距離超過螢幕斜邊的1/2，就散射子彈
+		{
+			//製造八顆子彈
+			for (int i = 0; i < 8; i++)
+			{
+				GameSystem::AddGameObject(new BossBullet2("BossBullet", x, y, width, height, 30 + 45 * i));
+			}
 
-
+			GameObject::Dead();
+		}
+	}
 }
 
 void BossBullet::SetBitMapPosition()
