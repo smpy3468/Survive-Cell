@@ -102,7 +102,7 @@ void Boss::Act()
 
 int Boss::GetPhase()
 {
-	return this->phase;
+	return phase;
 }
 
 void Boss::Fall(int perDisplacement)
@@ -161,7 +161,7 @@ void Boss::FarShoot()
 		if (isShoot == false)
 		{
 			isShoot = true;
-			GameSystem::AddGameObject(new BossBullet("BossBullet", x, y, 50, 50, this));
+			GameSystem::AddGameObject(new BossBullet("BossBullet", x, y, 50, 50));
 		}
 	}
 }

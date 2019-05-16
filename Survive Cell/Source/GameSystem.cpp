@@ -193,6 +193,8 @@ void GameSystem::AllObjectAct()
 {
 	for (auto& i : gameObjectList)
 	{
+		if(GameSystem::GetGameObjectWithType<Boss>())
+			GameSystem::GetGameObjectWithType<Boss>()->GetPhase();
 		i->Act();
 	}
 	//GetGameObjectWithType<Player>()->Act();

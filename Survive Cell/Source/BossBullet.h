@@ -11,7 +11,7 @@ class BossBullet :public GameObject
 {
 public:
 	BossBullet();
-	BossBullet(string tag, int x, int y, int width, int height, Boss* boss);
+	BossBullet(string tag, int x, int y, int width, int height);
 	~BossBullet();
 
 	void Dead()override;

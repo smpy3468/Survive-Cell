@@ -8,10 +8,8 @@ BossBullet::BossBullet()
 {
 }
 
-BossBullet::BossBullet(string tag, int x, int y, int width, int height,Boss* boss) :GameObject(tag, x, y, width, height)
+BossBullet::BossBullet(string tag, int x, int y, int width, int height) :GameObject(tag, x, y, width, height)
 {
-	this->boss = boss;
-
 	layer = GameSystem::LAYER_MONSTER;
 	ani = new CAnimation(5);
 	LoadAni();
@@ -53,20 +51,16 @@ void BossBullet::Act()
 		Dead();//先攻擊玩家再刪除
 	}
 
-	//if (boss->GetPhase() == 2)//Boss目前在第二階段
+	if (x + width > targetX && x < targetX
+		&& y + height > targetY && y < targetY)
 	{
-		if (x + width > targetX && x < targetX
-			&& y + height > targetY && y < targetY)
+		if (boss->GetPhase() == 2)//Boss目前在第二階段
 		{
 			//製造八顆子彈
-			GameSystem::AddGameObject(new BossBullet2("BossBullet",x,y,width,height,0));
-			GameSystem::AddGameObject(new BossBullet2("BossBullet", x, y, width, height, 45));
-			GameSystem::AddGameObject(new BossBullet2("BossBullet", x, y, width, height, 90));
-			GameSystem::AddGameObject(new BossBullet2("BossBullet", x, y, width, height, 135));
-			GameSystem::AddGameObject(new BossBullet2("BossBullet", x, y, width, height, 180));
-			GameSystem::AddGameObject(new BossBullet2("BossBullet", x, y, width, height, 225));
-			GameSystem::AddGameObject(new BossBullet2("BossBullet", x, y, width, height, 270));
-			GameSystem::AddGameObject(new BossBullet2("BossBullet", x, y, width, height, 315));
+			for (int i = 0; i < 8; i++)
+			{
+				GameSystem::AddGameObject(new BossBullet2("BossBullet", x, y, width, height, 15 + 45 * i));
+			}
 
 			GameObject::Dead();
 		}
