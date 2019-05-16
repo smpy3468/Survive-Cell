@@ -35,28 +35,41 @@ Boss::Boss(string tag, int x, int y, int width, int height) :Monster(tag, x, y, 
 			cumStateProb[i] += originStateProb[j];
 	}
 
+	phase = 1;//第一階段
 	currentState = STATE_IDLE;//預設動作
 }
 
 void Boss::Act()
 {
+	if (static_cast<float>(HP) / maxHP <= 0.5)//第二階段
+	{
+		phase = 2;
+	}
+
+	//currentState = STATE_FAR_SHOOT;
 	switch (currentState)//根據狀態做不同動作
 	{
 	case STATE_IDLE://靜止
 
-		faceLR = static_cast<int>(GameSystem::Rand(2));
+		//faceLR = static_cast<int>(GameSystem::Rand(2));
 
 		//if (ani[currentAni]->IsEnd())//播完動畫後
+	{
+		currentState = RandomState();//隨機改變狀態
+
+		if (currentState == STATE_JUMP)//下一個狀態是跳躍時，紀錄玩家跟BOSS的距離
 		{
-			currentState = RandomState();//隨機改變狀態
+			playerDistanceX = player->GetX() - x;
+			playerDistanceY = player->GetY() - y;
 		}
+	}
 
-		if (player->GetX() - x < 0)//玩家在左邊
-			faceLR = FACE_LEFT;//面向左邊
-		else
-			faceLR = FACE_RIGHT;//面相右邊
+	if (player->GetX() - x < 0)//玩家在左邊
+		faceLR = FACE_LEFT;//面向左邊
+	else
+		faceLR = FACE_RIGHT;//面相右邊
 
-		break;
+	break;
 	case STATE_MOVE://移動
 		if (faceLR == FACE_LEFT)
 		{
@@ -84,13 +97,12 @@ void Boss::Act()
 		break;
 	}
 
-	if (currentState != STATE_JUMP)
-	{
-		playerDistanceX = player->GetX() - x;
-		playerDistanceY = player->GetY() - y;
-	}
-
 	Fall(fallDisplacement);
+}
+
+int Boss::GetPhase()
+{
+	return this->phase;
 }
 
 void Boss::Fall(int perDisplacement)
@@ -142,14 +154,14 @@ void Boss::FarShoot()
 	if (ani[currentAni]->IsEnd())
 	{
 		isShoot = false;
-		currentState = STATE_IDLE;
+		currentState = STATE_IDLE;//回到靜止狀態
 	}
 	else if (ani[currentAni]->GetCurrentBitmapNumber() == 3)//第三張圖片時發射子彈
 	{
 		if (isShoot == false)
 		{
 			isShoot = true;
-			GameSystem::AddGameObject(new BossBullet("BossBullet", x, y, 50, 50));
+			GameSystem::AddGameObject(new BossBullet("BossBullet", x, y, 50, 50, this));
 		}
 	}
 }

@@ -10,7 +10,7 @@ class ItemTraditionalSword:public ItemWeapon {
 		ItemTraditionalSword();
 		~ItemTraditionalSword();
 		ItemTraditionalSword(string tag, int x, int y, int width, int height);
-		ItemTraditionalSword(string tag, int x, int y, int width, int height,int damage, int);
+		ItemTraditionalSword(string tag, int x, int y, int width, int height,int damage, int defense);
 	private:
 		void LoadAni()override;							//載入動畫
 		//void ShowBitMap()override;						//顯示動畫

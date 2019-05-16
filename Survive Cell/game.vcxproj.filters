@@ -192,6 +192,9 @@
     <ClCompile Include="Source\Treasure.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
+    <ClCompile Include="Source\BossBullet2.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h">
@@ -309,6 +312,9 @@
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\Treasure.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BossBullet2.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>

@@ -5,12 +5,12 @@ UIBlood::UIBlood(string tag, int x, int y, int width, int height) :UInterface(ta
 {
 	this->x = 110;
 	this->y = 10;
-	
+
 	this->width = maxWidth * player->GetHP() / player->GetMaxHP();
-	
+
 	this->maxWidth = 100;//最大寬度
 	this->width = maxWidth;//最開始的寬度設為最大寬度
-	
+
 	targetWidth = this->width;//最開始的寬度設為最大寬度
 }
 
@@ -32,21 +32,28 @@ void UIBlood::RefreshTargetWidth()
 
 
 void UIBlood::OnShow() {
-	GameSystem::DrawRectangle(0,0,300,100,RGB(210,210,210));
+	GameSystem::DrawRectangle(0, 0, 300, 100, RGB(210, 210, 210));
 
-	if (targetWidth < width)
+	if (targetWidth < width && width <= maxWidth)
+	{
 		width -= 1;
+	}
+	else if (targetWidth > width && width <= maxWidth)
+	{
+		width += 1;
+	}
 
 	GameSystem::DrawRectangle(x, y, maxWidth, height, RGB(0, 0, 0));//畫血條底部
-	GameSystem::DrawRectangle(x,y,width,height,RGB(0,255,0));//畫血條長度
+	GameSystem::DrawRectangle(x, y, width, height, RGB(255, 0, 0));//畫血條長度
 
 	//顯示UI文字
-	string text = "HP:" + to_string(player->GetHP()) + "\n攻擊力:" + to_string(player->GetAttackDamage());
-	GameSystem::ShowText(text, x + maxWidth + 10, 10, SIZE_X, SIZE_Y, GameSystem::ALIGN_LEFT, GameSystem::ALIGN_TOP,8);
+	string text = "HP:" + to_string(player->GetHP()) + "\n攻擊力:" + to_string(player->GetAttackDamage())
+		+ "\n防禦力:" + to_string(player->GetDefense());
+	GameSystem::ShowText(text, x + maxWidth + 10, 10, SIZE_X, SIZE_Y, GameSystem::ALIGN_LEFT, GameSystem::ALIGN_TOP, 8);
 
 	//顯示UI圖片
 	CMovingBitmap uiPlayer;
-	uiPlayer.LoadBitmap(".\\res\\UIPlayer.bmp",RGB(255,255,255));
+	uiPlayer.LoadBitmap(".\\res\\UIPlayer.bmp", RGB(255, 255, 255));
 	uiPlayer.SetTopLeft(0, 0);
 	uiPlayer.ShowBitmap();
 }

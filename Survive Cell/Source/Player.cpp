@@ -713,13 +713,15 @@ void Player::ShowBitMap()
 
 void Player::ShowInformation()
 {
-	/*string information = "Attack" + to_string(attackDamage)
+	/*
+	string information = "Attack" + to_string(attackDamage)
 		+ "\nAttackSpeed:" + to_string(attackSpeed) + "\nAttackRange:" + to_string(attackRange)
 		+ "\nMoveSpeed:" + to_string(moveSpeed) + "\nDefense:" + to_string(defense)
 		+ "\nUnconquered:" + to_string(isUnconquered)
-		+ "\nHP:" + to_string(HP);*/
+		+ "\nHP:" + to_string(HP);
 
-		//GameSystem::ShowText(information, 0, 0, SIZE_X, SIZE_Y, GameSystem::ALIGN_LEFT, GameSystem::ALIGN_TOP, 8, RGB(0, 0, 0));
+		GameSystem::ShowText(information, 0, 0, SIZE_X, SIZE_Y, GameSystem::ALIGN_LEFT, GameSystem::ALIGN_TOP, 8, RGB(0, 0, 0));
+	*/
 }
 
 void Player::CalculateAbility(PlayerEquipment* equipment)

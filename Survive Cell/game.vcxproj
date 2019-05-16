@@ -254,6 +254,7 @@
     <ClCompile Include="Source\audio.cpp" />
     <ClCompile Include="Source\Boss.cpp" />
     <ClCompile Include="Source\BossBullet.cpp" />
+    <ClCompile Include="Source\BossBullet2.cpp" />
     <ClCompile Include="Source\Buff.cpp" />
     <ClCompile Include="Source\Character.cpp" />
     <ClCompile Include="Source\Demon.cpp" />
@@ -327,6 +328,7 @@
     <ClInclude Include="Source\audio.h" />
     <ClInclude Include="Source\Boss.h" />
     <ClInclude Include="Source\BossBullet.h" />
+    <ClInclude Include="Source\BossBullet2.h" />
     <ClInclude Include="Source\Buff.h" />
     <ClInclude Include="Source\Character.h" />
     <ClInclude Include="Source\Demon.h" />
