@@ -18,7 +18,7 @@ Boss::Boss(string tag, int x, int y, int width, int height) :Monster(tag, x, y, 
 	tag = "Monster";
 
 	maxHP = 10000;
-	HP = maxHP;
+	HP = maxHP / 2;
 	aniDelay = 10;
 	moveSpeed = 3;
 

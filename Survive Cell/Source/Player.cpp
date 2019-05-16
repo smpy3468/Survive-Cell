@@ -27,7 +27,7 @@ Player::Player(string tag, int x, int y, int width, int height) :Character(tag, 
 {
 	tag = "Player";
 
-	maxHP = 100;
+	maxHP = 1000;
 	HP = maxHP;
 
 	originWidth = width;

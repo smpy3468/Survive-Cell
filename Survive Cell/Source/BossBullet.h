@@ -22,8 +22,10 @@ private:
 
 	Player * player = GameSystem::GetGameObjectWithType<Player>();//玩家
 
+	int originX, originY;//原始座標
 	int targetX, targetY;//目標座標
 	int distanceX, distanceY;//與目標的距離
+	int dx, dy;//x,y位移量
 	int moveSpeed;//移動速度
 
 	int attackDamage;//攻擊傷害
