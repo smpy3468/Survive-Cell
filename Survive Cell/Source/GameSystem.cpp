@@ -212,11 +212,16 @@ void GameSystem::ShowAllObject()//顯示所有物件
 {
 	for (auto& i : gameObjectList)
 	{
-		int k = i->GetY();
+		string k = i->GetTag();
+		bool i1 = i->GetX() <= Map::GetSX() + SIZE_X;
+		bool i2 = i->GetX() + i->GetWidth() >= Map::GetSX();
+		bool i3 = i->GetY() <= Map::GetSY() + SIZE_Y;
+		int iy = i->GetY();
+		bool i4 = i->GetY() + i->GetHeight() >= Map::GetSY();
 		if (i->GetX() <= Map::GetSX() + SIZE_X
 			&& i->GetX() + i->GetWidth() >= Map::GetSX()
 			&& i->GetY() <= Map::GetSY() + SIZE_Y
-			&& i->GetY() + i->GetHeight() >= Map::GetSY())//只顯示在畫面中的物件
+ 			&& i->GetY() + i->GetHeight() >= Map::GetSY())//只顯示在畫面中的物件
 			i->ShowBitMap();
 	}
 }
@@ -422,11 +427,11 @@ double GameSystem::Rand(double minValue, double maxValue)
 void GameSystem::CreatStage1Object()
 {
 	Init();
-
 	AddGameObject(new Player("Player", 80, 80, 50, 80));
 	Player* player = GetGameObjectWithTag<Player>("Player");
 	Map::SetSX(player->GetX() - SIZE_X / 2);
 	Map::SetSY(player->GetY() - SIZE_Y / 2);
+
 
 	AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 355, Map::WORLD_SIZE_X, 355, IDB_GROUND));
 
@@ -435,8 +440,9 @@ void GameSystem::CreatStage1Object()
 		//CreateFloor(stage1Floor[i][0], stage1Floor[i][1], stage1Floor[i][2], stage1Floor[i][3]);
 		GameSystem::AddGameObject(new Floor("Floor", stage1Floor[i][0], stage1Floor[i][1], stage1Floor[i][2], stage1Floor[i][3]));
 	}
+	
+	AddGameObject(new Treasure("Treasure", 400, 1388, 250, 187, 0,10, 0, 10));
 
-	AddGameObject(new Treasure("Item", 400, 1388, 250, 187, 0, 2, 0, 10));
 	AddGameObject(new Door("Door", 530, 480, 12, 120));//門
 	AddGameObject(new Door("Door", 1315, 260, 12, 120));//門
 	AddGameObject(new Door("Door", 2330, 1445, 12, 120));//門

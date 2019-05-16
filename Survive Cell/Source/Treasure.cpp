@@ -4,7 +4,7 @@
 Treasure::Treasure(string tag, int x, int y, int width, int height, int damageMin, int damageMax, int defenseMin, int defenseMax) :Item(tag, x, y, width, height)
 {
 	tag = "Treasure";
-	SetY(y);
+	SetY(y); //不加這行Y軸會在某個地方被改到
 	LoadAni();
 	this->damageMin = damageMin;
 	this->damageMax = damageMax;
@@ -38,14 +38,14 @@ void Treasure::GenWeapon(int damageMin, int damageMax, int defenseMin, int defen
 		if (type == 0)
 		{
 			GameSystem::AddGameObject(new Potion("Potion", x + 10 * i, y, 20, 10)); 
-			//GameSystem::AddGameObject(new ItemTraditionalSword("ItemWeapon", x +  16* i, y + height, 32, 32, 0, 0)); // 16 = 32(width) / 2 
+			 
 		}
 		else if (type >= 1)
 		{
-			//int damage = static_cast<int>(GameSystem::Rand((double)damageMin, (double)damageMax));
-			//int defense = static_cast<int>(GameSystem::Rand((double)defenseMin, (double)defenseMax));
-			GameSystem::AddGameObject(new ItemTraditionalSword("ItemWeapon", x + 16* i, y + height, 32, 32, 0, 0));
+			int damage = static_cast<int>(GameSystem::Rand(damageMin, damageMax));
+			int defense = static_cast<int>(GameSystem::Rand(defenseMin, defenseMax));
+			GameSystem::AddGameObject(new ItemTraditionalSword("ItemWeapon", x + 16* i, y, 32, 32, damage, defense));
 		}
-		//GameSystem::AddGameObject(new ItemTraditionalSword("ItemWeapon", x , y, 32, 32, 0, 0));
+
 	}
 }
