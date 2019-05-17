@@ -51,25 +51,25 @@ void Boss::Act()
 	{
 	case STATE_IDLE://靜止
 
+		if (player->GetX() + player->GetWidth() / 2 - (x + width / 2) < 0)//玩家在左邊
+			faceLR = FACE_LEFT;//面向左邊
+		else
+			faceLR = FACE_RIGHT;//面相右邊
+
 		//faceLR = static_cast<int>(GameSystem::Rand(2));
 
 		//if (ani[currentAni]->IsEnd())//播完動畫後
-	{
-		currentState = RandomState();//隨機改變狀態
-
-		if (currentState == STATE_JUMP)//下一個狀態是跳躍時，紀錄玩家跟BOSS的距離
 		{
-			playerDistanceX = player->GetX() - x;
-			playerDistanceY = player->GetY() - y;
+			currentState = RandomState();//隨機改變狀態
+
+			if (currentState == STATE_JUMP)//下一個狀態是跳躍時，紀錄玩家跟BOSS的距離
+			{
+				playerDistanceX = player->GetX() - x;
+				playerDistanceY = player->GetY() - y;
+			}
 		}
-	}
 
-	if (player->GetX() - x < 0)//玩家在左邊
-		faceLR = FACE_LEFT;//面向左邊
-	else
-		faceLR = FACE_RIGHT;//面相右邊
-
-	break;
+		break;
 	case STATE_MOVE://移動
 		if (faceLR == FACE_LEFT)
 		{

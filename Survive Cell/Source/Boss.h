@@ -39,7 +39,7 @@ private:
 	int RandomState();//決定隨機狀態
 	int currentState = 0;//目前狀態
 	int nearAttackRange = SIZE_X / 5;//近攻擊距離
-	int farAttackRange = SIZE_X * 4 / 5;//遠攻擊距離
+	int farAttackRange = SIZE_X * 2 / 3;//遠攻擊距離
 	int playerDistanceX, playerDistanceY;//玩家跟BOSS的距離
 
 	enum STATE
