@@ -44,7 +44,7 @@ Player::Player(string tag, int x, int y, int width, int height) :Character(tag, 
 	originRollDisplacement = 15;
 	rollDisplacement = originRollDisplacement;
 
-	attackRange = 3;
+	attackRange = 10;
 	attackDamage = 10;
 	attackSpeed = 5;
 	defense = 0;

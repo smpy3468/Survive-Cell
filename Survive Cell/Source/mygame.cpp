@@ -178,7 +178,7 @@ namespace game_framework {
 	{
 		Player& player = *(GameSystem::GetGameObjectWithTag<Player>("Player"));
 		player.AdjustPositionOnBegin();
-		GameSystem::SetIsNextStage(true);
+		//GameSystem::SetIsNextStage(true);
 		if (GameSystem::IsNextStage()) {
 			ShowInitProgress(30);				//´«Ãö¥dªºLoading
 			Sleep(300);							//Delay

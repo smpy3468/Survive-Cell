@@ -90,7 +90,14 @@ void BossBullet::LoadAni()
 	for (int i = 0; i < 8; i++)
 	{
 		//將檔名串接底線+編號+副檔名
-		string sPic = ".\\res\\boss_bullet";
+
+		string sPic = "";
+		
+		if(boss->GetPhase() == 1)//第一階段的圖
+			sPic = ".\\res\\boss_bullet";
+		else if(boss->GetPhase() == 2)//第二階段的圖
+			sPic = ".\\res\\boss_bullet2";
+
 		sPic += "_" + to_string(i) + ".bmp";
 
 		//轉成c-string
