@@ -249,6 +249,7 @@ void Player::Act()//行動
 		Fall();
 	currentState = nextState;*/
 
+
 	if (isRoll == true || isSquat)//翻滾中或蹲下中不能攻擊
 		isAttack = false;
 

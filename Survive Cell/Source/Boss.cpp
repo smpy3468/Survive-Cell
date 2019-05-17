@@ -170,8 +170,10 @@ void Boss::Jump()
 {
 	if (jumpDisplacement-- > 0)//跳躍位移量隨時間遞減
 	{
-		int dx = static_cast<int>(5 * moveSpeed * playerDistanceX / sqrt(pow(playerDistanceX, 2) + pow(playerDistanceY, 2)));//向玩家跳躍
-		Move(dx, -jumpDisplacement);//向上位移，並向玩家方向跳躍
+		if (jumpMode == JUMP_BACK)//在近處
+			JumpBack();//向後跳
+		else if (jumpMode == JUMP_FRONT)//在遠方
+			JumpFront();//向前跳
 	}
 	else
 	{
@@ -194,16 +196,22 @@ void Boss::Jump()
 
 void Boss::Move(int dx, int dy)
 {
-	this->x += dx;
-	this->y += dy;
+	if (x + dx >= 0 && x + dx < Map::WORLD_SIZE_X)//在地圖範圍內
+		this->x += dx;
+	if (y + dy >= 0 && y + dy < Map::WORLD_SIZE_Y)//在地圖範圍內
+		this->y += dy;
 }
 
 void Boss::JumpBack()
 {
+	int dx = static_cast<int>(-5 * moveSpeed * playerDistanceX / abs(playerDistanceX));//向玩家反方向跳躍
+	Move(dx, -jumpDisplacement);//向上位移，並向玩家方向跳躍
 }
 
 void Boss::JumpFront()
 {
+	int dx = static_cast<int>(5 * moveSpeed * playerDistanceX / sqrt(pow(playerDistanceX, 2) + pow(playerDistanceY, 2)));//向玩家跳躍
+	Move(dx, -jumpDisplacement);//向上位移，並向玩家方向跳躍
 }
 
 void Boss::InstantDeath()
@@ -213,10 +221,16 @@ void Boss::InstantDeath()
 int Boss::RandomState()
 {
 	if (InNear())//近距離
+	{
 		ChangeStateProb(nearStateProb);//變為近距攻擊狀態
+		jumpMode = JUMP_BACK;//向後跳
+	}
 
 	else if (InFar())//遠距離
+	{
 		ChangeStateProb(farStateProb);//變為遠距攻擊狀態
+		jumpMode = JUMP_FRONT;
+	}
 
 	else//超過遠距離攻擊範圍，BOSS不再攻擊玩家
 		ChangeStateProb(originStateProb);//原始狀態
@@ -232,7 +246,8 @@ int Boss::RandomState()
 
 void Boss::ChangeStateProb(unsigned int newStateProb[])//改變各項狀態機率
 {
-	memset(cumStateProb, 0, sizeof(cumStateProb[0]));//重置累計機率為0
+	for (int i = 0; i < STATE_LENGTH; i++)//重置累計機率為0
+		cumStateProb[i] = 0;
 
 	for (int i = 0; i < STATE_LENGTH; i++)
 	{
@@ -245,10 +260,7 @@ void Boss::ChangeStateProb(unsigned int newStateProb[])//改變各項狀態機率
 
 bool Boss::InNear()
 {
-	if (player->GetX() + player->GetWidth() > this->x - nearAttackRange
-		&& player->GetX() < this->x + this->width + nearAttackRange
-		&& player->GetY() + player->GetHeight() > this->y + this->height / 2
-		&& player->GetY() < this->y + this->height)//近距離
+	if (sqrt(pow(player->GetX() + player->GetWidth() / 2 - (x + width / 2), 2) + pow(player->GetY() + player->GetHeight() / 2 - (y + height / 2), 2)) < nearAttackRange)//近距離
 		return true;
 	else
 		return false;
@@ -256,10 +268,7 @@ bool Boss::InNear()
 
 bool Boss::InFar()
 {
-	if (player->GetX() + player->GetWidth() > this->x - farAttackRange
-		&& player->GetX() < this->x + this->width + farAttackRange
-		&& player->GetY() + player->GetHeight() > this->y + this->height / 2
-		&& player->GetY() < this->y + this->height)//遠距離
+	if (sqrt(pow(player->GetX() + player->GetWidth() / 2 - (x + width / 2), 2) + pow(player->GetY() + player->GetHeight() / 2 - (y + height / 2), 2)) < farAttackRange)//遠距離
 		return true;
 	else
 		return false;

@@ -31,13 +31,15 @@ private:
 	void NearSlash();//砍
 	void JumpBack();//往後跳
 	void JumpFront();//往前跳
+	const int JUMP_FRONT = 0, JUMP_BACK = 1;
+	int jumpMode;//跳躍模式
 	void FarShoot();//遠程攻擊
 	void InstantDeath();//即死技能
 
 	int RandomState();//決定隨機狀態
 	int currentState = 0;//目前狀態
-	int nearAttackRange = 50;//近攻擊距離
-	int farAttackRange = SIZE_X / 2;//遠攻擊距離
+	int nearAttackRange = SIZE_X / 5;//近攻擊距離
+	int farAttackRange = SIZE_X * 4 / 5;//遠攻擊距離
 	int playerDistanceX, playerDistanceY;//玩家跟BOSS的距離
 
 	enum STATE
@@ -56,8 +58,8 @@ private:
 	//各種狀態的機率，數字越大機率越高
 
 	unsigned int originStateProb[STATE_LENGTH] = { 1,30,0,0,0 };//原始機率，玩家不在攻擊範圍內時套用
-	unsigned int farStateProb[STATE_LENGTH] = { 1,5,0,30,10 };//遠距離時的機率
-	unsigned int nearStateProb[STATE_LENGTH] = { 1,5,30,5,10 };//近距離時的機率
+	unsigned int farStateProb[STATE_LENGTH] = { 0,0,0,30,10 };//遠距離時的機率
+	unsigned int nearStateProb[STATE_LENGTH] = { 0,0,30,0,10 };//近距離時的機率
 	bool InNear();//在近距攻擊範圍內
 	bool InFar();//在遠距攻擊範圍內
 
