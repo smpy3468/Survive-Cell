@@ -14,7 +14,7 @@ Portal::Portal(string tag, int x, int y, int width, int height, int number) :Gam
 
 Portal::~Portal() 
 {
-	//delete ani;
+	delete ani;
 }
 
 int Portal::GetConnectedNumber()

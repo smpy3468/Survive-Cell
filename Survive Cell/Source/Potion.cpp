@@ -8,6 +8,7 @@ Potion::Potion()
 
 Potion::~Potion()
 {
+
 }
 
 Potion::Potion(string tag, int x, int y, int width, int height) :Item(tag, x, y, width, height)

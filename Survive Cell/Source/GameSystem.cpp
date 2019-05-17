@@ -428,6 +428,7 @@ double GameSystem::Rand(double minValue, double maxValue)
 
 void GameSystem::CreatStage1Object()
 {
+	
 	Init();
 	AddGameObject(new Player("Player", 80, 80, 50, 80));
 	Player* player = GetGameObjectWithTag<Player>("Player");
@@ -451,17 +452,15 @@ void GameSystem::CreatStage1Object()
 	AddGameObject(new Door("Door", 3420, 480, 12, 120));//ªù
 	AddGameObject(new Goal("Goal", 3510, 1353, 143, 212));
 	AddGameObject(new Portal("Portal", 100, 480, 80, 120, 100));
-	//AddGameObject(new Portal("Portal", 500, 480, 80, 120, 0));
 	AddGameObject(new Portal("Portal", GetGameObjectWithType<Goal>()->GetX() - 300, GetGameObjectWithType<Goal>()->GetY(), 80, 120, 0));
-
+	
 	AddGameObject(new Demon("Monster", 100, 100, 110, 158));
-	//AddGameObject(new Boss("Monster", SIZE_X / 2, SIZE_Y / 2, 180, 280));
 
 	AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10 - 100, SIZE_Y * 9 / 10, 64, 60));
 	AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10 - 10, SIZE_Y * 9 / 10, 64, 60));
 	AddUserInterface(new UIBlood("UIBlood", 0, SIZE_Y - 30, 400, 30));
 	AddUserInterface(new UIMonsterBlood("UIMonster", 0, 0, 0, 0));
-
+	
 	Map::SetStaticObject();
 }
 

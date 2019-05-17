@@ -183,9 +183,6 @@
     <ClCompile Include="Source\Boss.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Portal.cpp">
-      <Filter>MFC</Filter>
-    </ClCompile>
     <ClCompile Include="Source\BossBullet.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
@@ -193,6 +190,9 @@
       <Filter>MyGame</Filter>
     </ClCompile>
     <ClCompile Include="Source\BossBullet2.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Portal.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
   </ItemGroup>
@@ -305,9 +305,6 @@
     <ClInclude Include="Source\Boss.h">
       <Filter>MyGame</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Portal.h">
-      <Filter>MFC</Filter>
-    </ClInclude>
     <ClInclude Include="Source\BossBullet.h">
       <Filter>MyGame</Filter>
     </ClInclude>
@@ -315,6 +312,9 @@
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\BossBullet2.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Portal.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>

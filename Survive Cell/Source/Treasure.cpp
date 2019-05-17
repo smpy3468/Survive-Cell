@@ -4,7 +4,7 @@
 Treasure::Treasure(string tag, int x, int y, int width, int height, int damageMin, int damageMax, int defenseMin, int defenseMax) :Item(tag, x, y, width, height)
 {
 	tag = "Treasure";
-	SetY(y); //不加這行Y軸會在某個地方被改到
+	//SetY(y); //不加這行Y軸會在某個地方被改到
 	LoadAni();
 	this->damageMin = damageMin;
 	this->damageMax = damageMax;
