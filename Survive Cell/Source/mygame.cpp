@@ -73,8 +73,6 @@
 #include "Door.h"
 #include "Goal.h"
 #include "Boss.h"
-#include "ButtonStart.h"
-#include "ButtonExit.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -115,8 +113,8 @@ namespace game_framework {
 			Map::Load();
 			//
 
-			buttonList.push_back(new ButtonStart("ButtonStart", SIZE_X * 3 / 4, SIZE_Y / 2, 100, 50));
-			buttonList.push_back(new ButtonExit("ButtonExit", SIZE_X * 3 / 4, SIZE_Y / 2 + 100, 100, 50));
+			buttonList.push_back(new Button("ButtonStart", SIZE_X * 3 / 4, SIZE_Y / 2, 100, 50, Button::ON_CLICK_START));
+			buttonList.push_back(new Button("ButtonExit", SIZE_X * 3 / 4, SIZE_Y / 2 + 100, 100, 50, Button::ON_CLICK_EXIT));
 
 			isLoaded = true;
 		}
@@ -133,7 +131,7 @@ namespace game_framework {
 
 	void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	{
-		//GotoGameState(GAME_STATE_RUN);
+		GotoGameState(GAME_STATE_RUN);
 	}
 
 	void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point)
@@ -143,12 +141,10 @@ namespace game_framework {
 			if (point.x > i->GetX() && point.x < i->GetX() + i->GetWidth()
 				&& point.y > i->GetY() && point.y < i->GetY() + i->GetHeight())
 			{
-				if (i->GetTag() == "ButtonStart")
-					GotoGameState(GAME_STATE_RUN);
-				else if (i->GetTag() == "ButtonExit")
-				{
-					exit(0);//Ãö³¬
-				}
+				i->OnClick(this->game);
+				
+				/*if (i->GetTag() == "ButtonStart")
+					GotoGameState(GAME_STATE_RUN);*/
 			}
 		}
 	}
