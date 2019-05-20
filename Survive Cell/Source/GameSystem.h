@@ -94,6 +94,16 @@ public:
 		return NULL;
 	}
 
+	template <class T>static T* GetUInterfaceWithType() //取得特定類別的UI(單一個)
+	{
+		for (auto& i : gameUIList)
+		{
+			if (dynamic_cast<T*>(i) != NULL)
+				return dynamic_cast<T*>(i);
+		}
+		return NULL;
+	}
+
 	template <class T>static T* GetUInterfaceWithTag(string tag) //取得特定標籤的遊戲物件(單一個)
 	{
 		for (auto& i : gameUIList) {

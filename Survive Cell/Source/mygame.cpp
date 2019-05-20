@@ -73,6 +73,8 @@
 #include "Door.h"
 #include "Goal.h"
 #include "Boss.h"
+#include "ButtonStart.h"
+#include "ButtonExit.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -82,7 +84,16 @@ namespace game_framework {
 	CGameStateInit::CGameStateInit(CGame *g)
 		: CGameState(g)
 	{
-		
+
+	}
+
+	CGameStateInit::~CGameStateInit()
+	{
+		for (unsigned int i = 0; i < buttonList.size(); i++)
+		{
+			delete buttonList[i];
+			buttonList.erase(buttonList.begin() + i);
+		}
 	}
 
 	void CGameStateInit::OnInit()
@@ -92,29 +103,65 @@ namespace game_framework {
 
 	void CGameStateInit::OnBeginState()
 	{
-		//OnInit
-		GameSystem::Load();
-		Map::Load();
-		//
+		Load();//載入
 
 		GameSystem::CreatStage1Object();
 		GameSystem::StopAudio(GameSystem::AUDIO_GAME_OVER);//停止遊戲中的音樂
 		GameSystem::PlayAudio(GameSystem::AUDIO_GAME_INIT);//播放遊戲結束的音樂
 	}
 
+	void CGameStateInit::Load()
+	{
+		if (isLoaded == false)
+		{
+			//OnInit
+			GameSystem::Load();
+			Map::Load();
+			//
+
+			buttonList.push_back(new ButtonStart("ButtonStart", SIZE_X * 3 / 4, SIZE_Y / 2, 100, 50));
+			buttonList.push_back(new ButtonExit("ButtonExit", SIZE_X * 3 / 4, SIZE_Y / 2 + 100, 100, 50));
+
+			isLoaded = true;
+		}
+	}
+
 	void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	{
-		GotoGameState(GAME_STATE_RUN);
+		//GotoGameState(GAME_STATE_RUN);
 	}
 
 	void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point)
 	{
-		
+		for (auto& i : buttonList)
+		{
+			if (point.x > i->GetX() && point.x < i->GetX() + i->GetWidth()
+				&& point.y > i->GetY() && point.y < i->GetY() + i->GetHeight())
+			{
+				if (i->GetTag() == "ButtonStart")
+					GotoGameState(GAME_STATE_RUN);
+				else if (i->GetTag() == "ButtonExit")
+					exit(0);//關閉
+			}
+		}
 	}
 
 	void CGameStateInit::OnShow()
 	{
-		Map::ShowStartMenu();		
+		Map::ShowStartMenu();
+
+		for (auto& i : buttonList)
+		{
+			i->SetBitMapPosition();
+			i->ShowBitMap();
+		}
+
+		/*Button* buttonStart = GameSystem::GetUInterfaceWithType<ButtonStart>();
+		Button* buttonExit = GameSystem::GetUInterfaceWithType<ButtonExit>();
+		buttonStart->SetBitMapPosition();
+		buttonExit->SetBitMapPosition();
+		buttonStart->ShowBitMap();
+		buttonExit->ShowBitMap();*/
 	}
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -158,7 +205,7 @@ namespace game_framework {
 		GameSystem::ShowText(text, 0, 0, SIZE_X, SIZE_Y, GameSystem::ALIGN_CENTER, GameSystem::ALIGN_CENTER, 16
 			, RGB(255 * (originCountDown - countDown) / originCountDown, 255 * (originCountDown - countDown) / originCountDown, 255 * (originCountDown - countDown) / originCountDown));
 
-		if(countDown <= 0)
+		if (countDown <= 0)
 			countDown = originCountDown;
 	}
 

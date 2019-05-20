@@ -20,7 +20,8 @@ UInterface::~UInterface()
 }
 
 UInterface::UInterface(string tag, int x, int y, int width, int height){
-	this->tag = "UInterface";
+	//this->tag = "UInterface";
+	this->tag = tag;
 	this->x = x;
 	this->y = y;
 	this->width=width;

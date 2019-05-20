@@ -37,6 +37,8 @@
  *      2. Replace the demonstration of animation as a new bouncing ball.
  *      3. Use ShowInitProgress(percent) to display loading progress.
 */
+#include "ButtonStart.h"
+#include "ButtonExit.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -57,6 +59,7 @@ namespace game_framework {
 	class CGameStateInit : public CGameState {
 	public:
 		CGameStateInit(CGame *g);
+		~CGameStateInit();
 		void OnInit();  								// 遊戲的初值及圖形設定
 		void OnBeginState();							// 設定每次重玩所需的變數
 		void OnKeyUp(UINT, UINT, UINT); 				// 處理鍵盤Up的動作
@@ -64,6 +67,9 @@ namespace game_framework {
 	protected:
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
+		void Load();//載入
+		bool isLoaded = false;//是否已載入
+		vector<Button*> buttonList;//按鈕列表
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
