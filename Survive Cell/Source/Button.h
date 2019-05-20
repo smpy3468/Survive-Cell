@@ -10,7 +10,7 @@ class Button:public UInterface
 public:
 	Button();
 	Button(string tag, int x, int y, int width, int height);
-	~Button();
+	virtual ~Button();
 
 	void Dead();
 	virtual void OnClick();

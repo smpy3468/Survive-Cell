@@ -89,11 +89,7 @@ namespace game_framework {
 
 	CGameStateInit::~CGameStateInit()
 	{
-		for (unsigned int i = 0; i < buttonList.size(); i++)
-		{
-			delete buttonList[i];
-			buttonList.erase(buttonList.begin() + i);
-		}
+		Dead();
 	}
 
 	void CGameStateInit::OnInit()
@@ -126,6 +122,15 @@ namespace game_framework {
 		}
 	}
 
+	void CGameStateInit::Dead()
+	{
+		for (unsigned int i = 0; i < buttonList.size();)
+		{
+			delete buttonList[i];
+			i++;
+		}
+	}
+
 	void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	{
 		//GotoGameState(GAME_STATE_RUN);
@@ -141,7 +146,9 @@ namespace game_framework {
 				if (i->GetTag() == "ButtonStart")
 					GotoGameState(GAME_STATE_RUN);
 				else if (i->GetTag() == "ButtonExit")
+				{
 					exit(0);//Ãö³¬
+				}
 			}
 		}
 	}

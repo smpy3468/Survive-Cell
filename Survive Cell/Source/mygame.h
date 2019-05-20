@@ -68,6 +68,7 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		void Load();//載入
+		void Dead();//離開遊戲時用到
 		bool isLoaded = false;//是否已載入
 		vector<Button*> buttonList;//按鈕列表
 	};

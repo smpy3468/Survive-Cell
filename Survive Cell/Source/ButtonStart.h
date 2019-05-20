@@ -10,7 +10,7 @@ class ButtonStart:public Button
 public:
 	ButtonStart();
 	ButtonStart(string tag, int x, int y, int width, int height);
-	~ButtonStart();
+	~ButtonStart()override;
 
 	void OnClick()override;
 
