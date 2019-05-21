@@ -257,6 +257,7 @@
     <ClCompile Include="Source\BossBullet2.cpp" />
     <ClCompile Include="Source\Buff.cpp" />
     <ClCompile Include="Source\Button.cpp" />
+    <ClCompile Include="Source\ButtonOnClickEvent.cpp" />
     <ClCompile Include="Source\Character.cpp" />
     <ClCompile Include="Source\Demon.cpp" />
     <ClCompile Include="Source\Door.cpp" />
@@ -332,6 +333,7 @@
     <ClInclude Include="Source\BossBullet2.h" />
     <ClInclude Include="Source\Buff.h" />
     <ClInclude Include="Source\Button.h" />
+    <ClInclude Include="Source\ButtonOnClickEvent.h" />
     <ClInclude Include="Source\Character.h" />
     <ClInclude Include="Source\Demon.h" />
     <ClInclude Include="Source\Door.h" />
