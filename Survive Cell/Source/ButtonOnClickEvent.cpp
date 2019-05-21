@@ -13,7 +13,7 @@ ButtonOnClickEvent::~ButtonOnClickEvent()
 
 void ButtonOnClickEvent::OnClickStart(CGame* c)
 {
-	c->Instance()->SetGameState(GAME_STATE_RUN);
+	c->Instance()->SetGameState(GAME_STATE_RUN);//按下開始，切換到GAME_STATE_RUN
 }
 
 void ButtonOnClickEvent::OnClickExit(CGame* c)

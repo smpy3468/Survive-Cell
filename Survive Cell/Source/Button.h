@@ -11,7 +11,7 @@ class Button :public UInterface
 public:
 	Button();
 	Button(string tag, int x, int y, int width, int height, int onClickEvent);
-	virtual ~Button();
+	~Button();
 
 	void Dead();
 	void (*OnClick)(CGame* c);

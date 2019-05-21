@@ -131,7 +131,7 @@ namespace game_framework {
 
 	void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	{
-		GotoGameState(GAME_STATE_RUN);
+		//GotoGameState(GAME_STATE_RUN);
 	}
 
 	void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point)
@@ -139,12 +139,9 @@ namespace game_framework {
 		for (auto& i : buttonList)
 		{
 			if (point.x > i->GetX() && point.x < i->GetX() + i->GetWidth()
-				&& point.y > i->GetY() && point.y < i->GetY() + i->GetHeight())
+				&& point.y > i->GetY() && point.y < i->GetY() + i->GetHeight())//滑鼠在按鈕上
 			{
-				i->OnClick(this->game);
-				
-				/*if (i->GetTag() == "ButtonStart")
-					GotoGameState(GAME_STATE_RUN);*/
+				i->OnClick(this->game);//執行按鈕事件
 			}
 		}
 	}
@@ -158,13 +155,6 @@ namespace game_framework {
 			i->SetBitMapPosition();
 			i->ShowBitMap();
 		}
-
-		/*Button* buttonStart = GameSystem::GetUInterfaceWithType<ButtonStart>();
-		Button* buttonExit = GameSystem::GetUInterfaceWithType<ButtonExit>();
-		buttonStart->SetBitMapPosition();
-		buttonExit->SetBitMapPosition();
-		buttonStart->ShowBitMap();
-		buttonExit->ShowBitMap();*/
 	}
 
 	/////////////////////////////////////////////////////////////////////////////
