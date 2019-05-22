@@ -41,9 +41,19 @@ Boss::Boss(string tag, int x, int y, int width, int height) :Monster(tag, x, y, 
 
 void Boss::Act()
 {
-	if (static_cast<float>(HP) / maxHP <= 0.5)//血量小於50%，第二階段
+	if (phase <= 1 && static_cast<float>(HP) / maxHP <= 0.5)//血量小於50%，第二階段
 	{
 		phase = 2;
+
+		for (int i = 0; i < ANI_LENGTH; i++)//動畫加速
+			ani[i]->SetDelayCount(aniDelay * 2 / 3);
+	}
+	else if (phase <= 2 && static_cast<float>(HP) / maxHP <= 0.2)//血量小於20%，第三階段
+	{
+		phase = 3;
+
+		for (int i = 0; i < ANI_LENGTH; i++)//動畫加速
+			ani[i]->SetDelayCount(aniDelay / 2);
 	}
 
 	//currentState = STATE_FAR_SHOOT;

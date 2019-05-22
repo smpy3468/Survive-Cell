@@ -78,8 +78,9 @@ private:
 		ANI_JUMP,
 		ANI_FAR_SHOOT_LEFT,
 		ANI_FAR_SHOOT_RIGHT,
-		ANI_GET_HIT_LEFT,
-		ANI_GET_HIT_RIGHT
+		/*ANI_GET_HIT_LEFT,
+		ANI_GET_HIT_RIGHT,*/
+		ANI_LENGTH
 	};
 
 	int phase = 1;//¶¥¬q
