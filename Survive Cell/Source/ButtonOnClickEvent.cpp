@@ -1,14 +1,20 @@
 #include "StdAfx.h"
 #include "ButtonOnClickEvent.h"
 
-vector<void(*)(CGame*)> ButtonOnClickEvent::onClickEventList = {&OnClickStart,&OnClickExit};
+map<int, void(*)(CGame*)> ButtonOnClickEvent::onClickEventList =
+{
+	{ON_CLICK_START,&OnClickStart},
+	{ON_CLICK_EXIT,&OnClickExit}
+};
 
 ButtonOnClickEvent::ButtonOnClickEvent()
 {
+
 }
 
 ButtonOnClickEvent::~ButtonOnClickEvent()
 {
+
 }
 
 void ButtonOnClickEvent::OnClickStart(CGame* c)

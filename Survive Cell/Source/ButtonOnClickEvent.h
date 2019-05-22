@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Map>
 #include "UInterface.h"
 
 //ButtonOnClickEvent
@@ -21,7 +22,7 @@ public:
 		ON_CLICK_LENGTH
 	};
 
-	static vector<void(*)(CGame*)> onClickEventList;//儲存按鈕事件的函數指標
+	static map<int,void(*)(CGame*)> onClickEventList;//儲存按鈕事件的函數指標
 private:
 	
 };
