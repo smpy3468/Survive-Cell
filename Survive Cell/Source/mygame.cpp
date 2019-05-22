@@ -193,17 +193,29 @@ namespace game_framework {
 	void CGameStateOver::OnShow()
 	{
 		string text;
-		
-		for (int i = 0; i < countDown; i += 3)
-		{
-			if (GameSystem::GetOverMode() == GameSystem::OVER_LOSE)
-				text += "G";
-			else if (GameSystem::GetOverMode() == GameSystem::OVER_WIN)
-				text += "神";
-		}
 
-		GameSystem::ShowText(text, 0, 0, SIZE_X, SIZE_Y, GameSystem::ALIGN_CENTER, GameSystem::ALIGN_CENTER, 16
-			, RGB(255 * (originCountDown - countDown) / originCountDown, 255 * (originCountDown - countDown) / originCountDown, 255 * (originCountDown - countDown) / originCountDown));
+		if (GameSystem::GetOverMode() == GameSystem::OVER_LOSE)
+		{
+			for (int i = 0; i < countDown; i += 3)
+			{
+				text += "G";
+			}
+
+			GameSystem::ShowText(text, 0, 0, SIZE_X, SIZE_Y, GameSystem::ALIGN_CENTER, GameSystem::ALIGN_CENTER, 16
+				, RGB(255 * (originCountDown - countDown) / originCountDown, 255 * (originCountDown - countDown) / originCountDown, 255 * (originCountDown - countDown) / originCountDown));
+		}
+		else if (GameSystem::GetOverMode() == GameSystem::OVER_WIN)
+		{
+			text += "太神啦";
+
+			int r, g, b;
+			r = static_cast<int>(GameSystem::Rand(255));
+			g = static_cast<int>(GameSystem::Rand(255));
+			b = static_cast<int>(GameSystem::Rand(255));
+
+			GameSystem::DrawRectangle(0, 0, SIZE_X, SIZE_Y, RGB(r, g, b));
+			GameSystem::ShowText(text, 0, 0, SIZE_X, SIZE_Y, GameSystem::ALIGN_CENTER, GameSystem::ALIGN_CENTER, 16, RGB(255 - r, 255 - g, 255 - b));
+		}
 
 		if (countDown <= 0)
 			countDown = originCountDown;
@@ -282,6 +294,8 @@ namespace game_framework {
 		if (nChar == KEY_F)//測試用，按下時加血
 		{
 			player.DecreaseHP(-100);
+			//Boss* boss = GameSystem::GetGameObjectWithType<Boss>();
+			//boss->DecreaseHP(1000);
 		}
 
 		if (nChar == KEY_LEFT)
