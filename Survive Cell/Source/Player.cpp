@@ -269,7 +269,7 @@ void Player::Act()//行動
 		}
 		else if (isRoll == false)
 		{
-			if (this->isSquatKeyDown)//蹲下
+			if (this->isSquatKeyDown && isGetHit == false)//蹲下
 			{
 				//isSquatKeyDown = false;
 				if (isGrounded)
