@@ -176,6 +176,12 @@ void Boss::FarShoot()
 	}
 }
 
+void Boss::Dead()
+{
+	GameSystem::SetGameOver(GameSystem::OVER_WIN);//遊戲結束
+	GameSystem::DeleteGameObject(this);
+}
+
 void Boss::Jump()
 {
 	if (jumpDisplacement-- > 0)//跳躍位移量隨時間遞減

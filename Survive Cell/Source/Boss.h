@@ -17,6 +17,7 @@ public:
 	int GetPhase();//目前階段
 
 private:
+	void Dead()override;//死亡
 
 	void Jump();//跳躍
 	void Fall(int perDisplacement);//掉落

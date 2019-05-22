@@ -193,8 +193,15 @@ namespace game_framework {
 	void CGameStateOver::OnShow()
 	{
 		string text;
+		
 		for (int i = 0; i < countDown; i += 3)
-			text += "G";
+		{
+			if (GameSystem::GetOverMode() == GameSystem::OVER_LOSE)
+				text += "G";
+			else if (GameSystem::GetOverMode() == GameSystem::OVER_WIN)
+				text += "神";
+		}
+
 		GameSystem::ShowText(text, 0, 0, SIZE_X, SIZE_Y, GameSystem::ALIGN_CENTER, GameSystem::ALIGN_CENTER, 16
 			, RGB(255 * (originCountDown - countDown) / originCountDown, 255 * (originCountDown - countDown) / originCountDown, 255 * (originCountDown - countDown) / originCountDown));
 
@@ -238,6 +245,7 @@ namespace game_framework {
 	{
 		if (GameSystem::IsGameOver())//遊戲結束
 			GotoGameState(GAME_STATE_OVER);//跳至遊戲結束狀態
+
 		if (GameSystem::IsNextStage())
 			GotoGameState(GAME_STATE_RUN);
 

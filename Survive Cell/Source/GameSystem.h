@@ -23,8 +23,15 @@ public:
 	static void Init();//初始化
 	static void Exit();//離開遊戲
 
+	enum OVER_MODE
+	{
+		OVER_WIN,
+		OVER_LOSE
+	};
+
+	static int GetOverMode();//取得哪種結束模式
 	static bool IsGameOver();//是否遊戲結束
-	static void SetGameOver();//設定遊戲結束
+	static void SetGameOver(int setOverMode);//設定遊戲結束
 	static bool IsNextStage();
 	static void SetIsNextStage(bool nextStage);
 	static void StagePlusOne();
@@ -200,6 +207,8 @@ private:
 	static vector<UInterface*> gameUIList;//存放所有遊戲UI物件列表
 
 	const static int FLOOR_WIDTH = 20, FLOOR_HEIGHT = 20;
+
+	static int overMode;//以哪種模式結束(玩家死掉?打贏BOSS?)
 	static bool isGameOver;//遊戲是否結束
 	static bool isNextStage;
 	static int  nowStage;

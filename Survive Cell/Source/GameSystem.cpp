@@ -27,6 +27,7 @@
 
 vector<GameObject*> GameSystem::gameObjectList;//初始化物件列表
 vector<UInterface*> GameSystem::gameUIList;//初始化物件列表
+int GameSystem::overMode = GameSystem::OVER_LOSE;
 bool GameSystem::isGameOver = false;
 bool GameSystem::isNextStage = false;
 int  GameSystem::nowStage = 0;
@@ -46,14 +47,20 @@ GameSystem::GameSystem()
 {
 }
 
+int GameSystem::GetOverMode()
+{
+	return overMode;
+}
+
 bool GameSystem::IsGameOver()
 {
 	return isGameOver;
 }
 
-void GameSystem::SetGameOver()
+void GameSystem::SetGameOver(int setOverMode)
 {
 	isGameOver = true;
+	overMode = setOverMode;
 }
 
 
@@ -444,7 +451,7 @@ void GameSystem::CreatStage1Object()
 		GameSystem::AddGameObject(new Floor("Floor", stage1Floor[i][0], stage1Floor[i][1], stage1Floor[i][2], stage1Floor[i][3]));
 	}
 	
-	AddGameObject(new Treasure("Treasure", 400, 1388, 250, 187, 100,100, 0, 10));
+	AddGameObject(new Treasure("Treasure", 400, 1388, 250, 187, 10,100, 0, 10));
 
 	AddGameObject(new Door("Door", 530, 480, 12, 120));//門
 	AddGameObject(new Door("Door", 1315, 260, 12, 120));//門

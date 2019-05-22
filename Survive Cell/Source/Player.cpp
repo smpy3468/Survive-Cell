@@ -737,7 +737,7 @@ void Player::CalculateAbility(PlayerEquipment* equipment)
 
 void Player::Dead()
 {
-	GameSystem::SetGameOver();//遊戲結束
+	GameSystem::SetGameOver(GameSystem::OVER_LOSE);//遊戲結束
 	//GameSystem::DeleteGameObject(this);
 }
 
