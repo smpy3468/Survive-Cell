@@ -87,7 +87,7 @@ void Player::AdjustPositionOnBegin()
 
 void Player::DecreaseHP(int dhp)
 {
-	if (isUnconquered == false)
+	//if (isUnconquered == false)
 	{
 		isGetHit = true;
 		HP -= dhp;
