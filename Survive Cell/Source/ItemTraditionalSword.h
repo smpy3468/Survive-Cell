@@ -20,5 +20,5 @@ class ItemTraditionalSword:public ItemWeapon {
 		//TraditionalSword GetThisEquipment(); //´£¨ÑClass:Equipment¥Î
 		
 		//SwordWave* wave = new SwordWave("SwordWave", x, y, 77, 70, IDB_0);
-		
+
 };

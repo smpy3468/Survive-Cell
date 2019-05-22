@@ -201,6 +201,15 @@
     <ClCompile Include="Source\ButtonOnClickEvent.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ItemWeaponBow.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerBow.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Arrow.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h">
@@ -327,6 +336,15 @@
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\ButtonOnClickEvent.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ItemWeaponBow.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerBow.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Arrow.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>

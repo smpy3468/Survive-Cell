@@ -24,7 +24,6 @@ ItemTraditionalSword::ItemTraditionalSword(string tag, int x, int y, int width, 
 ItemTraditionalSword::ItemTraditionalSword(string tag, int x, int y, int width, int height,int damage, int defense) :ItemWeapon(tag, x, y, width, height) {
 	tag = "ItemWeapon";
 	this->attackDamage = damage;
-	//SetY(y); //不加這行Y軸會在某個地方被改到
 	attackRange = 100;
 	this->defense = defense;
 	LoadAni();

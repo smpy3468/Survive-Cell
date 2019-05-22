@@ -3,6 +3,7 @@
 #include "GameSystem.h"
 #include "Potion.h"
 #include "ItemTraditionalSword.h"
+#include "ItemWeaponBow.h"
 class Treasure :public Item
 {
 public:

@@ -37,14 +37,15 @@ void Treasure::GenWeapon(int damageMin, int damageMax, int defenseMin, int defen
 
 		if (type == 0)
 		{
-			GameSystem::AddGameObject(new Potion("Potion", x + 10 * i, y, 20, 10)); 
-			 
+			//GameSystem::AddGameObject(new Potion("Potion", x + 10 * i, y, 48, 48)); 
+			GameSystem::AddGameObject(new ItemWeaponBow("ItemWeapon", x + 10 * i, y, 48, 48));
 		}
 		else if (type >= 1)
 		{
 			int damage = static_cast<int>(GameSystem::Rand(damageMin, damageMax));
 			int defense = static_cast<int>(GameSystem::Rand(defenseMin, defenseMax));
-			GameSystem::AddGameObject(new ItemTraditionalSword("ItemWeapon", x + 16* i, y, 32, 32, damage, defense));
+			//GameSystem::AddGameObject(new ItemTraditionalSword("ItemWeapon", x + 16* i, y, 32, 32, damage, defense));
+			GameSystem::AddGameObject(new ItemWeaponBow("ItemWeapon", x + 10 * i, y, 48, 48));
 		}
 
 	}

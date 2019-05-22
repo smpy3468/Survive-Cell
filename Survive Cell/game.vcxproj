@@ -251,6 +251,7 @@
     <None Include="res\Toolbar.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Arrow.cpp" />
     <ClCompile Include="Source\audio.cpp" />
     <ClCompile Include="Source\Boss.cpp" />
     <ClCompile Include="Source\BossBullet.cpp" />
@@ -263,6 +264,8 @@
     <ClCompile Include="Source\Door.cpp" />
     <ClCompile Include="Source\Effect.cpp" />
     <ClCompile Include="Source\Goal.cpp" />
+    <ClCompile Include="Source\ItemWeaponBow.cpp" />
+    <ClCompile Include="Source\PlayerBow.cpp" />
     <ClCompile Include="Source\PlayerEquipment.cpp" />
     <ClCompile Include="Source\EquipedSlot.cpp" />
     <ClCompile Include="Source\Fire.cpp" />
@@ -327,6 +330,7 @@
     <ClCompile Include="Source\ItemWeapon.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Arrow.h" />
     <ClInclude Include="Source\audio.h" />
     <ClInclude Include="Source\Boss.h" />
     <ClInclude Include="Source\BossBullet.h" />
@@ -347,6 +351,8 @@
     <ClInclude Include="Source\GameSystem.h" />
     <ClInclude Include="Source\gameView.h" />
     <ClInclude Include="Source\Goal.h" />
+    <ClInclude Include="Source\ItemWeaponBow.h" />
+    <ClInclude Include="Source\PlayerBow.h" />
     <ClInclude Include="Source\PlayerTradationalSword.h" />
     <ClInclude Include="Source\PlayerEquipment.h" />
     <ClInclude Include="Source\PlayerWeapon.h" />
