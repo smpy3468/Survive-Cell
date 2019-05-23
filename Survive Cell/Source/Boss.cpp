@@ -41,7 +41,7 @@ Boss::Boss(string tag, int x, int y, int width, int height) :Monster(tag, x, y, 
 
 void Boss::Act()
 {
-	if (phase <= 1 && static_cast<float>(HP) / maxHP <= 0.5)//血量小於50%，第二階段
+	if (phase <= 1 && static_cast<float>(HP) / maxHP <= 0.5)//血量小於50 %，第二階段
 	{
 		phase = 2;
 

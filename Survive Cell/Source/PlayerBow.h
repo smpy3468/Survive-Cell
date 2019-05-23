@@ -11,11 +11,8 @@ public:
 	void ShowBitMap()override;
 	void SetXY(int hostX, int hostY, int playerCurrentAni, int  playerAniNumber)override;
 private:
-	void ShowArrow();
-	void CleanArrow(Arrow* arrow);
-	void CleanArrowList();
 	void LoadAni()override;
-	vector <Arrow*> arrowList;
+	bool isShoot;	//每次攻擊射一發
 	enum ANI {
 		ANI_IDLE = 0,
 		ANI_LEFT,

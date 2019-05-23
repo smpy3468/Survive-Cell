@@ -8,10 +8,10 @@ Arrow::Arrow(string tag, int x, int y, int width, int height) :Effect(tag, x, y,
 	currentAni = ANI_ARROW_IDLE;
 	this->direction = ANI_ATTACK_LEFT;
 	LoadBitMap(".\\res\\arrow.bmp");
-	targetX = x + 300;
-	targetY = y + 20;
+	initX = x + 300;
+	initY = y + 20;
 	dX = 25;
-	dY = 5;
+	dY =  0;
 }
 
 Arrow::Arrow(string tag, int x, int y, int width, int height, int attackRange, int direction) :Effect(tag, x, y, width, height) {
@@ -20,40 +20,43 @@ Arrow::Arrow(string tag, int x, int y, int width, int height, int attackRange, i
 	SetBitMapPosition();
 	currentAni = ANI_ARROW_IDLE;
 	LoadBitMap(".\\res\\arrow.bmp");
-	this->targetX = 0;
-	this->targetY = 0;
+	this->initX = x;
+	this->initY = y;
 	this->direction = direction;
 	this->dX = 25;
-	this->dY = 5;
+	this->dY = 0;
 }
 
 Arrow::~Arrow()
 {
 }
 
+
+
 void Arrow::ShowBitMap() {
-	if (direction == ANI_ATTACK_LEFT&& CanMoveLeft(dX)&& CanMoveDown(dY))
+	Fall();
+	if (direction == ANI_ATTACK_LEFT&& CanMoveLeft(dX)&& CanMoveDown(dY) && isHit == false)
 	{
 		currentAni = ANI_ARROW_LEFT;
 		x = x - dX;
 		y = y + dY;
 		SetBitMapPosition();
 		ani[currentAni]->OnShow();
+		EffectAttackMonster(player->GetAttackDamage());
 	}
-	else if (direction == ANI_ATTACK_RIGHT && CanMoveRight(dX) && CanMoveDown(dY))
+	else if (direction == ANI_ATTACK_RIGHT && CanMoveRight(dX) && CanMoveDown(dY) && isHit == false)
 	{
 		currentAni = ANI_ARROW_RIGHT;
 		x = x + dX;
 		y = y + dY;
 		SetBitMapPosition();
 		ani[currentAni]->OnShow();
+		EffectAttackMonster(player->GetAttackDamage());
 	}
-	else if((x >= targetX && y >= targetY)|| (CanMoveRight(dX) || CanMoveDown(dY))){
+	else if((CanMoveRight(dX) || CanMoveDown(dY))){
 		Dead();
 	}
-	//SetBitMapPosition();
-	//ani[currentAni]->OnShow();
-	EffectAttackMonster(player->GetAttackDamage());
+
 }
 
 void Arrow::LoadAni() {
@@ -65,4 +68,10 @@ void Arrow::LoadAni() {
 
 	char* aniArrow_right[3] = { ".\\res\\arrow.bmp", ".\\res\\arrow.bmp",".\\res\\arrow.bmp" };
 	AddAniBitMaps(aniArrow_right, ANI_ARROW_RIGHT, 3);
+}
+
+void Arrow :: Fall()
+{
+	if (x - initX >= 200)		//如果箭已經飛了一段距離(150)就開始下降
+		dY = dY + 1;
 }

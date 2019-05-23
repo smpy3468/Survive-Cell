@@ -3,7 +3,7 @@
 
 PlayerBow::~PlayerBow()
 {
-	CleanArrowList();
+
 }
 
 PlayerBow::PlayerBow(ItemWeapon* rhs) :PlayerWeapon(rhs)
@@ -12,6 +12,7 @@ PlayerBow::PlayerBow(ItemWeapon* rhs) :PlayerWeapon(rhs)
 	SetY(player->GetY());
 	LoadAni();
 	haveEffect = true;
+	isShoot = false;
 }
 
 void PlayerBow::SetXY(int hostX, int hostY, int playerCurrentAni, int  playerAniNumber)
@@ -24,35 +25,21 @@ void PlayerBow::SetXY(int hostX, int hostY, int playerCurrentAni, int  playerAni
 
 void PlayerBow::ShowBitMap()
 {	
-	if((playerCurrentAni == ANI_ATTACK_LEFT || playerCurrentAni == ANI_ATTACK_RIGHT) && playerAniNumber==2){
-		arrowList.push_back(new Arrow("Arrow", x, y, 48, 48, 300, playerCurrentAni));
+	if((playerCurrentAni == ANI_ATTACK_LEFT || playerCurrentAni == ANI_ATTACK_RIGHT) && playerAniNumber==2 && isShoot == false){		//增加arrow物件
+		isShoot = true;
+		GameSystem::AddGameObject(new Arrow("Arrow", x, y, 48, 48, 300, playerCurrentAni));
 	}
-	ShowArrow();
+	else if (playerAniNumber == 0 && isShoot == true)
+	{
+		isShoot = false;
+	}
+
 	SetXY(player->GetX(), player->GetY(), playerCurrentAni, playerAniNumber);
 	SetBitMapPosition();
 	ani[currentAni]->OnShow();
 }
 
-void PlayerBow :: ShowArrow()
-{
-	for (auto &i : arrowList)
-	{
-		i->ShowBitMap();
-	}
-}
 
-void PlayerBow::CleanArrow(Arrow* arrow)
-{
-	delete arrow;
-};
-
-void PlayerBow::CleanArrowList()
-{
-	for (auto &i : arrowList)
-	{
-		CleanArrow(i);
-	}
-}
 
 void PlayerBow::LoadAni()
 {

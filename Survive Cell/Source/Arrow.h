@@ -10,10 +10,10 @@ public:
 
 private:
 	void LoadAni()override;
-	
-	int targetX, targetY;   //箭落地的位置
-	int dX, dY;
-	int direction;
+	void Fall(); //讓箭有落下的效果
+	int initX, initY;   //箭初始的位置
+	int dX, dY;				//每次下降多往前多少
+	int direction;			//方向
 
 	enum ANI {
 		ANI_ARROW_IDLE = 0,
