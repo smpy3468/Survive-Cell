@@ -45,7 +45,7 @@ void Treasure::GenWeapon(int damageMin, int damageMax, int defenseMin, int defen
 			int damage = static_cast<int>(GameSystem::Rand(damageMin, damageMax));
 			int defense = static_cast<int>(GameSystem::Rand(defenseMin, defenseMax));
 			//GameSystem::AddGameObject(new ItemTraditionalSword("ItemWeapon", x + 16* i, y, 32, 32, damage, defense));
-			GameSystem::AddGameObject(new ItemWeaponBow("ItemWeapon", x + 10 * i, y, 48, 48));
+			GameSystem::AddGameObject(new ItemWeaponBow("ItemWeapon", x + 10 * i, y, 48, 48,damage, defense));
 		}
 
 	}
