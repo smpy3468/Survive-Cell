@@ -209,9 +209,9 @@ namespace game_framework {
 			text += "¤Ó¯«°Õ";
 
 			int r, g, b;
-			r = static_cast<int>(GameSystem::Rand(255));
+			r = static_cast<int>(GameSystem::Rand(128,255));
 			g = static_cast<int>(GameSystem::Rand(255));
-			b = static_cast<int>(GameSystem::Rand(255));
+			b = static_cast<int>(GameSystem::Rand(128));
 
 			GameSystem::DrawRectangle(0, 0, SIZE_X, SIZE_Y, RGB(r, g, b));
 			GameSystem::ShowText(text, 0, 0, SIZE_X, SIZE_Y, GameSystem::ALIGN_CENTER, GameSystem::ALIGN_CENTER, 16, RGB(255 - r, 255 - g, 255 - b));

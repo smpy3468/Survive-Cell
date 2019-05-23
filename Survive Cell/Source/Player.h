@@ -58,14 +58,28 @@ public:
 	{
 		this->equipments.push_back(equipment);
 
-		if (!this->hasWeapon)//沒有武器
+		if (dynamic_cast<PlayerWeapon*>(equipment))//是武器
 		{
-			if (equipment->GetTag() == "PlayerWeapon")//是武器
+			//if (!this->hasWeapon)//沒有武器
 			{
 				this->weapon = equipments[equipments.size() - 1];
 				hasWeapon = true;//有武器了
 			}
+			/*else
+			{
+				for (unsigned int i=0;i<equipments.size();i++)
+				{
+					if (dynamic_cast<PlayerWeapon*>(equipments[i]))
+					{
+						delete equipments[i];
+						equipments.erase(equipments.begin() + i);
+						break;
+					}
+				}
+				this->weapon = equipments[equipments.size() - 1];
+			}*/
 		}
+
 
 		CalculateAbility(equipment);//計算能力值
 	}
@@ -89,7 +103,7 @@ private:
 	int currentState = 0, nextState = 0;//現態,次態
 	enum STATE//狀態機
 	{
-		STATE_IDLE=0,
+		STATE_IDLE = 0,
 		STATE_MOVE_LEFT,
 		STATE_MOVE_RIGHT,
 		STATE_JUMP,

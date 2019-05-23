@@ -24,5 +24,6 @@ void ButtonOnClickEvent::OnClickStart(CGame* c)
 
 void ButtonOnClickEvent::OnClickExit(CGame* c)
 {
-	exit(0);
+	//exit(0);
+	::PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, NULL, NULL);//¿à¯«¼gªº
 }
