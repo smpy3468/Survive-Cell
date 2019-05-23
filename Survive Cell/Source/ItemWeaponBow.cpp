@@ -40,7 +40,7 @@ void ItemWeaponBow::Picked() {
 	{
 		if (i->GetIsEquipmentPicSet() == false)
 		{
-			i->SetEquipmentPicture(".\\res\\sword_01d.bmp", i->GetX() + 15, i->GetY() + 8);
+			i->SetEquipmentPicture(".\\res\\bow.bmp", i->GetX() + 15, i->GetY() + 8);
 			break;
 		}
 		//還有後續

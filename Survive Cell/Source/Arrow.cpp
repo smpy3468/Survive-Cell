@@ -8,10 +8,10 @@ Arrow::Arrow(string tag, int x, int y, int width, int height) :Effect(tag, x, y,
 	currentAni = ANI_ARROW_IDLE;
 	this->direction = ANI_ATTACK_LEFT;
 	LoadBitMap(".\\res\\arrow.bmp");
-	targetX = x + 100;
+	targetX = x + 300;
 	targetY = y + 20;
-	dX = 1;
-	dY = 1;
+	dX = 25;
+	dY = 5;
 }
 
 Arrow::Arrow(string tag, int x, int y, int width, int height, int attackRange, int direction) :Effect(tag, x, y, width, height) {
@@ -23,8 +23,8 @@ Arrow::Arrow(string tag, int x, int y, int width, int height, int attackRange, i
 	this->targetX = 0;
 	this->targetY = 0;
 	this->direction = direction;
-	this->dX = 1;
-	this->dY = 1;
+	this->dX = 25;
+	this->dY = 5;
 }
 
 Arrow::~Arrow()
@@ -32,20 +32,27 @@ Arrow::~Arrow()
 }
 
 void Arrow::ShowBitMap() {
-	if (direction == ANI_ATTACK_LEFT && CanMoveLeft(dX)&& CanMoveDown(dY)){
+	if (direction == ANI_ATTACK_LEFT&& CanMoveLeft(dX)&& CanMoveDown(dY))
+	{
 		currentAni = ANI_ARROW_LEFT;
 		x = x - dX;
 		y = y + dY;
+		SetBitMapPosition();
+		ani[currentAni]->OnShow();
 	}
 	else if (direction == ANI_ATTACK_RIGHT && CanMoveRight(dX) && CanMoveDown(dY))
 	{
 		currentAni = ANI_ARROW_RIGHT;
 		x = x + dX;
 		y = y + dY;
+		SetBitMapPosition();
+		ani[currentAni]->OnShow();
 	}
-	else if (x >= targetX && y >= targetY)
+	else if((x >= targetX && y >= targetY)|| (CanMoveRight(dX) || CanMoveDown(dY))){
 		Dead();
-	ani[currentAni]->OnShow();
+	}
+	//SetBitMapPosition();
+	//ani[currentAni]->OnShow();
 	EffectAttackMonster(player->GetAttackDamage());
 }
 

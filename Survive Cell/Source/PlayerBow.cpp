@@ -24,11 +24,10 @@ void PlayerBow::SetXY(int hostX, int hostY, int playerCurrentAni, int  playerAni
 
 void PlayerBow::ShowBitMap()
 {	
-	if((playerCurrentAni == ANI_ATTACK_LEFT || playerCurrentAni == ANI_ATTACK_RIGHT) ){
-		arrowList.push_back(new Arrow("Arrow", x, y, 48, 48));
+	if((playerCurrentAni == ANI_ATTACK_LEFT || playerCurrentAni == ANI_ATTACK_RIGHT) && playerAniNumber==2){
+		arrowList.push_back(new Arrow("Arrow", x, y, 48, 48, 300, playerCurrentAni));
 	}
 	ShowArrow();
-		 //int hostX, int hostY, int hostCurrentAni, int attackAniNumber
 	SetXY(player->GetX(), player->GetY(), playerCurrentAni, playerAniNumber);
 	SetBitMapPosition();
 	ani[currentAni]->OnShow();

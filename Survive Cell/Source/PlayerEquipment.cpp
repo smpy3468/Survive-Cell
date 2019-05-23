@@ -18,7 +18,7 @@ PlayerEquipment::~PlayerEquipment()
 
 PlayerEquipment::PlayerEquipment(ItemWeapon* rhs):PlayerEquipment()
 {	
-	//player = GameSystem::GetGameObjectWithTag<Player>("Player");				//常用到就先記錄下來
+	player = GameSystem::GetGameObjectWithTag<Player>("Player");				//常用到就先記錄下來
 	tag = "PlayerEquipment";
 	operator=(rhs);
 }
