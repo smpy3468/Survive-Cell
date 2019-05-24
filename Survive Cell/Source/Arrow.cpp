@@ -72,6 +72,6 @@ void Arrow::LoadAni() {
 
 void Arrow :: Fall()
 {
-	if (x - initX >= 200)		//如果箭已經飛了一段距離(150)就開始下降
+	if (x - initX >= 250)		//如果箭已經飛了一段距離(250)就開始下降
 		dY = dY + 1;
 }
