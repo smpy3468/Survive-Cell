@@ -162,11 +162,11 @@ void Monster::Dead()
 	int i = static_cast<int>(GameSystem::Rand(4));
 	int damage = static_cast<int>(GameSystem::Rand(30,60));
 	int defense = static_cast<int>(GameSystem::Rand(5, 15));
-	if(i<=2)
+	if(i<=1)
 		GameSystem::AddGameObject(new Potion("Potion", x  , y, 48, 48));//產生一個細胞道具
-	else if(i <= 3)
+	else if(i <= 2)
 		GameSystem::AddGameObject(new ItemTraditionalSword("ItemWeapon", x + width / 2, y, 32, 32, damage, defense));
-	else if (i <= 4)
+	else if (i <= 3)
 		GameSystem::AddGameObject(new ItemWeaponBow("ItemWeapomBow", x + width / 2, y, 32, 32, damage, defense));
 	
 	GameSystem::DeleteGameObject(this);

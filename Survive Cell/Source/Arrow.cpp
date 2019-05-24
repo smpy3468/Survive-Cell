@@ -63,10 +63,10 @@ void Arrow::LoadAni() {
 	char* aniArrow_idle[1] = { ".\\res\\arrow.bmp" };
 	AddAniBitMaps(aniArrow_idle, ANI_ARROW_IDLE, 1);
 
-	char* aniArrow_left[3] = { ".\\res\\arrow.bmp", ".\\res\\arrow.bmp", ".\\res\\arrow.bmp" };
+	char* aniArrow_left[3] = { ".\\res\\arrow_left.bmp", ".\\res\\arrow_left.bmp", ".\\res\\arrow_left.bmp" };
 	AddAniBitMaps(aniArrow_left, ANI_ARROW_LEFT, 3);
 
-	char* aniArrow_right[3] = { ".\\res\\arrow.bmp", ".\\res\\arrow.bmp",".\\res\\arrow.bmp" };
+	char* aniArrow_right[3] = { ".\\res\\arrow_right.bmp", ".\\res\\arrow_right.bmp",".\\res\\arrow_right.bmp" };
 	AddAniBitMaps(aniArrow_right, ANI_ARROW_RIGHT, 3);
 }
 
