@@ -58,28 +58,29 @@ public:
 	{
 		this->equipments.push_back(equipment);
 
-		if (dynamic_cast<PlayerWeapon*>(equipment))//是武器
+		if (dynamic_cast<PlayerWeapon*>(equipment))//撿起的裝備是武器
 		{
-			//if (!this->hasWeapon)//沒有武器
+			if (weaponCount < MAX_WEAPON_COUNT)//目前武器數量小於最大武器數量
 			{
 				this->weapon = equipments[equipments.size() - 1];
 				hasWeapon = true;//有武器了
+				weaponCount++;//持有武器數量+1
 			}
-			/*else
+			else
 			{
-				for (unsigned int i=0;i<equipments.size();i++)
+				for (unsigned int i = 0; i < equipments.size(); i++)
 				{
-					if (dynamic_cast<PlayerWeapon*>(equipments[i]))
+					if (equipments[i] == weapon)
 					{
 						delete equipments[i];
 						equipments.erase(equipments.begin() + i);
 						break;
 					}
 				}
-				this->weapon = equipments[equipments.size() - 1];
-			}*/
-		}
 
+				this->weapon = equipments[equipments.size() - 1];
+			}
+		}
 
 		CalculateAbility(equipment);//計算能力值
 	}
@@ -170,7 +171,9 @@ private:
 	};
 
 	vector<PlayerEquipment*> equipments;//裝備
-	PlayerEquipment* weapon;//武器
+	PlayerEquipment* weapon;//目前武器
 
+	const int MAX_WEAPON_COUNT = 2;//最大武器數量
+	int weaponCount = 0;//武器數量
 	bool hasWeapon = false;
 };
