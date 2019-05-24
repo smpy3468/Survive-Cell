@@ -42,5 +42,8 @@ void Button::LoadAni()
 	case ButtonOnClickEvent::ON_CLICK_EXIT:
 		LoadBitMap(".\\res\\button_exit.bmp");
 		break;
+	case ButtonOnClickEvent::ON_CLICK_OPTION:
+		LoadBitMap(".\\res\\button_option.bmp");
+		break;
 	}
 }

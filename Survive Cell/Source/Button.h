@@ -14,7 +14,7 @@ public:
 	~Button();
 
 	void Dead();
-	void (*OnClick)(CGame* c);
+	bool (*OnClick)(CGame* c);
 	void SetBitMapPosition();
 	void ShowBitMap();
 

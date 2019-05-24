@@ -114,7 +114,8 @@ namespace game_framework {
 			//
 
 			buttonList.push_back(new Button("ButtonStart", SIZE_X * 3 / 4, SIZE_Y / 2, 100, 50, ButtonOnClickEvent::ON_CLICK_START));
-			buttonList.push_back(new Button("ButtonExit", SIZE_X * 3 / 4, SIZE_Y / 2 + 100, 100, 50, ButtonOnClickEvent::ON_CLICK_EXIT));
+			buttonList.push_back(new Button("ButtonOption", SIZE_X * 3 / 4, SIZE_Y / 2 + 100, 100, 50, ButtonOnClickEvent::ON_CLICK_OPTION));
+			buttonList.push_back(new Button("ButtonExit", SIZE_X * 3 / 4, SIZE_Y / 2 + 200, 100, 50, ButtonOnClickEvent::ON_CLICK_EXIT));
 
 			isLoaded = true;
 		}
@@ -136,12 +137,21 @@ namespace game_framework {
 
 	void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point)
 	{
+		if (isShowOption)//開著選單時，按下滑鼠左鍵可關閉
+		{
+			isShowOption = false;
+			return;
+		}
+
 		for (auto& i : buttonList)
 		{
 			if (point.x > i->GetX() && point.x < i->GetX() + i->GetWidth()
 				&& point.y > i->GetY() && point.y < i->GetY() + i->GetHeight())//滑鼠在按鈕上
 			{
 				i->OnClick(this->game);//執行按鈕事件
+
+				if (i->GetTag() == "ButtonOption")//按下選項
+					isShowOption = true;
 			}
 		}
 	}
@@ -154,6 +164,11 @@ namespace game_framework {
 		{
 			i->SetBitMapPosition();
 			i->ShowBitMap();
+		}
+
+		if (isShowOption)//顯示選項
+		{
+			ButtonOnClickEvent::OnClickOption(this->game);
 		}
 	}
 
@@ -209,9 +224,9 @@ namespace game_framework {
 			text += "太神啦";
 
 			int r, g, b;
-			r = static_cast<int>(GameSystem::Rand(128,255));
-			g = static_cast<int>(GameSystem::Rand(255));
-			b = static_cast<int>(GameSystem::Rand(128));
+			r = static_cast<int>(GameSystem::Rand(210,250));
+			g = static_cast<int>(GameSystem::Rand(210, 250));
+			b = static_cast<int>(GameSystem::Rand(210, 250));
 
 			GameSystem::DrawRectangle(0, 0, SIZE_X, SIZE_Y, RGB(r, g, b));
 			GameSystem::ShowText(text, 0, 0, SIZE_X, SIZE_Y, GameSystem::ALIGN_CENTER, GameSystem::ALIGN_CENTER, 16, RGB(255 - r, 255 - g, 255 - b));
@@ -288,14 +303,20 @@ namespace game_framework {
 		const char KEY_INTERACT = 0x43;//互動鍵c鍵
 		const char KEY_ROLL = 0x5a;//翻滾鍵Z鍵
 		const char KEY_F = 0x46;//F鍵
+		const char KEY_G = 0x47;//G鍵
 
 		Player& player = *(GameSystem::GetGameObjectWithTag<Player>("Player"));//宣告一個玩家，避免每次都要打一長串GetGameObject...
 
-		if (nChar == KEY_F)//測試用，按下時加血
+		if (nChar == KEY_F)//測試用，按下時玩家加血
 		{
 			player.DecreaseHP(-100);
-			//Boss* boss = GameSystem::GetGameObjectWithType<Boss>();
-			//boss->DecreaseHP(1000);
+		}
+		
+		if (nChar == KEY_G)//測試用，按下時BOSS扣血
+		{
+			Boss* boss = GameSystem::GetGameObjectWithType<Boss>();
+			if(boss)//有boss才扣血
+				boss->DecreaseHP(1000);
 		}
 
 		if (nChar == KEY_LEFT)

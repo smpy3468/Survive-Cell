@@ -70,6 +70,7 @@ namespace game_framework {
 		void Dead();//離開遊戲時用到
 		bool isLoaded = false;//是否已載入
 		vector<Button*> buttonList;//按鈕列表
+		bool isShowOption = false;//是否顯示選單
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
