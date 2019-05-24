@@ -31,7 +31,9 @@ public:
 	void SetIsPortaling(bool isPortaling, int destX, int destY); //設定是否在傳送 和 傳送位置
 	void SetIsUnconquered(bool isUnconquered);//設定是否無敵
 
+
 	bool GetIsJump();//是否在跳躍
+	int GetPickCount(); //撿了幾次武器
 
 	bool HasWeapon();//是否有武器
 
@@ -59,12 +61,13 @@ public:
 		this->equipments.push_back(equipment);
 
 		if (dynamic_cast<PlayerWeapon*>(equipment))//撿起的裝備是武器
-		{
+		{	pickCount++;	//計算撿裝備的次數
 			if (weaponCount < MAX_WEAPON_COUNT)//目前武器數量小於最大武器數量
 			{
 				this->weapon = equipments[equipments.size() - 1];
 				hasWeapon = true;//有武器了
 				weaponCount++;//持有武器數量+1
+				
 			}
 			else
 			{
@@ -176,4 +179,5 @@ private:
 	const int MAX_WEAPON_COUNT = 2;//最大武器數量
 	int weaponCount = 0;//武器數量
 	bool hasWeapon = false;
+	int pickCount;		//算撿起的數量
 };

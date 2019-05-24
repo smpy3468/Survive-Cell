@@ -43,7 +43,12 @@ void ItemWeaponBow::Picked() {
 			i->SetEquipmentPicture(".\\res\\bow.bmp", i->GetX() + 15, i->GetY() + 8);
 			break;
 		}
-		//還有後續
+		else if (i->GetIsEquipmentPicSet() == true && player->GetPickCount() % 2 == i->GetID())
+		{	
+			int count = player->GetPickCount();
+			i->SetEquipmentPicture(".\\res\\bow.bmp", i->GetX() + 15, i->GetY() + 8);
+			break;
+		}//還有後續
 	}
 
 	Dead();

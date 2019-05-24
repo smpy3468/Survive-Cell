@@ -51,6 +51,8 @@ Player::Player(string tag, int x, int y, int width, int height) :Character(tag, 
 	destinationX = 0;
 	destinationY = 0;
 
+	pickCount = 0;
+
 	isMoveLeft = false;
 	isMoveRight = false;
 
@@ -172,6 +174,11 @@ void Player::SetIsUnconquered(bool isUnconquered)
 bool Player::GetIsJump()
 {
 	return isJump;
+}
+
+int Player::GetPickCount()
+{
+	return pickCount;
 }
 
 void Player::SetIsPortaling(bool isPortaling, int destX, int destY)
@@ -730,9 +737,9 @@ void Player::CalculateAbility(PlayerEquipment* equipment)
 	//攻擊力與防禦累加上去
 	this->attackDamage = equipment->GetAttackDamage();
 	this->defense = equipment->GetDefense();
-
 	//攻擊距離使用武器的攻擊距離
 	this->attackRange = equipment->GetAttackRange();
+	
 }
 
 void Player::Dead()

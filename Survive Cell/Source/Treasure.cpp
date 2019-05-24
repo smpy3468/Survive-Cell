@@ -33,20 +33,25 @@ void Treasure::GenWeapon(int damageMin, int damageMax, int defenseMin, int defen
 		
 	for (int i = 0; i <= amount; i++)
 	{
-		int type = static_cast<int>(GameSystem::Rand(3));
+		int type = static_cast<int>(GameSystem::Rand(10));
 
-		if (type == 0)
+		if (type <= 2)
 		{
-			//GameSystem::AddGameObject(new Potion("Potion", x + 10 * i, y, 48, 48)); 
-			GameSystem::AddGameObject(new ItemWeaponBow("ItemWeapon", x + 10 * i, y, 48, 48));
+			GameSystem::AddGameObject(new Potion("Potion", x + 10 * i, y, 48, 48)); 
 		}
-		else if (type >= 1)
+		else if (type <= 5)
 		{
 			int damage = static_cast<int>(GameSystem::Rand(damageMin, damageMax));
 			int defense = static_cast<int>(GameSystem::Rand(defenseMin, defenseMax));
-			//GameSystem::AddGameObject(new ItemTraditionalSword("ItemWeapon", x + 16* i, y, 32, 32, damage, defense));
-			GameSystem::AddGameObject(new ItemWeaponBow("ItemWeapon", x + 10 * i, y, 48, 48,damage, defense));
+			GameSystem::AddGameObject(new ItemTraditionalSword("ItemWeapon", x + 16* i, y, 32, 32, damage, defense));
 		}
+		else if (type <= 10)
+		{
+			int damage = static_cast<int>(GameSystem::Rand(damageMin, damageMax));
+			int defense = static_cast<int>(GameSystem::Rand(defenseMin, defenseMax));
+			GameSystem::AddGameObject(new ItemWeaponBow("ItemWeapon", x + 10 * i, y, 48, 48, damage, defense));
+		}
+
 
 	}
 }
