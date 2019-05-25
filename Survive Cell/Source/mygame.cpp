@@ -62,7 +62,7 @@ namespace game_framework {
 
 			buttonList.push_back(new Button("ButtonStart", SIZE_X * 3 / 4, SIZE_Y / 2, 100, 50, ButtonOnClickEvent::ON_CLICK_START));
 			buttonList.push_back(new Button("ButtonOption", SIZE_X * 3 / 4, SIZE_Y / 2 + 100, 100, 50, ButtonOnClickEvent::ON_CLICK_OPTION));
-			buttonList.push_back(new Button("ButtonExit", SIZE_X * 3 / 4, SIZE_Y / 2 + 200, 100, 50, ButtonOnClickEvent::ON_CLICK_EXIT));
+			buttonList.push_back(new Button("ButtonExit", SIZE_X * 3 / 4, SIZE_Y / 2 + 200, 200, 50, ButtonOnClickEvent::ON_CLICK_EXIT));
 
 			isLoaded = true;
 		}
@@ -95,10 +95,13 @@ namespace game_framework {
 			if (point.x > i->GetX() && point.x < i->GetX() + i->GetWidth()
 				&& point.y > i->GetY() && point.y < i->GetY() + i->GetHeight())//滑鼠在按鈕上
 			{
-				i->OnClick(this->game);//執行按鈕事件
-
 				if (i->GetTag() == "ButtonOption")//按下選項
+				{
+					ButtonOnClickEvent::LoadOptionAni();
 					isShowOption = true;
+				}
+
+				i->OnClick(this->game);//執行按鈕事件
 			}
 		}
 	}

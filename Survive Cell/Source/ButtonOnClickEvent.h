@@ -16,6 +16,8 @@ public:
 	static bool OnClickExit(CGame* c);//結束按鈕
 	static bool OnClickOption(CGame* c);//選項按鈕
 
+	static void LoadOptionAni();//載入動畫
+
 	enum OnClickEvent
 	{
 		ON_CLICK_START = 0,
@@ -26,5 +28,6 @@ public:
 
 	static map<int, bool(*)(CGame*)> onClickEventList;//儲存按鈕事件的函數指標
 private:
-	
+	static CAnimation ani;
+	static bool isAniLoaded;
 };
