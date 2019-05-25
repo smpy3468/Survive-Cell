@@ -74,8 +74,8 @@ void BossBullet::Act()
 	}
 	else if (boss->GetPhase() == 3)//Boss目前在第三階段，散射所需距離變短
 	{
-		if (sqrt(pow(x - originX, 2) + pow(y - originY, 2)) >= sqrt(pow(SIZE_X, 2) + pow(SIZE_Y, 2)) / 3)
-			//或者移動的距離超過螢幕斜邊的1/3，就散射子彈
+		if (sqrt(pow(x - originX, 2) + pow(y - originY, 2)) >= sqrt(pow(SIZE_X, 2) + pow(SIZE_Y, 2)) * 5 / 12)
+			//或者移動的距離超過螢幕斜邊的5/12，就散射子彈
 		{
 			//製造八顆子彈
 			for (int i = 0; i < 8; i++)

@@ -92,7 +92,13 @@ void Player::DecreaseHP(int dhp)
 	//if (isUnconquered == false)
 	{
 		isGetHit = true;
-		HP -= dhp;
+
+		int finalDHp = dhp - defense;//³Ì²×ªº¦©¦å¶q
+		
+		if (finalDHp < 0)
+			finalDHp = 0;
+		
+		HP -= finalDHp;
 	}
 	if (HP <= 0)
 	{

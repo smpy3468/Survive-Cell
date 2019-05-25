@@ -13,7 +13,7 @@ Potion::~Potion()
 
 Potion::Potion(string tag, int x, int y, int width, int height) :Item(tag, x, y, width, height)
 {	
-	recoverHP = 10;
+	recoverHP = 100;
 	ani[0]->AddBitmap(".\\res\\potion.bmp",RGB(255,255,255));
 	//LoadBitMap(".\\res\\cell_green.bmp");
 }

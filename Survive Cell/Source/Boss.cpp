@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "Boss.h"
 #include "BossBullet.h"
+#include "Potion.h"
 #include <math.h>
 
 Boss::Boss()
@@ -44,6 +45,7 @@ void Boss::Act()
 	if (phase <= 1 && static_cast<float>(HP) / maxHP <= 0.5)//血量小於50 %，第二階段
 	{
 		phase = 2;
+		GameSystem::AddGameObject(new Potion("Potion", x, y, 48, 48));//生成一個藥水
 
 		for (int i = 0; i < ANI_LENGTH; i++)//動畫加速
 			ani[i]->SetDelayCount(aniDelay * 2 / 3);
@@ -51,6 +53,7 @@ void Boss::Act()
 	else if (phase <= 2 && static_cast<float>(HP) / maxHP <= 0.2)//血量小於20%，第三階段
 	{
 		phase = 3;
+		GameSystem::AddGameObject(new Potion("Potion", x, y, 48, 48));//生成一個藥水
 
 		for (int i = 0; i < ANI_LENGTH; i++)//動畫加速
 			ani[i]->SetDelayCount(aniDelay / 2);
