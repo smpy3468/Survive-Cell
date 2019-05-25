@@ -177,10 +177,6 @@ public:
 	static void PlayAudio(AUDIO id);//播放音樂
 	static void StopAudio(AUDIO id);//停止音樂
 
-	/*static void MonstersAutoMove();    //全部怪物在defenseRange內移動
-	static void MonstersAttackPlayer();//全部怪物在Player進入attackField時會追Player
-	static void MonstersAct();*/
-
 	static void CreatStage1Object();
 	//------------圖層相關------------//
 	enum LAYER//圖層編號

@@ -108,9 +108,6 @@
     <ClCompile Include="Source\GameObject.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Buff.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Character.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
@@ -130,9 +127,6 @@
       <Filter>MyGame</Filter>
     </ClCompile>
     <ClCompile Include="Source\Potion.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Trap.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
     <ClCompile Include="Source\Map.cpp">
@@ -245,9 +239,6 @@
     <ClInclude Include="Source\GameObject.h">
       <Filter>MyGame</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Buff.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Character.h">
       <Filter>MyGame</Filter>
     </ClInclude>
@@ -267,9 +258,6 @@
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\Potion.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Trap.h">
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\Map.h">

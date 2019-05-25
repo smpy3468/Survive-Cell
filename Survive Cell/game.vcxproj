@@ -256,7 +256,6 @@
     <ClCompile Include="Source\Boss.cpp" />
     <ClCompile Include="Source\BossBullet.cpp" />
     <ClCompile Include="Source\BossBullet2.cpp" />
-    <ClCompile Include="Source\Buff.cpp" />
     <ClCompile Include="Source\Button.cpp" />
     <ClCompile Include="Source\ButtonOnClickEvent.cpp" />
     <ClCompile Include="Source\Character.cpp" />
@@ -326,7 +325,6 @@
     </ClCompile>
     <ClCompile Include="Source\SwordWave.cpp" />
     <ClCompile Include="Source\ItemTraditionalSword.cpp" />
-    <ClCompile Include="Source\Trap.cpp" />
     <ClCompile Include="Source\ItemWeapon.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -335,7 +333,6 @@
     <ClInclude Include="Source\Boss.h" />
     <ClInclude Include="Source\BossBullet.h" />
     <ClInclude Include="Source\BossBullet2.h" />
-    <ClInclude Include="Source\Buff.h" />
     <ClInclude Include="Source\Button.h" />
     <ClInclude Include="Source\ButtonOnClickEvent.h" />
     <ClInclude Include="Source\Character.h" />
@@ -373,7 +370,6 @@
     <ClInclude Include="Source\mygame.h" />
     <ClInclude Include="Source\SwordWave.h" />
     <ClInclude Include="Source\ItemTraditionalSword.h" />
-    <ClInclude Include="Source\Trap.h" />
     <ClInclude Include="Source\ItemWeapon.h" />
   </ItemGroup>
   <ItemGroup>

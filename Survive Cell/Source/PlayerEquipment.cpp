@@ -92,10 +92,6 @@ bool PlayerEquipment::IsObjectInRange(GameObject* obj, int right_fix, int left_f
 		return true;
 	else if (OB_LEFT_EDGE <= RIGHT_EDGE && OB_LEFT_EDGE >= LEFT_EDGE)  //人在右, 火焰在左
 		return true;
-	/*else if (OB_DOWN_EDGE > UP_EDGE)       //人在下, 怪物在上
-			return true;
-	else if (OB_UP_EDGE < DOWN_EDGE)	   //人在上, 怪物在下
-			return true;*/
 	return false;
 }
 

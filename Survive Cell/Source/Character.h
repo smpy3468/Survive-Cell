@@ -6,7 +6,6 @@
 
 #include <vector>
 #include "GameObject.h"
-#include "Buff.h"
 
 class Character :public GameObject
 {
@@ -60,7 +59,6 @@ protected:
 
 	bool isGetHit;//被擊
 
-	vector<Buff> buff;//套用中的BUFF
 	bool isDead;//是否死亡
 	void Dead()override;//死亡時呼叫
 

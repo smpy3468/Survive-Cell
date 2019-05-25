@@ -16,14 +16,3 @@ void Goal::Picked()
 	GameSystem::SetIsNextStage(true);
 	GameSystem::StagePlusOne();
 }
-
-/*void Goal::ShowBitMap()
-{
-	SetBitMapPosition();
-	objectPic.ShowBitmap();
-}
-
-void Goal::SetBitMapPosition()
-{
-	objectPic.SetTopLeft(x - Map::GetSX(), y - Map::GetSY());
-}*/

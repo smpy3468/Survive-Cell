@@ -13,6 +13,7 @@ EquipedSlot::EquipedSlot(string tag, int x, int y, int width, int height, int ID
 
 EquipedSlot::~EquipedSlot()
 {
+	delete equipmentPicture;
 }
 
 int EquipedSlot::GetID()

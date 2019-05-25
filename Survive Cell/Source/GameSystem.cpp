@@ -118,15 +118,6 @@ void GameSystem::DeleteGameObject(GameObject * obj)
 			i++;
 		}
 	}
-
-	/*for (auto i = gameObjectList.begin(); i != gameObjectList.end(); i++)
-	{
-		if (*i == obj)
-		{
-			gameObjectList.erase(i);
-			return;
-		}
-	}*/
 }
 
 void GameSystem::DeleteUInterface(UInterface* ui)
@@ -144,15 +135,6 @@ void GameSystem::DeleteUInterface(UInterface* ui)
 			i++;
 		}
 	}
-
-	/*for (auto i = gameUIList.begin(); i != gameUIList.end(); i++)
-	{
-		if (*i == ui)
-		{
-			gameUIList.erase(i);
-			return;
-		}
-	}*/
 }
 
 void GameSystem::DeleteAllUI()
@@ -382,27 +364,6 @@ void GameSystem::StopAudio(AUDIO id)
 {
 	CAudio::Instance()->Stop(id);
 }
-
-/*void GameSystem::MonstersAutoMove() {
-	vector<Monster*> allMonster = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
-	for (auto& i : allMonster) {
-		i->AutoMove();
-	}
-}
-
-void GameSystem::MonstersAttackPlayer() {
-	vector<Monster*> allMonster = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
-	for (auto& i : allMonster) {
-		i->Attack();
-	}
-}
-
-void GameSystem::MonstersAct() {
-	vector<Monster*> allMonster = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
-	for (auto& i : allMonster) {
-		i->Act();
-	}
-}*/
 
 void GameSystem::ChangeToNextStage()
 {

@@ -251,63 +251,6 @@ void Player::SetIsGrounded(bool isGrounded)
 
 void Player::Act()//行動
 {
-	/*switch (currentState)
-	{
-	case STATE_IDLE:
-		if (isMoveLeft)
-			nextState = STATE_MOVE_LEFT;
-		if (isMoveRight)
-			nextState = STATE_MOVE_RIGHT;
-		if (isSquat)
-		{
-			if (isJumpKeyDown)
-				nextState = STATE_DOWN_JUMP;
-			else
-				nextState = STATE_SQUAT;
-		}
-		if (isJumpKeyDown)
-			nextState = STATE_JUMP;
-		if (isAttack)
-			nextState = STATE_ATTACK;
-		break;
-
-	case STATE_MOVE_LEFT:
-		faceLR = FACE_LEFT;
-		Move(-moveSpeed, 0);
-		break;
-
-	case STATE_MOVE_RIGHT:
-		faceLR = FACE_RIGHT;
-		Move(moveSpeed, 0);
-		break;
-
-	case STATE_ATTACK:
-		Attack();
-		break;
-
-	case STATE_JUMP:
-		Jump();
-		break;
-
-	case STATE_DOWN_JUMP:
-		DownJump();
-		break;
-
-	case STATE_ROLL:
-		Roll();
-		break;
-
-	case STATE_SQUAT:
-		ChangeHeight(originHeight / 2);//將高度變為一半
-		SetMoveSpeed(originMoveSpeed / 2);//速度變為一半
-		break;
-	}
-
-	if(isJump == false)
-		Fall();
-	currentState = nextState;*/
-
-
 	if (isRoll == true || isSquat)//翻滾中或蹲下中不能攻擊
 		isAttack = false;
 
@@ -550,24 +493,6 @@ bool Player::CanStand()
 	return true;//每個x座標上方的高度都夠
 }
 
-/*bool Player::IsFloorOnGround()
-{
-	int cy = y + height + 1;//玩家腳底的位置
-
-	for (int i = x; i < x + width; i++)
-	{
-		while (Map::HasObject(i, cy))//此處有地板
-		{
-			cy++;//繼續往下確認是否還是地板
-			if (cy >= GameSystem::GetGameObjectWithTag<Floor>("Ground")->GetY())//如果已到達最底層地板
-			{
-				return true;
-			}
-		}
-	}
-	return false;
-}*/
-
 void Player::Interact()
 {
 	//若有多個能夠互動的物件重疊，則先對道具互動，再對門互動
@@ -768,19 +693,6 @@ void Player::ShowBitMap()
 	{
 		ShowWeapon();
 	}
-}
-
-void Player::ShowInformation()
-{
-	/*
-	string information = "Attack" + to_string(attackDamage)
-		+ "\nAttackSpeed:" + to_string(attackSpeed) + "\nAttackRange:" + to_string(attackRange)
-		+ "\nMoveSpeed:" + to_string(moveSpeed) + "\nDefense:" + to_string(defense)
-		+ "\nUnconquered:" + to_string(isUnconquered)
-		+ "\nHP:" + to_string(HP);
-
-		GameSystem::ShowText(information, 0, 0, SIZE_X, SIZE_Y, GameSystem::ALIGN_LEFT, GameSystem::ALIGN_TOP, 8, RGB(0, 0, 0));
-	*/
 }
 
 void Player::RemoveWeapon()

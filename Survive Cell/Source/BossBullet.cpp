@@ -55,12 +55,7 @@ void BossBullet::Act()
 	}
 	else if (boss->GetPhase() == 2)//Boss目前在第二階段，有散射功能
 	{
-		if (/*(x + width > targetX && x < targetX
-			&& y + height > targetY && y < targetY
-			&& sqrt(pow(x - originX, 2) + pow(y - originY, 2)) >= sqrt(pow(SIZE_X, 2) + pow(SIZE_Y, 2)) / 4)
-			//到達玩家原始位置，且移動的距離要超過螢幕斜邊的1/4
-			||*/ 
-			sqrt(pow(x - originX, 2) + pow(y - originY, 2)) >= sqrt(pow(SIZE_X, 2) + pow(SIZE_Y, 2)) / 2)
+		if (sqrt(pow(x - originX, 2) + pow(y - originY, 2)) >= sqrt(pow(SIZE_X, 2) + pow(SIZE_Y, 2)) / 2)
 			//或者移動的距離超過螢幕斜邊的1/2，就散射子彈
 		{
 			//製造八顆子彈
