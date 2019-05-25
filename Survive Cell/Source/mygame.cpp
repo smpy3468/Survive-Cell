@@ -180,7 +180,7 @@ namespace game_framework {
 			text += "太神啦";
 
 			int r, g, b;
-			r = static_cast<int>(GameSystem::Rand(210,250));
+			r = static_cast<int>(GameSystem::Rand(210, 250));
 			g = static_cast<int>(GameSystem::Rand(210, 250));
 			b = static_cast<int>(GameSystem::Rand(210, 250));
 
@@ -228,7 +228,7 @@ namespace game_framework {
 			GameSystem::PlayAudio(GameSystem::AUDIO::AUDIO_GAME_RUN);//播放第一關的音樂
 		}
 		GameSystem::StopAudio(GameSystem::AUDIO::AUDIO_GAME_INIT);//停止結束的音樂
-		
+
 		ShowInitProgress(100);
 	}
 
@@ -269,13 +269,13 @@ namespace game_framework {
 
 		if (nChar == KEY_F)//測試用，按下時玩家加血
 		{
-			player.DecreaseHP(-100);
+			player.SetHP(player.GetHP() + 100);
 		}
-		
+
 		if (nChar == KEY_G)//測試用，按下時BOSS扣血
 		{
 			Boss* boss = GameSystem::GetGameObjectWithType<Boss>();
-			if(boss)//有boss才扣血
+			if (boss)//有boss才扣血
 				boss->DecreaseHP(1000);
 		}
 

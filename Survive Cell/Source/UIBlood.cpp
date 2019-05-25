@@ -38,7 +38,7 @@ void UIBlood::OnShow() {
 	{
 		width -= 1;
 	}
-	else if (targetWidth > width && width <= maxWidth)
+	else if (targetWidth > width && width < maxWidth)
 	{
 		width += 1;
 	}
