@@ -477,8 +477,8 @@ void GameSystem::CreatStage1Object()
 	AddGameObject(new Demon("Monster", 2200, 40, 110, 158));
 
 
-	AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10 - 100, SIZE_Y * 9 / 10, 64, 60, 1));
-	AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10 - 10, SIZE_Y * 9 / 10, 64, 60, 0));
+	AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10 - 100, SIZE_Y * 9 / 10, 64, 60, 0));
+	AddUserInterface(new EquipedSlot("EquipedSlot", SIZE_X / 10 - 10, SIZE_Y * 9 / 10, 64, 60, 1));
 	AddUserInterface(new UIBlood("UIBlood", 0, SIZE_Y - 30, 400, 30));
 	AddUserInterface(new UIMonsterBlood("UIMonster", 0, 0, 0, 0));
 	

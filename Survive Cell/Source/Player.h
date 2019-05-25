@@ -36,10 +36,11 @@ public:
 	int GetPickCount(); //撿了幾次武器
 
 	bool HasWeapon();//是否有武器
-	void ChangeWeapon();//切換武器
+	void ChangeWeapon(int weaponNum);//切換武器
 	PlayerEquipment* GetWeapon();
 	PlayerEquipment* GetWeapon1();
 	PlayerEquipment* GetWeapon2();
+	int CurrentWeapon();//目前用的武器是哪一把
 
 	//----------------動作相關---------------------//
 	void Act();//按下按鍵行動
@@ -197,5 +198,5 @@ private:
 	const int MAX_WEAPON_COUNT = 2;//最大武器數量
 	int weaponCount = 0;//武器數量
 	bool hasWeapon = false;
-	int pickCount;		//算撿起的數量
+	int pickCount = 0;		//算撿起的數量
 };

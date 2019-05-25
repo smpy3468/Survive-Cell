@@ -193,12 +193,19 @@ bool Player::HasWeapon()
 	return hasWeapon;
 }
 
-void Player::ChangeWeapon()
+void Player::ChangeWeapon(int weaponNum)
 {
-	if(weapon == weapon1 && weapon2)
-		this->weapon = weapon2;//切換至武器2
-	else if(weapon == weapon2 && weapon1)
-		this->weapon = weapon1;//切換至武器1
+	switch (weaponNum)
+	{
+	case 1:
+		if(weapon1)//如果有武器1
+			weapon = weapon1;
+		break;
+	case 2:
+		if(weapon2)//如果有武器2
+			weapon = weapon2;
+		break;
+	}
 
 	if(weapon)//有武器
 		CalculateAbility(weapon);//重新計算能力值
@@ -218,6 +225,18 @@ PlayerEquipment * Player::GetWeapon2()
 {
 	return weapon2;
 }
+
+int Player::CurrentWeapon()
+{
+	if (weapon == weapon1)
+		return 1;
+	else if (weapon == weapon2)
+		return 2;
+	else
+		return 0;
+}
+
+
 
 void Player::SetIsGrounded(bool isGrounded)
 {
