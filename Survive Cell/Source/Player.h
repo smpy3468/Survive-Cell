@@ -180,7 +180,7 @@ private:
 	};
 
 	vector<PlayerEquipment*> equipments;//裝備
-	PlayerEquipment* weapon;//目前武器
+	PlayerEquipment* weapon = NULL;//目前武器
 	PlayerEquipment* weapon1 = NULL,*weapon2 = NULL;//身上的兩把武器
 
 	const int MAX_WEAPON_COUNT = 2;//最大武器數量

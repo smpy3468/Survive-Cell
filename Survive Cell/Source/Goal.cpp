@@ -13,6 +13,9 @@ Goal::~Goal()
 
 void Goal::Picked()
 {
-	GameSystem::SetIsNextStage(true);
-	GameSystem::StagePlusOne();
+	if (GameSystem::GetNowStage() <= 1)//只有第一關的終點有作用
+	{
+		GameSystem::SetIsNextStage(true);
+		GameSystem::StagePlusOne();
+	}
 }

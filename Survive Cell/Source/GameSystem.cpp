@@ -27,12 +27,12 @@
 
 vector<GameObject*> GameSystem::gameObjectList;//初始化物件列表
 vector<UInterface*> GameSystem::gameUIList;//初始化物件列表
-int GameSystem::overMode = GameSystem::OVER_LOSE;
+int GameSystem::overMode = GameSystem::OVER_LOSE;//預設遊戲結束模式
 bool GameSystem::isGameOver = false;
 bool GameSystem::isNextStage = false;
 int  GameSystem::nowStage = 0;
 bool GameSystem::isLoaded = false;
-int GameSystem::stage1Floor[stage1FloorCount][4] =
+int GameSystem::stage1Floor[stage1FloorCount][4] = //第一關的地板
 {
 	{0,600,710,120},{ 0, 720, 710, 640 },{ 330, 400, 410, 80 },{ 890, 170, 200, 45 },{ 1090, 600, 850, 120 }
 ,{ 1090, 0, 65, 490 },{ 0, 1360, 310, 205 },{ 650, 1360, 60, 150 },{ 710, 910, 220, 45 },{ 825, 1150, 180, 35 }
@@ -77,6 +77,11 @@ void GameSystem::SetIsNextStage(bool nextStage)
 void GameSystem::StagePlusOne()
 {
 	nowStage = nowStage + 1;
+}
+
+int GameSystem::GetNowStage()
+{
+	return nowStage;
 }
 
 vector<GameObject*>& GameSystem::GetAllGameObject()//取得所有物件
@@ -451,14 +456,10 @@ void GameSystem::CreatStage1Object()
 void GameSystem::CreatStage2Object()
 {
 	AddGameObject(new Boss("Monster", SIZE_X - 200, Map::WORLD_SIZE_Y - 100 - 280, 180, 280));
-	//AddGameObject((new Demon("Monster", SIZE_X / 2 + 100, SIZE_Y / 2 - 133, 131, 141)));
-	//AddGameObject((new Demon("Monster", SIZE_X / 2 - 150, SIZE_Y / 2 - 133, 131, 141)));
 
 	AddGameObject(new Floor("Floor", 0, Map::WORLD_SIZE_Y - 100, Map::WORLD_SIZE_X, 100, IDB_GROUND));//地圖最下方的地板
 
-	//AddGameObject(new Door("Door", 100, Map::WORLD_SIZE_Y - 220, 12, 120));//門
 	AddGameObject(new Goal("Goal", 150, Map::WORLD_SIZE_Y - 312, 143, 212));
-	//AddUserInterface(new UIBlood("UIBlood", 0, SIZE_Y - 30, 400, 30));
 
 	Map::Init();
 	Map::SetStaticObject();

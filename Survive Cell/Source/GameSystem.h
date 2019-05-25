@@ -35,6 +35,7 @@ public:
 	static bool IsNextStage();
 	static void SetIsNextStage(bool nextStage);
 	static void StagePlusOne();
+	static int GetNowStage();
 
 	static vector<GameObject*>& GetAllGameObject();//取得所有遊戲物件
 	static void AddGameObject(GameObject* obj);//加入遊戲物件

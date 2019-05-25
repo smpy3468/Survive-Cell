@@ -204,16 +204,16 @@ void Player::ChangeWeapon(int weaponNum)
 	switch (weaponNum)
 	{
 	case 1:
-		if(weapon1)//如果有武器1
+		if(weapon1 != NULL)//如果有武器1
 			weapon = weapon1;
 		break;
 	case 2:
-		if(weapon2)//如果有武器2
+		if(weapon2 != NULL)//如果有武器2
 			weapon = weapon2;
 		break;
 	}
 
-	if(weapon)//有武器
+	if(weapon != NULL)//有武器
 		CalculateAbility(weapon);//重新計算能力值
 }
 
