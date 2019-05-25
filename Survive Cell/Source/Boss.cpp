@@ -223,7 +223,10 @@ void Boss::Move(int dx, int dy)
 
 void Boss::JumpBack()
 {
-	int dx = static_cast<int>(-5 * moveSpeed * playerDistanceX / abs(playerDistanceX));//向玩家反方向跳躍
+	int dx = 0;
+	if(playerDistanceX != 0)//確保分母不為0
+		dx = static_cast<int>(-5 * moveSpeed * playerDistanceX / (abs(playerDistanceX)));//向玩家反方向跳躍
+
 	Move(dx, -jumpDisplacement);//向上位移，並向玩家方向跳躍
 }
 

@@ -172,7 +172,9 @@ public:
 	{
 		AUDIO_GAME_INIT = 0,
 		AUDIO_GAME_RUN,
-		AUDIO_GAME_OVER
+		AUDIO_GAME_RUN_2,
+		AUDIO_GAME_OVER_LOSE,
+		AUDIO_GAME_OVER_WIN
 	};
 	static void PlayAudio(AUDIO id);//播放音樂
 	static void StopAudio(AUDIO id);//停止音樂

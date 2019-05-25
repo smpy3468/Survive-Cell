@@ -328,7 +328,9 @@ void GameSystem::Load()
 	{
 		CAudio::Instance()->Load(AUDIO::AUDIO_GAME_INIT, ".\\res\\game_init.mp3");
 		CAudio::Instance()->Load(AUDIO::AUDIO_GAME_RUN, ".\\res\\game_run.mp3");
-		CAudio::Instance()->Load(AUDIO::AUDIO_GAME_OVER, ".\\res\\game_over.mp3");
+		CAudio::Instance()->Load(AUDIO::AUDIO_GAME_RUN_2, ".\\res\\game_run_2.mp3");
+		CAudio::Instance()->Load(AUDIO::AUDIO_GAME_OVER_LOSE, ".\\res\\game_over_lose.mp3");
+		CAudio::Instance()->Load(AUDIO::AUDIO_GAME_OVER_WIN, ".\\res\\game_over_win.mp3");
 
 		isLoaded = true;
 	}
