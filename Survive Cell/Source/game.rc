@@ -64,8 +64,6 @@ END
 
 IDB_FLOOR               BITMAP                  "..\\res\\floor.bmp"
 
-IDB_CONTINUE            BITMAP                  "..\\res\\continue.bmp"
-
 IDB_LOADING             BITMAP                  "..\\res\\loading.bmp"
 
 IDB_BACKGROUND          BITMAP                  "..\\res\\background.bmp"
