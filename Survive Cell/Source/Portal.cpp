@@ -39,7 +39,7 @@ void Portal::ShowBitMap()
 void Portal::LoadAni()
 {
 	char* picture0 = ".\\res\\portal.bmp";
-	ani->AddBitmap(picture0);
+	ani->AddBitmap(picture0,RGB(255,255,255));
 };
 
 Portal* Portal::Connected()

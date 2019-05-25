@@ -193,6 +193,32 @@ bool Player::HasWeapon()
 	return hasWeapon;
 }
 
+void Player::ChangeWeapon()
+{
+	if(weapon == weapon1 && weapon2)
+		this->weapon = weapon2;//切換至武器2
+	else if(weapon == weapon2 && weapon1)
+		this->weapon = weapon1;//切換至武器1
+
+	if(weapon)//有武器
+		CalculateAbility(weapon);//重新計算能力值
+}
+
+PlayerEquipment * Player::GetWeapon()
+{
+	return weapon;
+}
+
+PlayerEquipment * Player::GetWeapon1()
+{
+	return weapon1;
+}
+
+PlayerEquipment * Player::GetWeapon2()
+{
+	return weapon2;
+}
+
 void Player::SetIsGrounded(bool isGrounded)
 {
 	this->isGrounded = isGrounded;
@@ -730,6 +756,28 @@ void Player::ShowInformation()
 
 		GameSystem::ShowText(information, 0, 0, SIZE_X, SIZE_Y, GameSystem::ALIGN_LEFT, GameSystem::ALIGN_TOP, 8, RGB(0, 0, 0));
 	*/
+}
+
+void Player::RemoveWeapon()
+{
+	for (unsigned int i = 0; i < equipments.size(); i++)
+	{
+		if (equipments[i] == weapon)
+		{
+			if (weapon == weapon1)
+			{
+				weapon1 = NULL;//清除武器
+			}
+			else if (weapon == weapon2)
+			{
+				weapon2 = NULL;//清除武器
+			}
+
+			delete equipments[i];
+			equipments.erase(equipments.begin() + i);
+			break;
+		}
+	}
 }
 
 void Player::CalculateAbility(PlayerEquipment* equipment)

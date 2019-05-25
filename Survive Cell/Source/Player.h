@@ -36,6 +36,10 @@ public:
 	int GetPickCount(); //撿了幾次武器
 
 	bool HasWeapon();//是否有武器
+	void ChangeWeapon();//切換武器
+	PlayerEquipment* GetWeapon();
+	PlayerEquipment* GetWeapon1();
+	PlayerEquipment* GetWeapon2();
 
 	//----------------動作相關---------------------//
 	void Act();//按下按鍵行動
@@ -61,32 +65,45 @@ public:
 		this->equipments.push_back(equipment);
 
 		if (dynamic_cast<PlayerWeapon*>(equipment))//撿起的裝備是武器
-		{	pickCount++;	//計算撿裝備的次數
+		{	
+			pickCount++;	//計算撿裝備的次數
 			if (weaponCount < MAX_WEAPON_COUNT)//目前武器數量小於最大武器數量
 			{
-				this->weapon = equipments[equipments.size() - 1];
+				if (!weapon1)//還沒有武器
+				{
+					this->weapon1 = equipments[equipments.size() - 1];
+					this->weapon = weapon1;
+				}
+				else if (!weapon2)//還沒有第二把武器
+				{
+					this->weapon2 = equipments[equipments.size() - 1];
+					this->weapon = weapon2;
+				}
+
 				hasWeapon = true;//有武器了
-				weaponCount++;//持有武器數量+1
-				
+				weaponCount++;//持有武器數量+1	
 			}
 			else
 			{
-				for (unsigned int i = 0; i < equipments.size(); i++)
-				{
-					if (equipments[i] == weapon)
-					{
-						delete equipments[i];
-						equipments.erase(equipments.begin() + i);
-						break;
-					}
-				}
+				RemoveWeapon();//移除武器
 
-				this->weapon = equipments[equipments.size() - 1];
+				if (!weapon1)//武器1已清除
+				{
+					this->weapon1 = equipments[equipments.size() - 1];
+					this->weapon = weapon1;
+				}
+				else if (!weapon2)//武器2已清除
+				{
+					this->weapon2 = equipments[equipments.size() - 1];
+					this->weapon = weapon2;
+				}
 			}
 		}
 
 		CalculateAbility(equipment);//計算能力值
 	}
+
+	void RemoveWeapon();//移除武器
 
 private:
 	bool isMoveLeft;//是否向左移動
@@ -175,6 +192,7 @@ private:
 
 	vector<PlayerEquipment*> equipments;//裝備
 	PlayerEquipment* weapon;//目前武器
+	PlayerEquipment* weapon1 = NULL,*weapon2 = NULL;//身上的兩把武器
 
 	const int MAX_WEAPON_COUNT = 2;//最大武器數量
 	int weaponCount = 0;//武器數量

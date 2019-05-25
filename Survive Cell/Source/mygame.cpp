@@ -304,6 +304,7 @@ namespace game_framework {
 		const char KEY_ROLL = 0x5a;//翻滾鍵Z鍵
 		const char KEY_F = 0x46;//F鍵
 		const char KEY_G = 0x47;//G鍵
+		const char KEY_1 = 0x31;//1鍵
 
 		Player& player = *(GameSystem::GetGameObjectWithTag<Player>("Player"));//宣告一個玩家，避免每次都要打一長串GetGameObject...
 
@@ -355,6 +356,11 @@ namespace game_framework {
 		if (nChar == KEY_ROLL)
 		{
 			player.SetIsRoll(true);
+		}
+
+		if (nChar == KEY_1)
+		{
+			player.ChangeWeapon();
 		}
 	}
 
