@@ -147,7 +147,7 @@ namespace game_framework {
 		//GameSystem::StopAudio(GameSystem::AUDIO::AUDIO_GAME_OVER);//停止遊戲結束的音樂
 		//GameSystem::PlayAudio(GameSystem::AUDIO::AUDIO_GAME_INIT);//播放遊戲開始的音樂
 
-		GameSystem::StopAudio(GameSystem::AUDIO::AUDIO_GAME_RUN);//停止遊戲中的音樂
+		GameSystem::StopAudio(GameSystem::AUDIO::AUDIO_GAME_RUN_1);//停止遊戲中的音樂
 		GameSystem::StopAudio(GameSystem::AUDIO::AUDIO_GAME_RUN_2);//停止遊戲中的音樂
 
 		if (GameSystem::GetOverMode() == GameSystem::OVER_LOSE)
@@ -219,13 +219,13 @@ namespace game_framework {
 			player.MoveTo(GameSystem::GetGameObjectWithTag<Goal>("Goal")->GetX()
 				, GameSystem::GetGameObjectWithTag<Goal>("Goal")->GetY());//移動至傳送門的位置
 
-			GameSystem::StopAudio(GameSystem::AUDIO::AUDIO_GAME_RUN);//停止第一關的音樂
+			GameSystem::StopAudio(GameSystem::AUDIO::AUDIO_GAME_RUN_1);//停止第一關的音樂
 			GameSystem::PlayAudio(GameSystem::AUDIO::AUDIO_GAME_RUN_2);//播放第二關的音樂
 		}
 		else
 		{
 			GameSystem::StopAudio(GameSystem::AUDIO::AUDIO_GAME_RUN_2);//停止第二關的音樂
-			GameSystem::PlayAudio(GameSystem::AUDIO::AUDIO_GAME_RUN);//播放第一關的音樂
+			GameSystem::PlayAudio(GameSystem::AUDIO::AUDIO_GAME_RUN_1);//播放第一關的音樂
 		}
 		GameSystem::StopAudio(GameSystem::AUDIO::AUDIO_GAME_INIT);//停止結束的音樂
 
