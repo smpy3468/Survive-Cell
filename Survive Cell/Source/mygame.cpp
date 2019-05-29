@@ -61,9 +61,9 @@ namespace game_framework {
 			Map::Load();
 			//
 
-			buttonList.push_back(new Button("ButtonStart", SIZE_X * 3 / 4, SIZE_Y / 2, 100, 50, ButtonOnClickEvent::ON_CLICK_START));
-			buttonList.push_back(new Button("ButtonOption", SIZE_X * 3 / 4, SIZE_Y / 2 + 100, 100, 50, ButtonOnClickEvent::ON_CLICK_OPTION));
-			buttonList.push_back(new Button("ButtonExit", SIZE_X * 3 / 4, SIZE_Y / 2 + 200, 200, 50, ButtonOnClickEvent::ON_CLICK_EXIT));
+			buttonList.push_back(new Button("ButtonStart", SIZE_X * 3 / 4, SIZE_Y / 2 - 50, 100, 50, ButtonOnClickEvent::ON_CLICK_START));
+			buttonList.push_back(new Button("ButtonOption", SIZE_X * 3 / 4, SIZE_Y / 2 + 50, 100, 50, ButtonOnClickEvent::ON_CLICK_OPTION));
+			buttonList.push_back(new Button("ButtonExit", SIZE_X * 3 / 4, SIZE_Y / 2 + 150, 200, 50, ButtonOnClickEvent::ON_CLICK_EXIT));
 
 			isLoaded = true;
 		}
