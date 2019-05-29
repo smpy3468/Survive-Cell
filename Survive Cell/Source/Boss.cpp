@@ -273,10 +273,10 @@ void Boss::ChangeStateProb(unsigned int newStateProb[])//改變各項狀態機率
 
 	for (int i = 0; i < STATE_LENGTH; i++)
 	{
-		currentStateProb[i] = newStateProb[i];
+		currentStateProb[i] = newStateProb[i];//改變目前狀態機率
 
 		for (int j = 0; j <= i; j++)
-			cumStateProb[i] += currentStateProb[j];
+			cumStateProb[i] += currentStateProb[j];//前i項的機率加總
 	}
 }
 

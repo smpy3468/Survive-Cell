@@ -3,6 +3,7 @@
 //GameSystem
 //遊戲系統
 //紀錄場上所有物件資訊
+//提供各種共用函式
 
 #include "StdAfx.h"
 #include <vector>
@@ -80,7 +81,7 @@ public:
 		return targetObjects;
 	}
 
-	template <class T> static vector<T*> GetGameObjectsWithType()//取得特定標籤的遊戲物件(多個)
+	template <class T> static vector<T*> GetGameObjectsWithType()//取得特定類別的遊戲物件(多個)
 	{
 		vector<T*> targetObjects;
 		for (auto& i : gameObjectList)
@@ -92,7 +93,7 @@ public:
 		return targetObjects;
 	}
 
-	template <class T> static T* GetGameObjectWithType()//取得特定標籤的遊戲物件(多個)
+	template <class T> static T* GetGameObjectWithType()//取得特定類別的遊戲物件(單一個)
 	{
 		for (auto& i : gameObjectList)
 		{

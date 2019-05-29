@@ -3,8 +3,8 @@
 #include "GameObject.h"
 #include "Player.h"
 
-//BossBullet
-//Boss發射的子彈
+//BossBullet2
+//Boss的子彈散射出來的子彈
 
 class BossBullet2 :public GameObject
 {
