@@ -48,5 +48,4 @@ protected:
 	int defense;			//¨¾¿m¤O
 	CMovingBitmap pic;
 	Player* player = GameSystem::GetGameObjectWithTag<Player>("Player"); 
-
 };

@@ -39,7 +39,6 @@ void EquipedSlot::SetEquipmentPicture(char* pictureAddress, int x, int y) {
 		equipmentPicture->SetTopLeft(x, y);
 		isEquipmentPicSet = true;
 	}
-
 }
 
 void EquipedSlot::ShowBitMap() {

@@ -31,7 +31,6 @@ protected:
 	virtual void Dead()override;
 	
 	void SetBitMapPosition()override;
-
 	
 	int currentAni = ANI_IDLE;     //IDLE 動畫
 	int perDisplacement; //掉落速度;

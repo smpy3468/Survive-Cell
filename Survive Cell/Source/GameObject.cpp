@@ -3,7 +3,6 @@
 #include "Map.h"
 #include "Monster.h"
 
-
 GameObject::GameObject()
 {
 	tag = "GameObject";
@@ -37,8 +36,6 @@ GameObject::GameObject(string tag, int x, int y, int width, int height)  //沒有p
 	this->y = y;
 	this->width = width;
 	this->height = height;
-
-	//this->LoadBitMap(pictureID);//載入圖片
 }
 
 string GameObject::GetTag()

@@ -17,7 +17,6 @@ Monster::~Monster()
 {
 }
 
-
 Monster::Monster(string tag, int x, int y, int width, int height) :Character(tag, x, y, width, height)
 {
 	tag = "Monster";
@@ -56,7 +55,6 @@ int Monster::GetDefenseRange() {
 	return defenseRange;
 }
 
-
 int Monster::GetRL() {
 	return rl;
 }
@@ -67,8 +65,6 @@ int Monster::GetdX(int point) {
 	else
 		return dX[1];
 }
-
-
 
 int Monster::GetStatus() {
 	return status;
@@ -108,7 +104,6 @@ void Monster::Up()
 	}
 }
 
-
 bool Monster::IsInAttackField(int playerX, int playerY, int right_fix, int left_fix, int up_fix, int down_fix) {
 	int attackXField_Left = x - attackField - left_fix, attackXField_Right = x + attackField + right_fix;
 	int attackYField_down = y + attackField + down_fix, attackYField_up = y - attackField - up_fix;
@@ -143,13 +138,11 @@ int  Monster::PlaceRelativePlayer(Player* player) {
 		return LEFT;
 }
 
-
 void Monster::PlayerAttack(int damage)
 {
 	DecreaseHP(damage);
 	status = ISATTACK;
 }
-
 
 void Monster::ShowBitMap()
 {	

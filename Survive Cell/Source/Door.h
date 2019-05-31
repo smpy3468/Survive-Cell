@@ -17,7 +17,6 @@ public:
 	void Kicked();//³Q½ð
 	bool GetRuin();
 
-
 	void SetBitMapPosition()override;
 private:
 	const int LEFT = 1, RIGHT = 2;

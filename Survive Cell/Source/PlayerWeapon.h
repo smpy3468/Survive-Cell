@@ -13,6 +13,5 @@ protected:
 	bool haveEffect = false;         //是否 有特效;
 	int playerCurrentAni = 0, playerAniNumber = 0; //用來判斷玩家攻擊動畫進行到哪個階段，進而顯示Effect
 
-
 	const int ANI_ATTACK_LEFT = 3, ANI_ATTACK_RIGHT = 4;						//攻擊動編碼
 };

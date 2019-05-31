@@ -10,8 +10,6 @@ ItemTraditionalSword::~ItemTraditionalSword()
 {
 }
 
-
-
 ItemTraditionalSword::ItemTraditionalSword(string tag, int x, int y, int width, int height) :ItemWeapon(tag, x, y, width, height) {
 	tag = "ItemWeapon";
 	attackDamage = 100;
@@ -30,12 +28,10 @@ ItemTraditionalSword::ItemTraditionalSword(string tag, int x, int y, int width, 
 	LoadBitMap(".\\res\\sword_01d.bmp");
 }
 
-
 void ItemTraditionalSword::LoadAni() {
 	char* aniIdle[1] = { ".\\res\\sword_01d.bmp" };
 	AddAniBitMaps(aniIdle, ANI_IDLE, 1);
 }
-
 
 void ItemTraditionalSword::Picked() {
 	Player* player = GameSystem::GetGameObjectWithTag<Player>("Player");
@@ -45,7 +41,6 @@ void ItemTraditionalSword::Picked() {
 
 	//--------------UI設定--------------------------//
 	vector<EquipedSlot*> equipedSlots = GameSystem::GetUInterfacesWithTag<EquipedSlot>("EquipedSlot");
-
 
 	for (auto& i : equipedSlots)
 	{
@@ -61,15 +56,10 @@ void ItemTraditionalSword::Picked() {
 			(player->CurrentWeapon() == 2 && i->GetID() == 1))
 			)
 		{	
-			
 			i->SetEquipmentPicture(".\\res\\sword_01d.bmp", i->GetX() + 15, i->GetY() + 8);
 			break;
 		}
-		//還有後續
 	}
 
 	Dead();
 }
-
-
-

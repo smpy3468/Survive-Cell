@@ -1,7 +1,6 @@
 #include "StdAfx.h"
 #include "Demon.h"
 
-
 Demon::Demon() {
 	tag = "Monster";
 }
@@ -32,11 +31,7 @@ Demon::Demon(string tag, int x, int y, int width, int height) :Monster(tag, x, y
 	LoadAni();
 	LoadBitMap(".\\res\\demon_idle.bmp");
 	fire = new Fire("Fire", x, y, 154, 105);
-
 }
-
-//-------------------------------------------------------------------------------------------------
-
 
 void Demon::AutoMove() {
 
@@ -69,7 +64,6 @@ void Demon::AutoMove() {
 			SetRL(LEFT);								//換往左
 			status = LEFT;
 		}
-
 	}
 
 	if (x <= GetdX(0) && GetRL() != 0)       //GetdX[0]左邊警戒範圍，如果超過左邊 改右邊移動
@@ -77,11 +71,7 @@ void Demon::AutoMove() {
 
 	else if (x >= GetdX(1) && GetRL() != 0) //GetdX[1]右邊警戒範圍，如果超過右邊 改左邊移動
 		SetRL(LEFT);
-
-
 }
-
-
 
 void Demon::Attack() {
 	const int ATTACK_SPEED = 4;
@@ -120,7 +110,6 @@ void Demon::Attack() {
 
 				x += moveSpeed;
 				currentAni = ANI_RIGHT;     //設定往右的動畫
-
 			}
 		}
 		else {
@@ -140,8 +129,6 @@ void Demon::Attack() {
 		status = STANDBY;
 		moveSpeed = originMoveSpeed;
 	}
-
-
 }
 
 void Demon::IsAttack()
@@ -163,7 +150,6 @@ void Demon::IsAttack()
 		}
 	}
 
-
 	if (!ani[currentAni]->IsEnd()) {		//reset state;(GetCurrentBitmapNumber()要在ShowBitMap才會動)
 		status = ISATTACK;
 	}
@@ -173,10 +159,6 @@ void Demon::IsAttack()
 		ani[ANI_ATTACK_LEFT]->Reset();
 		status = STANDBY;
 	}
-
-
-
-
 }
 
 void Demon::Act()											//組合各種動作(ISATTACK, AUTOMOVE, ATTACK)
@@ -197,16 +179,12 @@ void Demon::Act()											//組合各種動作(ISATTACK, AUTOMOVE, ATTACK)
 	ani[currentAni]->OnMove();						//顯示動畫
 }
 
-
-
 void Demon::ShowBitMap() {
 	currentBitMapNumber = ani[currentAni]->GetCurrentBitmapNumber();
 	fire->ShowBitMap(x, y, currentAni, ani[currentAni]->GetCurrentBitmapNumber());
 	ani[currentAni]->OnShow();
 
 }
-
-//-------------------------------------------------------------------------------------------------
 
 void Demon::LoadAni()
 {

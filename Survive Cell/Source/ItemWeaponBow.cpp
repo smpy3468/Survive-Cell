@@ -35,7 +35,6 @@ void ItemWeaponBow::Picked() {
 	//--------------UI設定--------------------------//
 	vector<EquipedSlot*> equipedSlots = GameSystem::GetUInterfacesWithTag<EquipedSlot>("EquipedSlot");
 
-
 	for (auto& i : equipedSlots)
 	{
 		if (i->GetIsEquipmentPicSet() == false)
@@ -49,20 +48,17 @@ void ItemWeaponBow::Picked() {
 			||
 			(player->CurrentWeapon() == 2 && i->GetID() == 1))
 			)
-		{	
-			
+		{		
 			i->SetEquipmentPicture(".\\res\\bow.bmp", i->GetX() + 15, i->GetY() + 8);
 			break;
-		}//還有後續
+		}
 	}
 
 	Dead();
 }
-
 
 void ItemWeaponBow::LoadAni()
 {
 	char* aniIdle[1] = { ".\\res\\bow.bmp" };
 	AddAniBitMaps(aniIdle, ANI_IDLE, 1);
 }
-

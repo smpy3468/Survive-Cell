@@ -13,4 +13,3 @@ PlayerWeapon::PlayerWeapon(ItemWeapon* rhs) :PlayerEquipment(rhs) {
 	playerCurrentAni = 0;		
 	playerAniNumber = 0;
 }
-

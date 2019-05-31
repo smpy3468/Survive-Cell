@@ -51,7 +51,5 @@ void Treasure::GenWeapon(int damageMin, int damageMax, int defenseMin, int defen
 			int defense = static_cast<int>(GameSystem::Rand(defenseMin, defenseMax));
 			GameSystem::AddGameObject(new ItemWeaponBow("ItemWeapon", x + 10 * i, y, 48, 48, damage, defense));
 		}
-
-
 	}
 }

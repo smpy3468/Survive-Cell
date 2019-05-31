@@ -31,8 +31,6 @@ Arrow::~Arrow()
 {
 }
 
-
-
 void Arrow::ShowBitMap() {
 	Fall();
 	if (direction == ANI_ATTACK_LEFT&& CanMoveLeft(dX)&& CanMoveDown(dY) && isHit == false)

@@ -54,4 +54,3 @@ Portal* Portal::Connected()
 	}
 	return this;
 }
-

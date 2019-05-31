@@ -11,7 +11,6 @@ class UIBlood : public UInterface
 	private:
 		void RefreshTargetWidth();//更新目標寬度
 		void OnShow();
-		
 
 		Player* player = GameSystem::GetGameObjectWithTag<Player>("Player");
 		int targetWidth;//目標寬度

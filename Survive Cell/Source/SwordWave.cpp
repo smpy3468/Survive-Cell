@@ -51,8 +51,6 @@ void SwordWave::SetXY(int hostX, int hostY, int hostCurrentAni) {
 	}
 }
 
-
-
 void SwordWave::LoadAni() {
 	char* aniSwordWave_idle[1] = { ".\\res\\swordwave_left_0.bmp" };
 	AddAniBitMaps(aniSwordWave_idle, ANI_SWORDWAVE_IDLE, 1);

@@ -68,4 +68,3 @@ void Fire::LoadAni() {
 
 	AddAniBitMaps(aniFire_right, ANI_FIRE_RIGHT, 5);
 }
-

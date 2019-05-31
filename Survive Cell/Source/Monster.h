@@ -26,7 +26,6 @@ public:
 	int GetdX(int point);						//GetdX(0)取得左邊防守邊線, GetdX(1)取得右邊防守邊線
 	int GetStatus();							//取得怪物現在狀態 STANDBY:0, LEFT:1, RIGTH:2, ATTACK = 3 
 
-
 	//----------------移動相關---------------------//
 	virtual void AutoMove(); //在防守區域內來回走動
 	void Move(int dx, int dy)override;		   
@@ -65,14 +64,10 @@ protected:
 		ANI_ISATTACK_LEFT		   //被攻擊左邊動畫
 	};
 
-	
-
 private:
-
 	int dX[2], dY[2];											   //0左1右、0上1下
 	int rl;														   //現在往哪邊走	
 	int defenseRange, attackField;								   //defenseRange 來回走動的範圍, attackfield衝過去攻擊主角的範圍
-	
 
 	void Dead()override;										   //死亡
 };

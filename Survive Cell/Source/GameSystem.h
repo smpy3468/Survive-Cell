@@ -217,5 +217,4 @@ private:
 	static int stage1Floor[stage1FloorCount][4];//第一關的地板，x,y,width,height四個數字
 
 	static bool isLoaded;//是否已載入
-
 };
