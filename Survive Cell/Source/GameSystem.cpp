@@ -40,7 +40,7 @@ int GameSystem::stage1Floor[stage1FloorCount][4] = //第一關的地板
 ,{ 1570, 1370, 100, 195 },{ 1115, 380, 455, 35 },{ 1315, 170, 170, 95 },{ 1425, 170, 275, 50 },{ 1700, 120, 80, 480 }
 ,{ 2160, 600, 1680, 120 },{ 1890, 445, 610, 35 },{ 2160, 720, 310, 650 },{ 2230, 1370, 140, 75 },{ 2700, 720, 520, 110 }
 ,{ 3080, 830, 140, 130 },{ 2700, 960, 520, 320 },{ 2140, 0, 1700, 30 },{ 2140, 210, 930, 30 },{ 2630, 30, 80, 125 }
-,{ 3260, 60, 580, 360 },{ 3380, 420, 100, 60 },{ 2830, 410, 80, 190 },{ 2630, 460, 200, 50 },{ 2910, 410, 160, 40 }
+,{ 3260, 30, 580, 360 },{ 3260, 390, 100, 210 },{ 2830, 410, 80, 190 },{ 2630, 460, 200, 50 },{ 2910, 410, 160, 40 }
 };
 
 GameSystem::GameSystem()
@@ -420,18 +420,15 @@ void GameSystem::CreatStage1Object()
 	}
 	
 	AddGameObject(new Treasure("Treasure", 400, 1388, 250, 187, 10,100, 0, 10));
+	AddGameObject(new Treasure("Treasure", 3580, 420, 250, 187, 10, 100, 0, 10));
 
 	AddGameObject(new Door("Door", 530, 480, 12, 120));//門
 	AddGameObject(new Door("Door", 1315, 260, 12, 120));//門
 	AddGameObject(new Door("Door", 2330, 1445, 12, 120));//門
-	AddGameObject(new Door("Door", 3420, 480, 12, 120));//門
 	AddGameObject(new Goal("Goal", 3510, 1353, 143, 212));
-	AddGameObject(new Portal("Portal", 100, 480, 80, 120, 100));
-	AddGameObject(new Portal("Portal", GetGameObjectWithType<Goal>()->GetX() - 300, GetGameObjectWithType<Goal>()->GetY(), 80, 120, 0));
-	AddGameObject(new Portal("Portal", 1420, 1445, 80, 120, 1));
-	AddGameObject(new Portal("Portal", 2920, 90, 80, 120, 99));
+	AddGameObject(new Portal("Portal", 1750, 1445, 80, 120, 1));
+	AddGameObject(new Portal("Portal", 3400, 480, 80, 120, 99));
 
-	AddGameObject(new Demon("Monster", 100, 100, 110, 158));
 	AddGameObject(new Demon("Monster", 400, 200, 110, 158));
 	AddGameObject(new Demon("Monster", 900, 1380, 110, 158));
 	AddGameObject(new Demon("Monster", 800, 1380, 110, 158));
