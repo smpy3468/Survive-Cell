@@ -10,9 +10,9 @@ public:
 	void ShowBitMap()
 	{
 		vector<Monster*> allMonster = GameSystem::GetGameObjectsWithTag<Monster>("Monster");
-		for (auto& i : allMonster)
+		for (auto& i : allMonster)//全部怪物顯示血條
 		{
-			if (i->GetStatus() == ISATTACK && i->GetHP() > 0)
+			if (i->GetStatus() == ISATTACK && i->GetHP() > 0)//怪物被打中才顯示血條
 				OnShow(i->GetX(), i->GetY(),i->GetWidth(),i->GetHeight(), i->GetHP(), i->GetMaxHP());
 		}
 	}

@@ -10,7 +10,7 @@ public:
 	virtual ~PlayerWeapon();
 	PlayerWeapon(ItemWeapon* rhs);
 protected:
-	bool haveEffect = false;         //使否 有特效;
+	bool haveEffect = false;         //是否 有特效;
 	int playerCurrentAni = 0, playerAniNumber = 0; //用來判斷玩家攻擊動畫進行到哪個階段，進而顯示Effect
 
 

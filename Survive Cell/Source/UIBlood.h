@@ -9,11 +9,11 @@ class UIBlood : public UInterface
 		~UIBlood();
 		void ShowBitMap();
 	private:
-		void RefreshTargetWidth();
+		void RefreshTargetWidth();//更新目標寬度
 		void OnShow();
 		
 
 		Player* player = GameSystem::GetGameObjectWithTag<Player>("Player");
-		int targetWidth;
+		int targetWidth;//目標寬度
 		int maxWidth;//最大寬度
 };

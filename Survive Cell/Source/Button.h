@@ -14,7 +14,7 @@ public:
 	~Button();
 
 	void Dead();
-	bool (*OnClick)(CGame* c);
+	bool (*OnClick)(CGame* c);//按下的事件
 	void SetBitMapPosition();
 	void ShowBitMap();
 

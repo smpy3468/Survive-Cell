@@ -7,7 +7,6 @@ class PlayerBow :public PlayerWeapon
 public:
 	~PlayerBow();
 	PlayerBow(ItemWeapon* rhs);
-	//void SetXY(int hostX, int hostY, int playerCurrentAni, int  playerAniNumber)override;
 	void ShowBitMap()override;
 	void SetXY(int hostX, int hostY, int playerCurrentAni, int  playerAniNumber)override;
 private:

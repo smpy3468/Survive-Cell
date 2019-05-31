@@ -14,7 +14,7 @@ private:
 	void LoadAni()override;
 	
 
-	SwordWave* wave;
+	SwordWave* wave;//¼Cªi
 	enum ANI {
 		ANI_IDLE = 0,
 		ANI_LEFT,
