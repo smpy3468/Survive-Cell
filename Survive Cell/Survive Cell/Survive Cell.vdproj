@@ -956,6 +956,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
         "Release"
@@ -4128,9 +4136,9 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Survive Cell"
-        "ProductCode" = "8:{8DD63FA2-0918-4C41-9C99-164333109FC6}"
-        "PackageCode" = "8:{29EB2CEA-B9B6-4E38-83B4-FAAF93765305}"
-        "UpgradeCode" = "8:{3DDF8FB1-1FD2-41C6-B825-EBB57B6F55C8}"
+        "ProductCode" = "8:{2E996B1B-CC7B-4E58-8EAF-5453E71E7BEA}"
+        "PackageCode" = "8:{B9DBBCDC-2489-4620-BF88-F822D07A8287}"
+        "UpgradeCode" = "8:{3F13E6C5-4BB6-47A8-9B75-A174E4AFD178}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
